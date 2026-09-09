@@ -192,11 +192,97 @@
     </div>
 
     <div class="book-row reveal">
-      <div class="book-cover" style="color:var(--gold);">[ Cover — favorite read ]</div>
+      <a class="book-cover-link" id="teaserTrigger3" aria-label="Play teaser for Numerology Cheat Code">
+        <img src="assets/contribution/numerology-cheat-code-cover.png" alt="Numerology Cheat Code — Bhayank & Moolank in a Gist, cover art">
+        <div class="cover-play-overlay">
+          <div class="cover-play-btn">▶</div>
+        </div>
+        <div class="cover-teaser-label">Watch teaser</div>
+      </a>
       <div>
-        <h4>[ Placeholder — another favorite ]</h4>
-        <div class="by">Favorite read · Author name here</div>
-        <p class="feeling">"[ Your notes on this one. ]"</p>
+        <h4>Numerology Cheat Code — Bhayank &amp; Moolank in a Gist</h4>
+        <div class="by">Written by Sanatan Vishal Singh</div>
+        <p class="feeling">"[ Add a few honest sentences on why this quick-reference guide stayed with you. ]"</p>
+
+        <div class="price-row">
+          <span class="price-tag">₹399</span>
+          <span class="price-note">Launch price · pre-book now to be first in line</span>
+        </div>
+        <button class="prebook-btn" id="prebookToggle3">📖 Pre-book this book</button>
+
+        <div class="booking-box prebook-panel" id="prebookPanel3">
+          <div class="form-row">
+            <div><label>Full name</label><input type="text" id="pbName3" placeholder="Your name"></div>
+            <div><label>Email</label><input type="email" id="pbEmail3" placeholder="you@email.com"></div>
+          </div>
+          <div class="form-row">
+            <div><label>Phone</label><input type="tel" id="pbPhone3" placeholder="+91"></div>
+            <div><label>Copies</label>
+              <select id="pbQty3">
+                <option value="1" selected>1 copy</option>
+                <option value="2">2 copies</option>
+                <option value="3">3 copies</option>
+                <option value="5">5 copies</option>
+              </select>
+            </div>
+          </div>
+          <div class="total-row"><span>Price per copy</span><span>₹399</span></div>
+          <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pbTotal3">₹399</span></div>
+          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pbConfirm3">Confirm pre-booking (demo)</button>
+          <div class="confirm-box" id="pbConfirmBox3">✓ Pre-booking request captured. In production this hands off to a live payment gateway, and you'll get a confirmation email/SMS along with first access when the book launches.</div>
+        </div>
+
+        <div class="book-actions">
+          <div class="react-btn"><span>♡</span> 0 found this moving</div>
+          <div class="react-btn">💬 Share your viewpoint</div>
+        </div>
+        <div class="viewpoints">
+          <div class="vp-form"><input type="text" placeholder="Share your viewpoint on this..."><button class="btn btn-accent" style="padding:11px 20px;">Post</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-row reveal">
+      <a class="book-cover-link" id="teaserTrigger4" aria-label="Play teaser for The Black Book of Truth">
+        <img src="assets/contribution/black-book-of-truth-cover.png" alt="The Black Book of Truth — cover art">
+        <div class="cover-play-overlay">
+          <div class="cover-play-btn">▶</div>
+        </div>
+        <div class="cover-teaser-label">Watch teaser</div>
+      </a>
+      <div>
+        <h4>The Black Book of Truth</h4>
+        <div class="by">Written by Vishal Singh</div>
+        <p class="feeling">"[ Add a few honest sentences on why this story, and telling it, mattered to you. ]"</p>
+
+        <div class="price-row">
+          <span class="price-tag">₹999</span>
+          <span class="price-note">Launch price · pre-book now to be first in line</span>
+        </div>
+        <button class="prebook-btn" id="prebookToggle4">📖 Pre-book this book</button>
+
+        <div class="booking-box prebook-panel" id="prebookPanel4">
+          <div class="form-row">
+            <div><label>Full name</label><input type="text" id="pbName4" placeholder="Your name"></div>
+            <div><label>Email</label><input type="email" id="pbEmail4" placeholder="you@email.com"></div>
+          </div>
+          <div class="form-row">
+            <div><label>Phone</label><input type="tel" id="pbPhone4" placeholder="+91"></div>
+            <div><label>Copies</label>
+              <select id="pbQty4">
+                <option value="1" selected>1 copy</option>
+                <option value="2">2 copies</option>
+                <option value="3">3 copies</option>
+                <option value="5">5 copies</option>
+              </select>
+            </div>
+          </div>
+          <div class="total-row"><span>Price per copy</span><span>₹999</span></div>
+          <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pbTotal4">₹999</span></div>
+          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pbConfirm4">Confirm pre-booking (demo)</button>
+          <div class="confirm-box" id="pbConfirmBox4">✓ Pre-booking request captured. In production this hands off to a live payment gateway, and you'll get a confirmation email/SMS along with first access when the book launches.</div>
+        </div>
+
         <div class="book-actions">
           <div class="react-btn"><span>♡</span> 0 found this moving</div>
           <div class="react-btn">💬 Share your viewpoint</div>
@@ -231,6 +317,30 @@
     </div>
     <video id="teaserVideo2" src="assets/contribution/divine-code-teaser.mp4" controls playsinline></video>
     <div class="teaser-modal-foot">A short teaser for readers deciding whether to pre-book. Full book launches soon — ₹599.</div>
+  </div>
+</div>
+
+<!-- TEASER MODAL (PiP-style) — NUMEROLOGY CHEAT CODE -->
+<div class="teaser-modal-backdrop" id="teaserBackdrop3">
+  <div class="teaser-modal">
+    <div class="teaser-modal-head">
+      <span>Numerology Cheat Code — Teaser</span>
+      <button class="teaser-close" id="teaserClose3" aria-label="Close teaser">✕</button>
+    </div>
+    <video id="teaserVideo3" src="assets/contribution/numerology-cheat-code-teaser.mp4" controls playsinline></video>
+    <div class="teaser-modal-foot">A short teaser for readers deciding whether to pre-book. Full book launches soon — ₹399.</div>
+  </div>
+</div>
+
+<!-- TEASER MODAL (PiP-style) — THE BLACK BOOK OF TRUTH -->
+<div class="teaser-modal-backdrop" id="teaserBackdrop4">
+  <div class="teaser-modal">
+    <div class="teaser-modal-head">
+      <span>The Black Book of Truth — Teaser</span>
+      <button class="teaser-close" id="teaserClose4" aria-label="Close teaser">✕</button>
+    </div>
+    <video id="teaserVideo4" src="assets/contribution/black-book-of-truth-teaser.mp4" controls playsinline></video>
+    <div class="teaser-modal-foot">A short teaser for readers deciding whether to pre-book. Full book launches soon — ₹999.</div>
   </div>
 </div>
 
@@ -271,6 +381,8 @@
 
   initTeaser({ trigger:'teaserTrigger',  backdrop:'teaserBackdrop',  close:'teaserClose',  video:'teaserVideo' });
   initTeaser({ trigger:'teaserTrigger2', backdrop:'teaserBackdrop2', close:'teaserClose2', video:'teaserVideo2' });
+  initTeaser({ trigger:'teaserTrigger3', backdrop:'teaserBackdrop3', close:'teaserClose3', video:'teaserVideo3' });
+  initTeaser({ trigger:'teaserTrigger4', backdrop:'teaserBackdrop4', close:'teaserClose4', video:'teaserVideo4' });
 
   // Pre-book panel toggle + running total — reusable per book
   function initPrebook(ids, price){
@@ -303,6 +415,8 @@
 
   initPrebook({ toggle:'prebookToggle',  panel:'prebookPanel',  qty:'pbQty',  total:'pbTotal',  confirm:'pbConfirm',  confirmBox:'pbConfirmBox' }, 999);
   initPrebook({ toggle:'prebookToggle2', panel:'prebookPanel2', qty:'pbQty2', total:'pbTotal2', confirm:'pbConfirm2', confirmBox:'pbConfirmBox2' }, 599);
+  initPrebook({ toggle:'prebookToggle3', panel:'prebookPanel3', qty:'pbQty3', total:'pbTotal3', confirm:'pbConfirm3', confirmBox:'pbConfirmBox3' }, 399);
+  initPrebook({ toggle:'prebookToggle4', panel:'prebookPanel4', qty:'pbQty4', total:'pbTotal4', confirm:'pbConfirm4', confirmBox:'pbConfirmBox4' }, 999);
 </script>
 </body>
 </html>
