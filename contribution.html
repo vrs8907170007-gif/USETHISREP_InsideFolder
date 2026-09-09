@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contribution — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body{ --accent: var(--violet); --accent-glow: var(--violet-glow); }
+  .con-hero{ position:relative; overflow:hidden; padding:76px 0 56px; border-bottom:1px solid var(--line); }
+  .con-hero .glow{ width:640px; height:640px; background: var(--violet); top:-300px; left:-160px; }
+  .con-hero h1{ font-size: clamp(36px,5vw,60px); margin-top:16px; }
+
+  .book-row{ display:grid; grid-template-columns: 160px 1fr; gap:32px; padding:36px 0; border-top:1px solid var(--line); }
+  .book-row:first-child{ border-top:none; }
+  @media (max-width:640px){ .book-row{ grid-template-columns:1fr; } }
+  .book-cover{ aspect-ratio:2/3; border-radius:10px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; text-align:center; font-size:11.5px; color:var(--ivory-dim); padding:12px; }
+  .book-row h4{ font-size:21px; }
+  .book-row .by{ font-size:12.5px; color:var(--violet); font-weight:700; margin-top:6px; }
+  .book-row .feeling{ margin-top:14px; font-size:14.5px; color:var(--ivory-dim); font-style:italic; border-left:2px solid var(--violet); padding-left:14px; }
+  .book-actions{ display:flex; gap:14px; margin-top:16px; align-items:center; flex-wrap:wrap; }
+  .react-btn{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ivory-dim); border:1px solid var(--line); border-radius:999px; padding:8px 16px; cursor:pointer; }
+  .react-btn:hover{ border-color:var(--violet); color:var(--violet); }
+  .react-btn.liked{ border-color:var(--violet); background:rgba(122,79,224,0.14); color:var(--violet); }
+
+  .viewpoints{ margin-top:20px; }
+  .vp{ display:flex; gap:12px; padding:14px 0; border-top:1px solid var(--line-soft); }
+  .vp .avatar{ width:34px; height:34px; border-radius:50%; background:rgba(122,79,224,0.18); color:var(--violet); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; flex-shrink:0; }
+  .vp b{ font-size:13.5px; }
+  .vp p{ font-size:13.5px; color:var(--ivory-dim); margin-top:4px; }
+  .vp-form{ margin-top:14px; display:flex; gap:10px; }
+  .vp-form input{ flex:1; padding:11px 14px; border-radius:8px; border:1px solid var(--line); background:rgba(255,255,255,0.03); color:var(--ivory); font-size:13.5px; }
+
+  /* Book cover with teaser trigger */
+  .book-cover-link{ display:block; position:relative; width:160px; min-width:160px; max-width:160px; aspect-ratio:2/3; border-radius:10px; overflow:hidden; border:1px solid var(--line); cursor:pointer; }
+  .book-cover-link img{ display:block; width:100%; height:100%; object-fit:cover; }
+  @media (max-width:640px){ .book-cover-link{ width:160px; max-width:160px; } }
+  .cover-play-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(11,13,18,0.0); transition: background .25s ease; }
+  .book-cover-link:hover .cover-play-overlay{ background: rgba(11,13,18,0.45); }
+  .cover-play-btn{ width:46px; height:46px; border-radius:50%; background: rgba(245,241,232,0.92); color: var(--stage); display:flex; align-items:center; justify-content:center; font-size:16px; opacity:0; transform: scale(0.85); transition: all .25s ease; }
+  .book-cover-link:hover .cover-play-btn{ opacity:1; transform: scale(1); }
+  .cover-teaser-label{ position:absolute; bottom:8px; left:0; right:0; text-align:center; font-size:9.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color: var(--ivory); opacity:0; transition: opacity .25s ease; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+  .book-cover-link:hover .cover-teaser-label{ opacity:1; }
+
+  /* Price + pre-book */
+  .price-row{ display:flex; align-items:baseline; gap:10px; margin-top:16px; }
+  .price-row .price-tag{ font-family:var(--font-display); font-size:24px; color: var(--gold); font-weight:600; }
+  .price-row .price-note{ font-size:12px; color: var(--ivory-dim); }
+  .prebook-btn{ display:inline-flex; align-items:center; gap:8px; margin-top:14px; padding:12px 22px; border-radius:999px; background: var(--violet); color:#fff; font-size:13.5px; font-weight:700; border:none; cursor:pointer; box-shadow: 0 8px 24px var(--violet-glow); }
+  .prebook-btn:hover{ filter:brightness(1.08); }
+
+  /* PiP-style teaser modal */
+  .teaser-modal-backdrop{ display:none; position:fixed; inset:0; background: rgba(6,7,10,0.82); z-index:200; align-items:center; justify-content:center; padding:24px; }
+  .teaser-modal-backdrop.open{ display:flex; }
+  .teaser-modal{ position:relative; width:min(420px, 100%); background: var(--stage-2); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+  .teaser-modal video{ width:100%; display:block; background:#000; aspect-ratio:16/9; }
+  .teaser-modal-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--line); }
+  .teaser-modal-head span{ font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--ivory-dim); }
+  .teaser-close{ width:28px; height:28px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--ivory); font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .teaser-close:hover{ border-color:var(--violet); color:var(--violet); }
+  .teaser-modal-foot{ padding:14px 18px; font-size:12.5px; color:var(--ivory-dim); }
+
+  /* Pre-book form modal (reuses booking-box look) */
+  .booking-box{ border:1px solid var(--line); padding:30px; border-radius:16px; background: linear-gradient(180deg, var(--stage-2), var(--stage-3)); margin-top:24px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  @media (max-width:640px){ .form-row{ grid-template-columns:1fr; } }
+  .booking-box label{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px; }
+  .booking-box input, .booking-box select{ width:100%; padding:13px 15px; border:1px solid var(--line); background: rgba(255,255,255,0.03); border-radius:8px; font-family:var(--font-body); font-size:14.5px; color:var(--ivory); }
+  .booking-box input::placeholder{ color: rgba(245,241,232,0.35); }
+  .booking-box input:focus, .booking-box select:focus{ outline:2px solid var(--violet); outline-offset:1px; border-color: transparent; }
+  .total-row{ display:flex; justify-content:space-between; padding-top:16px; border-top:1px solid var(--line); margin-top:4px; font-size:15px; }
+  .confirm-box{ display:none; border:1px solid var(--violet); background: rgba(122,79,224,0.14); border-radius:10px; padding:20px; margin-top:20px; font-size:13.5px; color:var(--violet); }
+  .prebook-panel{ display:none; }
+  .prebook-panel.open{ display:block; }
+</style>
+</head>
+<body>
+
+<section class="con-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">Reading Room</div>
+    <h1 class="reveal">Contribution</h1>
+    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">Books and writing I love, or wrote myself, with a few honest words about how each one landed for me — and room for your own view underneath.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+
+    <div class="book-row reveal">
+      <a class="book-cover-link" id="teaserTrigger" aria-label="Play teaser for I AM GOD">
+        <img src="assets/contribution/i-am-god-cover.png" alt="I AM GOD — The Autobiography of God, The Triseries, cover art">
+        <div class="cover-play-overlay">
+          <div class="cover-play-btn">▶</div>
+        </div>
+        <div class="cover-teaser-label">Watch teaser</div>
+      </a>
+      <div>
+        <h4>I AM GOD — The Conscience &amp; The Consciousness</h4>
+        <div class="by">Written by Sanatan Vishal Singh · Volume 1 of the Triseries</div>
+        <p class="feeling">"This one started as a single question I couldn't put down, and turned into the whole first volume. I still don't think I've fully answered it — I'm not sure it's meant to be answered."</p>
+
+        <div class="price-row">
+          <span class="price-tag">₹999</span>
+          <span class="price-note">Launch price · pre-book now to be first in line</span>
+        </div>
+        <button class="prebook-btn" id="prebookToggle">📖 Pre-book this book</button>
+
+        <div class="booking-box prebook-panel" id="prebookPanel">
+          <div class="form-row">
+            <div><label>Full name</label><input type="text" id="pbName" placeholder="Your name"></div>
+            <div><label>Email</label><input type="email" id="pbEmail" placeholder="you@email.com"></div>
+          </div>
+          <div class="form-row">
+            <div><label>Phone</label><input type="tel" id="pbPhone" placeholder="+91"></div>
+            <div><label>Copies</label>
+              <select id="pbQty">
+                <option value="1" selected>1 copy</option>
+                <option value="2">2 copies</option>
+                <option value="3">3 copies</option>
+                <option value="5">5 copies</option>
+              </select>
+            </div>
+          </div>
+          <div class="total-row"><span>Price per copy</span><span>₹999</span></div>
+          <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pbTotal">₹999</span></div>
+          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pbConfirm">Confirm pre-booking (demo)</button>
+          <div class="confirm-box" id="pbConfirmBox">✓ Pre-booking request captured. In production this hands off to a live payment gateway, and you'll get a confirmation email/SMS along with first access when the book launches.</div>
+        </div>
+
+        <div class="book-actions">
+          <div class="react-btn"><span>♡</span> 42 found this moving</div>
+          <div class="react-btn">💬 Share your viewpoint</div>
+        </div>
+        <div class="viewpoints">
+          <div class="vp"><div class="avatar">AN</div><div><b>Anaya N.</b><p>The shift from questioning to listening in chapter four completely reframed how I think about doubt.</p></div></div>
+          <div class="vp-form"><input type="text" placeholder="Share your viewpoint on this..."><button class="btn btn-accent" style="padding:11px 20px;">Post</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-row reveal">
+      <a class="book-cover-link" id="teaserTrigger2" aria-label="Play teaser for The Divine Code">
+        <img src="assets/contribution/divine-code-cover.png" alt="The Divine Code — The Ultimate Numerology Master Book, cover art">
+        <div class="cover-play-overlay">
+          <div class="cover-play-btn">▶</div>
+        </div>
+        <div class="cover-teaser-label">Watch teaser</div>
+      </a>
+      <div>
+        <h4>The Divine Code — The Ultimate Numerology Master Book</h4>
+        <div class="by">Written by Sanatan Guru Vishal Singh</div>
+        <p class="feeling">"[ Add a few honest sentences on why numerology, and why this book, stayed with you. ]"</p>
+
+        <div class="price-row">
+          <span class="price-tag">₹599</span>
+          <span class="price-note">Launch price · pre-book now to be first in line</span>
+        </div>
+        <button class="prebook-btn" id="prebookToggle2">📖 Pre-book this book</button>
+
+        <div class="booking-box prebook-panel" id="prebookPanel2">
+          <div class="form-row">
+            <div><label>Full name</label><input type="text" id="pbName2" placeholder="Your name"></div>
+            <div><label>Email</label><input type="email" id="pbEmail2" placeholder="you@email.com"></div>
+          </div>
+          <div class="form-row">
+            <div><label>Phone</label><input type="tel" id="pbPhone2" placeholder="+91"></div>
+            <div><label>Copies</label>
+              <select id="pbQty2">
+                <option value="1" selected>1 copy</option>
+                <option value="2">2 copies</option>
+                <option value="3">3 copies</option>
+                <option value="5">5 copies</option>
+              </select>
+            </div>
+          </div>
+          <div class="total-row"><span>Price per copy</span><span>₹599</span></div>
+          <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pbTotal2">₹599</span></div>
+          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pbConfirm2">Confirm pre-booking (demo)</button>
+          <div class="confirm-box" id="pbConfirmBox2">✓ Pre-booking request captured. In production this hands off to a live payment gateway, and you'll get a confirmation email/SMS along with first access when the book launches.</div>
+        </div>
+
+        <div class="book-actions">
+          <div class="react-btn"><span>♡</span> 0 found this moving</div>
+          <div class="react-btn">💬 Share your viewpoint</div>
+        </div>
+        <div class="viewpoints">
+          <div class="vp-form"><input type="text" placeholder="Share your viewpoint on this..."><button class="btn btn-accent" style="padding:11px 20px;">Post</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-row reveal">
+      <div class="book-cover" style="color:var(--gold);">[ Cover — favorite read ]</div>
+      <div>
+        <h4>[ Placeholder — another favorite ]</h4>
+        <div class="by">Favorite read · Author name here</div>
+        <p class="feeling">"[ Your notes on this one. ]"</p>
+        <div class="book-actions">
+          <div class="react-btn"><span>♡</span> 0 found this moving</div>
+          <div class="react-btn">💬 Share your viewpoint</div>
+        </div>
+        <div class="viewpoints">
+          <div class="vp-form"><input type="text" placeholder="Share your viewpoint on this..."><button class="btn btn-accent" style="padding:11px 20px;">Post</button></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TEASER MODAL (PiP-style) — I AM GOD -->
+<div class="teaser-modal-backdrop" id="teaserBackdrop">
+  <div class="teaser-modal">
+    <div class="teaser-modal-head">
+      <span>I AM GOD — Teaser</span>
+      <button class="teaser-close" id="teaserClose" aria-label="Close teaser">✕</button>
+    </div>
+    <video id="teaserVideo" src="assets/contribution/i-am-god-teaser.mp4" controls playsinline></video>
+    <div class="teaser-modal-foot">A short teaser for readers deciding whether to pre-book. Full book launches soon — ₹999.</div>
+  </div>
+</div>
+
+<!-- TEASER MODAL (PiP-style) — THE DIVINE CODE -->
+<div class="teaser-modal-backdrop" id="teaserBackdrop2">
+  <div class="teaser-modal">
+    <div class="teaser-modal-head">
+      <span>The Divine Code — Teaser</span>
+      <button class="teaser-close" id="teaserClose2" aria-label="Close teaser">✕</button>
+    </div>
+    <video id="teaserVideo2" src="assets/contribution/divine-code-teaser.mp4" controls playsinline></video>
+    <div class="teaser-modal-foot">A short teaser for readers deciding whether to pre-book. Full book launches soon — ₹599.</div>
+  </div>
+</div>
+
+<script src="js/shell.js"></script>
+<script>
+  document.querySelectorAll('.react-btn').forEach(btn=>{
+    if(btn.textContent.includes('found this moving')){
+      btn.addEventListener('click', ()=>{
+        const liked = btn.classList.toggle('liked');
+        const n = parseInt(btn.textContent.match(/\d+/)[0], 10);
+        btn.innerHTML = '<span>♡</span> ' + (liked ? n+1 : n-1) + ' found this moving';
+      });
+    }
+  });
+
+  // Teaser modal (PiP-style popup) — reusable per book
+  function initTeaser(ids){
+    const trigger  = document.getElementById(ids.trigger);
+    const backdrop = document.getElementById(ids.backdrop);
+    const closeBtn = document.getElementById(ids.close);
+    const video    = document.getElementById(ids.video);
+    if(!trigger || !backdrop) return;
+
+    function openTeaser(){
+      backdrop.classList.add('open');
+      video.currentTime = 0;
+      video.play().catch(()=>{});
+    }
+    function closeTeaser(){
+      backdrop.classList.remove('open');
+      video.pause();
+    }
+    trigger.addEventListener('click', function(e){ e.preventDefault(); openTeaser(); });
+    closeBtn.addEventListener('click', closeTeaser);
+    backdrop.addEventListener('click', function(e){ if(e.target === backdrop) closeTeaser(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeTeaser(); });
+  }
+
+  initTeaser({ trigger:'teaserTrigger',  backdrop:'teaserBackdrop',  close:'teaserClose',  video:'teaserVideo' });
+  initTeaser({ trigger:'teaserTrigger2', backdrop:'teaserBackdrop2', close:'teaserClose2', video:'teaserVideo2' });
+
+  // Pre-book panel toggle + running total — reusable per book
+  function initPrebook(ids, price){
+    const toggle  = document.getElementById(ids.toggle);
+    const panel   = document.getElementById(ids.panel);
+    const qty     = document.getElementById(ids.qty);
+    const total   = document.getElementById(ids.total);
+    const confirm = document.getElementById(ids.confirm);
+    const confirmBox = document.getElementById(ids.confirmBox);
+    if(!toggle || !panel) return;
+
+    toggle.addEventListener('click', function(){
+      panel.classList.toggle('open');
+      if(panel.classList.contains('open')){
+        panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+      }
+    });
+
+    function updateTotal(){
+      const n = parseInt(qty.value, 10) || 1;
+      total.textContent = '₹' + (price * n).toLocaleString('en-IN');
+    }
+    qty.addEventListener('change', updateTotal);
+
+    confirm.addEventListener('click', function(){
+      confirmBox.style.display = 'block';
+      confirmBox.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+  }
+
+  initPrebook({ toggle:'prebookToggle',  panel:'prebookPanel',  qty:'pbQty',  total:'pbTotal',  confirm:'pbConfirm',  confirmBox:'pbConfirmBox' }, 999);
+  initPrebook({ toggle:'prebookToggle2', panel:'prebookPanel2', qty:'pbQty2', total:'pbTotal2', confirm:'pbConfirm2', confirmBox:'pbConfirmBox2' }, 599);
+</script>
+</body>
+</html>

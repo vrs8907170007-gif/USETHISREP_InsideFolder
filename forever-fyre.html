@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever FYRE — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body{ --accent: var(--flame); --accent-glow: var(--flame-glow); }
+  .venture-hero{ position:relative; overflow:hidden; padding: 76px 0 80px; border-bottom:1px solid var(--line); }
+  .venture-hero .glow{ width:760px; height:760px; background: var(--flame); top:-360px; right:-220px; }
+  .venture-hero h1{ font-size: clamp(38px,5.2vw,66px); margin-top:16px; }
+  .stat-row{ display:flex; gap: 46px; flex-wrap:wrap; margin-top: 40px; }
+  .stat b{ display:block; font-family:var(--font-display); font-size: 32px; color: var(--flame); }
+  .stat span{ font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ivory-dim); }
+
+  .tab-row{ display:flex; gap:6px; margin-bottom:48px; overflow-x:auto; padding-bottom:4px; }
+  .tab-btn{ font-size:13px; font-weight:700; padding: 12px 22px; background: var(--stage-2); border:1px solid var(--line); border-radius: 999px; cursor:pointer; color:var(--ivory-dim); white-space:nowrap; transition: all .2s ease; }
+  .tab-btn.active{ color:var(--stage); background: var(--flame); border-color: var(--flame); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .layout-img{ border-radius:16px; overflow:hidden; border:1px solid var(--line); margin-bottom:28px; }
+  .layout-img img{ width:100%; display:block; }
+
+  .lineup-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  @media (max-width:900px){ .lineup-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:600px){ .lineup-grid{ grid-template-columns:repeat(2,1fr); } }
+  .day-card{ border:1px solid var(--line); border-radius:12px; padding:16px 14px; background:var(--stage-2); }
+  .day-card .daynum{ font-size:11px; font-weight:700; color:var(--flame); letter-spacing:.06em; text-transform:uppercase; }
+  .day-card .date{ font-size:11px; color:var(--ivory-dim); margin-top:2px; }
+  .day-card .acts{ font-size:12.5px; margin-top:10px; line-height:1.6; }
+  .day-card.nye{ border-color: var(--flame); box-shadow: 0 0 20px var(--flame-glow); }
+
+  .pass-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media (max-width:900px){ .pass-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .pass-grid{ grid-template-columns:1fr; } }
+  .pass-card{ cursor:pointer; border:1px solid var(--line); transition: all .2s ease; }
+  .pass-card.selected{ border-color: var(--flame); box-shadow: 0 0 30px var(--flame-glow); }
+  .pass-card .price{ font-family:var(--font-display); font-size:30px; color:var(--flame); margin-top:12px; }
+  .pass-card .cap{ font-size:11.5px; color:var(--ivory-dim); margin-top:4px; }
+  .pass-card ul{ margin-top:14px; padding-left:18px; font-size:12.5px; color:var(--ivory-dim); line-height:1.8; }
+
+  .fin-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:700px){ .fin-grid{ grid-template-columns:1fr; } }
+  .fin-card h4{ font-size:15px; margin-bottom:12px; }
+  .fin-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:8px 0; border-top:1px solid var(--line-soft); color:var(--ivory-dim); }
+  .fin-row:first-child{ border-top:none; }
+  .fin-row b{ color:var(--ivory); }
+  .fin-total{ display:flex; justify-content:space-between; font-size:14.5px; font-weight:700; padding-top:12px; margin-top:8px; border-top:1px solid var(--line); color:var(--flame); }
+
+  .booking-box{ border:1px solid var(--line); padding:34px; border-radius:16px; background: linear-gradient(180deg, var(--stage-2), var(--stage-3)); margin-top:32px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  @media (max-width:640px){ .form-row{ grid-template-columns:1fr; } }
+  label{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px; }
+  input, select, textarea{ width:100%; padding:13px 15px; border:1px solid var(--line); background: rgba(255,255,255,0.03); border-radius:8px; font-family:var(--font-body); font-size:14.5px; color:var(--ivory); }
+  input:focus, select:focus, textarea:focus{ outline:2px solid var(--flame); outline-offset:1px; border-color: transparent; }
+  .pay-methods{ display:flex; gap:10px; margin:16px 0; flex-wrap:wrap; }
+  .pay-chip{ border:1px solid var(--line); padding:9px 16px; border-radius:999px; font-size:12.5px; font-weight:600; cursor:pointer; color: var(--ivory-dim); }
+  .pay-chip.selected{ border-color: var(--flame); background: var(--flame); color: var(--stage); }
+  .total-row{ display:flex; justify-content:space-between; padding-top:16px; border-top:1px solid var(--line); margin-top:16px; font-size:15px; }
+  .qty-row{ display:flex; align-items:center; justify-content:space-between; border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:18px; }
+  .qty-ctrl{ display:flex; align-items:center; gap:14px; }
+  .qty-btn{ width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--ivory); cursor:pointer; font-size:16px; }
+
+  .confirm-box{ display:none; border:1px solid var(--flame); background: rgba(224,86,47,0.14); border-radius:10px; padding:20px; margin-top:20px; font-size:13.5px; color:var(--flame); }
+
+  .post{ border-bottom:1px solid var(--line); padding: 36px 0; }
+  .post-meta{ font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--flame); margin-bottom:12px; }
+  .post h3{ font-size:26px; }
+  .post-img{ width:100%; aspect-ratio: 16/8; border-radius:14px; margin:18px 0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--flame); font-weight:600; background: radial-gradient(120% 140% at 20% 10%, rgba(224,86,47,0.25), var(--stage-2)); border: 1px solid var(--line); }
+  .comment{ display:flex; gap:14px; padding:18px 0; border-top:1px solid var(--line-soft); }
+  .avatar{ width:40px; height:40px; border-radius:50%; background: rgba(224,86,47,0.18); color:var(--flame); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;}
+  .comment-body b{ font-size:14px; }
+  .comment-body .when{ font-size:11.5px; color: var(--ivory-dim); margin-left:8px; }
+  .comment-body p{ font-size:14px; margin-top:6px; color: var(--ivory-dim); }
+  .comment-form textarea{ min-height:90px; margin-bottom:12px; }
+</style>
+</head>
+<body>
+
+<section class="venture-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">Venture — 04</div>
+    <h1 class="reveal">Forever FYRE <span style="display:inline-block; vertical-align:middle; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--flame); border:1px solid var(--flame); border-radius:999px; padding:6px 14px; margin-left:10px;">Coming Soon</span></h1>
+    <p class="reveal" style="max-width:60ch; margin-top:18px; color:var(--ivory-dim); font-size:16.5px;">An annual musical festival at Pandora City — ten days of music, nature, adventure, and wellness, closing on the nation's biggest New Year's Eve celebration. Dates to be announced.</p>
+    <div class="stat-row reveal">
+      <div class="stat"><b>10</b><span>Days</span></div>
+      <div class="stat"><b>20,000</b><span>Guest Capacity</span></div>
+      <div class="stat"><b>4</b><span>Ticket Tiers</span></div>
+      <div class="stat"><b>100+</b><span>Artists &amp; DJs</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="lineup">Lineup &amp; Zones</button>
+      <button class="tab-btn" data-tab="book">Passes &amp; Booking</button>
+      <button class="tab-btn" data-tab="blog">Blog &amp; Updates</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="field-note">Field note — the fire is literal, not just a name. Dates to be announced, Pandora City, Wada–Palghar.</div>
+      <div class="layout-img" style="margin-top:24px;"><img src="assets/forever-fyre/masterplan-main.png" alt="Forever FYRE festival master plan"></div>
+      <div class="grid-2">
+        <div>
+          <h2 style="font-size:30px;">What Forever FYRE is</h2>
+          <p style="color:var(--ivory-dim); margin-top:16px;">Forever FYRE is a festival and recurring event series set on the 65-acre fruit orchard grounds of Pandora City — ten days of live music, nature, adventure, and wellness, built around two mega stages and multiple zones. It closes with a New Year's Eve grand celebration designed to be the country's biggest.</p>
+          <p style="color:var(--ivory-dim); margin-top:16px;">Every edition is eco-friendly and zero-plastic, with an RFID cashless wristband covering access, payments, food, and activities across the entire site.</p>
+        </div>
+        <div class="card" style="background: linear-gradient(180deg, rgba(224,86,47,0.14), var(--stage-2));">
+          <div class="eyebrow">Event Highlights</div>
+          <ul style="margin-top:16px; padding-left:20px; font-size:14.5px; color:var(--ivory-dim); line-height:2.1;">
+            <li>2 mega stages &amp; multiple zones</li>
+            <li>International &amp; Indian artists</li>
+            <li>Adventure park &amp; water activities</li>
+            <li>Premium camping &amp; stay options</li>
+            <li>Wellness, yoga &amp; spiritual sessions</li>
+            <li>Zero-plastic, eco-friendly event</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINEUP & ZONES -->
+    <div class="tab-panel" id="tab-lineup">
+      <div class="field-note">10 days, 10 line-ups — closing night mirrors Day 1's Club DJ Night.</div>
+      <div class="lineup-grid" style="margin-top:24px;">
+        <div class="day-card"><div class="daynum">Day 1</div><div class="date">TBA</div><div class="acts">Club DJ Night — DJ Aqeel, Nikhil Chinapa, DJ Chetas</div></div>
+        <div class="day-card"><div class="daynum">Day 2</div><div class="date">TBA</div><div class="acts">Shaan, Anu Malik, Vishal Dadlani, Shreya Ghoshal, Indian Idol Team</div></div>
+        <div class="day-card"><div class="daynum">Day 3</div><div class="date">TBA</div><div class="acts">Sonu Nigam, Kailash Kher, India's Got Talent Team</div></div>
+        <div class="day-card"><div class="daynum">Day 4</div><div class="date">TBA</div><div class="acts">Diljit Dosanjh</div></div>
+        <div class="day-card"><div class="daynum">Day 5</div><div class="date">TBA</div><div class="acts">AP Dhillon</div></div>
+        <div class="day-card"><div class="daynum">Day 6</div><div class="date">TBA</div><div class="acts">Badshah, King, Hustle Team</div></div>
+        <div class="day-card"><div class="daynum">Day 7</div><div class="date">TBA</div><div class="acts">Emiway, Rappers Team</div></div>
+        <div class="day-card nye"><div class="daynum">Day 8 — New Year Eve</div><div class="date">TBA</div><div class="acts">Arjit Singh / A. R. Rahman</div></div>
+        <div class="day-card"><div class="daynum">Day 9</div><div class="date">TBA</div><div class="acts">Honey Singh</div></div>
+        <div class="day-card"><div class="daynum">Day 10 — Closing</div><div class="date">TBA</div><div class="acts">Same as Day 1 Club DJ Night</div></div>
+      </div>
+
+      <h3 style="font-size:22px; margin-top:44px; margin-bottom:20px;">Festival zones &amp; the site map</h3>
+      <div class="layout-img"><img src="assets/forever-fyre/site-map-final.png" alt="Forever FYRE festival site map"></div>
+      <p style="color:var(--ivory-dim);">Ten numbered zones run the length of the grounds: the Main Stage Arena, VIP Lounge, a multi-cuisine Food Court, four stay zones (Jungle Tent Experience, Couple Luxury Tents, Music Lovers Dome, Luxury Villa Zone), a Wellness &amp; Relaxation area, a Market Place, a Sports &amp; Fun Zone, an Adventure Zone, and full Transport &amp; Parking infrastructure.</p>
+    </div>
+
+    <!-- BOOK -->
+    <div class="tab-panel" id="tab-book">
+      <div class="field-note">Passes — prototype flow, based on the four real ticket tiers. No live payment is processed on this demo.</div>
+      <div class="pass-grid" style="margin-top:28px;">
+        <div class="card pass-card" data-price="5000" data-name="Bronze">
+          <div class="eyebrow">Bronze</div>
+          <div class="price">₹5,000</div>
+          <div class="cap">10,000 guests</div>
+          <ul><li>Budget stay / dorms</li><li>Festival grounds access</li><li>Standard F&amp;B</li></ul>
+        </div>
+        <div class="card pass-card" data-price="7000" data-name="Silver">
+          <div class="eyebrow">Silver</div>
+          <div class="price">₹7,000</div>
+          <div class="cap">6,000 guests</div>
+          <ul><li>Comfortable stay</li><li>Arena access</li><li>All activities included</li></ul>
+        </div>
+        <div class="card pass-card selected" data-price="10000" data-name="Gold">
+          <div class="eyebrow">Gold</div>
+          <div class="price">₹10,000</div>
+          <div class="cap">3,000 guests</div>
+          <ul><li>Premium accommodation</li><li>Elevated viewing deck</li><li>Premium F&amp;B</li></ul>
+        </div>
+        <div class="card pass-card" data-price="15000" data-name="Platinum">
+          <div class="eyebrow">Platinum</div>
+          <div class="price">₹15,000</div>
+          <div class="cap">1,000 guests</div>
+          <ul><li>Premium accommodation</li><li>VIP viewing zone</li><li>Exclusive lounge</li></ul>
+        </div>
+      </div>
+
+      <div class="booking-box">
+        <div class="qty-row">
+          <div><b>Number of passes</b></div>
+          <div class="qty-ctrl">
+            <button class="qty-btn" id="ffMinus">−</button>
+            <span id="ffQty">1</span>
+            <button class="qty-btn" id="ffPlus">+</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <div><label>Full name</label><input type="text" placeholder="Your name"></div>
+          <div><label>Email</label><input type="email" placeholder="you@email.com"></div>
+        </div>
+        <div class="form-row">
+          <div><label>Phone</label><input type="tel" placeholder="+91"></div>
+          <div><label>City</label><input type="text" placeholder="Your city"></div>
+        </div>
+        <label style="margin-top:6px;">Payment method</label>
+        <div class="pay-methods">
+          <div class="pay-chip selected">UPI</div>
+          <div class="pay-chip">Card</div>
+          <div class="pay-chip">Net Banking</div>
+        </div>
+        <div class="total-row"><span>Pass</span><span id="ffPassName">Gold</span></div>
+        <div class="total-row"><span>Price × Qty</span><span id="ffCalc">₹10,000 × 1</span></div>
+        <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="ffTotal">₹10,000</span></div>
+        <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="ffConfirm">Confirm booking (demo)</button>
+        <div class="confirm-box" id="ffConfirmBox">✓ Pass request captured. In production this hands off to a live payment gateway and issues an RFID wristband confirmation by email.</div>
+      </div>
+
+      <h3 style="font-size:20px; margin-top:44px; margin-bottom:18px;">Revenue &amp; expenses (as modelled)</h3>
+      <div class="fin-grid">
+        <div class="card fin-card">
+          <h4 style="color:var(--flame);">Revenue Breakup</h4>
+          <div class="fin-row"><span>Accommodation</span><b>₹36.4 Cr</b></div>
+          <div class="fin-row"><span>Food</span><b>₹2.8 Cr</b></div>
+          <div class="fin-row"><span>Beverages</span><b>₹14.4 Cr</b></div>
+          <div class="fin-row"><span>Activities / Event Pass</span><b>₹32.8 Cr</b></div>
+          <div class="fin-row"><span>Sponsorships</span><b>₹20 Cr</b></div>
+          <div class="fin-total"><span>Total Revenue</span><span>₹109.6 Cr</span></div>
+        </div>
+        <div class="card fin-card">
+          <h4 style="color:var(--flame);">Expenses &amp; Profit</h4>
+          <div class="fin-row"><span>Artist Fees + Production</span><b>₹20 Cr</b></div>
+          <div class="fin-row"><span>Infrastructure &amp; Stage</span><b>₹20 Cr</b></div>
+          <div class="fin-row"><span>Security &amp; Safety</span><b>₹12 Cr</b></div>
+          <div class="fin-row"><span>Staff &amp; Operations</span><b>₹10 Cr</b></div>
+          <div class="fin-row"><span>Marketing, Utilities &amp; Misc.</span><b>₹24.4 Cr</b></div>
+          <div class="fin-total"><span>Net Profit (21.2% margin)</span><span>₹23.2 Cr</span></div>
+        </div>
+      </div>
+      <p style="font-size:12px; color:var(--ivory-dim); font-style:italic; margin-top:16px;">Figures shown exactly as in the original financial model for this edition.</p>
+    </div>
+
+    <!-- BLOG -->
+    <div class="tab-panel" id="tab-blog">
+      <div class="field-note">Blog — announcements and a first look, open for comment. Dates and lineup confirmations will post here first.</div>
+
+      <div class="post">
+        <div class="post-meta">Announcement</div>
+        <h3>Dates coming soon</h3>
+        <div class="post-img">
+          <img src="assets/forever-fyre/masterplan-main.png" alt="Forever FYRE reference master plan" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        </div>
+        <div style="font-size:11px; color:var(--flame); font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-top:-8px; margin-bottom:12px;">Reference image — concept master plan, not an on-site photo</div>
+        <p style="color:var(--ivory-dim);">Ten days, two mega stages, and a New Year's Eve headliner slot between Arjit Singh and A. R. Rahman. Passes open here first, before anywhere else. Exact dates to be announced.</p>
+
+        <div class="comment-form" style="margin-top:22px;">
+          <label>Leave a comment</label>
+          <textarea placeholder="Share your thoughts..."></textarea>
+          <button class="btn btn-accent">Post comment</button>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-meta">A First Look</div>
+        <h3>Get a feel for the venue, ahead of launch</h3>
+        <p style="color:var(--ivory-dim); margin-bottom:20px;">The festival hasn't happened yet, so there are no event photos to show — but here's what the grounds and layout are planned to look like, so you can picture it before doors open.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+          <div>
+            <div class="post-img" style="margin-top:0;">
+              <img src="assets/forever-fyre/site-map-final.png" alt="Forever FYRE reference site map" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+            </div>
+            <div style="font-size:11px; color:var(--flame); font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-top:8px;">Reference image — festival site map</div>
+          </div>
+          <div>
+            <div class="post-img" style="margin-top:0;">[ Reference image — main stage concept ]</div>
+            <div style="font-size:11px; color:var(--flame); font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-top:8px;">Reference image — placeholder, to be added</div>
+          </div>
+          <div>
+            <div class="post-img" style="margin-top:0;">[ Reference image — camping &amp; stay zone concept ]</div>
+            <div style="font-size:11px; color:var(--flame); font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-top:8px;">Reference image — placeholder, to be added</div>
+          </div>
+          <div>
+            <div class="post-img" style="margin-top:0;">[ Reference image — adventure zone concept ]</div>
+            <div style="font-size:11px; color:var(--flame); font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-top:8px;">Reference image — placeholder, to be added</div>
+          </div>
+        </div>
+
+        <div class="comment-form" style="margin-top:26px;">
+          <label>Leave a comment</label>
+          <textarea placeholder="Share your thoughts..."></textarea>
+          <button class="btn btn-accent">Post comment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  let ffQty = 1;
+  document.querySelectorAll('.pass-card').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      document.querySelectorAll('.pass-card').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      updateFfTotal();
+    });
+  });
+  document.querySelectorAll('.pay-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.pay-chip').forEach(c=>c.classList.remove('selected'));
+      chip.classList.add('selected');
+    });
+  });
+  document.getElementById('ffPlus').addEventListener('click', ()=>{ ffQty++; document.getElementById('ffQty').textContent = ffQty; updateFfTotal(); });
+  document.getElementById('ffMinus').addEventListener('click', ()=>{ if(ffQty>1){ffQty--; document.getElementById('ffQty').textContent = ffQty; updateFfTotal();} });
+
+  function updateFfTotal(){
+    const selected = document.querySelector('.pass-card.selected');
+    const rate = parseInt(selected.dataset.price, 10);
+    const name = selected.dataset.name;
+    document.getElementById('ffPassName').textContent = name;
+    document.getElementById('ffCalc').textContent = '₹' + rate.toLocaleString('en-IN') + ' × ' + ffQty;
+    document.getElementById('ffTotal').textContent = '₹' + (rate*ffQty).toLocaleString('en-IN');
+  }
+  document.getElementById('ffConfirm').addEventListener('click', ()=>{
+    document.getElementById('ffConfirmBox').style.display = 'block';
+  });
+</script>
+</body>
+</html>

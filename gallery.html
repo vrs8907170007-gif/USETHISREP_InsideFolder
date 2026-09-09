@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .gal-hero{ position:relative; overflow:hidden; padding:76px 0 56px; border-bottom:1px solid var(--line); }
+  .gal-hero .glow{ width:640px; height:640px; background: var(--gold); top:-300px; right:-160px; }
+  .gal-hero h1{ font-size: clamp(36px,5vw,60px); margin-top:16px; }
+
+  .folder-nav{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+  .folder-chip{
+    display:flex; align-items:center; gap:8px;
+    border:1px solid var(--line); padding:10px 18px; border-radius:999px;
+    font-size:12.5px; font-weight:700; color:var(--ivory-dim); cursor:pointer;
+  }
+  .folder-chip .count{ font-size:10.5px; opacity:.7; }
+  .folder-chip.active{ background: var(--gold); color: var(--stage); border-color: var(--gold); }
+  .folder-chip.active .count{ opacity:.85; }
+
+  .folder-section{ padding: 56px 0; border-top:1px solid var(--line); }
+  .folder-section:first-of-type{ border-top:none; }
+  .folder-head{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:30px; }
+  .folder-head h2{ font-size:26px; }
+  .folder-head .desc{ font-size:13.5px; color:var(--ivory-dim); max-width:60ch; margin-top:6px; }
+
+  .photo-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  @media (max-width:760px){ .photo-grid{ grid-template-columns:1fr; } }
+  .subfolder-label{ display:flex; align-items:center; gap:12px; margin: 8px 0 20px; }
+  .subfolder-label h3{ font-size:16px; color:var(--gold); white-space:nowrap; }
+  .subfolder-label .line{ height:1px; background:var(--line); flex:1; }
+
+  .photo-card{ border:1px solid var(--line); border-radius:14px; overflow:hidden; background: var(--stage-2); }
+  .photo-card.featured{ border:1px solid var(--gold); box-shadow: 0 0 0 1px var(--gold), 0 8px 28px rgba(212,175,55,0.18); position:relative; }
+  .photo-card.featured .img-wrap{ position:relative; }
+  .featured-badge{ position:absolute; top:10px; right:10px; background:var(--gold); color:var(--stage); font-size:11px; font-weight:700; letter-spacing:.04em; padding:4px 10px; border-radius:999px; z-index:2; text-transform:uppercase; }
+  .photo-card .img-wrap{ background: var(--stage-3); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .photo-card .img-wrap img{ width:100%; display:block; }
+  .photo-card .placeholder-ph{ aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; font-size:12.5px; color:var(--ivory-dim); text-align:center; padding:20px; }
+  .photo-card-body{ padding: 18px 20px 22px; }
+  .photo-card-body .title{ font-size:15.5px; font-weight:700; }
+  .photo-card-body .date{ font-size:11.5px; color:var(--gold); font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-top:4px; }
+
+  .note-box{
+    margin-top:14px; padding:12px 14px; border-left:2px solid var(--gold);
+    background: rgba(212,175,106,0.06); font-family:var(--font-display); font-style:italic;
+    font-size:13.5px; line-height:1.55; color:var(--ivory);
+  }
+  .note-label{ font-family:var(--font-body); font-style:normal; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:6px; }
+
+  .comment-toggle{ margin-top:14px; font-size:12px; font-weight:700; color:var(--ivory-dim); cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
+  .comment-toggle:hover{ color:var(--gold); }
+  .comment-area{ display:none; margin-top:12px; }
+  .comment-area.open{ display:block; }
+  .comment-area textarea{
+    width:100%; min-height:70px; padding:11px 14px; border-radius:8px; border:1px solid var(--line);
+    background: rgba(255,255,255,0.03); color:var(--ivory); font-family:var(--font-body); font-size:13px; margin-bottom:10px;
+  }
+  .comment-list{ margin-top:12px; }
+  .comment-item{ display:flex; gap:10px; padding:10px 0; border-top:1px solid var(--line-soft); }
+  .comment-item .avatar{ width:30px; height:30px; border-radius:50%; background: rgba(212,175,106,0.16); color:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; flex-shrink:0; }
+  .comment-item b{ font-size:12.5px; }
+  .comment-item p{ font-size:12.5px; color:var(--ivory-dim); margin-top:2px; }
+  .comment-post-btn{ padding:9px 18px; font-size:11.5px; }
+
+  .upload-cta{
+    margin-top:14px; border:1.5px dashed var(--line); border-radius:14px; padding:34px 20px;
+    text-align:center; color:var(--ivory-dim); font-size:13px;
+  }
+</style>
+</head>
+<body>
+
+<section class="gal-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">Picture Blog</div>
+    <h1 class="reveal">Gallery</h1>
+    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">Photos, memories, and documents worth keeping — organized into folders, each with room for the note I want attached to it, and yours too.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="folder-nav reveal">
+      <div class="folder-chip active" data-folder="all">All Folders</div>
+      <div class="folder-chip" data-folder="folder-x">Academics Records <span class="count">(11)</span></div>
+      <div class="folder-chip" data-folder="pandora-city">Pandora City <span class="count">(6)</span></div>
+      <div class="folder-chip" data-folder="forever-fyre">Forever FYRE <span class="count">(2)</span></div>
+      <div class="folder-chip" data-folder="career">Career &amp; Industry <span class="count">(1)</span></div>
+      <div class="folder-chip" data-folder="it-certifications">IT &amp; Tech Certifications <span class="count">(11)</span></div>
+      <div class="folder-chip" data-folder="business-personal-dev">Business &amp; Personal Development <span class="count">(11)</span></div>
+      <div class="folder-chip" data-folder="employment-letters">Employment &amp; Appointment Letters <span class="count">(7)</span></div>
+      <div class="folder-chip" data-folder="press-release">Press Release <span class="count">(18)</span></div>
+      <div class="folder-chip" data-folder="athletics">Athletics &amp; Fitness <span class="count">(71)</span></div>
+      <div class="folder-chip" data-folder="nightlife">Tipsy Monkee / Nightlife <span class="count">(0)</span></div>
+      <div class="folder-chip" data-folder="family">Family <span class="count">(0)</span></div>
+      <div class="folder-chip" data-folder="everyday">Everyday <span class="count">(0)</span></div>
+    </div>
+
+    <!-- FOLDER X -->
+    <div class="folder-section" data-folder="folder-x">
+      <div class="folder-head">
+        <div>
+          <h2>Academics Records</h2>
+          <p class="desc">The paper trail behind the story — school results, certifications, and milestones worth keeping close.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+
+        <div class="photo-card featured reveal">
+          <div class="img-wrap">
+            <span class="featured-badge">Special Mention</span>
+            <img src="assets/certificates/best-outgoing-student-1995.jpg" alt="Certificate of Merit, Best Outgoing Student, Bangur Nagar Vidya Bhavan & Bangur Junior College, 17 February 1995">
+          </div>
+          <div class="photo-card-body">
+            <div class="title">Best Outgoing Student — 1st Place, Std. X-B</div>
+            <div class="date">17 February 1995 · Bangur Nagar Vidya Bhavan &amp; Bangur Junior College, Goregaon (West), Bombay</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this moment — what it took, what it meant, how it feels looking back. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/mumbai-univ-ba-degree-2001.jpg" alt="University of Mumbai B.A. Degree Passing Certificate, First Class First, May 2001"></div>
+          <div class="photo-card-body">
+            <div class="title">B.A. Degree — First Class First</div>
+            <div class="date">May 2001 · University of Mumbai</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/mumbai-univ-tyba-marksheet-2001.jpg" alt="University of Mumbai TY BA Economics marksheet, First Class First, 461/600, May 2001"></div>
+          <div class="photo-card-body">
+            <div class="title">T.Y. B.A. Marksheet — Economics, 461/600</div>
+            <div class="date">May 2001 · University of Mumbai</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/standrews-syba-passing-1999.jpg" alt="St. Andrew's College SYBA Passing Certificate, First Class, November 1999"></div>
+          <div class="photo-card-body">
+            <div class="title">S.Y.B.A. Passing Certificate — First Class</div>
+            <div class="date">November 1999 · St. Andrew's College, Bandra (West), Mumbai</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/standrews-syba-marksheet-1999.jpg" alt="St. Andrew's College SYBA marksheet, 707 marks, September 1999"></div>
+          <div class="photo-card-body">
+            <div class="title">S.Y.B.A. Marksheet — 707 Total Marks</div>
+            <div class="date">September 1999 · St. Andrew's College, Bandra (West), Mumbai</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/standrews-fyba-passing-1998.jpg" alt="St. Andrew's College FYBA Passing Certificate, Second Class, 30 April 1998"></div>
+          <div class="photo-card-body">
+            <div class="title">F.Y.B.A. Passing Certificate — Second Class</div>
+            <div class="date">30 April 1998 · St. Andrew's College, Bandra (West), Mumbai</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/standrews-fyba-marksheet-1998.jpg" alt="St. Andrew's College FYBA marksheet, 290 total marks, academic year 1997-98"></div>
+          <div class="photo-card-body">
+            <div class="title">F.Y.B.A. Marksheet — 290 Total Marks</div>
+            <div class="date">Academic Year 1997–98 · St. Andrew's College, Bandra (West), Mumbai</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/nos-ssc-certificate-1997.jpg" alt="National Open School Senior Secondary School Examination Certificate, New Delhi, May 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">Senior Secondary School Examination Certificate</div>
+            <div class="date">May 1997 · National Open School, New Delhi</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/certificates/nos-ssc-marksheet-1997.jpg" alt="National Open School Marks Statement, Senior Secondary, Total 296, May 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">Senior Secondary Marks Statement — Total 296</div>
+            <div class="date">May 1997 · National Open School, New Delhi</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/cert-ssc.jpg" alt="SSC Certificate, Maharashtra State Board, March 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">SSC Certificate — Distinction, 91.50%</div>
+            <div class="date">March 1995 · Maharashtra State Board</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this moment — what it took, what it meant, how it feels looking back. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/cert-marksheet.jpg" alt="SSC Marksheet, Maharashtra State Board, March 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">SSC Marksheet — Full Subject Breakdown</div>
+            <div class="date">March 1995 · Maharashtra State Board</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection here too — or leave it as the receipt of a younger version of yourself. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PANDORA CITY -->
+    <div class="folder-section" data-folder="pandora-city">
+      <div class="folder-head">
+        <div>
+          <h2 style="color:var(--emerald);">Pandora City</h2>
+          <p class="desc">The master plans behind the 65-acre build — each sub-farm and zone with its own layout, revenue model, and story.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/pandora-city/fruit-farm-final.png" alt="Pandora City Fruit Farm Retreat master layout plan"></div>
+          <div class="photo-card-body">
+            <div class="title">Fruit Farm Retreat — Master Layout</div>
+            <div class="date" style="color:var(--emerald);">20 Acres · 1,000 Couple Tents · ~2,000 Guest Capacity</div>
+            <div class="note-box" style="border-color:var(--emerald); background:rgba(46,139,110,0.08);">
+              <span class="note-label" style="color:var(--emerald);">My note</span>
+              [ Add your own reflection on this plan — what excites you most about it, what it took to design. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--emerald); color:var(--emerald);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/pandora-city/goat-farm.png" alt="Pandora City Goat Farm master layout plan"></div>
+          <div class="photo-card-body">
+            <div class="title">Goat Farm — Katoo Supply &amp; Eid Special</div>
+            <div class="date" style="color:var(--emerald);">8 Acres · 2,000 Goat Capacity · 20 Sheds</div>
+            <div class="note-box" style="border-color:var(--emerald); background:rgba(46,139,110,0.08);">
+              <span class="note-label" style="color:var(--emerald);">My note</span>
+              [ Add your own reflection here — the veterinary knowledge behind this one runs deep. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--emerald); color:var(--emerald);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/pandora-city/dairy-farm.png" alt="Pandora City Dairy Farm master layout plan"></div>
+          <div class="photo-card-body">
+            <div class="title">Dairy Farm Setup — Cows &amp; Buffaloes</div>
+            <div class="date" style="color:var(--emerald);">5 Acres · 25 Cows + 25 Buffaloes</div>
+            <div class="note-box" style="border-color:var(--emerald); background:rgba(46,139,110,0.08);">
+              <span class="note-label" style="color:var(--emerald);">My note</span>
+              [ Add your own reflection on this one — the milk centre concept ties straight back to the resume story. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--emerald); color:var(--emerald);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/pandora-city/adventure-park.png" alt="Pandora City Adventure Park master layout plan"></div>
+          <div class="photo-card-body">
+            <div class="title">Adventure Park — Thrill, Fun, Nature</div>
+            <div class="date" style="color:var(--emerald);">8 Acres · 40+ Activities · 2,000 Daily Guests</div>
+            <div class="note-box" style="border-color:var(--emerald); background:rgba(46,139,110,0.08);">
+              <span class="note-label" style="color:var(--emerald);">My note</span>
+              [ This is where the athletics background comes full circle — add your thought here. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--emerald); color:var(--emerald);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/pandora-city/fish-farm.png" alt="Pandora City Fish Farm Retreat master layout plan"></div>
+          <div class="photo-card-body">
+            <div class="title">Fish Farm Retreat — Zorbing, Boating &amp; BBQ</div>
+            <div class="date" style="color:var(--emerald);">4 Acres Water · 90,000 Fish Stocked</div>
+            <div class="note-box" style="border-color:var(--emerald); background:rgba(46,139,110,0.08);">
+              <span class="note-label" style="color:var(--emerald);">My note</span>
+              [ Add your own reflection — the pond-side living concept came from somewhere specific. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--emerald); color:var(--emerald);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/pandora-city/fruit-farm-v1.png" alt="Pandora City Fruit Farm earlier concept version"></div>
+          <div class="photo-card-body">
+            <div class="title">Fruit Farm Retreat — Earlier Concept</div>
+            <div class="date" style="color:var(--emerald);">20 Acres · 45 Couple Tents · Original Scale</div>
+            <div class="note-box" style="border-color:var(--emerald); background:rgba(46,139,110,0.08);">
+              <span class="note-label" style="color:var(--emerald);">My note</span>
+              [ The version before the version — worth keeping to see how far the thinking has come. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--emerald); color:var(--emerald);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOREVER FYRE -->
+    <div class="folder-section" data-folder="forever-fyre">
+      <div class="folder-head">
+        <div>
+          <h2 style="color:var(--flame);">Forever FYRE</h2>
+          <p class="desc">The festival, mapped out — stages, zones, the ten-day lineup, and the numbers behind it.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/forever-fyre/masterplan-main.png" alt="Forever FYRE annual musical festival master plan"></div>
+          <div class="photo-card-body">
+            <div class="title">Forever FYRE — Full Festival Master Plan</div>
+            <div class="date" style="color:var(--flame);">24 Dec 2026 – 2 Jan 2027 · 10 Days · 20,000 Guests</div>
+            <div class="note-box" style="border-color:var(--flame); background:rgba(224,86,47,0.08);">
+              <span class="note-label" style="color:var(--flame);">My note</span>
+              [ Add your own reflection on this one — the New Year's Eve vision has been years in the making. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--flame); color:var(--flame);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/forever-fyre/site-map-final.png" alt="Forever FYRE festival site map with accommodation zones"></div>
+          <div class="photo-card-body">
+            <div class="title">Festival Site Map — Zones &amp; Stay Options</div>
+            <div class="date" style="color:var(--flame);">65-Acre Fruit Orchard Grounds · 4 Accommodation Tiers</div>
+            <div class="note-box" style="border-color:var(--flame); background:rgba(224,86,47,0.08);">
+              <span class="note-label" style="color:var(--flame);">My note</span>
+              [ Add your own reflection — this is where 20,000 people find a place to stay for ten days. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn" style="border-color:var(--flame); color:var(--flame);">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CAREER & INDUSTRY -->
+    <div class="folder-section" data-folder="career">
+      <div class="folder-head">
+        <div>
+          <h2>Career &amp; Industry</h2>
+          <p class="desc">Moments from the entertainment and hospitality years.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/celeb-friends.jpg" alt="Vishal Singh with entertainment industry figures"></div>
+          <div class="photo-card-body">
+            <div class="title">Industry Night, VRU Entertainments Era</div>
+            <div class="date">Circa 2008–2014</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own memory of this night — who was there, what it meant at the time. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area">
+              <textarea placeholder="Share a thought on this..."></textarea>
+              <button class="btn btn-accent comment-post-btn">Post</button>
+              <div class="comment-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IT & TECH CERTIFICATIONS -->
+    <div class="folder-section" data-folder="it-certifications">
+      <div class="folder-head">
+        <div>
+          <h2>IT &amp; Tech Certifications</h2>
+          <p class="desc">From an NIIT scholarship and a Microsoft Certified Professional badge signed by Bill Gates in 1999, to hands-on AI tooling workshops decades later.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/python-using-ai-2026.png" alt="AI For Techies Certificate of Completion, Vishal Singh, Python Using AI Workshop, issued August 23 2026"></div>
+          <div class="photo-card-body">
+            <div class="title">Python Using AI Workshop — AI For Techies</div>
+            <div class="date">23 August 2026</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/ai-tools-chatgpt-2026.jpeg" alt="be10x Certificate of Completion, Vishal Singh, AI tools and ChatGPT workshop, issued August 1 2026"></div>
+          <div class="photo-card-body">
+            <div class="title">AI Tools &amp; ChatGPT Workshop — be10x</div>
+            <div class="date">1 August 2026</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/ai-tools-chatgpt-2026-styled.png" alt="Illustrated portrait holding the be10x AI Tools and ChatGPT Workshop certificate"></div>
+          <div class="photo-card-body">
+            <div class="title">AI Tools &amp; ChatGPT Workshop — Keepsake Portrait</div>
+            <div class="date">1 August 2026</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/niit-java-jdk-1999.jpg" alt="NIIT certificate, Java Programming Using JDK 1.2 With UML, Singh Vishal, 17 September to 17 December 1999"></div>
+          <div class="photo-card-body">
+            <div class="title">Java Programming Using JDK 1.2 with UML — NIIT</div>
+            <div class="date">17 September – 17 December 1999</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/microsoft-exam-score-1999.jpg" alt="Microsoft Examination Score Report, Developing Applications with C++ Using the Microsoft Foundation Class Library, Vishal Singh, August 17 1999, Pass, score 722"></div>
+          <div class="photo-card-body">
+            <div class="title">MFC C++ Exam — Score Report (Pass, 722/1000)</div>
+            <div class="date">17 August 1999</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/microsoft-mcp-transcript-1999.jpg" alt="Microsoft Certified Professional Transcript, Vishal R Singh, certification achieved August 17 1999"></div>
+          <div class="photo-card-body">
+            <div class="title">Microsoft Certified Professional — Official Transcript</div>
+            <div class="date">17 August 1999</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/microsoft-mcp-certificate-1999.jpg" alt="Microsoft Certificate of Excellence, Vishal R Singh, Microsoft Certified Professional, signed by Bill Gates"></div>
+          <div class="photo-card-body">
+            <div class="title">Microsoft Certified Professional — Certificate of Excellence</div>
+            <div class="date">1999</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/niit-semester-g-1999.jpg" alt="NIIT Transcript, Network-Centered Computing Curriculum, Semester G, Singh Vishal Ramnayan, 23 September 1999, Grade A"></div>
+          <div class="photo-card-body">
+            <div class="title">NIIT Transcript — Semester G (Grade A)</div>
+            <div class="date">23 September 1999</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/niit-semester-f-1999.jpg" alt="NIIT Transcript, Network-Centered Computing Curriculum, Semester F, Singh Vishal Ramnayan, 06 April 1999, Grade B"></div>
+          <div class="photo-card-body">
+            <div class="title">NIIT Transcript — Semester F (Grade B)</div>
+            <div class="date">6 April 1999</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/niit-semester-e-1998.jpg" alt="NIIT Transcript, Network-Centered Computing Curriculum, Semester E, Singh Vishal Ramnayan, 18 August 1998, Grade B"></div>
+          <div class="photo-card-body">
+            <div class="title">NIIT Transcript — Semester E (Grade B)</div>
+            <div class="date">18 August 1998</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/niit-windows98-enrollment-1998.jpg" alt="NIIT certificate, Singh Ramnayan Vishal, enrolled for Microsoft Windows 98 on its worldwide launch day, June 25 1998"></div>
+          <div class="photo-card-body">
+            <div class="title">Windows 98 Worldwide Launch Day Enrollment — NIIT</div>
+            <div class="date">25 June 1998</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/it-certifications/niit-scholarship-1998.jpg" alt="NIIT Vivek College letter, Scholarship 98, Vishal Singh, 35 percent scholarship for next semester, 20 September 1998"></div>
+          <div class="photo-card-body">
+            <div class="title">NIIT Scholarship '98 — 35% Award Letter</div>
+            <div class="date">20 September 1998</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BUSINESS & PERSONAL DEVELOPMENT -->
+    <div class="folder-section" data-folder="business-personal-dev">
+      <div class="folder-head">
+        <div>
+          <h2>Business &amp; Personal Development</h2>
+          <p class="desc">From Scouts patrol-leader training and personality-development transcripts to the HCL Infosystems recognitions that marked PcGenesis's standing in the trade.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+
+        <div class="photo-card featured reveal">
+          <div class="img-wrap">
+            <span class="featured-badge">Featured</span>
+            <img src="assets/business-personal-dev/hcl-point-appointment-2005.jpg" alt="HCL Infosystems Ltd Frontline Certificate appointing P.C. Genesis as HCL Point, valid till 2005-2006">
+          </div>
+          <div class="photo-card-body">
+            <div class="title">Appointed HCL Point — P.C. Genesis</div>
+            <div class="date">Valid 2005–2006 · HCL Infosystems Ltd., Frontline Division</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card featured reveal">
+          <div class="img-wrap">
+            <span class="featured-badge">Featured</span>
+            <img src="assets/business-personal-dev/hcl-frontline-recognition-2004.jpg" alt="HCL Infosystems Ltd Frontline recognizes P.C. Genesis for excellent performance in Consumer PC, Western Suburb-2 Mumbai, 2004-05">
+          </div>
+          <div class="photo-card-body">
+            <div class="title">Excellent Performance in "Consumer PC" — P.C. Genesis</div>
+            <div class="date">2004–05 · HCL Infosystems Ltd., Western Suburb-2, Mumbai</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/nis-success-communication-2000.jpg" alt="NIS Sparta certificate, Success Through Communication, Vishal Singh of NIIT Goregaon, 29 May 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">"Success Through Communication" — NIS Sparta</div>
+            <div class="date">3–10 May 2000</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/nis-transcript-semc-2000.jpg" alt="NIS Transcript, Singh Vishal, Program ECPD, Semester C, 11 May 2000, aggregate 80 percent"></div>
+          <div class="photo-card-body">
+            <div class="title">NIS Transcript — Semester C (80% Aggregate)</div>
+            <div class="date">11 May 2000</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/nis-transcript-unit4-2000.jpg" alt="NIS Transcript, Singh Vishal, Program ECPD, Unit IV, 10 May 2000, aggregate 70 percent"></div>
+          <div class="photo-card-body">
+            <div class="title">NIS Transcript — Unit IV (70% Aggregate)</div>
+            <div class="date">10 May 2000</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/nis-transcript-sem3-1999.jpg" alt="NIS Transcript, Vishal Singh, Program ECPD, Semester III, 06 August 1999, aggregate 60 marks"></div>
+          <div class="photo-card-body">
+            <div class="title">NIS Transcript — Semester III (Aggregate 60)</div>
+            <div class="date">6 August 1999</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/nis-transcript-unit1-1998.jpg" alt="NIS Transcript, Singh Vishal Ramnayan, Program ECPD, Learning Unit I, August 1998, aggregate 83 percent"></div>
+          <div class="photo-card-body">
+            <div class="title">NIS Transcript — Learning Unit I (83% Aggregate)</div>
+            <div class="date">August 1998</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/scouts-patrol-leader-1993.jpg" alt="North Bombay Suburban Bharat Scouts and Guides District Association certificate, Scout Singh Vishal R, Std IX Patrol Leaders training, 24 July 1993"></div>
+          <div class="photo-card-body">
+            <div class="title">Std IX Patrol Leaders Training — Scouts &amp; Guides</div>
+            <div class="date">24 July 1993 · S.R.W.S. High School, Andheri (W)</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/science-exhibition-1992.jpg" alt="Vidnyan Pradarshan Science Exhibition Certificate, Singh Vishal Ramnayan, Bangur Nagar Vidya Bhawan, Ward P, 1992-93"></div>
+          <div class="photo-card-body">
+            <div class="title">Vidnyan Pradarshan — Science Exhibition Certificate</div>
+            <div class="date">2–4 December 1992 · Ward P, Navjeevan Vidyalaya High School, Malad</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/scouts-patrol-leader-1992.jpg" alt="North Bombay Suburban Bharat Scouts and Guides District Association certificate, Scout Vishal Singh, Std VIII Patrol Leader training, 18 July 1992"></div>
+          <div class="photo-card-body">
+            <div class="title">Std VIII Patrol Leader Training — Scouts &amp; Guides</div>
+            <div class="date">18 July 1992 · Shree Ram Welfare High School</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/business-personal-dev/rrmi-proficiency-1992.jpg" alt="Readers' Research Modern Institute Proficiency Certificate, Singh Vishal, 13th RRMI All-India General Knowledge Test Junior Category, Second Division, 29 January 1992"></div>
+          <div class="photo-card-body">
+            <div class="title">13th All-India General Knowledge Test — Second Division</div>
+            <div class="date">29 January 1992 · Readers' Research Modern Institute, Jaipur</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EMPLOYMENT & APPOINTMENT LETTERS -->
+    <div class="folder-section" data-folder="employment-letters">
+      <div class="folder-head">
+        <div>
+          <h2>Employment &amp; Appointment Letters</h2>
+          <p class="desc">The paper trail of a career — sales floor to CEO's chair — from RSG Infotech through VRU Entertainment.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/employment-letters/vru-ceo-appointment-2008-p1.jpg" alt="VRU Entertainment Pvt Ltd letter appointing Vishal Singh as CEO for Events Division, page 1, 1 October 2008"></div>
+          <div class="photo-card-body">
+            <div class="title">CEO, Events Division — Appointment (Page 1)</div>
+            <div class="date">1 October 2008 · VRU Entertainment Pvt. Ltd.</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/employment-letters/vru-ceo-appointment-2008-p2.jpg" alt="VRU Entertainment Pvt Ltd letter appointing Vishal Singh as CEO for Events Division, page 2 with signatures, 1 October 2008"></div>
+          <div class="photo-card-body">
+            <div class="title">CEO, Events Division — Appointment (Page 2, Signed)</div>
+            <div class="date">1 October 2008 · VRU Entertainment Pvt. Ltd.</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/employment-letters/mangalmurti-appointment-2002-p1.jpg" alt="Mangal Murti Ltd Appointment Letter for Vishal Singh as Sales Manager, page 1, 23 August 2002"></div>
+          <div class="photo-card-body">
+            <div class="title">Sales Manager — Appointment Letter (Page 1)</div>
+            <div class="date">23 August 2002 · Mangal Murti Ltd.</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/employment-letters/mangalmurti-appointment-2002-p2.jpg" alt="Mangal Murti Ltd Appointment Letter for Vishal Singh, page 2, terms and conditions, 23 August 2002"></div>
+          <div class="photo-card-body">
+            <div class="title">Sales Manager — Appointment Letter (Page 2)</div>
+            <div class="date">23 August 2002 · Mangal Murti Ltd.</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/employment-letters/mangalmurti-appointment-2002-p3.jpg" alt="Mangal Murti Ltd Appointment Letter for Vishal Singh, page 3 with signatures, 23 August 2002"></div>
+          <div class="photo-card-body">
+            <div class="title">Sales Manager — Appointment Letter (Page 3, Signed)</div>
+            <div class="date">23 August 2002 · Mangal Murti Ltd.</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/employment-letters/davars-college-reference-2002.jpg" alt="Davar's College reference letter for Vishal Singh, Business Development Manager and Center Administrator, 16 May 2002"></div>
+          <div class="photo-card-body">
+            <div class="title">Business Development Manager / Center Administrator — Reference Letter</div>
+            <div class="date">16 May 2002 · Davar's College</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/employment-letters/rsg-infotech-reference-2001.jpg" alt="RSG Infotech Pvt Ltd reference letter for Vishal Singh Ramnayan, Best Salesman of the Year, 10 April 2001"></div>
+          <div class="photo-card-body">
+            <div class="title">Best Salesman of the Year — Reference Letter</div>
+            <div class="date">10 April 2001 · RSG Infotech Pvt. Ltd.</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ATHLETICS & FITNESS -->
+    <div class="folder-section" data-folder="athletics">
+      <div class="folder-head">
+        <div>
+          <h2>Athletics &amp; Fitness</h2>
+          <p class="desc">The track, the training, the national colours — official certificates from a career that ran from West Zone 1995 to an Olympic selection camp in 1999.</p>
+        </div>
+      </div>
+
+      <div class="subfolder-label"><h3>Nationals Certificates</h3><div class="line"></div></div>
+      <div class="photo-grid">
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/afi-olympics-selection-1999.jpg" alt="Athletics Federation of India letter, January 1999, selection for Asian Games 1999 and Olympics 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">AFI Selection Letter — Asian Games &amp; Olympics 2000</div>
+            <div class="date">16 January 1999 · Athletics Federation of India</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection here — the letter that named you for Asian Games 1999 and Olympics 2000, 400m &amp; 400m Hurdles. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/southzone-relay-2000.jpg" alt="AFI Merit Certificate, First Place 4x400m Relay, South Zone Junior Athletics Championships 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">Merit Certificate — 1st, 4x400m Relay</div>
+            <div class="date">18–19 Sept 2000 · 12th South Zone Junior Championships, Thiruvananthapuram</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection — 3:19.86, representing Maharashtra. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/southzone-400m-2000.jpg" alt="AFI Merit Certificate, First Place 400m, South Zone Junior Athletics Championships 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">Merit Certificate — 1st, 400m</div>
+            <div class="date">18–19 Sept 2000 · 12th South Zone Junior Championships, Thiruvananthapuram</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection — 48.13 seconds, Men U/20. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/southzone-hurdles-2000.jpg" alt="AFI Merit Certificate, First Place 400m Hurdles, South Zone Junior Athletics Championships 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">Merit Certificate — 1st, 400m Hurdles</div>
+            <div class="date">18–19 Sept 2000 · 12th South Zone Junior Championships, Thiruvananthapuram</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection — 53.89 seconds, Men U/20. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/westzone-1996.jpg" alt="VIII West Zone Athletic Championships 1996 Souvenir Certificate"></div>
+          <div class="photo-card-body">
+            <div class="title">VIII West Zone Athletic Championships</div>
+            <div class="date">30 Sept – 2 Oct 1996 · Gandhinagar</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/westzone-1995-a.jpg" alt="7th West Zone Athletic Championship 1995 Souvenir Certificate"></div>
+          <div class="photo-card-body">
+            <div class="title">7th West Zone Athletic Championship</div>
+            <div class="date">27–28 October 1995 · Ajmer</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/westzone-1995-b.jpg" alt="7th West Zone Athletic Championship 1995 Souvenir Certificate, second copy"></div>
+          <div class="photo-card-body">
+            <div class="title">7th West Zone Athletic Championship — Second Copy</div>
+            <div class="date">27–28 October 1995 · Ajmer</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="subfolder-label" style="margin-top:44px;"><h3>School &amp; College Certificates</h3><div class="line"></div></div>
+      <div class="photo-grid">
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/standrews-400m-1998.jpg" alt="St. Andrew's College Certificate of Honour, First place 400 Mts Run, academic year 1998-99"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — 400 Mts. Run</div>
+            <div class="date">10 December 1998 · St. Andrew's College, Bandra</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/standrews-longjump-1998.jpg" alt="St. Andrew's College Certificate of Honour, First place Long Jump, academic year 1998-99"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Long Jump</div>
+            <div class="date">10 December 1998 · St. Andrew's College, Bandra</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/standrews-800m-1998.jpg" alt="St. Andrew's College Certificate of Honour, First place 800 Mts Run, academic year 1998-99"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — 800 Mts. Run</div>
+            <div class="date">10 December 1998 · St. Andrew's College, Bandra</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/standrews-1500m-1998.jpg" alt="St. Andrew's College Certificate of Honour, First place 1500 Mts Run, academic year 1998-99"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — 1500 Mts. Run</div>
+            <div class="date">10 December 1998 · St. Andrew's College, Bandra</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/state-junior-participation-1998.jpg" alt="Maharashtra State Junior Athletics Selection Trial Certificate of Participation, January 1998, Sangli"></div>
+          <div class="photo-card-body">
+            <div class="title">45th State Junior Athletics Selection Trials — Participation</div>
+            <div class="date">6–7 January 1998 · Sangli</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/highjump-3rd-1995.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, Third place High Jump, std X, 17 Feb 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — High Jump</div>
+            <div class="date">17 February 1995 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/shotput-1st-1995.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place Shot Put, std X, 17 Feb 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put</div>
+            <div class="date">17 February 1995 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/400m-1st-1995.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place 400 Mts Running, std X, 17 Feb 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — 400 Mts. Running</div>
+            <div class="date">17 February 1995 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/prabodhan-putshot-1994.jpg" alt="Prabodhan Inter School Sports Meet 1994 Certificate of Honour, Second place Put Shot, boys under 17"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — Put Shot (Boys U-17)</div>
+            <div class="date">16 December 1994 · Prabodhan Inter School Sports Meet</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/championship-u14-1994.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, Championship under 14 years group, std IX, 29 Jan 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">Championship — Under 14 Years Group</div>
+            <div class="date">29 January 1994 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/400m-running-1994.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place 400m Running, std IX, 29 Jan 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — 400m Running</div>
+            <div class="date">29 January 1994 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/shotput-competition-1994.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place Shot Put Competition, std IX, 29 Jan 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put Competition</div>
+            <div class="date">29 January 1994 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/prabodhan-shotput-1993.jpg" alt="Prabodhan Inter School Sports Meet 1993 Certificate of Honour, Second place PVT Shot 4kgs, boys under 14"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — PVT Shot, 4kgs (Boys U-14)</div>
+            <div class="date">12 December 1993 · Prabodhan Inter School Sports Meet</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/prabodhan-600m-1993.jpg" alt="Prabodhan Inter School Sports Meet 1993 Certificate of Honour, Third place 600m Run, boys under 14"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — 600m Run (Boys U-14)</div>
+            <div class="date">11 December 1993 · Prabodhan Inter School Sports Meet</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/elocution-1993.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, Second place Elocution Competition, std VIII, 15 Feb 1993"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — Elocution Competition</div>
+            <div class="date">15 February 1993 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/shotput-boys-1993.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place Shot Put for Boys, std VIII, 15 Feb 1993"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put for Boys</div>
+            <div class="date">15 February 1993 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/goli-fek-1992.jpg" alt="A. Bh. Goregaonkar English School prashastipatra, Golden Jubilee Year, second place Goli Fek shot put, 1992"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — Goli Fek (Shot Put)</div>
+            <div class="date">1992 · A. Bh. Goregaonkar English School — Golden Jubilee Year</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/flower-arrangement-1990.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place Flower Arrangement Competition, std VI, 10 Dec 1990"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Flower Arrangement Competition (Group I)</div>
+            <div class="date">10 December 1990 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/fancy-dress-1990.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place Fancy Dress Competition, std VI, 15 Aug 1990"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Fancy Dress Competition (Group I)</div>
+            <div class="date">15 August 1990 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/best-character-1989.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place Best Character in the Play, std IV, 27 Jan 1989"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Best Character in the Play</div>
+            <div class="date">27 January 1989 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/drama-1988.jpg" alt="Bangur Nagar Vidya Bhavan Certificate of Merit, First place Drama, std III, 1988"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Drama</div>
+            <div class="date">1988 · Bangur Nagar Vidya Bhavan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="subfolder-label" style="margin-top:44px;"><h3>State &amp; District Sports Events</h3><div class="line"></div></div>
+      <div class="photo-grid">
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-relay-1998.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, First place 4x400m Relay Men, Maharashtra State Level Open Athletic Meet, February 1998"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — 4x400m Relay (Men)</div>
+            <div class="date">1 February 1998 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-800m-1998.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, Second place 800m Run Boys U-18, Maharashtra State Level Open Athletic Meet, January 1998"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — 800m Run (Boys U-18)</div>
+            <div class="date">30 January 1998 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-highjump-1998.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, Second place High Jump Boys U-18, Maharashtra State Level Open Athletic Meet, January 1998"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — High Jump (Boys U-18)</div>
+            <div class="date">29 January 1998 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/state-junior-relay-1998.jpg" alt="Maharashtra Amateur Athletic Association Merit Certificate, Second place 4x400m Relay, Boys U-18, Maharashtra State Junior Athletic Championships, Sangli 1998"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — 4x400m Relay (Boys U-18)</div>
+            <div class="date">6–7 January 1998 · Maharashtra State Junior Athletic Championships, Sangli</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/ymca-highjump-1997.jpg" alt="Bombay YMCA Certificate of Honour, Third place High Jump Boys U-18, Annual Athletic Meet 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — High Jump (Boys U-18)</div>
+            <div class="date">6–7 December 1997 · Bombay YMCA, University Pavilion</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/ymca-shotput-1997.jpg" alt="Bombay YMCA Certificate of Honour, Second place Shot Put Boys U-18, Annual Athletic Meet 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — Shot Put (Boys U-18)</div>
+            <div class="date">6–7 December 1997 · Bombay YMCA, University Pavilion</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-javelin-1997.jpg" alt="Mumbai Suburban District Amateur Athletic Association Certificate of Merit, First place Javelin Throw, 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Javelin Throw</div>
+            <div class="date">27 November 1997 · Mumbai Suburban District Athletic Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-discus-1997.jpg" alt="Mumbai Suburban District Amateur Athletic Association Certificate of Merit, First place Discus Throw, 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Discus Throw</div>
+            <div class="date">27 November 1997 · Mumbai Suburban District Athletic Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-shotput-1997.jpg" alt="Mumbai Suburban District Amateur Athletic Association Certificate of Merit, First place Shot Put, 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put</div>
+            <div class="date">27 November 1997 · Mumbai Suburban District Athletic Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-800m-1997.jpg" alt="Mumbai Suburban District Amateur Athletic Association Certificate of Merit, Second place 800m Run, 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — 800m Run</div>
+            <div class="date">27 November 1997 · Mumbai Suburban District Athletic Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-1500m-1997.jpg" alt="Mumbai Suburban District Amateur Athletic Association Certificate of Merit, Second place 1500m Run, 1997"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — 1500m Run</div>
+            <div class="date">27 November 1997 · Mumbai Suburban District Athletic Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/mumbai-ymca-hurdles-1996.jpg" alt="Mumbai YMCA Certificate of Honour, Third place 110m Hurdles Boys U-18, XXI Annual Athletic Meet 1996"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — 110m Hurdles (Boys U-18)</div>
+            <div class="date">7–8 December 1996 · Mumbai YMCA, University Pavilion</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/mumbai-ymca-shotput-1996.jpg" alt="Mumbai YMCA Certificate of Honour, Second place Shot Put Boys U-18, XXI Annual Athletic Meet 1996"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — Shot Put (Boys U-18)</div>
+            <div class="date">7–8 December 1996 · Mumbai YMCA, University Pavilion</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-shotput-1996b.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, Third place Shot Put Boys U-18, Maharashtra State Level Open Athletic Meet 1996"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — Shot Put (Boys U-18)</div>
+            <div class="date">2 November 1996 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-highjump-1996.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, Third place High Jump Boys U-18, Maharashtra State Level Open Athletic Meet 1996"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — High Jump (Boys U-18)</div>
+            <div class="date">31 October 1996 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/state-heptathlon-1996.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Merit, First place Heptathlon Boys U-18, Maharashtra State Athletic Championship, Pune 1996"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Heptathlon (Boys U-18)</div>
+            <div class="date">14 September 1996 · Maharashtra State Athletic Championship, Pune</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-javelin-1996.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, Second place Javelin Throw Boys U-16, Maharashtra State Level Open Athletic Meet January 1996"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — Javelin Throw (Boys U-16)</div>
+            <div class="date">4 January 1996 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-800m-1996.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, First place 800m Boys U-16, Maharashtra State Level Open Athletic Meet January 1996"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — 800m (Boys U-16)</div>
+            <div class="date">5 January 1996 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/maaa-relay-1995.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Merit, Third place 4x100 Relay Boys U-16, 45th Maharashtra State Junior Athletic Championship, Amravati 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — 4x100 Relay (Boys U-16)</div>
+            <div class="date">27–29 December 1995 · 45th Maharashtra State Junior Athletic Championship, Amravati</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/maaa-pentathlon-1995-a.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Merit, First place Pentathlon Boys U-16, 45th Maharashtra State Junior Athletic Championship, Amravati 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Pentathlon (Boys U-16)</div>
+            <div class="date">27–29 December 1995 · 45th Maharashtra State Junior Athletic Championship, Amravati</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/maaa-shotput-1995.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Merit, First place Shot Put Boys U-16, 45th Maharashtra State Junior Athletic Championship, Amravati 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put (Boys U-16)</div>
+            <div class="date">27–29 December 1995 · 45th Maharashtra State Junior Athletic Championship, Amravati</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/maaa-pentathlon-1995-b.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Merit, First place Pentathlon Boys U-16, 45th Maharashtra State Junior Athletic Championship, Amravati 1995, second copy"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Pentathlon (Boys U-16) — Second Copy</div>
+            <div class="date">27–29 December 1995 · 45th Maharashtra State Junior Athletic Championship, Amravati</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/state-junior-participation-1995-96b.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Participation, State Junior Athletic Championship 1995-96, Amravati, second copy"></div>
+          <div class="photo-card-body">
+            <div class="title">Maharashtra State Junior Athletic Championship — Participation (Second Copy)</div>
+            <div class="date">27–29 December 1995 · Amravati</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/state-junior-participation-1995-96.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Participation, State Junior Athletic Championship 1995-96, Amravati"></div>
+          <div class="photo-card-body">
+            <div class="title">Maharashtra State Junior Athletic Championship — Participation</div>
+            <div class="date">27–29 December 1995 · Amravati</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/ymca-relay-1995.jpg" alt="Bombay YMCA Certificate of Honour, Third place 4x100m Relay Boys U-18, 20th Annual Athletic Meet 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — 4x100m Relay (Boys U-18)</div>
+            <div class="date">2–3 December 1995 · Bombay YMCA, University Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/ymca-hurdles-1995.jpg" alt="Bombay YMCA Certificate of Honour, Second place 100m Hurdles Boys U-16, 20th Annual Athletic Meet 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — 100m Hurdles (Boys U-16)</div>
+            <div class="date">2–3 December 1995 · Bombay YMCA, University Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/ymca-javelin-1995.jpg" alt="Bombay YMCA Certificate of Honour, First place Javelin Throw Boys U-16, 20th Annual Athletic Meet 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Javelin Throw (Boys U-16)</div>
+            <div class="date">2–3 December 1995 · Bombay YMCA, University Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/ymca-shotput-1995.jpg" alt="Bombay YMCA Certificate of Honour, First place Shot Put Boys U-16, 20th Annual Athletic Meet 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put (Boys U-16)</div>
+            <div class="date">2–3 December 1995 · Bombay YMCA, University Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-8th-hurdles-1995.jpg" alt="Bombay Suburban District Amateur Athletic Association Certificate of Merit, Second place 100m Hurdles B/16, 8th Track and Field Championships 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — 100m Hurdles (B/16)</div>
+            <div class="date">19 November 1995 · Bombay Suburban District, 8th Track &amp; Field Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-8th-pentathlon-1995.jpg" alt="Bombay Suburban District Amateur Athletic Association Certificate of Merit, First place Pentathlon B/16, 8th Track and Field Championships 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Pentathlon (B/16)</div>
+            <div class="date">19 November 1995 · Bombay Suburban District, 8th Track &amp; Field Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-8th-shotput-1995.jpg" alt="Bombay Suburban District Amateur Athletic Association Certificate of Merit, Third place Shot Put B/16, 8th Track and Field Championships 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — Shot Put (B/16)</div>
+            <div class="date">19 November 1995 · Bombay Suburban District, 8th Track &amp; Field Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-8th-javelin-1995.jpg" alt="Bombay Suburban District Amateur Athletic Association Certificate of Merit, First place Javelin Throw B/16, 8th Track and Field Championships 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Javelin Throw (B/16)</div>
+            <div class="date">19 November 1995 · Bombay Suburban District, 8th Track &amp; Field Championships</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/itc-state-junior-shotput-1995.jpg" alt="ITC Maharashtra State Junior Athletic Championship 1995 Certificate of Merit, Third place Shot Put, Boys U-16"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — Shot Put (Boys U-16)</div>
+            <div class="date">14–15 October 1995 · ITC Maharashtra State Junior Athletic Championship, Jalgaon</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/state-junior-participation-1995.jpg" alt="Maharashtra State Junior Athletic Championship 1995 Certificate of Participation, Jalgaon"></div>
+          <div class="photo-card-body">
+            <div class="title">Maharashtra State Junior Athletic Championship — Participation</div>
+            <div class="date">14–15 October 1995 · Jalgaon</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/malayali-samajam-shotput-1995.jpg" alt="Borivli Malayali Samajam Certificate of Honour, First place Shot Put, XII Bombay Suburban Athletic Meet 1995"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put (Boys U-17)</div>
+            <div class="date">5 February 1995 · Borivli Malayali Samajam, Bombay Suburban Athletic Meet</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/state-junior-participation-1994.jpg" alt="Maharashtra Amateur Athletic Association Junior Championship 1994 Certificate of Participation, Pune"></div>
+          <div class="photo-card-body">
+            <div class="title">Maharashtra State Junior Championship — Participation</div>
+            <div class="date">2–3 August 1994 · Pune</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/malayali-samajam-shotput-1994.jpg" alt="Borivli Malayali Samajam Certificate of Honour, First place Shot Put, XI Bombay Suburban Athletic Meet 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">First Place — Shot Put</div>
+            <div class="date">12 February 1994 · Borivli Malayali Samajam, Bombay Suburban Athletic Meet</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/keraleeya-400m-1994.jpg" alt="Bombay Keraleeya Samaj Certificate of Honour, Second place 400m Run Boys U-14, Annual Athletic Meet 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — 400m Run (Boys U-14)</div>
+            <div class="date">6 March 1994 · Bombay Keraleeya Samaj</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/keraleeya-highjump-1994.jpg" alt="Bombay Keraleeya Samaj Certificate of Honour, Third place High Jump Boys U-14, Annual Athletic Meet 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — High Jump (Boys U-14)</div>
+            <div class="date">6 March 1994 · Bombay Keraleeya Samaj</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/bharat-petroleum-highjump-1994.jpg" alt="Bharat Petroleum Thane Metropolitan Gymkhana Certificate of Honour, Second place High Jump Boys U-14, Maharashtra State Level Open Athletic Meet 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — High Jump (Boys U-14)</div>
+            <div class="date">29 January 1994 · Bharat Petroleum / Thane Metropolitan Gymkhana, Dadoji Konddeo Stadium</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/sangli-participation-1994.jpg" alt="Sangli District Amateur Athletic Association Certificate of Participation, 42nd State Junior Athletic Meet 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">42nd State Junior Athletic Meet — Participation</div>
+            <div class="date">2–4 January 1994 · Sangli</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/maaa-shotput-1994.jpg" alt="Maharashtra Amateur Athletic Association Certificate of Merit, Third place Shot Put Boys U-14, Annual Athletic Championship, Sangli 1994"></div>
+          <div class="photo-card-body">
+            <div class="title">Third Place — Shot Put (Boys U-14)</div>
+            <div class="date">2 January 1994 · Maharashtra Amateur Athletic Association, Sangli</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/nationals/suburban-5th-shotput-1993.jpg" alt="Bombay Suburban District Amateur Athletic Association Certificate of Merit, Second place Shot Put B/14, 5th Track and Field Championships 1993"></div>
+          <div class="photo-card-body">
+            <div class="title">Second Place — Shot Put (B/14)</div>
+            <div class="date">5 December 1993 · Bombay Suburban District, 5th Track &amp; Field Championships, IIT Gymkhana</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PRESS RELEASE -->
+    <div class="folder-section" data-folder="press-release">
+      <div class="folder-head">
+        <div>
+          <h2>Press Release</h2>
+          <p class="desc">Newspaper clippings, headlines, and results sheets from a competitive athletics career — print coverage that ran alongside the medals.</p>
+        </div>
+      </div>
+
+      <div class="photo-grid">
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press-clipping-1995.jpg" alt="Sunday Mid-Day newspaper clipping, December 3 1995, Vishal Singh winning gold in U-16 hurdles"></div>
+          <div class="photo-card-body">
+            <div class="title">"Hurdle High" — Sunday Mid-Day</div>
+            <div class="date">3 December 1995 · YMCA Athletics Meet, University Stadium</div>
+            <div class="note-box">
+              <span class="note-label">My note</span>
+              [ Add your own reflection on this one — this is where it starts, in print. ]
+            </div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/gearing-for-success-1996.jpg" alt="Bombay Times feature, 20 Nov 1996, Gearing For Success, Vishal C Singh named a bright prospect at Project 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">"Gearing For Success" — Named a Bright Prospect</div>
+            <div class="date">20 Nov 1996 · Bombay Times</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — this is the one where they call it out by name: "Vishal R. Singh... is kind of crazy about athletics." ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/adrian-sets-record-vishal-dazzles-1997.jpg" alt="Times of India, 3 Nov 1996, Vishal Dazzles headline, hurdles"></div>
+          <div class="photo-card-body">
+            <div class="title">"Vishal Dazzles" — Times of India</div>
+            <div class="date">3 Nov 1996 · Times of India</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — a headline with your name in it. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/rathod-excels-thane-meet.jpg" alt="Times of India, Rathod Excels In Thane Meet, mentions Vishal R Singh in high jump results"></div>
+          <div class="photo-card-body">
+            <div class="title">"Rathod Excels In Thane Meet"</div>
+            <div class="date">Times of India, Mumbai</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — the high jump line credited to Prabhodan 2000. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/soares-soars-new-mark-1996.jpg" alt="Newspaper clipping, 6 Jan 1996, Soares Soars To New Mark, discus throw result naming Vishal Singh"></div>
+          <div class="photo-card-body">
+            <div class="title">"Soares Soars To New Mark" — Discus Result</div>
+            <div class="date">6 Jan 1996</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — 2nd place discus, boys under 16. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/five-state-marks-fall-thane.jpg" alt="Times of India, Five State Marks Fall At Thane Athletics, mentions Vishal R Singh in 110m hurdles"></div>
+          <div class="photo-card-body">
+            <div class="title">"Five State Marks Fall At Thane Athletics"</div>
+            <div class="date">Times of India</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — 110m hurdles result, Nagindas Khandwala meet. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/superb-show-ravindra-mahamuni-1996.jpg" alt="Times of India, 2 Nov 1996, Superb Show By Ravindra Mahamuni, discus result naming Vishal R Singh, Prabhodan Project 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">Discus Result — Prabhodan Project 2000</div>
+            <div class="date">2 Nov 1996 · Times of India, Mumbai</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — 39.92m, boys under 20. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/project2000-nagindas-dominate.jpg" alt="Athletes Of Project 2000, Nagindas Dominate Meet, javelin and discus results naming Vishal Singh"></div>
+          <div class="photo-card-body">
+            <div class="title">"Athletes Of Project 2000, Nagindas Dominate Meet"</div>
+            <div class="date">28 Nov (year unmarked)</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — javelin 39.98m and discus 26.78m, hand-marked in the margin. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/marshelene-new-meet-record-1997.jpg" alt="Indian Express, 7 Dec 1997, Marshelene Hurls A New Meet Record, mentions Vishal C Singh Project 2000, 110m hurdles"></div>
+          <div class="photo-card-body">
+            <div class="title">MSSA Cricket Cup coverage — 110m Hurdles Result</div>
+            <div class="date">7 Dec 1997 · Indian Express</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — boys under 18, 110m hurdles. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/sagar-sabaa-record-marks-1998.jpg" alt="TMG Athletics, Sagar Sabaa Set New Marks As Juniors Get Spotlight, mentions Vishal Singh of Project 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">"Sagar, Sabaa Set New Marks As Juniors Get Spotlight"</div>
+            <div class="date">30 Jan (year unmarked) · TMG Athletics</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — the record that credits Project 2000 by name and distance. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/dias-celebrates-birthday-1995.jpg" alt="Times of India, 21 Nov 1995, Dias Celebrates Birthday With Record, mentions Vishal R Singh under 16 boys"></div>
+          <div class="photo-card-body">
+            <div class="title">"Dias Celebrates Birthday With Record"</div>
+            <div class="date">21 Nov 1995 · Times of India, Bombay</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — boys under 16, 200m result. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/disney-lewis-kavita-1998.jpg" alt="Newspaper clipping, 2 Feb 1998, Disney Lewis Is Fastest Runner, Kavita Sets Mark, mentions Vishal Singh Project 2000"></div>
+          <div class="photo-card-body">
+            <div class="title">"Disney Lewis Is Fastest Runner, Kavita Sets Mark"</div>
+            <div class="date">2 Feb 1998</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/sabaa-individual-honours.jpg" alt="United Athletes Saba Khan Claims Individual Honours, results sheet"></div>
+          <div class="photo-card-body">
+            <div class="title">"United Athletes' Sabaa Khan Claims Individual Honours"</div>
+            <div class="date">Full results sheet</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this one. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/project2000-14medals-hindi.jpg" alt="Hindi newspaper clipping, Project 2000 wins 14 medals, team photo"></div>
+          <div class="photo-card-body">
+            <div class="title">"Project 2000 Ne 14 Padak Jeete" — Team Photo</div>
+            <div class="date">23 September (year unmarked)</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — the team photo, 2 gold, 5 silver, 2 bronze at the ITC Junior meet in Amravati. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/state-records-sheet-1.jpg" alt="State records and results sheet, Vishal R Singh high jump and shot put entries"></div>
+          <div class="photo-card-body">
+            <div class="title">Results &amp; State Records Sheet — I</div>
+            <div class="date">High Jump &amp; Shot Put entries, Prabhodan/Prabodhan</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this record sheet. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/state-records-sheet-2.jpg" alt="State records and results sheet, Vishal R Singh shot put and discus throw entries"></div>
+          <div class="photo-card-body">
+            <div class="title">Results &amp; State Records Sheet — II</div>
+            <div class="date">Shot Put &amp; Discus Throw entries, Prabhodan 2000</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this record sheet. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/westzone-results-sheet-1.jpg" alt="West Zone results sheet, typed, pentathlon and decathlon and heptathlon results naming Vishal R Singh"></div>
+          <div class="photo-card-body">
+            <div class="title">West Zone Results Sheet — Pentathlon</div>
+            <div class="date">Boys Under 16, hand-labelled "West Zone Results"</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection — 2nd place, Pentathlon, 2964 points. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+        <div class="photo-card reveal">
+          <div class="img-wrap"><img src="assets/athletics/press/westzone-results-sheet-2.jpg" alt="West Zone results sheet, typed, 4x400m relay results for boys under 20 and under 18"></div>
+          <div class="photo-card-body">
+            <div class="title">West Zone Results Sheet — 4x400m Relay</div>
+            <div class="date">Boys Under 20 &amp; Under 18</div>
+            <div class="note-box"><span class="note-label">My note</span>[ Add your own reflection on this relay result. ]</div>
+            <div class="comment-toggle" onclick="this.nextElementSibling.classList.toggle('open')">💬 View / add comments</div>
+            <div class="comment-area"><textarea placeholder="Share a thought on this..."></textarea><button class="btn btn-accent comment-post-btn">Post</button><div class="comment-list"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TIPSY MONKEE / NIGHTLIFE (empty, ready for uploads) -->
+    <div class="folder-section" data-folder="nightlife">
+      <div class="folder-head">
+        <div>
+          <h2>Tipsy Monkee / Nightlife</h2>
+          <p class="desc">A decade of Wednesday nights and the brand that started a trend — waiting for the next upload.</p>
+        </div>
+      </div>
+      <div class="upload-cta reveal">
+        <span class="featured-badge" style="position:static; display:inline-block; margin-bottom:12px;">Coming Soon</span>
+        <div>This folder is empty for now. Send photos any time — each one gets its own note and comment thread.</div>
+      </div>
+    </div>
+
+    <!-- FAMILY (empty, ready for uploads) -->
+    <div class="folder-section" data-folder="family">
+      <div class="folder-head">
+        <div>
+          <h2>Family</h2>
+          <p class="desc">The people the whole story runs back to — waiting for the next upload.</p>
+        </div>
+      </div>
+      <div class="upload-cta reveal">
+        <span class="featured-badge" style="position:static; display:inline-block; margin-bottom:12px;">Coming Soon</span>
+        <div>This folder is empty for now. Send photos any time — each one gets its own note and comment thread.</div>
+      </div>
+    </div>
+
+    <!-- EVERYDAY (empty, ready for uploads) -->
+    <div class="folder-section" data-folder="everyday">
+      <div class="folder-head">
+        <div>
+          <h2>Everyday</h2>
+          <p class="desc">Land, events, and the everyday in between — waiting for the next upload.</p>
+        </div>
+      </div>
+      <div class="upload-cta reveal">
+        <span class="featured-badge" style="position:static; display:inline-block; margin-bottom:12px;">Coming Soon</span>
+        <div>This folder is empty for now. Send more photos any time — each one gets its own note and comment thread, just like the ones above.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  document.querySelectorAll('.folder-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.folder-chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.folder;
+      document.querySelectorAll('.folder-section').forEach(sec=>{
+        sec.style.display = (f === 'all' || sec.dataset.folder === f) ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>

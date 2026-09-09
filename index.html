@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishal Singh — Land, Fire, and Everything Between</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .hero{ position:relative; padding: 90px 0 110px; overflow:hidden; border-bottom:1px solid var(--line); }
+  .hero .glow-gold{ width:640px; height:640px; background: var(--gold); top:-220px; left:-160px; }
+  .hero .glow-violet{ width:520px; height:520px; background: var(--violet); bottom:-260px; right:-140px; opacity:.35; }
+  .hero-inner{ display:grid; grid-template-columns: 1.25fr 1fr; gap:64px; align-items:end; }
+  @media (max-width:900px){ .hero-inner{ grid-template-columns:1fr; } }
+  .hero h1{ font-size: clamp(42px, 6vw, 82px); margin-top:20px; font-weight:600; }
+  .hero h1 em{ font-style:italic; color: var(--gold); font-weight:400; }
+  .hero-sub{ font-size:18px; color: var(--ivory-dim); max-width:48ch; margin-top:22px; }
+  .hero-meta{ font-size:13.5px; color: var(--ivory-dim); border-top:1px solid var(--line); padding-top:18px; line-height:2.1; }
+  .hero-meta b{ color: var(--ivory); font-weight:700; }
+
+  .overview-head{ display:flex; justify-content: space-between; align-items:flex-end; margin-bottom: 48px; flex-wrap:wrap; gap: 16px; }
+  .overview-head h2{ font-size: 42px; margin-top:12px; }
+
+  .card-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 940px){ .card-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px){ .card-grid{ grid-template-columns: 1fr; } }
+
+  .ocard{ position:relative; overflow:hidden; padding:0; }
+  .ocard-video{
+    position: relative; aspect-ratio: 16/10; overflow: hidden; cursor: pointer;
+    background: radial-gradient(120% 120% at 30% 20%, var(--stage-3), var(--stage));
+  }
+  .ocard-video .play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .play-btn{
+    width:60px; height:60px; border-radius:50%;
+    border: 1.5px solid rgba(245,241,232,0.5);
+    display:flex; align-items:center; justify-content:center; color: var(--ivory);
+    backdrop-filter: blur(4px); background: rgba(255,255,255,0.05);
+    transition: transform .25s ease, background .25s ease;
+  }
+  .ocard-video:hover .play-btn{ background: var(--ivory); color: var(--stage); transform: scale(1.1); }
+  .ocard-video .clip-label{ position:absolute; bottom:12px; left:14px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color: var(--ivory-dim); }
+  .ocard-video .clip-time{ position:absolute; bottom:12px; right:14px; font-size:11px; color: var(--ivory-dim); }
+  .ocard-body{ padding: 24px 24px 28px; }
+  .ocard-body h3{ font-size: 22px; margin-top: 12px; }
+  .ocard-body p{ font-size: 14px; color: var(--ivory-dim); margin-top: 10px; }
+  .ocard-body .go{ margin-top: 18px; font-size: 12.5px; font-weight:700; letter-spacing:.04em; display:inline-flex; align-items:center; gap:6px; color: var(--ivory); }
+  .ocard-body .go svg{ transition: transform .2s ease; }
+  .ocard:hover .go svg{ transform: translateX(5px); }
+  .ocard.emerald:hover{ border-color: var(--emerald); box-shadow: 0 10px 40px var(--emerald-glow); }
+  .ocard.emerald .eyebrow{ color: var(--emerald); }
+  .ocard.emerald .eyebrow::before{ background: var(--emerald); box-shadow:0 0 10px var(--emerald-glow); }
+  .ocard.flame:hover{ border-color: var(--flame); box-shadow: 0 10px 40px var(--flame-glow); }
+  .ocard.flame .eyebrow{ color: var(--flame); }
+  .ocard.flame .eyebrow::before{ background: var(--flame); box-shadow:0 0 10px var(--flame-glow); }
+  .ocard.violet:hover{ border-color: var(--violet); box-shadow: 0 10px 40px var(--violet-glow); }
+  .ocard.violet .eyebrow{ color: var(--violet); }
+  .ocard.violet .eyebrow::before{ background: var(--violet); box-shadow:0 0 10px var(--violet-glow); }
+
+  .quote-band{ position:relative; overflow:hidden; border-top:1px solid var(--line); background: var(--stage-2); }
+  .quote-band .glow-flame{ width:500px; height:500px; background:var(--flame); left:50%; top:-260px; transform:translateX(-50%); opacity:.3; }
+  .lede-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:56px; align-items:center; }
+  @media (max-width:860px){ .lede-grid{ grid-template-columns:1fr; } }
+  .strip-quote{ font-family: var(--font-display); font-style: italic; font-weight:400; font-size: clamp(24px, 3vw, 36px); line-height:1.4; max-width: 20ch; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="glow glow-gold"></div>
+  <div class="glow glow-violet"></div>
+  <div class="shell">
+    <div class="hero-inner">
+      <div class="reveal">
+        <div class="eyebrow">A Founder's Note</div>
+        <h1>Land, ideas, and things worth <em>gathering</em> around.</h1>
+        <p class="hero-sub">I build places people can stand on, write things people can sit with, and host gatherings people remember. This is the record of all three — Pandora City, Forever FYRE, a trilogy in progress, and the work in between.</p>
+        <div style="margin-top:36px; display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="about.html" class="btn btn-solid">Read the long version</a>
+          <a href="talk2me.html" class="btn btn-accent">Talk to me</a>
+        </div>
+      </div>
+      <div class="hero-meta reveal">
+        <div><b>Role</b> — Founder & CEO, V Hospitality Pvt. Ltd.</div>
+        <div><b>Based</b> — Mumbai, Maharashtra</div>
+        <div><b>Active ventures</b> — Pandora City, Forever FYRE</div>
+        <div><b>Also writing</b> — AN AUTOBIOGRAPHY OF GOD (trilogy)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="overview-head reveal">
+      <div>
+        <div class="eyebrow">The Index</div>
+        <h2>Nine rooms. One stage.</h2>
+      </div>
+      <p style="max-width:38ch; color:var(--ivory-dim); font-size:14.5px;">Every page below opens with a short clip before the detail. Click a frame to preview.</p>
+    </div>
+
+    <div class="card-grid">
+
+      <article class="ocard card reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: About Me">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">About Me</div><div class="clip-time">0:48</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">01 · Person</div>
+          <h3>About Me</h3>
+          <p>Background, resume highlights, and the philosophy underneath the ventures.</p>
+          <a href="about.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Accomplishments">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Accomplishments</div><div class="clip-time">1:12</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">02 · Record</div>
+          <h3>Accomplishments</h3>
+          <p>Every venture I've been part of, with the detail behind each one.</p>
+          <a href="accomplishments.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card emerald reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Pandora City" style="background:radial-gradient(120% 120% at 30% 20%, rgba(46,139,110,0.25), var(--stage));">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Pandora City</div><div class="clip-time">2:03</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">03 · Venture</div>
+          <h3>Pandora City</h3>
+          <p>65 acres in Awandhe becoming a full agri-tourism destination — layouts, stays, and booking.</p>
+          <a href="pandora-city.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card flame reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Forever FYRE" style="background:radial-gradient(120% 120% at 30% 20%, rgba(224,86,47,0.28), var(--stage));">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Forever FYRE</div><div class="clip-time">1:34</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">04 · Venture</div>
+          <h3>Forever FYRE</h3>
+          <p>The festival series — lineup, passes, and everything happening around the fire.</p>
+          <a href="forever-fyre.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Experience and Work">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Experience & Work</div><div class="clip-time">1:20</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">05 · Craft</div>
+          <h3>Experience & Work</h3>
+          <p>Executed work, with pictures and the context behind each project.</p>
+          <a href="experience.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card violet reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Talk2Me" style="background:radial-gradient(120% 120% at 30% 20%, rgba(122,79,224,0.28), var(--stage));">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Talk2Me</div><div class="clip-time">0:39</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">06 · Dialogue</div>
+          <h3>Talk2Me</h3>
+          <p>A room for registered visitors and friends to sit and talk philosophy.</p>
+          <a href="talk2me.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Gallery">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Gallery</div><div class="clip-time">0:52</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">07 · Picture blog</div>
+          <h3>Gallery</h3>
+          <p>A running photo log — the land, the events, the everyday.</p>
+          <a href="gallery.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Contribution">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Contribution</div><div class="clip-time">1:05</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">08 · Reading room</div>
+          <h3>Contribution</h3>
+          <p>Books and writing I love or wrote myself, with my notes — and yours.</p>
+          <a href="contribution.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+      <article class="ocard card reveal">
+        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Library">
+          <div class="play"><div class="play-btn">▶</div></div>
+          <div class="clip-label">Library</div><div class="clip-time">0:44</div>
+        </div>
+        <div class="ocard-body">
+          <div class="eyebrow">09 · Resources</div>
+          <h3>Library</h3>
+          <p>Free, useful links for daily life — plus where else to find my work.</p>
+          <a href="library.html" class="go">Enter the page →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="quote-band section-tight">
+  <div class="glow glow-flame"></div>
+  <div class="shell lede-grid">
+    <p class="strip-quote reveal">"Everything I've built started as a sentence in a notebook before it was a place, a page, or a fire."</p>
+    <div class="reveal">
+      <div class="eyebrow">Contact</div>
+      <p style="margin-top:16px; color:var(--ivory-dim); font-size:14.5px; max-width:44ch;">For collaborations, bookings, press, or just to say hello — the full details, address, and a direct form live on the Contact page.</p>
+      <a href="contact.html" class="btn btn-solid" style="margin-top:20px;">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  document.querySelectorAll('.ocard-video').forEach(function(v){
+    v.addEventListener('click', function(){
+      alert('This preview will play the section\'s overview clip once video assets are uploaded. For now, click "Enter the page" to see the full section.');
+    });
+    v.addEventListener('keypress', function(e){ if(e.key==='Enter') v.click(); });
+  });
+</script>
+</body>
+</html>

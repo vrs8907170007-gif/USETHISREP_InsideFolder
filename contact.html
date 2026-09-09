@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .con-hero{ position:relative; overflow:hidden; padding:76px 0 56px; border-bottom:1px solid var(--line); }
+  .con-hero .glow{ width:640px; height:640px; background: var(--gold); top:-300px; left:-160px; }
+  .con-hero h1{ font-size: clamp(36px,5vw,60px); margin-top:16px; }
+
+  .contact-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:56px; align-items:start; }
+  @media (max-width:860px){ .contact-grid{ grid-template-columns:1fr; } }
+
+  .addr-card{ margin-bottom:22px; }
+  .addr-card .label{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); }
+  .contact-line{ display:flex; align-items:center; gap:14px; padding:16px 0; border-top:1px solid var(--line); }
+  .contact-line:first-of-type{ border-top:none; }
+  .contact-line .icon{ width:40px; height:40px; border-radius:50%; background: rgba(212,175,106,0.14); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .contact-line a{ font-size:15px; font-weight:600; }
+  .contact-line a:hover{ color: var(--gold); }
+  .contact-line .sub{ font-size:12px; color:var(--ivory-dim); margin-top:2px; }
+
+  .form-card{ border:1px solid var(--line); border-radius:16px; padding:34px; background: linear-gradient(180deg, var(--stage-2), var(--stage-3)); }
+  label{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px; }
+  .form-row{ margin-bottom:18px; }
+  .form-row-2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px; }
+  @media (max-width:600px){ .form-row-2{ grid-template-columns:1fr; } }
+  input, select, textarea{ width:100%; padding:13px 15px; border:1px solid var(--line); background: rgba(255,255,255,0.03); border-radius:8px; font-family:var(--font-body); font-size:14.5px; color:var(--ivory); }
+  input:focus, select:focus, textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; border-color: transparent; }
+  .confirm-box{ display:none; border:1px solid var(--gold); background: rgba(212,175,106,0.14); border-radius:10px; padding:20px; margin-top:20px; font-size:13.5px; color:var(--gold); }
+</style>
+</head>
+<body>
+
+<section class="con-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">Get In Touch</div>
+    <h1 class="reveal">Contact</h1>
+    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">For collaborations, bookings, press, or just to say hello — reach me directly.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell contact-grid">
+    <div class="reveal">
+      <div class="addr-card card">
+        <div class="label">Direct contact</div>
+        <div class="contact-line">
+          <div class="icon">✉</div>
+          <div><a href="mailto:p.svishal@gmail.com">p.svishal@gmail.com</a><div class="sub">Email — general enquiries</div></div>
+        </div>
+        <div class="contact-line">
+          <div class="icon">☎</div>
+          <div><a href="tel:+918369578225">+91 83695 78225</a><div class="sub">Primary phone</div></div>
+        </div>
+        <div class="contact-line">
+          <div class="icon">☎</div>
+          <div><a href="tel:+919136540798">+91 91365 40798</a><div class="sub">Alternate phone</div></div>
+        </div>
+        <div class="contact-line">
+          <div class="icon">in</div>
+          <div><a href="https://linkedin.com/in/nonchalantvs" target="_blank" rel="noopener">linkedin.com/in/nonchalantvs</a><div class="sub">LinkedIn</div></div>
+        </div>
+      </div>
+
+      <div class="addr-card card" style="border-color: rgba(212,175,106,0.4);">
+        <div class="label">Based in</div>
+        <h4 style="margin-top:10px; font-size:17px;">Mumbai, Maharashtra, India</h4>
+        <p style="color:var(--ivory-dim); font-size:14px; margin-top:8px;">V Hospitality Pvt. Ltd. operates out of Mumbai; The Pandora City is located in Awandhe village, Wada Taluka, Palghar District.</p>
+      </div>
+
+      <div class="addr-card card" style="border-color: rgba(46,139,110,0.4);">
+        <div class="label" style="color:var(--emerald);">Pandora City enquiries</div>
+        <p style="color:var(--ivory-dim); font-size:14px; margin-top:10px;">For site visits, bookings, or partnership interest in The Pandora City, use the form here or the booking page directly.</p>
+        <a href="pandora-city.html" class="btn" style="margin-top:14px; border-color:var(--emerald); color:var(--emerald); padding:10px 20px; font-size:12px;">Go to Pandora City →</a>
+      </div>
+
+      <div class="addr-card card" style="border-color: rgba(224,86,47,0.4);">
+        <div class="label" style="color:var(--flame);">Forever FYRE enquiries</div>
+        <p style="color:var(--ivory-dim); font-size:14px; margin-top:10px;">For passes, vendor stalls, or press access to Forever FYRE, mention it directly in your message below.</p>
+        <a href="forever-fyre.html" class="btn" style="margin-top:14px; border-color:var(--flame); color:var(--flame); padding:10px 20px; font-size:12px;">Go to Forever FYRE →</a>
+      </div>
+    </div>
+
+    <div class="form-card reveal">
+      <div class="eyebrow">Send a message</div>
+      <h3 style="font-size:24px; margin-top:12px;">Write to me directly</h3>
+      <div style="margin-top:24px;">
+        <div class="form-row-2">
+          <div><label>Full name</label><input type="text" placeholder="Your name"></div>
+          <div><label>Email</label><input type="email" placeholder="you@email.com"></div>
+        </div>
+        <div class="form-row">
+          <label>Reason for reaching out</label>
+          <select>
+            <option>General / just saying hello</option>
+            <option>Pandora City enquiry</option>
+            <option>Forever FYRE enquiry</option>
+            <option>Press or collaboration</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Message</label>
+          <textarea style="min-height:130px;" placeholder="Write your message..."></textarea>
+        </div>
+        <button class="btn btn-accent" style="width:100%; justify-content:center;" id="contactSend">Send message (demo)</button>
+        <div class="confirm-box" id="contactConfirm">✓ Message captured. In production this sends directly to p.svishal@gmail.com.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  document.getElementById('contactSend').addEventListener('click', ()=>{
+    document.getElementById('contactConfirm').style.display = 'block';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experience & Work — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .exp-hero{ position:relative; overflow:hidden; padding:76px 0 56px; border-bottom:1px solid var(--line); }
+  .exp-hero .glow{ width:640px; height:640px; background: var(--gold); top:-300px; left:-160px; }
+  .exp-hero h1{ font-size: clamp(36px,5vw,60px); margin-top:16px; }
+
+  .filter-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px; }
+  .filter-chip{ border:1px solid var(--line); padding:9px 18px; border-radius:999px; font-size:12.5px; font-weight:600; color:var(--ivory-dim); cursor:pointer; }
+  .filter-chip.active{ background: var(--gold); color: var(--stage); border-color: var(--gold); }
+
+  .work-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  @media (max-width:820px){ .work-grid{ grid-template-columns:1fr; } }
+  .work-card .thumb{ aspect-ratio:16/10; border-radius:12px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; font-size:12.5px; color:var(--ivory-dim); text-align:center; padding:16px; border:1px solid var(--line); overflow:hidden; }
+  .work-card .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .work-card h4{ font-size:19px; }
+  .work-card .meta{ font-size:12px; font-weight:700; margin-top:8px; letter-spacing:.04em; text-transform:uppercase; }
+  .work-card .period{ font-size:11.5px; color:var(--ivory-dim); margin-top:2px; }
+  .work-card p{ color:var(--ivory-dim); font-size:14px; margin-top:10px; }
+  .work-card .facts{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .work-card[data-cat="pandora-city"] .meta{ color: var(--emerald); }
+  .work-card[data-cat="entertainment"] .meta{ color: var(--violet); }
+  .work-card[data-cat="hospitality"] .meta{ color: var(--gold); }
+  .work-card[data-cat="tech-build"] .meta{ color: var(--flame); }
+</style>
+</head>
+<body>
+
+<section class="exp-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">Craft</div>
+    <h1 class="reveal">Experience & Work</h1>
+    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">Not just what I've built — how it actually got built. The production logistics, construction methods, and technical groundwork behind each chapter.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="filter-row reveal">
+      <div class="filter-chip active" data-filter="all">All work</div>
+      <div class="filter-chip" data-filter="pandora-city">Pandora City</div>
+      <div class="filter-chip" data-filter="entertainment">Entertainment Production</div>
+      <div class="filter-chip" data-filter="hospitality">Hospitality Operations</div>
+      <div class="filter-chip" data-filter="tech-build">Technology & Construction</div>
+    </div>
+
+    <div class="work-grid" id="workGrid">
+
+      <div class="card work-card reveal" data-cat="pandora-city">
+        <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(46,139,110,0.22), var(--stage-2));">[ Land survey / site photos ]</div>
+        <div class="meta">Pandora City</div>
+        <div class="period">2021 – Present</div>
+        <h4>65-acre site design, Awandhe village</h4>
+        <p>Converging a lifetime of athletics, agriculture, hospitality, and event management into one integrated masterplan — an Adventure Park, an organic farm, a mixed-species animal and dairy operation, jungle/tent stays, and an Eco-Vibrant Luminous Garden, each designed as an independently self-sufficient unit.</p>
+        <div class="facts"><span class="tag">65 acres</span><span class="tag">6 integrated concepts</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="pandora-city">
+        <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(46,139,110,0.22), var(--stage-2));">[ Farm / dairy operation photos ]</div>
+        <div class="meta">Pandora City</div>
+        <div class="period">2021 – Present</div>
+        <h4>Farm, dairy & rescue-animal operation</h4>
+        <p>Hands-on cultivation, ploughing, and farming knowledge under V Agro, extended into a Goat, Fish, Turkey, Duck, Dog, Cow & Buffalo Farm and Milk Centre — built directly on veterinary experience gained sheltering abandoned dogs.</p>
+        <div class="facts"><span class="tag">V Agro</span><span class="tag">Multi-species operation</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="entertainment">
+        <div class="thumb"><img src="assets/celeb-friends.jpg" alt="Industry event, VRU Entertainments era"></div>
+        <div class="meta">Entertainment Production</div>
+        <div class="period">2008 – 2014</div>
+        <h4>Full-cycle event production, VRU Entertainments</h4>
+        <p>Hands-on command of budgeting, recce, pre-production, production, and post-production across major industry events — the Videocon Screen Awards, Filmfare Awards, and Grasim Mr. India & Miss India — plus scripting work for Satyamev Jayate and Kaun Banega Crorepati.</p>
+        <div class="facts"><span class="tag">6-year production run</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="entertainment">
+        <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(122,79,224,0.22), var(--stage-2));">[ Brand launch photos ]</div>
+        <div class="meta">Entertainment Production</div>
+        <div class="period">2008 – 2014</div>
+        <h4>Talent & brand launches</h4>
+        <p>Directed the launch of Jacqueline Fernandes as the face of Collection G for D Damas, hosted launch events for Lonely Planet, Nissan Micra, Lee Jeans, and Yakult, and vendored with Showbiz on the Filmfare Awards, Videocon Screen Awards, and talent hunts.</p>
+        <div class="facts"><span class="tag">Bollywood debut launched</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="hospitality">
+        <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(212,175,106,0.22), var(--stage-2));">[ Dance platform photos ]</div>
+        <div class="meta">Hospitality Operations</div>
+        <div class="period">2022 – 2025</div>
+        <h4>Alcohol-free dance platform, V Services</h4>
+        <p>Re-architected an entire lounge-bar model in direct response to a licensing shock — a ₹500-entry, five-hour, food-and-liquor-free dance format built for an underserved under-21 market, run by a lean six-person team.</p>
+        <div class="facts"><span class="tag">₹16L+ / month</span><span class="tag">150+ daily guests</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="hospitality">
+        <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(212,175,106,0.22), var(--stage-2));">[ Tipsy Monkee venue photos ]</div>
+        <div class="meta">Hospitality Operations</div>
+        <div class="period">2015 – 2025</div>
+        <h4>Ten years of daily venue leadership, Tipsy Monkee</h4>
+        <p>Front-of-house hospitality, patron relations, and service standards sustained over a full decade — building and defending Mumbai's original Wednesday midweek party format against a wave of brands it inspired.</p>
+        <div class="facts"><span class="tag">10 years running</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="tech-build">
+        <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(224,86,47,0.22), var(--stage-2));">[ HCL reseller network photos ]</div>
+        <div class="meta">Technology & Construction</div>
+        <div class="period">2002 – 2006</div>
+        <h4>HCL reseller network build-out, PcGenesis</h4>
+        <p>Designed and ran a sub-dealer distribution network across regions, each dealer selling ten units to qualify as an authorised HCL reseller — technical diagnostics, hardware upgrades, and channel management underneath a network that moved 250 PCs in a single month.</p>
+        <div class="facts"><span class="tag">250 PCs / month</span><span class="tag">#1 HCL seller, Mumbai suburbs</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="tech-build">
+        <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(224,86,47,0.22), var(--stage-2));">[ Construction site photos ]</div>
+        <div class="meta">Technology & Construction</div>
+        <div class="period">2014 – 2015</div>
+        <h4>Ready-block construction, King's Timber</h4>
+        <p>Labour contracting and interior-design project management using ready-block construction methods, uncommon in the market at the time — coordinating on-site workforce, quality control, and delivery timelines. Centrepiece project: a 1.4 lakh sq. ft. structure for the Goa Jail.</p>
+        <div class="facts"><span class="tag">1.4 lakh sq ft</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  document.querySelectorAll('.filter-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      document.querySelectorAll('.work-card').forEach(card=>{
+        card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>

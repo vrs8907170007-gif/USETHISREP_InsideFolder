@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pandora City — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body{ --accent: var(--emerald); --accent-glow: var(--emerald-glow); }
+  .venture-hero{ position:relative; overflow:hidden; padding: 76px 0 60px; border-bottom:1px solid var(--line); }
+  .venture-hero .glow{ width:700px; height:700px; background: var(--emerald); top:-320px; left:-200px; }
+  .venture-hero h1{ font-size: clamp(38px,5.2vw,66px); margin-top:16px; }
+  .stat-row{ display:flex; gap: 46px; flex-wrap:wrap; margin-top: 34px; }
+  .stat b{ display:block; font-family:var(--font-display); font-size: 32px; color: var(--emerald); }
+  .stat span{ font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ivory-dim); }
+
+  .tab-row{ display:flex; gap:6px; margin-bottom:44px; overflow-x:auto; padding-bottom:4px; }
+  .tab-btn{ font-size:13px; font-weight:700; padding: 12px 22px; background: var(--stage-2); border:1px solid var(--line); border-radius: 999px; cursor:pointer; color:var(--ivory-dim); white-space:nowrap; transition: all .2s ease; }
+  .tab-btn.active{ color:var(--stage); background: var(--emerald); border-color: var(--emerald); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .subfarm-nav{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px; }
+  .subfarm-chip{ border:1px solid var(--line); padding:10px 18px; border-radius:999px; font-size:12.5px; font-weight:700; color:var(--ivory-dim); cursor:pointer; }
+  .subfarm-chip.active{ background: var(--emerald); color: var(--stage); border-color: var(--emerald); }
+  .subfarm-panel{ display:none; }
+  .subfarm-panel.active{ display:block; }
+
+  .subfarm-layout{ border-radius:16px; overflow:hidden; border:1px solid var(--line); margin-bottom:28px; }
+  .subfarm-layout img{ width:100%; display:block; }
+
+  .stat-mini-row{ display:flex; gap:28px; flex-wrap:wrap; margin-bottom:28px; }
+  .stat-mini{ min-width:130px; }
+  .stat-mini b{ display:block; font-family:var(--font-display); font-size:24px; color:var(--emerald); }
+  .stat-mini span{ font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); }
+
+  .fin-note{ font-size:12px; color:var(--ivory-dim); font-style:italic; margin-top:-16px; margin-bottom:28px; }
+
+  .zone-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:860px){ .zone-grid{ grid-template-columns:1fr; } }
+  .zone-card h4{ font-size:18px; color: var(--ivory); }
+  .zone-card p{ color:var(--ivory-dim); font-size:14px; margin-top:8px; }
+  .zone-card .tag{ margin-top:12px; display:inline-block; }
+
+  .booking-box{ border:1px solid var(--line); padding:34px; border-radius:16px; background: linear-gradient(180deg, var(--stage-2), var(--stage-3)); }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  @media (max-width:640px){ .form-row{ grid-template-columns:1fr; } }
+  label{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px; }
+  input, select, textarea{ width:100%; padding:13px 15px; border:1px solid var(--line); background: rgba(255,255,255,0.03); border-radius:8px; font-family:var(--font-body); font-size:14.5px; color:var(--ivory); }
+  input::placeholder, textarea::placeholder{ color: rgba(245,241,232,0.35); }
+  input:focus, select:focus, textarea:focus{ outline:2px solid var(--emerald); outline-offset:1px; border-color: transparent; }
+  .stay-option{ border:1px solid var(--line); border-radius:12px; padding:18px 20px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; margin-bottom:12px; background: var(--stage-2); transition: all .2s ease; }
+  .stay-option.selected{ border-color: var(--emerald); background: rgba(46,139,110,0.12); box-shadow: 0 0 24px var(--emerald-glow); }
+  .stay-option .price{ font-weight:700; color: var(--emerald); }
+  .total-row{ display:flex; justify-content:space-between; padding-top:16px; border-top:1px solid var(--line); margin-top:16px; font-size:15px; }
+  .pay-methods{ display:flex; gap:10px; margin:16px 0; flex-wrap:wrap; }
+  .pay-chip{ border:1px solid var(--line); padding:9px 16px; border-radius:999px; font-size:12.5px; font-weight:600; cursor:pointer; color: var(--ivory-dim); }
+  .pay-chip.selected{ border-color: var(--emerald); background: var(--emerald); color: var(--stage); }
+
+  .post{ border-bottom:1px solid var(--line); padding: 36px 0; }
+  .post-meta{ font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--emerald); margin-bottom:12px; }
+  .post h3{ font-size:26px; }
+  .post-img{ width:100%; aspect-ratio: 16/8; border-radius:14px; margin:18px 0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--emerald); font-weight:600; background: radial-gradient(120% 140% at 20% 10%, rgba(46,139,110,0.25), var(--stage-2)); border: 1px solid var(--line); }
+  .comment{ display:flex; gap:14px; padding:18px 0; border-top:1px solid var(--line-soft); }
+  .avatar{ width:40px; height:40px; border-radius:50%; background: rgba(46,139,110,0.18); color:var(--emerald); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;}
+  .comment-body b{ font-size:14px; }
+  .comment-body .when{ font-size:11.5px; color: var(--ivory-dim); margin-left:8px; }
+  .comment-body p{ font-size:14px; margin-top:6px; color: var(--ivory-dim); }
+  .comment-form textarea{ min-height:90px; margin-bottom:12px; }
+
+  .confirm-box{ display:none; border:1px solid var(--emerald); background: rgba(46,139,110,0.14); border-radius:10px; padding:20px; margin-top:20px; font-size:13.5px; color:var(--emerald); }
+</style>
+</head>
+<body>
+
+<section class="venture-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">Venture — 03</div>
+    <h1 class="reveal">Pandora City</h1>
+    <p class="reveal" style="max-width:60ch; margin-top:18px; color:var(--ivory-dim); font-size:16.5px;">An agri-tourism and hospitality development on 65 acres in Awandhe village, Wada, Palghar — five integrated sub-farms, each independently self-sufficient, together forming one destination.</p>
+    <div class="stat-row reveal">
+      <div class="stat"><b>65</b><span>Total Acres</span></div>
+      <div class="stat"><b>5</b><span>Integrated Sub-Farms</span></div>
+      <div class="stat"><b>Awandhe</b><span>Village, Wada, Palghar</span></div>
+      <div class="stat"><b>2021 →</b><span>Founded, phased rollout</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="subfarms">The Five Sub-Farms</button>
+      <button class="tab-btn" data-tab="book">Book a Stay</button>
+      <button class="tab-btn" data-tab="blog">Blog &amp; Updates</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="field-note">Field note — Awandhe, Wada Taluka. Logged on site survey day.</div>
+      <div class="grid-2" style="margin-top:28px;">
+        <div>
+          <h2 style="font-size:30px;">The idea, plainly stated</h2>
+          <p style="color:var(--ivory-dim); margin-top:16px;">Pandora City takes 65 acres of working land and layers hospitality on top of it without replacing it. Every fitness credential, every hour spent training abandoned dogs into a veterinary instinct, every year of hosting guests — all of it converges here, split into five sub-farms that each stand on their own financially, and together form one destination.</p>
+          <p style="color:var(--ivory-dim); margin-top:16px;">The land is held in the names of Ramnayan Singh and Usha Singh; Vishal leads the project as Founder, having run it under V Agro since 2021.</p>
+        </div>
+        <div class="card" style="background: linear-gradient(180deg, rgba(46,139,110,0.14), var(--stage-2));">
+          <div class="eyebrow">The Five Sub-Farms</div>
+          <ul style="margin-top:16px; padding-left:20px; font-size:14.5px; color:var(--ivory-dim); line-height:2.1;">
+            <li>Fruit Farm Retreat — orchards &amp; jungle stays</li>
+            <li>Goat Farm — Katoo supply &amp; Eid special</li>
+            <li>Dairy Farm — cows, buffaloes &amp; milk centre</li>
+            <li>Adventure Park — 40+ outdoor/indoor activities</li>
+            <li>Fish Farm Retreat — aquaculture &amp; water activities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-FARMS -->
+    <div class="tab-panel" id="tab-subfarms">
+      <div class="field-note">Each sub-farm's figures are shown exactly as planned — independently, without a combined total, since each was modelled separately.</div>
+
+      <div class="subfarm-nav" style="margin-top:24px;">
+        <div class="subfarm-chip active" data-sf="fruit">Fruit Farm Retreat</div>
+        <div class="subfarm-chip" data-sf="goat">Goat Farm</div>
+        <div class="subfarm-chip" data-sf="dairy">Dairy Farm</div>
+        <div class="subfarm-chip" data-sf="adventure">Adventure Park</div>
+        <div class="subfarm-chip" data-sf="fish">Fish Farm Retreat</div>
+      </div>
+
+      <!-- FRUIT FARM -->
+      <div class="subfarm-panel active" id="sf-fruit">
+        <div class="subfarm-layout"><img src="assets/pandora-city/fruit-farm-final.png" alt="Fruit Farm Retreat master layout"></div>
+        <div class="stat-mini-row">
+          <div class="stat-mini"><b>20</b><span>Acres</span></div>
+          <div class="stat-mini"><b>2,000+</b><span>Fruit Trees</span></div>
+          <div class="stat-mini"><b>1,000</b><span>Couple Tents</span></div>
+          <div class="stat-mini"><b>~2,300</b><span>Total Guest Capacity</span></div>
+          <div class="stat-mini"><b>~₹3.70 Cr+</b><span>Est. Combined Annual Revenue</span></div>
+        </div>
+        <p style="color:var(--ivory-dim);">A 20-acre orchard integrated with jungle-stay tourism — Mango, Guava, Papaya, Lemon, Chikoo, Coconut, Grapes, Drumstick and Banana across the plantation, with 1,000 couple tents, 10 Machaan stays, and 10 Tree Villas built into the orchard itself. Guests move through fruit picking, nature walks, bird watching, cycle trails, organic farming, and farm-to-table dining.</p>
+      </div>
+
+      <!-- GOAT FARM -->
+      <div class="subfarm-panel" id="sf-goat">
+        <div class="subfarm-layout"><img src="assets/pandora-city/goat-farm.png" alt="Goat Farm master layout"></div>
+        <div class="stat-mini-row">
+          <div class="stat-mini"><b>8</b><span>Acres</span></div>
+          <div class="stat-mini"><b>2,000</b><span>Goat Capacity</span></div>
+          <div class="stat-mini"><b>20</b><span>Sheds (100 each)</span></div>
+          <div class="stat-mini"><b>₹28.73 Cr</b><span>Total Investment</span></div>
+          <div class="stat-mini"><b>₹7.40 Cr</b><span>Annual Revenue</span></div>
+          <div class="stat-mini"><b>₹14.94 Cr</b><span>Annual Net Profit (as modelled)</span></div>
+        </div>
+        <div class="fin-note">Figures shown exactly as in the original financial model.</div>
+        <p style="color:var(--ivory-dim);">A semi-intensive grazing operation built for two revenue lines: daily Katoo supply (10 goats/day) and premium Eid Special goats (200/year). Core breeds include Sojat, Jamnapari, Sirohi, Katoo, Barbari, and Boer, supported by a full health plan — vaccination, deworming, regular vet checks — and dedicated quarantine and kidding areas.</p>
+      </div>
+
+      <!-- DAIRY FARM -->
+      <div class="subfarm-panel" id="sf-dairy">
+        <div class="subfarm-layout"><img src="assets/pandora-city/dairy-farm.png" alt="Dairy Farm master layout"></div>
+        <div class="stat-mini-row">
+          <div class="stat-mini"><b>5</b><span>Acres</span></div>
+          <div class="stat-mini"><b>50</b><span>Cows + Buffaloes (25 each)</span></div>
+          <div class="stat-mini"><b>~1,71,600 L</b><span>Est. Annual Milk Yield</span></div>
+          <div class="stat-mini"><b>₹69L</b><span>Total Investment</span></div>
+          <div class="stat-mini"><b>90.41%</b><span>Annual ROI</span></div>
+          <div class="stat-mini"><b>~1.1 yr</b><span>Payback Period</span></div>
+        </div>
+        <p style="color:var(--ivory-dim);">25 HF &amp; Jersey Cross cows and 25 Murrah buffaloes on a herringbone milking parlor with bulk chilling, feeding directly into raw milk sales plus value-added curd, paneer, and ghee. Waste becomes biogas and organic manure — nothing on this farm is a pure cost line.</p>
+      </div>
+
+      <!-- ADVENTURE PARK -->
+      <div class="subfarm-panel" id="sf-adventure">
+        <div class="subfarm-layout"><img src="assets/pandora-city/adventure-park.png" alt="Adventure Park master layout"></div>
+        <div class="stat-mini-row">
+          <div class="stat-mini"><b>8</b><span>Acres</span></div>
+          <div class="stat-mini"><b>40+</b><span>Outdoor &amp; Indoor Activities</span></div>
+          <div class="stat-mini"><b>2,000</b><span>Daily Guest Capacity</span></div>
+          <div class="stat-mini"><b>₹6.82 Cr</b><span>Total Investment</span></div>
+          <div class="stat-mini"><b>₹2.75 Cr</b><span>Annual Net Profit</span></div>
+          <div class="stat-mini"><b>40.30%</b><span>Annual ROI</span></div>
+        </div>
+        <p style="color:var(--ivory-dim);">ATV and dirt bike tracks, zip lines, water zorbing, boating, fishing, net cricket, volleyball, paintball, and a full indoor activity hub covering board games, live music, standup comedy, and yoga — built directly on a lifetime of hosting and coaching. Priced at ₹7,000 per person per day, all-inclusive.</p>
+      </div>
+
+      <!-- FISH FARM -->
+      <div class="subfarm-panel" id="sf-fish">
+        <div class="subfarm-layout"><img src="assets/pandora-city/fish-farm.png" alt="Fish Farm Retreat master layout"></div>
+        <div class="stat-mini-row">
+          <div class="stat-mini"><b>4</b><span>Acres of Water</span></div>
+          <div class="stat-mini"><b>90,000</b><span>Fish Stocked</span></div>
+          <div class="stat-mini"><b>90–110 t</b><span>Annual Yield</span></div>
+          <div class="stat-mini"><b>₹7.31 Cr</b><span>Total Investment</span></div>
+          <div class="stat-mini"><b>~₹15 Cr</b><span>Annual Retreat Revenue</span></div>
+          <div class="stat-mini"><b>6–10 mo</b><span>Break-even</span></div>
+        </div>
+        <p style="color:var(--ivory-dim);">Two ponds (2.5 and 1.5 acre) stocked with Catla, Rohu, Mrigal, Grass Carp, and Tilapia, wrapped in a Goa-style retreat experience — water zorbing, fishing, boating, live BBQ, and pond-side living, aimed at a minimum of 500 guests a month at ₹5,000 per person.</p>
+      </div>
+
+    </div>
+
+    <!-- BOOK -->
+    <div class="tab-panel" id="tab-book">
+      <div class="field-note">Booking — prototype flow, based on the Fruit Farm Retreat's stay options. No live payment is processed on this demo.</div>
+      <div class="grid-2" style="margin-top:28px; align-items:start;">
+        <div>
+          <h3 style="font-size:22px; margin-bottom:18px;">Choose your stay</h3>
+          <div class="stay-option selected" data-price="5000" data-name="Couple Tent (Glamping)">
+            <div><b>Couple Tent (Glamping)</b><div style="font-size:12.5px; color:var(--ivory-dim); margin-top:4px;">Sleeps 2 · King bed, private deck</div></div>
+            <div class="price">₹5,000 / night</div>
+          </div>
+          <div class="stay-option" data-price="15000" data-name="Machaan Stay (Elevated)">
+            <div><b>Machaan Stay (Elevated)</b><div style="font-size:12.5px; color:var(--ivory-dim); margin-top:4px;">Sleeps up to 7 · Elevated platform</div></div>
+            <div class="price">₹15,000 / night</div>
+          </div>
+          <div class="stay-option" data-price="30000" data-name="Luxury Tree Villa">
+            <div><b>Luxury Tree Villa</b><div style="font-size:12.5px; color:var(--ivory-dim); margin-top:4px;">Sleeps up to 20 · Full estate access</div></div>
+            <div class="price">₹30,000 / night</div>
+          </div>
+        </div>
+
+        <div class="booking-box">
+          <div class="form-row">
+            <div><label>Check-in</label><input type="date" id="pcCheckin"></div>
+            <div><label>Check-out</label><input type="date" id="pcCheckout"></div>
+          </div>
+          <div class="form-row">
+            <div><label>Guests</label><select><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4+ guests</option></select></div>
+            <div><label>Full name</label><input type="text" placeholder="Your name"></div>
+          </div>
+          <div class="form-row">
+            <div><label>Email</label><input type="email" placeholder="you@email.com"></div>
+            <div><label>Phone</label><input type="tel" placeholder="+91"></div>
+          </div>
+
+          <label style="margin-top:8px;">Payment method</label>
+          <div class="pay-methods">
+            <div class="pay-chip selected">UPI</div>
+            <div class="pay-chip">Card</div>
+            <div class="pay-chip">Net Banking</div>
+            <div class="pay-chip">Pay at property</div>
+          </div>
+
+          <div class="total-row"><span>Nightly rate</span><span id="pcRate">₹5,000</span></div>
+          <div class="total-row"><span>Nights</span><span id="pcNights">1</span></div>
+          <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pcTotal">₹5,000</span></div>
+
+          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pcConfirm">Confirm booking (demo)</button>
+          <div class="confirm-box" id="pcConfirmBox">✓ Booking request captured. In production this step hands off to a live payment gateway and sends a confirmation email/SMS.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <div class="tab-panel" id="tab-blog">
+      <div class="field-note">Blog — updates from the ground, open for comment.</div>
+
+      <div class="post">
+        <div class="post-meta">12 Aug 2026 · Site Update</div>
+        <h3>First orchard rows are in the ground</h3>
+        <div class="post-img">[ photo — orchard planting day ]</div>
+        <p style="color:var(--ivory-dim);">A short note on the first planting phase, what we chose to put in first, and why the orchard belt sets the pace for everything downstream of it.</p>
+
+        <div style="margin-top:26px;">
+          <div class="comment">
+            <div class="avatar">RA</div>
+            <div class="comment-body"><b>Riya A.</b><span class="when">2 days ago</span><p>This is exciting to watch unfold — will there be a volunteer planting day open to visitors?</p></div>
+          </div>
+          <div class="comment">
+            <div class="avatar">VS</div>
+            <div class="comment-body"><b>Vishal Singh</b><span class="when">1 day ago</span><p>Yes — planning one for the next phase. Will post dates here first.</p></div>
+          </div>
+        </div>
+
+        <div class="comment-form" style="margin-top:22px;">
+          <label>Leave a comment</label>
+          <textarea placeholder="Share your thoughts..."></textarea>
+          <button class="btn btn-accent">Post comment</button>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-meta">3 Jul 2026 · Milestone</div>
+        <h3>Survey complete — 65 acres mapped</h3>
+        <div class="post-img">[ photo — land survey ]</div>
+        <p style="color:var(--ivory-dim);">The full survey is done. Here's how the land breaks down into five sub-farms, each with its own layout and revenue model.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.subfarm-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.subfarm-chip').forEach(c=>c.classList.remove('active'));
+      document.querySelectorAll('.subfarm-panel').forEach(p=>p.classList.remove('active'));
+      chip.classList.add('active');
+      document.getElementById('sf-'+chip.dataset.sf).classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.stay-option').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      document.querySelectorAll('.stay-option').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      updatePcTotal();
+    });
+  });
+  document.querySelectorAll('.pay-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.pay-chip').forEach(c=>c.classList.remove('selected'));
+      chip.classList.add('selected');
+    });
+  });
+
+  function nightsBetween(){
+    const ci = document.getElementById('pcCheckin').value;
+    const co = document.getElementById('pcCheckout').value;
+    if(!ci || !co) return 1;
+    const d = (new Date(co) - new Date(ci)) / (1000*60*60*24);
+    return d > 0 ? d : 1;
+  }
+  function updatePcTotal(){
+    const selected = document.querySelector('.stay-option.selected');
+    const rate = parseInt(selected.dataset.price, 10);
+    const nights = nightsBetween();
+    document.getElementById('pcRate').textContent = '₹' + rate.toLocaleString('en-IN');
+    document.getElementById('pcNights').textContent = nights;
+    document.getElementById('pcTotal').textContent = '₹' + (rate*nights).toLocaleString('en-IN');
+  }
+  document.getElementById('pcCheckin').addEventListener('change', updatePcTotal);
+  document.getElementById('pcCheckout').addEventListener('change', updatePcTotal);
+  document.getElementById('pcConfirm').addEventListener('click', ()=>{
+    document.getElementById('pcConfirmBox').style.display = 'block';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talk2Me — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body{ --accent: var(--violet); --accent-glow: var(--violet-glow); }
+
+  .t2m-hero{ position:relative; overflow:hidden; padding: 76px 0 56px; border-bottom:1px solid var(--line); }
+  .t2m-hero .glow{ width:760px; height:760px; background: var(--violet); top:-360px; left:50%; transform:translateX(-50%); opacity:.5; }
+  .t2m-hero h1{ font-size: clamp(38px,5.4vw,66px); margin-top:18px; text-align:center; }
+  .t2m-hero p{ text-align:center; max-width:60ch; margin:18px auto 0; color:var(--ivory-dim); font-size:16.5px; }
+  .t2m-hero-cta{ display:flex; justify-content:center; gap:16px; margin-top:34px; flex-wrap:wrap; }
+
+  .chat-shell{
+    display:grid; grid-template-columns: 280px 1fr; gap:0;
+    border:1px solid var(--line); border-radius:20px; overflow:hidden;
+    box-shadow: 0 30px 90px rgba(122,79,224,0.18);
+    background: var(--stage-2);
+  }
+  @media (max-width:820px){ .chat-shell{ grid-template-columns:1fr; } }
+
+  .chat-sidebar{ background: var(--stage-3); border-right:1px solid var(--line); padding: 22px 0; }
+  @media (max-width:820px){ .chat-sidebar{ display:none; } }
+  .sidebar-head{ padding: 0 20px 16px; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color: var(--ivory-dim); }
+  .thread{ display:flex; gap:12px; padding: 13px 20px; cursor:pointer; border-left:2px solid transparent; }
+  .thread:hover{ background: rgba(122,79,224,0.08); }
+  .thread.active{ background: rgba(122,79,224,0.14); border-left-color: var(--violet); }
+  .thread .tav{ width:38px; height:38px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:var(--stage);
+    background: linear-gradient(135deg, var(--violet), var(--gold)); }
+  .thread-name{ font-size:13.5px; font-weight:600; }
+  .thread-preview{ font-size:12px; color:var(--ivory-dim); margin-top:2px; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  .chat-main{ display:flex; flex-direction:column; height: 560px; }
+  .chat-header{ padding: 18px 26px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+  .chat-header .who{ display:flex; align-items:center; gap:12px; }
+  .chat-header .tav{ width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--stage); background: linear-gradient(135deg, var(--violet), var(--gold)); }
+  .chat-header .name{ font-weight:700; font-size:15px; }
+  .chat-header .status{ font-size:12px; color: var(--emerald); }
+  .chat-header .topic{ font-size:12px; color: var(--ivory-dim); border:1px solid var(--line); padding:6px 14px; border-radius:999px; }
+
+  .chat-log{ flex:1; overflow-y:auto; padding: 24px 26px; display:flex; flex-direction:column; gap:16px; }
+  .bubble{ max-width:70%; padding: 13px 17px; border-radius: 16px; font-size:14.5px; line-height:1.55; }
+  .bubble.them{ background: var(--stage-3); border:1px solid var(--line); align-self:flex-start; border-bottom-left-radius:4px; }
+  .bubble.me{ background: linear-gradient(135deg, rgba(122,79,224,0.9), rgba(122,79,224,0.65)); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; box-shadow: 0 6px 24px var(--violet-glow); }
+  .bubble .t{ display:block; font-size:10.5px; opacity:.6; margin-top:6px; }
+
+  .chat-input{ padding: 18px 22px; border-top:1px solid var(--line); display:flex; gap:12px; align-items:center; }
+  .chat-input input{ flex:1; padding:13px 18px; border-radius:999px; border:1px solid var(--line); background: rgba(255,255,255,0.03); color:var(--ivory); font-family:var(--font-body); font-size:14px; }
+  .chat-input input::placeholder{ color: rgba(245,241,232,0.35); }
+  .chat-send{ width:44px; height:44px; border-radius:50%; background: var(--violet); border:none; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 0 22px var(--violet-glow); flex-shrink:0; }
+
+  .gate-note{ text-align:center; font-size:12.5px; color: var(--ivory-dim); margin-top:18px; }
+  .gate-note b{ color: var(--violet); }
+
+  .topics-strip{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:32px; }
+  .topic-chip{ border:1px solid var(--line); padding:9px 18px; border-radius:999px; font-size:13px; color:var(--ivory-dim); }
+  .topic-chip:hover{ border-color:var(--violet); color:var(--violet); }
+
+  .reg-card{ max-width:460px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<section class="t2m-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow" style="justify-content:center;">A Room For Dialogue</div>
+    <h1 class="reveal">Talk2Me</h1>
+    <p class="reveal">A quiet corner of the site for registered visitors and friends to sit with me and talk — about consciousness, the trilogy, the ventures, or whatever's on your mind. This is a live preview of the room; registration opens it up for real.</p>
+    <div class="t2m-hero-cta reveal">
+      <a href="#register" class="btn btn-accent">Register to join</a>
+      <a href="#preview" class="btn">Preview the room</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="preview">
+  <div class="shell">
+    <div class="eyebrow reveal">Preview</div>
+    <h2 style="font-size:32px; margin-top:12px;" class="reveal">What the room feels like</h2>
+    <p style="color:var(--ivory-dim); max-width:60ch; margin-top:12px;" class="reveal">This is a sample conversation, shown so you know what to expect before registering. Once you're in, you can start a thread with me directly or join open discussion threads on a topic.</p>
+
+    <div class="chat-shell reveal" style="margin-top:40px;">
+      <div class="chat-sidebar">
+        <div class="sidebar-head">Your Threads</div>
+        <div class="thread active">
+          <div class="tav">VS</div>
+          <div><div class="thread-name">Vishal Singh</div><div class="thread-preview">On consciousness, the second time...</div></div>
+        </div>
+        <div class="thread">
+          <div class="tav" style="background:linear-gradient(135deg,var(--emerald),var(--gold));">PC</div>
+          <div><div class="thread-name">Pandora City circle</div><div class="thread-preview">Anyone visiting in October?</div></div>
+        </div>
+        <div class="thread">
+          <div class="tav" style="background:linear-gradient(135deg,var(--flame),var(--gold));">FF</div>
+          <div><div class="thread-name">Forever FYRE — lineup chat</div><div class="thread-preview">That set closing last year...</div></div>
+        </div>
+        <div class="sidebar-head" style="margin-top:18px;">Open Topics</div>
+        <div class="thread">
+          <div class="tav" style="background:linear-gradient(135deg,#666,#333);">#</div>
+          <div><div class="thread-name">On Free Will</div><div class="thread-preview">14 people talking</div></div>
+        </div>
+      </div>
+
+      <div class="chat-main">
+        <div class="chat-header">
+          <div class="who">
+            <div class="tav">VS</div>
+            <div><div class="name">Vishal Singh</div><div class="status">● Usually replies within a day</div></div>
+          </div>
+          <div class="topic">Topic: Consciousness</div>
+        </div>
+        <div class="chat-log" id="t2mLog">
+          <div class="bubble them">Welcome — glad you found your way here. What's been on your mind lately?<span class="t">Vishal · 3:12 PM</span></div>
+          <div class="bubble me">I've been re-reading the second book of your trilogy — the part where the child stops asking questions and starts listening instead. That shift felt important.<span class="t">You · 3:14 PM</span></div>
+          <div class="bubble them">That's the hinge of the whole trilogy, honestly. The first volume is about the noise of conscience. The second is about what's left once you stop arguing with it.<span class="t">Vishal · 3:15 PM</span></div>
+          <div class="bubble them">Curious — when you stopped asking, what did you notice first?<span class="t">Vishal · 3:15 PM</span></div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="t2mInput" placeholder="Type a message to continue the preview...">
+          <button class="chat-send" id="t2mSend" aria-label="Send">➤</button>
+        </div>
+      </div>
+    </div>
+    <p class="gate-note reveal">This preview thread is a demo. <b>Register below</b> to open a real conversation.</p>
+  </div>
+</section>
+
+<section class="section-tight" style="background: var(--stage-2); border-top:1px solid var(--line);">
+  <div class="shell">
+    <div class="eyebrow reveal" style="justify-content:center;">Topics people bring here</div>
+    <div class="topics-strip reveal">
+      <div class="topic-chip">Consciousness</div>
+      <div class="topic-chip">Faith & doubt</div>
+      <div class="topic-chip">Building Pandora City</div>
+      <div class="topic-chip">Forever FYRE culture</div>
+      <div class="topic-chip">Writing & publishing</div>
+      <div class="topic-chip">Just saying hello</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="register">
+  <div class="shell">
+    <div class="card reg-card reveal" style="border-color: var(--violet); box-shadow: 0 20px 60px var(--violet-glow);">
+      <div class="eyebrow">Join the room</div>
+      <h3 style="font-size:26px; margin-top:12px;">Register to Talk2Me</h3>
+      <p style="color:var(--ivory-dim); font-size:14px; margin-top:10px;">Free for visitors and friends. I read every message myself.</p>
+      <div style="margin-top:22px;">
+        <label style="font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px;">Full name</label>
+        <input type="text" placeholder="Your name" style="width:100%; padding:13px 16px; border-radius:8px; border:1px solid var(--line); background:rgba(255,255,255,0.03); color:var(--ivory); margin-bottom:16px;">
+        <label style="font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px;">Email</label>
+        <input type="email" placeholder="you@email.com" style="width:100%; padding:13px 16px; border-radius:8px; border:1px solid var(--line); background:rgba(255,255,255,0.03); color:var(--ivory); margin-bottom:16px;">
+        <label style="font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px;">What brings you here? (optional)</label>
+        <textarea placeholder="A line or two..." style="width:100%; min-height:80px; padding:13px 16px; border-radius:8px; border:1px solid var(--line); background:rgba(255,255,255,0.03); color:var(--ivory); margin-bottom:20px;"></textarea>
+        <button class="btn btn-accent" style="width:100%; justify-content:center;" id="t2mRegister">Create my account (demo)</button>
+        <div id="t2mRegConfirm" style="display:none; margin-top:16px; padding:16px; border-radius:10px; border:1px solid var(--violet); background:rgba(122,79,224,0.14); font-size:13px; color:var(--violet);">✓ Registration captured. In production this creates a real account with email verification.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  const log = document.getElementById('t2mLog');
+  const input = document.getElementById('t2mInput');
+  function sendMsg(){
+    const val = input.value.trim();
+    if(!val) return;
+    const b = document.createElement('div');
+    b.className = 'bubble me';
+    b.innerHTML = val.replace(/</g,'&lt;') + '<span class="t">You · just now</span>';
+    log.appendChild(b);
+    input.value = '';
+    log.scrollTop = log.scrollHeight;
+    setTimeout(()=>{
+      const r = document.createElement('div');
+      r.className = 'bubble them';
+      r.innerHTML = 'Thanks for trying the preview — register above and I\'ll reply for real. <span class="t">Vishal · just now</span>';
+      log.appendChild(r);
+      log.scrollTop = log.scrollHeight;
+    }, 700);
+  }
+  document.getElementById('t2mSend').addEventListener('click', sendMsg);
+  input.addEventListener('keypress', (e)=>{ if(e.key==='Enter') sendMsg(); });
+
+  document.getElementById('t2mRegister').addEventListener('click', ()=>{
+    document.getElementById('t2mRegConfirm').style.display = 'block';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .lib-hero{ position:relative; overflow:hidden; padding:76px 0 56px; border-bottom:1px solid var(--line); }
+  .lib-hero .glow{ width:640px; height:640px; background: var(--gold); top:-300px; right:-160px; }
+  .lib-hero h1{ font-size: clamp(36px,5vw,60px); margin-top:16px; }
+
+  .res-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:860px){ .res-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .res-grid{ grid-template-columns:1fr; } }
+  .res-card h4{ font-size:17px; }
+  .res-card p{ color:var(--ivory-dim); font-size:13.5px; margin-top:10px; }
+  .res-card a{ display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-size:12.5px; font-weight:700; color:var(--gold); }
+
+  .venture-links{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:24px; }
+  @media (max-width:700px){ .venture-links{ grid-template-columns:1fr; } }
+  .vlink{ display:flex; align-items:center; justify-content:space-between; padding:22px 26px; border-radius:14px; border:1px solid var(--line); }
+  .vlink h4{ font-size:18px; }
+  .vlink span{ font-size:12.5px; color:var(--ivory-dim); }
+</style>
+</head>
+<body>
+
+<section class="lib-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">Resources</div>
+    <h1 class="reveal">Library</h1>
+    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">Free, useful links for daily life, plus where to find the rest of my work and ventures.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="eyebrow reveal">Everyday help</div>
+    <h2 style="font-size:30px; margin-top:12px;" class="reveal">Free & useful links</h2>
+    <p style="color:var(--ivory-dim); max-width:60ch; margin-top:10px;" class="reveal">Placeholder categories below — replace with the specific resources you personally recommend to visitors.</p>
+
+    <div class="res-grid reveal" style="margin-top:32px;">
+      <div class="card res-card"><h4>Wellness & mindfulness</h4><p>Guided meditation, breathing practices, and mental clarity resources worth bookmarking.</p><a href="#">[ Add link ] →</a></div>
+      <div class="card res-card"><h4>Financial literacy basics</h4><p>Plain-language explainers on budgeting, saving, and long-term planning.</p><a href="#">[ Add link ] →</a></div>
+      <div class="card res-card"><h4>Sustainable living</h4><p>Practical guides on composting, water conservation, and low-impact living.</p><a href="#">[ Add link ] →</a></div>
+      <div class="card res-card"><h4>Reading & learning</h4><p>Free courses and open libraries for continued learning at any age.</p><a href="#">[ Add link ] →</a></div>
+      <div class="card res-card"><h4>Travel planning in India</h4><p>Trusted resources for planning offbeat and rural travel, including agri-tourism.</p><a href="#">[ Add link ] →</a></div>
+      <div class="card res-card"><h4>[ Your category ]</h4><p style="color:var(--ivory-dim);">Slot open for another resource category you want visitors to have.</p><a href="#">[ Add link ] →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" style="background: var(--stage-2); border-top:1px solid var(--line);">
+  <div class="shell">
+    <div class="eyebrow reveal">Elsewhere</div>
+    <h2 style="font-size:28px; margin-top:12px;" class="reveal">My other ventures & sale sites</h2>
+    <div class="venture-links reveal">
+      <a href="pandora-city.html" class="vlink" style="border-color:var(--emerald);">
+        <div><h4>Pandora City — book a stay</h4><span>Direct link to the booking page</span></div>
+        <span style="color:var(--emerald); font-weight:700;">→</span>
+      </a>
+      <a href="forever-fyre.html" class="vlink" style="border-color:var(--flame);">
+        <div><h4>Forever FYRE — get passes</h4><span>Direct link to the ticket page</span></div>
+        <span style="color:var(--flame); font-weight:700;">→</span>
+      </a>
+      <div class="vlink"><div><h4>[ External sale site ]</h4><span>Placeholder — add link when live</span></div><span style="color:var(--gold); font-weight:700;">→</span></div>
+      <div class="vlink"><div><h4>[ Another venture link ]</h4><span>Placeholder — add link when ready</span></div><span style="color:var(--gold); font-weight:700;">→</span></div>
+    </div>
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+</body>
+</html>

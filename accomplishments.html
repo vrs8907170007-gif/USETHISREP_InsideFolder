@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accomplishments — Vishal Singh</title>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .acc-hero{ position:relative; overflow:hidden; padding:76px 0 56px; border-bottom:1px solid var(--line); }
+  .acc-hero .glow{ width:640px; height:640px; background: var(--gold); top:-300px; right:-160px; }
+  .acc-hero h1{ font-size: clamp(36px,5vw,60px); margin-top:16px; }
+
+  .acc-stats{ display:flex; gap:44px; flex-wrap:wrap; margin-top:36px; padding-top:26px; border-top:1px solid var(--line); }
+  .acc-stats b{ display:block; font-family:var(--font-display); font-size:30px; color:var(--gold); }
+  .acc-stats span{ font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--ivory-dim); }
+
+  .filter-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:44px; }
+  .filter-chip{ border:1px solid var(--line); padding:9px 18px; border-radius:999px; font-size:12.5px; font-weight:600; color:var(--ivory-dim); cursor:pointer; }
+  .filter-chip.active{ background: var(--gold); color: var(--stage); border-color: var(--gold); }
+
+  .venture-row{
+    display:grid; grid-template-columns: 1fr 1.4fr; gap:44px; align-items:center;
+    padding: 52px 0; border-top:1px solid var(--line);
+  }
+  .venture-row:first-child{ border-top:none; }
+  @media (max-width:860px){ .venture-row{ grid-template-columns:1fr; } }
+  .venture-visual{
+    aspect-ratio:16/11; border-radius:16px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:13px; text-align:center; padding:20px;
+  }
+  .venture-row h3{ font-size:27px; }
+  .venture-row .role{ font-size:12.5px; font-weight:700; margin-top:8px; letter-spacing:.04em; text-transform:uppercase; }
+  .venture-row .period{ font-size:12px; color:var(--ivory-dim); margin-top:4px; }
+  .venture-row p{ color:var(--ivory-dim); font-size:14.5px; margin-top:14px; max-width:58ch; }
+  .venture-row blockquote{
+    margin:16px 0 0; padding:14px 18px; border-left:2px solid var(--gold);
+    font-family:var(--font-display); font-style:italic; font-size:14.5px; line-height:1.55; color:var(--ivory);
+    background: rgba(212,175,106,0.06);
+  }
+  .venture-row .facts{ display:flex; gap:26px; margin-top:20px; flex-wrap:wrap; }
+  .venture-row .facts b{ display:block; font-family:var(--font-display); font-size:21px; }
+  .venture-row .facts span{ font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ivory-dim); }
+</style>
+</head>
+<body>
+
+<section class="acc-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow reveal">The Record</div>
+    <h1 class="reveal">Accomplishments</h1>
+    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">Every venture across 25+ years — technology, entertainment, construction, hospitality, and now land and words. Each one built, run, and in most cases, outgrown on purpose.</p>
+    <div class="acc-stats reveal">
+      <div><b>12</b><span>Ventures &amp; roles</span></div>
+      <div><b>25+</b><span>Years building</span></div>
+      <div><b>₹16L+</b><span>Monthly profit, twice rebuilt from zero</span></div>
+      <div><b>1</b><span>Trilogy in progress</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="filter-row reveal">
+      <div class="filter-chip active" data-filter="all">All</div>
+      <div class="filter-chip" data-filter="current">Current Ventures</div>
+      <div class="filter-chip" data-filter="hospitality">Hospitality &amp; Nightlife</div>
+      <div class="filter-chip" data-filter="entertainment">Entertainment &amp; Media</div>
+      <div class="filter-chip" data-filter="tech">Technology</div>
+      <div class="filter-chip" data-filter="writing">Writing</div>
+    </div>
+
+    <div id="ventureList">
+
+    <!-- PANDORA CITY -->
+    <div class="venture-row reveal" data-cat="current">
+      <div class="venture-visual" style="background: radial-gradient(120% 120% at 30% 20%, rgba(46,139,110,0.25), var(--stage-2)); color: var(--emerald);">[ Pandora City — hero image ]</div>
+      <div>
+        <div class="eyebrow" style="color:var(--emerald);">Current Venture</div>
+        <h3>The Pandora City</h3>
+        <div class="role" style="color:var(--emerald);">Founder — 2021 to Present</div>
+        <p>65 acres in Awandhe village, Wada, Palghar, built as the convergence point of every earlier chapter: an Adventure Park drawing on a national athletics background, a full organic Fruit &amp; Vegetable Farm, a Goat, Fish, Turkey, Duck, Dog, Cow &amp; Buffalo Farm and Milk Centre built on veterinary knowledge gained sheltering abandoned dogs, a Weekend Getaway and Jungle/Tent Living platform, and an Eco-Vibrant Luminous Garden experience.</p>
+        <blockquote>"Each of these units of commercially promising money-making machines is individually capable of being self-sufficient and giving lucrative returns to its believers and supporters."</blockquote>
+        <div class="facts">
+          <div><b>65</b><span>Acres</span></div>
+          <div><b>6</b><span>Integrated concepts</span></div>
+          <div><b>V Agro</b><span>Founding proprietorship</span></div>
+        </div>
+        <a href="pandora-city.html" class="btn btn-accent" style="margin-top:22px; border-color:var(--emerald); color:var(--emerald);">Full project detail →</a>
+      </div>
+    </div>
+
+    <!-- FOREVER FYRE -->
+    <div class="venture-row reveal" data-cat="current">
+      <div class="venture-visual" style="background: radial-gradient(120% 120% at 30% 20%, rgba(224,86,47,0.28), var(--stage-2)); color: var(--flame);">[ Forever FYRE — hero image ]</div>
+      <div>
+        <div class="eyebrow" style="color:var(--flame);">Current Venture</div>
+        <h3>Forever FYRE</h3>
+        <div class="role" style="color:var(--flame);">Founder &amp; Organizer</div>
+        <p>An annual musical festival within The Pandora City, conceived to bring guests together as family at least once a year — envisioned, in full ambition, as the nation's biggest New Year's celebration.</p>
+        <div class="facts">
+          <div><b>Annual</b><span>Cadence</span></div>
+          <div><b>Family-first</b><span>Guest philosophy</span></div>
+        </div>
+        <a href="forever-fyre.html" class="btn btn-accent" style="margin-top:22px; border-color:var(--flame); color:var(--flame);">Full event detail →</a>
+      </div>
+    </div>
+
+    <!-- V HOSPITALITY -->
+    <div class="venture-row reveal" data-cat="current hospitality">
+      <div class="venture-visual" style="background: radial-gradient(120% 120% at 30% 20%, rgba(212,175,106,0.22), var(--stage-2)); color: var(--gold);">[ V Hospitality — venue photo ]</div>
+      <div>
+        <div class="eyebrow">Current Venture</div>
+        <h3>V Hospitality</h3>
+        <div class="role">Founder &amp; Managing Director — 2025 to Present</div>
+        <p>The institutional expression of everything learned across V Services and the Tipsy Monkee decade — hospitality and recurring high-capacity event operations running four days a week, built around vendor management, venue logistics, and municipal clearances.</p>
+        <div class="facts">
+          <div><b>₹16L</b><span>Monthly collections</span></div>
+          <div><b>4 days</b><span>Weekly event cadence</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- V SERVICES -->
+    <div class="venture-row reveal" data-cat="hospitality">
+      <div class="venture-visual" style="background: radial-gradient(120% 120% at 30% 20%, rgba(212,175,106,0.22), var(--stage-2)); color: var(--gold);">[ V Services — dance floor photo ]</div>
+      <div>
+        <div class="eyebrow">Turnaround</div>
+        <h3>V Services</h3>
+        <div class="role">Proprietor — Apr 2022 to Apr 2025</div>
+        <p>Rebuilt from the ground up after food and liquor licences were revoked. Re-architected the entire model into a zero-alcohol, zero-food dance platform for under-21 guests shut out by a Maharashtra Government policy — proving a market existed where regulation seemed to have closed one.</p>
+        <blockquote>"God always leaves a window open for seekers — our team of six stood up to the challenge by booking gross profits of over ₹16 lakh per month through strategies uncommon to most."</blockquote>
+        <div class="facts">
+          <div><b>₹16L+</b><span>Gross profit / month</span></div>
+          <div><b>150+</b><span>Daily dancers</span></div>
+          <div><b>6</b><span>Person team</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIPSY MONKEE -->
+    <div class="venture-row reveal" data-cat="hospitality">
+      <div class="venture-visual" style="background: radial-gradient(120% 120% at 30% 20%, rgba(212,175,106,0.22), var(--stage-2)); color: var(--gold);">[ Tipsy Monkee — brand photo ]</div>
+      <div>
+        <div class="eyebrow">Brand Founded</div>
+        <h3>Tipsy Monkee</h3>
+        <div class="role">Owner &amp; Host — Jan 2015 to Dec 2025</div>
+        <p>Pioneered Wednesday midweek party culture in Mumbai, and launched entertainment acts Mohit Modanwal and Dakx Band as products of the brand. Ten years of daily lounge-bar operations, guest relations, and service standards that outlasted the trend cycle it started.</p>
+        <blockquote>"That later started becoming a craze among Mumbai's party hub, and now you see many brands with names inspired by TIPSY or MONKEE around party places."</blockquote>
+        <div class="facts">
+          <div><b>10</b><span>Years running</span></div>
+          <div><b>1st</b><span>Midweek party brand</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VRU ENTERTAINMENTS -->
+    <div class="venture-row reveal" data-cat="entertainment">
+      <div class="venture-visual" style="overflow:hidden; padding:0;"><img src="assets/celeb-friends.jpg" style="width:100%; height:100%; object-fit:cover;" alt="Vishal Singh with entertainment industry figures"></div>
+      <div>
+        <div class="eyebrow" style="color:var(--violet);">Entertainment</div>
+        <h3>VRU Entertainments Pvt. Ltd.</h3>
+        <div class="role" style="color:var(--violet);">Founder &amp; CEO, Events Division — 2008 to 2014</div>
+        <p>Directed production-house operations across Dubai and India — the Videocon Screen Awards, Filmfare Awards, Grasim Mr. India &amp; Miss India, advertising for the Aditya Birla Group, and scripting work for Satyamev Jayate and Kaun Banega Crorepati. Launched Jacqueline Fernandes into the Indian media industry as the face of Collection G for D Damas.</p>
+        <div class="facts">
+          <div><b>6 yrs</b><span>Full production cycle</span></div>
+          <div><b>1</b><span>Bollywood debut launched</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KING'S TIMBER -->
+    <div class="venture-row reveal" data-cat="entertainment">
+      <div class="venture-visual" style="color:var(--gold);">[ King's Timber — construction photo ]</div>
+      <div>
+        <div class="eyebrow">Construction</div>
+        <h3>King's Timber Construction</h3>
+        <div class="role">Founder, Partnership Firm — 2014 to 2015</div>
+        <p>Managed labour contracting and interior-design projects using then-uncommon ready-block construction methods. The chapter's centrepiece: a 1.4 lakh sq. ft. structure built for the Goa Jail.</p>
+        <div class="facts">
+          <div><b>1.4L sq ft</b><span>Goa Jail structure</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PCGENESIS -->
+    <div class="venture-row reveal" data-cat="tech">
+      <div class="venture-visual" style="color:var(--gold);">[ PcGenesis — hardware photo ]</div>
+      <div>
+        <div class="eyebrow">Technology</div>
+        <h3>PcGenesis</h3>
+        <div class="role">Founder &amp; Proprietor — 2002 to 2006</div>
+        <p>Built a sub-dealer network across regions, selling ten units each to become authorised HCL resellers — reaching 250 HCL PCs sold in a single month across the Mumbai suburbs, with formal recognition as the highest HCL seller in the region.</p>
+        <div class="facts">
+          <div><b>250</b><span>PCs sold in a month</span></div>
+          <div><b>#1</b><span>HCL seller, Mumbai suburbs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH HUNT -->
+    <div class="venture-row reveal" data-cat="tech">
+      <div class="venture-visual" style="color:var(--gold);">[ Tech Hunt Developer ]</div>
+      <div>
+        <div class="eyebrow">First Venture</div>
+        <h3>Tech Hunt Developer</h3>
+        <div class="role">Proprietor — 2002</div>
+        <p>An early e-commerce training venture, years ahead of India's digital retail boom — enrolling students and helping them launch functioning online businesses. Closed voluntarily, at age 22, when the outcomes no longer felt honest to what students were paying for.</p>
+      </div>
+    </div>
+
+    <!-- WRITING -->
+    <div class="venture-row reveal" data-cat="writing">
+      <div class="venture-visual" style="background: radial-gradient(120% 120% at 30% 20%, rgba(122,79,224,0.28), var(--stage-2)); color: var(--violet);">[ Autobiography of God — cover art ]</div>
+      <div>
+        <div class="eyebrow" style="color:var(--violet);">Literary Work</div>
+        <h3>AN AUTOBIOGRAPHY OF GOD</h3>
+        <div class="role" style="color:var(--violet);">Author — Volume I in progress</div>
+        <p>A three-volume philosophical trilogy — Volume I, "I AM GOD," described in the author's own words as a way to become one with God. Alongside it runs THE DIVINE CODE, a simplified numerology guide for aspirants.</p>
+        <a href="contribution.html" class="btn btn-accent" style="margin-top:22px; border-color:var(--violet); color:var(--violet);">Read &amp; discuss →</a>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="js/shell.js"></script>
+<script>
+  document.querySelectorAll('.filter-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      document.querySelectorAll('.venture-row').forEach(row=>{
+        const cats = row.dataset.cat.split(' ');
+        row.style.display = (f === 'all' || cats.includes(f)) ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
