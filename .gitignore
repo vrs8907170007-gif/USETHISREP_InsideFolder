@@ -1,0 +1,16 @@
+# Environment and secret files
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+.vercel/
+coverage/
+
+# Local tooling and OS files
+.DS_Store
+Thumbs.db
+*.log
