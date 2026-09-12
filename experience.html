@@ -27,6 +27,14 @@
   .work-card[data-cat="entertainment"] .meta{ color: var(--violet); }
   .work-card[data-cat="hospitality"] .meta{ color: var(--gold); }
   .work-card[data-cat="tech-build"] .meta{ color: var(--flame); }
+
+  .subsection-divider{ grid-column: 1 / -1; display:flex; align-items:center; gap:16px; margin: 8px 0 4px; }
+  .subsection-divider:first-child{ margin-top: 0; }
+  .subsection-divider .line{ flex:1; height:1px; background: var(--line); }
+  .subsection-divider .label{ font-family: var(--font-display); font-size: 22px; color: var(--ivory); white-space: nowrap; }
+  .subsection-divider .label .sub{ display:block; font-family: var(--font-body); font-size: 12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color: var(--violet); margin-top: 4px; }
+  .vru-intro{ grid-column: 1 / -1; color: var(--ivory-dim); font-size: 14.5px; line-height: 1.7; max-width: 78ch; margin-bottom: 6px; }
+  .work-card .facts .tag.name-tag{ background: rgba(122,79,224,0.14); border-color: rgba(122,79,224,0.35); color: var(--ivory); }
 </style>
 </head>
 <body>
@@ -46,11 +54,159 @@
       <div class="filter-chip active" data-filter="all">All work</div>
       <div class="filter-chip" data-filter="pandora-city">Pandora City</div>
       <div class="filter-chip" data-filter="entertainment">Entertainment Production</div>
+      <div class="filter-chip" data-filter="vru">VRU Entertainment</div>
       <div class="filter-chip" data-filter="hospitality">Hospitality Operations</div>
       <div class="filter-chip" data-filter="tech-build">Technology & Construction</div>
     </div>
 
     <div class="work-grid" id="workGrid">
+
+      <div class="subsection-divider reveal" data-cat="vru">
+        <div class="label">VRU Entertainment<span class="sub">Celebrity / Corporate Events & Productions</span></div>
+        <div class="line"></div>
+      </div>
+      <p class="vru-intro reveal" data-cat="vru">VRU Entertainment Pvt. Ltd. — the events and production arm of Mangal Murti Limited — designed and produced televised award shows, brand launches, and press events across two decades, working with national broadcasters, global brands, and Bollywood's biggest names. Below is a curated slice of that portfolio, drawn directly from VRU's own work-profile records.</p>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/filmfare-awards.jpg" alt="Filmfare Awards outdoor production, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Televised Awards</div>
+        <div class="period">1996, 1998, 2000</div>
+        <h4>Filmfare Awards — first-ever outdoor edition</h4>
+        <p>Presented annually by The Times Group and often called Hindi cinema's equivalent of the Oscars, Filmfare had never been staged outdoors before VRU was brought in to produce it — a format the show then repeated in 1998 and 2000.</p>
+        <div class="facts"><span class="tag">First outdoor Filmfare</span><span class="tag">The Times Group</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/femina-miss-india.jpg" alt="Femina Miss India stage production, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Televised Awards</div>
+        <div class="period">1996, 1998, 2000</div>
+        <h4>Femina Miss India — national pageant production</h4>
+        <p>Design and on-ground production for India's national beauty pageant, run annually by Bennett, Coleman & Co. and a recognised feeder to international beauty-queen titles.</p>
+        <div class="facts"><span class="tag">National pageant</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/cnbc-business-leadership.jpg" alt="CNBC Business Leadership Awards stage, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Televised Awards</div>
+        <div class="period">Multi-year</div>
+        <h4>CNBC Business Leadership, Auto Car & Mutual Fund Awards</h4>
+        <p>Recurring production partner across CNBC-TV18's flagship award properties — the India Business Leader Awards, the CNBC-TV18 Autocar auto awards produced year on year, and the CNBC-TV18–CRISIL Mutual Fund Awards.</p>
+        <div class="facts"><span class="tag">CNBC-TV18</span><span class="tag">Recurring, year on year</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/gladrags.jpg" alt="Gladrags Mega Model and Manhunt stage, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Televised Awards</div>
+        <div class="period">Multi-year</div>
+        <h4>Gladrags Mega Model & Manhunt Contest</h4>
+        <p>Long-running production association with Gladrags' modelling contest, feeding winners into Manhunt International, Miss Intercontinental, and Top Model of the World.</p>
+        <div class="facts"><span class="tag">Manhunt International pathway</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/yakult-kajol.jpg" alt="Yakult press conference with Kajol, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Brand Activations</div>
+        <div class="period">2009 – 2010</div>
+        <h4>Yakult press conference — Taj Lands End, Mumbai</h4>
+        <p>Introduced Kajol Devgan to the press as the newly announced brand ambassador for Yakult, alongside Yakult–Danone leadership.</p>
+        <div class="facts"><span class="tag name-tag">Kajol Devgan</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/lonely-planet.jpg" alt="Lonely Planet magazine launch, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Brand Activations</div>
+        <div class="period">2010</div>
+        <h4>Lonely Planet Magazine launch — Mumbai & Delhi</h4>
+        <p>Twin-city launch graced by Saif Ali Khan and Kareena Kapoor in Mumbai, with Neil Nitin Mukesh, Dia Mirza, and Virender Sehwag attending the Delhi leg.</p>
+        <div class="facts"><span class="tag name-tag">Saif Ali Khan</span><span class="tag name-tag">Kareena Kapoor</span><span class="tag name-tag">+3 more</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/gold-expressions-2009.jpg" alt="Gold Expressions 2009 fashion show, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Brand Activations</div>
+        <div class="period">2005 – 2009</div>
+        <h4>Gold Expressions — World Gold Council, five editions</h4>
+        <p>Produced the "Gold Expressions" jewellery-fashion launches for the World Gold Council across five consecutive years, with showstoppers including Lara Dutta, Sandhya Mridhul, Sophie Chaudhary, Preeti Jhangiani, Suneeta Rao, and Jacqueline Fernandez.</p>
+        <div class="facts"><span class="tag">5 consecutive editions</span><span class="tag">World Gold Council</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/collection-g-jacqueline.jpg" alt="Collection G press conference with Jacqueline Fernandez, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Brand Activations</div>
+        <div class="period">2010</div>
+        <h4>"Collection G" press conference — Hilton Towers, Mumbai</h4>
+        <p>Launch event introducing Jacqueline Fernandez as the new face of D'damas & Gitanjali Group's "Collection G," alongside World Gold Council leadership.</p>
+        <div class="facts"><span class="tag name-tag">Jacqueline Fernandez</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/triumph-launch.jpg" alt="Triumph lingerie launch runway show, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Brand Activations</div>
+        <div class="period">2007 – 2009</div>
+        <h4>Triumph new-logo & range launch — The Park, New Delhi</h4>
+        <p>Runway production for Triumph International's rebrand and new range reveal, unveiled by the brand's country and sales leadership.</p>
+        <div class="facts"><span class="tag">Triumph International</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/lucky-lakshmi-kamalnath.jpg" alt="Lucky Lakshmi jewellery festival launch with Union Minister Kamal Nath, VRU Entertainment"></div>
+        <div class="meta">VRU Entertainment — Brand Activations</div>
+        <div class="period">2006</div>
+        <h4>"Lucky Lakshmi" — launch of the world's largest jewellery shopping festival</h4>
+        <p>Press launch for the Gems & Jewellery Federation's flagship festival, inaugurated by the then Union Minister of Commerce & Industry, Shri Kamal Nath.</p>
+        <div class="facts"><span class="tag name-tag">Hon'ble Union Minister Kamal Nath</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-events/market-overview.jpg" alt="VRU Entertainment corporate market overview slide"></div>
+        <div class="meta">VRU Entertainment — Industry Context</div>
+        <div class="period">2009 – 2013 outlook</div>
+        <h4>Operating inside a fast-growing industry</h4>
+        <p>VRU's parent, Mangal Murti Limited, operated within an Indian media & entertainment industry sized at INR 584 billion in 2008 and projected (FICCI/PwC) to reach INR 1,052 billion by 2013 — with the filmed entertainment segment alone worth an estimated INR 117 billion in 2010.</p>
+        <div class="facts"><span class="tag">INR 584 Bn (2008) → INR 1,052 Bn (2013E)</span></div>
+      </div>
+
+      <div class="subsection-divider reveal" data-cat="vru">
+        <div class="label">VRU Entertainment<span class="sub">Birthday Parties</span></div>
+        <div class="line"></div>
+      </div>
+      <p class="vru-intro reveal" data-cat="vru">Beyond the red carpet, VRU also built a full birthday-party production line for kids' events — themed balloon decoration, inflatables, and interactive rides — deployed at homes, societies, and banquet halls across Mumbai.</p>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-birthday/disney-cartoon-mural.jpg" alt="Hand-painted Disney character mural birthday backdrop"></div>
+        <div class="meta">VRU Entertainment — Birthday Parties</div>
+        <div class="period">Ongoing product line</div>
+        <h4>Themed decor: Disney, Princess & cartoon-character sets</h4>
+        <p>Custom-painted backdrops and cut-out character sets — Mickey & friends, Disney princesses, Dora, and more — combined with balloon arches, ceiling installations, and full banquet-hall dressing for themed birthday parties.</p>
+        <div class="facts"><span class="tag">Custom hand-painted backdrops</span><span class="tag">Full venue dressing</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-birthday/balloon-cartoon-characters.jpg" alt="Balloon decoration with costumed cartoon characters"></div>
+        <div class="meta">VRU Entertainment — Birthday Parties</div>
+        <div class="period">Ongoing product line</div>
+        <h4>Balloon decoration, arches & imported balloon work</h4>
+        <p>Balloon arches and ceiling drapes, entrance arches with costumed cartoon characters, and premium imported-balloon installations for banquet dining setups.</p>
+        <div class="facts"><span class="tag">Live costumed characters</span><span class="tag">Imported balloon options</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-birthday/jumbo-slide-moonwalker.jpg" alt="Jumbo slide and sliding moonwalker inflatable rides"></div>
+        <div class="meta">VRU Entertainment — Birthday Parties</div>
+        <div class="period">Ongoing product line</div>
+        <h4>Inflatable rides: jumbo slide, moonwalkers & zigzag</h4>
+        <p>A fleet of large-format inflatables — jumbo slide, sliding and jumping moonwalkers, and zigzag slides — for high-footfall birthday events and society functions.</p>
+        <div class="facts"><span class="tag">Large-format inflatables</span></div>
+      </div>
+
+      <div class="card work-card reveal" data-cat="vru">
+        <div class="thumb"><img src="assets/experience/vru-birthday/rock-climbing-spiderwave.jpg" alt="Rock climbing wall and SpiderWave velcro wall activities"></div>
+        <div class="meta">VRU Entertainment — Birthday Parties</div>
+        <div class="period">Ongoing product line</div>
+        <h4>Activity stations: rock climbing, SpiderWave, ball pool & more</h4>
+        <p>Interactive activity stations rounding out the birthday roster — an inflatable rock-climbing wall, SpiderWave velcro wall, ball pool, and aeroplane jumper.</p>
+        <div class="facts"><span class="tag">Interactive activity stations</span></div>
+      </div>
 
       <div class="card work-card reveal" data-cat="pandora-city">
         <div class="thumb" style="background:radial-gradient(120% 120% at 30% 20%, rgba(46,139,110,0.22), var(--stage-2));">[ Land survey / site photos ]</div>
@@ -137,6 +293,12 @@
       const f = chip.dataset.filter;
       document.querySelectorAll('.work-card').forEach(card=>{
         card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+      });
+      document.querySelectorAll('.subsection-divider').forEach(el=>{
+        el.style.display = (f === 'all' || el.dataset.cat === f) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.vru-intro').forEach(el=>{
+        el.style.display = (f === 'all' || el.dataset.cat === f) ? 'block' : 'none';
       });
     });
   });
