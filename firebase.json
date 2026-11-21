@@ -1,0 +1,11 @@
+{
+  "firestore": { "rules": "firestore.rules" },
+  "hosting": {
+    "public": ".",
+    "ignore": ["firebase.json", "firestore.rules", "**/.*", "*.md"],
+    "headers": [
+      { "source": "**/*.@(jpg|jpeg|png|webp|mp4|js|css)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] }
+    ]
+  },
+  "emulators": { "auth": { "port": 9099 }, "firestore": { "port": 8080 }, "ui": { "enabled": false } }
+}

@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contribution — Vishal Singh</title>
+<meta name="description" content="Books by Vishal Singh (Sanatani V) — what each is about, teasers and reader viewpoints: The Divine Code, The Complete Science of Numerology, An Autobiography of God, Road to Billions, AI Unlocked, Tsunami, The Cage Keepers and more.">
+<meta name="theme-color" content="#0B0D12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vishal Singh">
+<meta property="og:title" content="Contribution — Vishal Singh">
+<meta property="og:description" content="Books by Vishal Singh — The Divine Code, The Complete Science of Numerology, Autobiography of God, Road to Billions, AI Unlocked, Tsunami, The Cage Keepers and more. Buy on Amazon or here in India.">
+<meta property="og:image" content="https://vsofficial.vercel.app/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;600&display=swap">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="css/base.css">
 <style>
   body{ --accent: var(--violet); --accent-glow: var(--violet-glow); }
@@ -72,6 +85,39 @@
   .confirm-box{ display:none; border:1px solid var(--violet); background: rgba(122,79,224,0.14); border-radius:10px; padding:20px; margin-top:20px; font-size:13.5px; color:var(--violet); }
   .prebook-panel{ display:none; }
   .prebook-panel.open{ display:block; }
+  .store-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; }
+  .notify-form{ display:flex; gap:10px; margin-top:16px; max-width:420px; }
+  .notify-form .vs-input{ flex:1; }
+  .notify-form .btn{ padding:12px 20px; font-size:13px; }
+  .store-card.flash{ box-shadow:0 0 0 2px var(--violet), 0 20px 60px var(--violet-glow); }
+  .store-filters{ display:flex; flex-direction:column; gap:10px; margin-top:26px; }
+  .store-filters .chips{ display:flex; gap:6px; flex-wrap:wrap; }
+  .store-filters .chips button{ background:none; border:1px solid var(--line); color:var(--ivory-dim); font:600 12px var(--font-body); padding:7px 14px; border-radius:999px; cursor:pointer; }
+  .store-filters .chips button.on{ background:var(--violet); color:#fff; border-color:var(--violet); }
+  .series-block{ margin-top:44px; }
+  .series-block h3{ font-size:24px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .series-block h3 small{ font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--ivory-dim); letter-spacing:.04em; }
+  .series-block .store-grid{ margin-top:18px; }
+  .store-card.soon .sc-cover{ opacity:.78; }
+  .soon-badge{ align-self:flex-start; font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:999px; border:1px solid var(--gold); color:var(--gold); }
+  .out-badge{ align-self:flex-start; font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:999px; border:1px solid var(--emerald); color:#8fd9bf; }
+  .sc-notify{ display:flex; gap:6px; margin-top:auto; }
+  .sc-notify input{ flex:1; min-width:0; padding:10px 12px; font-size:12.5px; }
+  .sc-notify .btn{ padding:10px 14px; font-size:12px; }
+  .sc-note{ font-size:12px; color:var(--ivory-dim); }
+  .sc-also{ font-size:12px; color:var(--ivory-dim); }
+  .sc-also a{ color:var(--gold); font-weight:600; }
+  .store-card h3, .store-card .sc-sub, .series-block h3{ font-family: var(--font-display), 'Noto Serif Devanagari', serif; }
+  .price-row{ flex-wrap:wrap; row-gap:4px; }
+  .price-row .price-tag{ white-space:nowrap; }
+  .fl-head{ font-size:26px; margin:44px 0 6px; display:flex; align-items:baseline; gap:12px; }
+  .fl-head small{ font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--ivory-dim); letter-spacing:.04em; }
+  .fl-sub{ font-size:14px; color:var(--ivory-dim); margin-top:4px; font-family:var(--font-display), 'Noto Serif Devanagari', serif; }
+  .fl-blurb{ margin-top:14px; font-size:14.5px; color:var(--ivory-dim); line-height:1.7; max-width:68ch; }
+  .book-row h4{ font-family: var(--font-display), 'Noto Serif Devanagari', serif; }
+  .book-cover-link.static{ cursor:default; }
+  .book-cover-link .type-cover{ width:100%; }
+  .book-cover-link img{ width:100%; aspect-ratio:1600/2560; object-fit:cover; }
 </style>
 </head>
 <body>
@@ -81,228 +127,680 @@
   <div class="shell">
     <div class="eyebrow reveal">Reading Room</div>
     <h1 class="reveal">Contribution</h1>
-    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">Books and writing I love, or wrote myself, with a few honest words about how each one landed for me — and room for your own view underneath.</p>
+    <p class="reveal" style="max-width:60ch; margin-top:16px; color:var(--ivory-dim); font-size:16.5px;">My books — what each one is about, teasers where there are any, and room for your own view underneath. Ready to buy? Visit the <a href="bookstore.html" style="color:var(--violet); font-weight:600;">Bookstore</a>.</p>
   </div>
 </section>
 
-<section class="section">
+
+<section class="section" style="padding-top:56px;">
   <div class="shell">
-
-    <div class="book-row reveal">
-      <a class="book-cover-link" id="teaserTrigger" aria-label="Play teaser for I AM GOD">
-        <img src="assets/contribution/i-am-god-cover.png" alt="I AM GOD — The Autobiography of God, The Triseries, cover art">
-        <div class="cover-play-overlay">
-          <div class="cover-play-btn">▶</div>
-        </div>
-        <div class="cover-teaser-label">Watch teaser</div>
-      </a>
+    <div class="eyebrow reveal" style="margin-bottom:10px;">Featured · teasers &amp; reader viewpoints</div>
+    <p class="reveal" style="color:var(--ivory-dim); max-width:62ch; font-size:14.5px;">Every book in one place — published titles first, then what's coming next. Watch a teaser where there is one, and leave your viewpoint.</p>
+    <div id="featuredList">
+    <!-- BOOKS:START (generated from catalog.json by netlify/build_books.py) -->
+    <h3 class="fl-head">Out now <small>14 books</small></h3>
+    <div class="book-row reveal" id="featured-ai-unlocked">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/ai-unlocked-kindle.webp" alt="AI Unlocked — Kindle cover"></div>
       <div>
-        <h4>I AM GOD — The Conscience &amp; The Consciousness</h4>
-        <div class="by">Written by Sanatan Vishal Singh · Volume 1 of the Triseries</div>
-        <p class="feeling">"This one started as a single question I couldn't put down, and turned into the whole first volume. I still don't think I've fully answered it — I'm not sure it's meant to be answered."</p>
-
-        <div class="price-row">
-          <span class="price-tag">₹999</span>
-          <span class="price-note">Launch price · pre-book now to be first in line</span>
-        </div>
-        <button class="prebook-btn" id="prebookToggle">📖 Pre-book this book</button>
-
-        <div class="booking-box prebook-panel" id="prebookPanel">
-          <div class="form-row">
-            <div><label>Full name</label><input type="text" id="pbName" placeholder="Your name"></div>
-            <div><label>Email</label><input type="email" id="pbEmail" placeholder="you@email.com"></div>
-          </div>
-          <div class="form-row">
-            <div><label>Phone</label><input type="tel" id="pbPhone" placeholder="+91"></div>
-            <div><label>Copies</label>
-              <select id="pbQty">
-                <option value="1" selected>1 copy</option>
-                <option value="2">2 copies</option>
-                <option value="3">3 copies</option>
-                <option value="5">5 copies</option>
-              </select>
-            </div>
-          </div>
-          <div class="total-row"><span>Price per copy</span><span>₹999</span></div>
-          <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pbTotal">₹999</span></div>
-          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pbConfirm">Confirm pre-booking (demo)</button>
-          <div class="confirm-box" id="pbConfirmBox">✓ Pre-booking request captured. In production this hands off to a live payment gateway, and you'll get a confirmation email/SMS along with first access when the book launches.</div>
-        </div>
-
-        <div class="book-actions">
-          <div class="react-btn"><span>♡</span> 42 found this moving</div>
-          <div class="react-btn">💬 Share your viewpoint</div>
-        </div>
-        <div class="viewpoints">
-          <div class="vp"><div class="avatar">AN</div><div><b>Anaya N.</b><p>The shift from questioning to listening in chapter four completely reframed how I think about doubt.</p></div></div>
-          <div class="vp-form"><input type="text" placeholder="Share your viewpoint on this..."><button class="btn btn-accent" style="padding:11px 20px;">Post</button></div>
-        </div>
+        <h4>AI Unlocked</h4>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">Stop guessing. Start getting results from AI. AI Unlocked puts three things in one place: a practical directory of the major AI tools — what each does well, what it costs and where its limits are — a repeatable method for writing prompts that work, and step-by-step projects that turn knowledge into finished work.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $4.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HQC2P25M" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-ai-unlocked" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-ai-unlocked"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-ai-unlocked" data-label="AI Unlocked"></div>
       </div>
     </div>
-
-    <div class="book-row reveal">
-      <a class="book-cover-link" id="teaserTrigger2" aria-label="Play teaser for The Divine Code">
-        <img src="assets/contribution/divine-code-cover.png" alt="The Divine Code — The Ultimate Numerology Master Book, cover art">
-        <div class="cover-play-overlay">
-          <div class="cover-play-btn">▶</div>
-        </div>
-        <div class="cover-teaser-label">Watch teaser</div>
-      </a>
+    <div class="book-row reveal" id="featured-i-am-god">
+      <a class="book-cover-link" href="#" data-teaser="assets/contribution/i-am-god-teaser.mp4" data-title="Autobiography of God — Volume 1" data-status="sale" aria-label="Play teaser for Autobiography of God — Volume 1"><img loading="lazy" decoding="async" src="assets/covers/i-am-god-kindle.webp" alt="Autobiography of God — Volume 1 — Kindle cover"><div class="cover-play-overlay"><div class="cover-play-btn">▶</div></div><div class="cover-teaser-label">Watch teaser</div></a>
       <div>
-        <h4>The Divine Code — The Ultimate Numerology Master Book</h4>
-        <div class="by">Written by Sanatan Guru Vishal Singh</div>
-        <p class="feeling">"[ Add a few honest sentences on why numerology, and why this book, stayed with you. ]"</p>
-
-        <div class="price-row">
-          <span class="price-tag">₹599</span>
-          <span class="price-note">Launch price · pre-book now to be first in line</span>
-        </div>
-        <button class="prebook-btn" id="prebookToggle2">📖 Pre-book this book</button>
-
-        <div class="booking-box prebook-panel" id="prebookPanel2">
-          <div class="form-row">
-            <div><label>Full name</label><input type="text" id="pbName2" placeholder="Your name"></div>
-            <div><label>Email</label><input type="email" id="pbEmail2" placeholder="you@email.com"></div>
-          </div>
-          <div class="form-row">
-            <div><label>Phone</label><input type="tel" id="pbPhone2" placeholder="+91"></div>
-            <div><label>Copies</label>
-              <select id="pbQty2">
-                <option value="1" selected>1 copy</option>
-                <option value="2">2 copies</option>
-                <option value="3">3 copies</option>
-                <option value="5">5 copies</option>
-              </select>
-            </div>
-          </div>
-          <div class="total-row"><span>Price per copy</span><span>₹599</span></div>
-          <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pbTotal2">₹599</span></div>
-          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pbConfirm2">Confirm pre-booking (demo)</button>
-          <div class="confirm-box" id="pbConfirmBox2">✓ Pre-booking request captured. In production this hands off to a live payment gateway, and you'll get a confirmation email/SMS along with first access when the book launches.</div>
-        </div>
-
-        <div class="book-actions">
-          <div class="react-btn"><span>♡</span> 0 found this moving</div>
-          <div class="react-btn">💬 Share your viewpoint</div>
-        </div>
-        <div class="viewpoints">
-          <div class="vp-form"><input type="text" placeholder="Share your viewpoint on this..."><button class="btn btn-accent" style="padding:11px 20px;">Post</button></div>
-        </div>
+        <h4>Autobiography of God — Volume 1</h4>
+        <div class="fl-sub">I AM GOD</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">Every autobiography begins with a birth. This one cannot. In this first volume of a spiritual trilogy, a boy from a crowded Mumbai chawl asks the question no one around him will answer: if his father&#x27;s name is Ram, where is Sita? What follows is a lifetime of dreams, mantras, examinations and encounters that slowly rearrange his understanding of God, consciousness, time and love. Do not believe it, do not disbelieve it. Walk beside it.</p>
+        <p class="feeling">"This one started as a single question I couldn&#x27;t put down, and turned into the whole first volume. I still don&#x27;t think I&#x27;ve fully answered it — I&#x27;m not sure it&#x27;s meant to be answered."</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $9.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HS4FCZNX" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-i-am-god" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-i-am-god"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-i-am-god" data-label="Autobiography of God — Volume 1"></div>
       </div>
     </div>
-
-    <div class="book-row reveal">
-      <div class="book-cover" style="color:var(--gold);">[ Cover — favorite read ]</div>
+    <div class="book-row reveal" id="featured-autobiography-of-god-vol-2">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/autobiography-of-god-vol-2-kindle.webp" alt="Autobiography of God — Volume 2 — Kindle cover"></div>
       <div>
-        <h4>[ Placeholder — another favorite ]</h4>
-        <div class="by">Favorite read · Author name here</div>
-        <p class="feeling">"[ Your notes on this one. ]"</p>
-        <div class="book-actions">
-          <div class="react-btn"><span>♡</span> 0 found this moving</div>
-          <div class="react-btn">💬 Share your viewpoint</div>
-        </div>
-        <div class="viewpoints">
-          <div class="vp-form"><input type="text" placeholder="Share your viewpoint on this..."><button class="btn btn-accent" style="padding:11px 20px;">Post</button></div>
-        </div>
+        <h4>Autobiography of God — Volume 2</h4>
+        <div class="fl-sub">Living with Yin &amp; Yang</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">The search is over. The conversation has just begun. At the end of Volume I, a boy from a crowded Mumbai chawl heard a Voice say three words: Welcome home, child. Volume II begins one breath later — and this time, God does the talking, answering the questions the boy has carried all his life: why evil was permitted, why the honest stay poor while cheats grow rich, and what lies beneath it all.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $9.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HS5SGW2P" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-autobiography-of-god-vol-2" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-autobiography-of-god-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-autobiography-of-god-vol-2" data-label="Autobiography of God — Volume 2"></div>
       </div>
     </div>
-
+    <div class="book-row reveal" id="featured-road-to-billions">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/road-to-billions-kindle.webp" alt="Road to Billions — Kindle cover"></div>
+      <div>
+        <h4>Road to Billions</h4>
+        <div class="fl-sub">101 Shoestring-Budget Business Ideas That Can Scale Without a Huge Team</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">101 business ideas you can begin on a shoestring budget, online or offline, AI-powered or completely non-tech. Each chapter explains the business in plain language, gives a day-by-day 30-day launch plan, and closes with a growth roadmap showing how the idea could scale without a huge team.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $4.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HP93Q6TP" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-road-to-billions" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-road-to-billions"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-road-to-billions" data-label="Road to Billions"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-road-to-billions-extended">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/road-to-billions-extended-kindle.webp" alt="Road to Billion$ — Kindle cover"></div>
+      <div>
+        <h4>Road to Billion$</h4>
+        <div class="fl-sub">Extended Edition</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">Every billion-dollar company began as one idea, one customer and one person who kept going. Road to Billion$ hands you 101 of those starting points, each built for the AI era and each explained as a complete, practical business plan you can begin online — often alone, often in a weekend.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $7.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HQGJHN7T" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-road-to-billions-extended" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-road-to-billions-extended"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-road-to-billions-extended" data-label="Road to Billion$"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-the-cage-keepers">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/the-cage-keepers-kindle.webp" alt="The Cage Keepers — Kindle cover"></div>
+      <div>
+        <h4>The Cage Keepers</h4>
+        <div class="fl-sub">A Novel of Kamathipura</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">Every girl is an investment. Every window has a price. Fifty thousand rupees — the price of a young widow and her feverish baby on a night bus to Mumbai. Vimla believed she was going to a doctor. She was going to a red door on Falkland Road, where a ledger says she owes everything, and every night adds to the sum.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $6.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HR7XL3CB" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-the-cage-keepers" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-the-cage-keepers"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-the-cage-keepers" data-label="The Cage Keepers"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-numerology-vol-1">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/numerology-vol-1-kindle.webp" alt="The Complete Science of Numerology — Volume 1 — Kindle cover"></div>
+      <div>
+        <h4>The Complete Science of Numerology — Volume 1</h4>
+        <div class="fl-sub">History, Foundations, Names &amp; Reference</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">A complete reference to the Indian numerology tradition: the Moolank, the Bhagyank, planetary symbolism, compatibility and life design. Every chapter separates what tradition says from what evidence shows, so the book can be used as a mirror for reflection, not as a forecast. This volume: History, Foundations, Names &amp; Reference (Chapters 1–43).</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $5.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HM58Q7DL" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-numerology-vol-1" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-numerology-vol-1"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-numerology-vol-1" data-label="The Complete Science of Numerology — Volume 1"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-numerology-vol-2">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/numerology-vol-2-kindle.webp" alt="The Complete Science of Numerology — Volume 2 — Kindle cover"></div>
+      <div>
+        <h4>The Complete Science of Numerology — Volume 2</h4>
+        <div class="fl-sub">Moolank Encyclopedia, Part 1: Moolank 1 to 5</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">A complete reference to the Indian numerology tradition: the Moolank, the Bhagyank, planetary symbolism, compatibility and life design. Every chapter separates what tradition says from what evidence shows, so the book can be used as a mirror for reflection, not as a forecast. This volume: The Moolank Encyclopedia, Part One — Moolank 1 to 5.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $6.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HMMKFJRN" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-numerology-vol-2" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-numerology-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-numerology-vol-2" data-label="The Complete Science of Numerology — Volume 2"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-numerology-vol-3">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/numerology-vol-3-kindle.webp" alt="The Complete Science of Numerology — Volume 3 — Kindle cover"></div>
+      <div>
+        <h4>The Complete Science of Numerology — Volume 3</h4>
+        <div class="fl-sub">Moolank Encyclopedia, Part 2: Moolank 6 to 9</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">A complete reference to the Indian numerology tradition: the Moolank, the Bhagyank, planetary symbolism, compatibility and life design. Every chapter separates what tradition says from what evidence shows, so the book can be used as a mirror for reflection, not as a forecast. This volume: The Moolank Encyclopedia, Part Two — Moolank 6 to 9.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $6.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HNJ132NZ" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-numerology-vol-3" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-numerology-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-numerology-vol-3" data-label="The Complete Science of Numerology — Volume 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-numerology-vol-4">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/numerology-vol-4-kindle.webp" alt="The Complete Science of Numerology — Volume 4 — Kindle cover"></div>
+      <div>
+        <h4>The Complete Science of Numerology — Volume 4</h4>
+        <div class="fl-sub">The Bhagyank Encyclopedia, Part One (Bhagyank 1–5)</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">A complete reference to the Indian numerology tradition: the Moolank, the Bhagyank, planetary symbolism, compatibility and life design. Every chapter separates what tradition says from what evidence shows, so the book can be used as a mirror for reflection, not as a forecast. This volume: The Bhagyank Encyclopedia, Part One — Bhagyank 1 to 5.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $6.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HNHV9MT8" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-numerology-vol-4" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-numerology-vol-4"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-numerology-vol-4" data-label="The Complete Science of Numerology — Volume 4"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-numerology-vol-5">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/numerology-vol-5-kindle.webp" alt="The Complete Science of Numerology — Volume 5 — Kindle cover"></div>
+      <div>
+        <h4>The Complete Science of Numerology — Volume 5</h4>
+        <div class="fl-sub">The Bhagyank Encyclopedia, Part Two (Bhagyank 6–9)</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">A complete reference to the Indian numerology tradition: the Moolank, the Bhagyank, planetary symbolism, compatibility and life design. Every chapter separates what tradition says from what evidence shows, so the book can be used as a mirror for reflection, not as a forecast. This volume: The Bhagyank Encyclopedia, Part Two — Bhagyank 6 to 9.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $6.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HP8JGX5H" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-numerology-vol-5" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-numerology-vol-5"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-numerology-vol-5" data-label="The Complete Science of Numerology — Volume 5"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-divine-code">
+      <a class="book-cover-link" href="#" data-teaser="assets/contribution/divine-code-teaser.mp4" data-title="The Divine Code" data-status="sale" aria-label="Play teaser for The Divine Code"><img loading="lazy" decoding="async" src="assets/covers/divine-code-kindle.webp" alt="The Divine Code — Kindle cover"><div class="cover-play-overlay"><div class="cover-play-btn">▶</div></div><div class="cover-teaser-label">Watch teaser</div></a>
+      <div>
+        <h4>The Divine Code</h4>
+        <div class="fl-sub">The Ultimate Numerology Master Book: Moolank - Bhagyank - Destiny - Name Vibration</div>
+        <div class="by">by Sanatan Guru Vishal Singh</div>
+        <p class="fl-blurb">Your birth date is a code. Learn to read it. In Vedic numerology, two numbers hold the answer: your Moolank, which shows how you act every day, and your Bhagyank, which shows where your life is heading. The Divine Code is a complete beginner&#x27;s guide to reading both, with a full chapter for each number from 1 to 9, linked to the nine planets of the Navagraha.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $4.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HLQCGBTK" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-divine-code" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-divine-code"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-divine-code" data-label="The Divine Code"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-divine-code-graphic">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/divine-code-graphic-kindle.webp" alt="The Divine Code: Graphic Edition — Kindle cover"></div>
+      <div>
+        <h4>The Divine Code: Graphic Edition</h4>
+        <div class="fl-sub">The Ultimate Numerology Graphic Edition</div>
+        <div class="by">by Sanatan Guru Vishal Singh</div>
+        <p class="fl-blurb">Your numbers, at a glance. Eighteen beautifully illustrated cheat sheets distil the Moolank and Bhagyank system into two facing pages for every number: ruling planet, strengths and challenges, colour-coded compatibility, lucky and avoid lists, mantras, Lal Kitab remedies, a gemstone guide and a daily affirmation.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $9.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HMN8YWXL" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-divine-code-graphic" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-divine-code-graphic"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-divine-code-graphic" data-label="The Divine Code: Graphic Edition"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-tsunami">
+      <div class="book-cover-link static"><img loading="lazy" decoding="async" src="assets/covers/tsunami-kindle.webp" alt="Tsunami — Kindle cover"></div>
+      <div>
+        <h4>Tsunami</h4>
+        <div class="fl-sub">A Love Story!</div>
+        <div class="by">by Sanatani V</div>
+        <p class="fl-blurb">A love that dared the ocean. A destiny that would not wait. When a lonely Mumbai clerk falls for a girl whose world lies beyond the horizon, love becomes a wave that refuses to return — a poignant, sweeping tale of longing that spans continents. Based on the screenplay Floating Flowers by Praveen Morchhale.</p>
+        <div class="price-row"><span class="price-tag">Out now</span><span class="price-note">E-book, paperback &amp; hardcover · on Amazon from $4.99</span></div>
+        <a class="prebook-btn" href="https://www.amazon.com/dp/B0HRFGFFQS" target="_blank" rel="noopener" style="display:inline-flex; text-decoration:none;">🛒 Buy on Amazon</a> <a href="bookstore.html#book-tsunami" style="margin-left:14px; font-size:13px; color:var(--violet); font-weight:600;">All formats →</a>
+        <div class="book-actions"><div class="react-btn" data-like="book-tsunami"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-tsunami" data-label="Tsunami"></div>
+      </div>
+    </div>
+    <h3 class="fl-head">Coming soon <small>38 books</small></h3>
+    <div class="book-row reveal" id="featured-autobiography-of-god-vol-3">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#2E8B6E" role="img" aria-label="Autobiography of God — Volume 3 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Autobiography of God</span><span class="tc-vol">Volume 3</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Autobiography of God — Volume 3</h4>
+        <div class="fl-sub">Creation Becomes the Creator</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Autobiography of God — Volume 3" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-autobiography-of-god-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-autobiography-of-god-vol-3" data-label="Autobiography of God — Volume 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-numerology-cheat-code">
+      <a class="book-cover-link" href="#" data-teaser="assets/contribution/numerology-cheat-code-teaser.mp4" data-title="Numerology Cheat Code" data-status="soon" aria-label="Play teaser for Numerology Cheat Code"><img loading="lazy" decoding="async" src="assets/contribution/numerology-cheat-code-cover.webp" alt="Numerology Cheat Code — Kindle cover"><div class="cover-play-overlay"><div class="cover-play-btn">▶</div></div><div class="cover-teaser-label">Watch teaser</div></a>
+      <div>
+        <h4>Numerology Cheat Code</h4>
+        <div class="fl-sub">Bhayank &amp; Moolank in a Gist</div>
+        <div class="by">by Sanatan Vishal Singh</div>
+        <p class="fl-blurb">A practical, quick-reference guide to your root and destiny numbers — Moolank, and Bhayank, the &quot;danger number&quot; — so you can read your chart quickly and easily.</p>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Numerology Cheat Code" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-numerology-cheat-code"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-numerology-cheat-code" data-label="Numerology Cheat Code"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-vol-1">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#E0562F" role="img" aria-label="Siddhi Kosh — Volume 1 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Siddhi Kosh</span><span class="tc-vol">Volume 1</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Siddhi Kosh — Volume 1</h4>
+        <div class="fl-sub">Foundations of Sadhana &amp; the Siddhis of the Gods · The Sanatani Encyclopedia of Mantras, Siddhis &amp; Sacred Remedies</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Siddhi Kosh — Volume 1" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-vol-1"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-vol-1" data-label="Siddhi Kosh — Volume 1"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-vol-2">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#4F7AE0" role="img" aria-label="Siddhi Kosh — Volume 2 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Siddhi Kosh</span><span class="tc-vol">Volume 2</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Siddhi Kosh — Volume 2</h4>
+        <div class="fl-sub">Totke &amp; Upay: Sacred Remedies for Hard Times · The Sanatani Encyclopedia of Mantras, Siddhis &amp; Sacred Remedies</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Siddhi Kosh — Volume 2" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-vol-2" data-label="Siddhi Kosh — Volume 2"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-vol-3">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#7A4FE0" role="img" aria-label="Siddhi Kosh — Volume 3 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Siddhi Kosh</span><span class="tc-vol">Volume 3</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Siddhi Kosh — Volume 3</h4>
+        <div class="fl-sub">Yoga, Kundalini &amp; the Classical Siddhis · The Sanatani Encyclopedia of Mantras, Siddhis &amp; Sacred Remedies</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Siddhi Kosh — Volume 3" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-vol-3" data-label="Siddhi Kosh — Volume 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-vol-4">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="Siddhi Kosh — Volume 4 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Siddhi Kosh</span><span class="tc-vol">Volume 4</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Siddhi Kosh — Volume 4</h4>
+        <div class="fl-sub">Tantra, Shakti &amp; the Ten Mahavidyas · The Sanatani Encyclopedia of Mantras, Siddhis &amp; Sacred Remedies</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Siddhi Kosh — Volume 4" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-vol-4"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-vol-4" data-label="Siddhi Kosh — Volume 4"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-vol-5">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#2E8B6E" role="img" aria-label="Siddhi Kosh — Volume 5 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Siddhi Kosh</span><span class="tc-vol">Volume 5</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Siddhi Kosh — Volume 5</h4>
+        <div class="fl-sub">Siddhis of the World · The Sanatani Encyclopedia of Mantras, Siddhis &amp; Sacred Remedies</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Siddhi Kosh — Volume 5" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-vol-5"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-vol-5" data-label="Siddhi Kosh — Volume 5"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-black-book-of-truth">
+      <a class="book-cover-link" href="#" data-teaser="assets/contribution/black-book-of-truth-teaser.mp4" data-title="The Black Book of Truth" data-status="soon" aria-label="Play teaser for The Black Book of Truth"><img loading="lazy" decoding="async" src="assets/contribution/black-book-of-truth-cover.webp" alt="The Black Book of Truth — Kindle cover"><div class="cover-play-overlay"><div class="cover-play-btn">▶</div></div><div class="cover-teaser-label">Watch teaser</div></a>
+      <div>
+        <h4>The Black Book of Truth</h4>
+        <div class="fl-sub">A novel of real events</div>
+        <div class="by">by Vishal Singh</div>
+        <p class="fl-blurb">A novel of real events: how a music festival in the Bahamas became a global scandal — a story of ambition, money, deception, and the price of believing.</p>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Black Book of Truth" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-black-book-of-truth"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-black-book-of-truth" data-label="The Black Book of Truth"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-1">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 1 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 1</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 1</h4>
+        <div class="fl-sub">Alien Civilisations</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 1" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-1"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-1" data-label="The Extraterrestrial Intelligence Project — Volume 1"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-2">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#2E8B6E" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 2 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 2</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 2</h4>
+        <div class="fl-sub">UFO and UAP Files</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 2" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-2" data-label="The Extraterrestrial Intelligence Project — Volume 2"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-3">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#E0562F" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 3 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 3</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 3</h4>
+        <div class="fl-sub">Alleged Alien Species</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 3" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-3" data-label="The Extraterrestrial Intelligence Project — Volume 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-4">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#4F7AE0" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 4 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 4</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 4</h4>
+        <div class="fl-sub">Government Disclosure</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 4" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-4"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-4" data-label="The Extraterrestrial Intelligence Project — Volume 4"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-5">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#7A4FE0" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 5 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 5</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 5</h4>
+        <div class="fl-sub">Alien Technology</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 5" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-5"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-5" data-label="The Extraterrestrial Intelligence Project — Volume 5"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-6">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 6 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 6</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 6</h4>
+        <div class="fl-sub">Ancient Astronauts</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 6" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-6"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-6" data-label="The Extraterrestrial Intelligence Project — Volume 6"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-7">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#2E8B6E" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 7 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 7</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 7</h4>
+        <div class="fl-sub">Extraterrestrial Biology</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 7" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-7"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-7" data-label="The Extraterrestrial Intelligence Project — Volume 7"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-8">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#E0562F" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 8 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 8</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 8</h4>
+        <div class="fl-sub">Cosmic Civilisations</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 8" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-8"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-8" data-label="The Extraterrestrial Intelligence Project — Volume 8"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-9">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#4F7AE0" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 9 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 9</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 9</h4>
+        <div class="fl-sub">Alien Communication</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 9" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-9"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-9" data-label="The Extraterrestrial Intelligence Project — Volume 9"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-eti-project-vol-10">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#E0562F" role="img" aria-label="The Extraterrestrial Intelligence Project — Volume 10 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Extraterrestrial Intelligence Project</span><span class="tc-vol">Volume 10</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Extraterrestrial Intelligence Project — Volume 10</h4>
+        <div class="fl-sub">Earth Contact Scenarios</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Extraterrestrial Intelligence Project — Volume 10" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-eti-project-vol-10"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-eti-project-vol-10" data-label="The Extraterrestrial Intelligence Project — Volume 10"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-brain-mastery-vol-1">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#2E8B6E" role="img" aria-label="The Ultimate Brain Mastery — Volume 1 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Ultimate Brain Mastery</span><span class="tc-vol">Volume 1</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Ultimate Brain Mastery — Volume 1</h4>
+        <div class="fl-sub">A Complete 100-Chapter Program to Unlock Your Full Brain Potential</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Ultimate Brain Mastery — Volume 1" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-brain-mastery-vol-1"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-brain-mastery-vol-1" data-label="The Ultimate Brain Mastery — Volume 1"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-brain-mastery-vol-2">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#E0562F" role="img" aria-label="The Ultimate Brain Mastery — Volume 2 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Ultimate Brain Mastery</span><span class="tc-vol">Volume 2</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Ultimate Brain Mastery — Volume 2</h4>
+        <div class="fl-sub">Advanced Practices &amp; Proven Strategies for Extraordinary Brain Performance</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Ultimate Brain Mastery — Volume 2" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-brain-mastery-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-brain-mastery-vol-2" data-label="The Ultimate Brain Mastery — Volume 2"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-brain-mastery-vol-3">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#4F7AE0" role="img" aria-label="The Ultimate Brain Mastery — Volume 3 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Ultimate Brain Mastery</span><span class="tc-vol">Volume 3</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Ultimate Brain Mastery — Volume 3</h4>
+        <div class="fl-sub">Transformation Journey — Advanced Cognitive Mastery for a Superhuman Mind: Practice • Transfer • Integration</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Ultimate Brain Mastery — Volume 3" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-brain-mastery-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-brain-mastery-vol-3" data-label="The Ultimate Brain Mastery — Volume 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-brain-mastery-vol-4">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#7A4FE0" role="img" aria-label="The Ultimate Brain Mastery — Volume 4 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Ultimate Brain Mastery</span><span class="tc-vol">Volume 4</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Ultimate Brain Mastery — Volume 4</h4>
+        <div class="fl-sub">The Brain Efficiency Revolution — Master Your Attention. Optimise Your Thinking. Elevate Your Performance.</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Ultimate Brain Mastery — Volume 4" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-brain-mastery-vol-4"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-brain-mastery-vol-4" data-label="The Ultimate Brain Mastery — Volume 4"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-brain-mastery-vol-5">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="The Ultimate Brain Mastery — Volume 5 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">The Ultimate Brain Mastery</span><span class="tc-vol">Volume 5</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>The Ultimate Brain Mastery — Volume 5</h4>
+        <div class="fl-sub">The Mind Reengineering Blueprint — From Cognitive Potential to Real-World Performance</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="The Ultimate Brain Mastery — Volume 5" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-brain-mastery-vol-5"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-brain-mastery-vol-5" data-label="The Ultimate Brain Mastery — Volume 5"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-unlocking-your-mind-vol-1">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#7A4FE0" role="img" aria-label="Unlocking Your Mind — Volume 1 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Unlocking Your Mind</span><span class="tc-vol">Volume 1</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Unlocking Your Mind — Volume 1</h4>
+        <div class="fl-sub">Spark · Ultimate Brain Mastery Guide</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Unlocking Your Mind — Volume 1" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-unlocking-your-mind-vol-1"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-unlocking-your-mind-vol-1" data-label="Unlocking Your Mind — Volume 1"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-unlocking-your-mind-vol-2">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="Unlocking Your Mind — Volume 2 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Unlocking Your Mind</span><span class="tc-vol">Volume 2</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Unlocking Your Mind — Volume 2</h4>
+        <div class="fl-sub">Sharpen · Ultimate Brain Mastery Guide</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Unlocking Your Mind — Volume 2" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-unlocking-your-mind-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-unlocking-your-mind-vol-2" data-label="Unlocking Your Mind — Volume 2"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-unlocking-your-mind-vol-3">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#2E8B6E" role="img" aria-label="Unlocking Your Mind — Volume 3 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Unlocking Your Mind</span><span class="tc-vol">Volume 3</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Unlocking Your Mind — Volume 3</h4>
+        <div class="fl-sub">Calculate · Ultimate Brain Mastery Guide</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Unlocking Your Mind — Volume 3" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-unlocking-your-mind-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-unlocking-your-mind-vol-3" data-label="Unlocking Your Mind — Volume 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-unlocking-your-mind-vol-4">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#E0562F" role="img" aria-label="Unlocking Your Mind — Volume 4 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Unlocking Your Mind</span><span class="tc-vol">Volume 4</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Unlocking Your Mind — Volume 4</h4>
+        <div class="fl-sub">Reason · Ultimate Brain Mastery Guide</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Unlocking Your Mind — Volume 4" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-unlocking-your-mind-vol-4"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-unlocking-your-mind-vol-4" data-label="Unlocking Your Mind — Volume 4"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-unlocking-your-mind-vol-5">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#4F7AE0" role="img" aria-label="Unlocking Your Mind — Volume 5 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Unlocking Your Mind</span><span class="tc-vol">Volume 5</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Unlocking Your Mind — Volume 5</h4>
+        <div class="fl-sub">Master · Ultimate Brain Mastery Guide</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Unlocking Your Mind — Volume 5" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-unlocking-your-mind-vol-5"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-unlocking-your-mind-vol-5" data-label="Unlocking Your Mind — Volume 5"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-unlocking-your-mind-vol-6">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#7A4FE0" role="img" aria-label="Unlocking Your Mind — Volume 6 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Unlocking Your Mind</span><span class="tc-vol">Volume 6</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Unlocking Your Mind — Volume 6</h4>
+        <div class="fl-sub">Create · Ultimate Brain Mastery Guide</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Unlocking Your Mind — Volume 6" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-unlocking-your-mind-vol-6"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-unlocking-your-mind-vol-6" data-label="Unlocking Your Mind — Volume 6"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-unlocking-your-mind-vol-7">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="Unlocking Your Mind — Volume 7 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">Unlocking Your Mind</span><span class="tc-vol">Volume 7</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>Unlocking Your Mind — Volume 7</h4>
+        <div class="fl-sub">Sustain · Ultimate Brain Mastery Guide</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="Unlocking Your Mind — Volume 7" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-unlocking-your-mind-vol-7"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-unlocking-your-mind-vol-7" data-label="Unlocking Your Mind — Volume 7"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-ishwar-ki-atmakatha-vol-1">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#4F7AE0" role="img" aria-label="ईश्वर की आत्मकथा — खंड 1 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">ईश्वर की आत्मकथा</span><span class="tc-vol">खंड 1</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>ईश्वर की आत्मकथा — खंड 1</h4>
+        <div class="fl-sub">मैं ही ईश्वर हूँ — अंतरात्मा और चेतना</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="ईश्वर की आत्मकथा — खंड 1" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-ishwar-ki-atmakatha-vol-1"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-ishwar-ki-atmakatha-vol-1" data-label="ईश्वर की आत्मकथा — खंड 1"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-ishwar-ki-atmakatha-vol-2">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#7A4FE0" role="img" aria-label="ईश्वर की आत्मकथा — खंड 2 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">ईश्वर की आत्मकथा</span><span class="tc-vol">खंड 2</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>ईश्वर की आत्मकथा — खंड 2</h4>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="ईश्वर की आत्मकथा — खंड 2" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-ishwar-ki-atmakatha-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-ishwar-ki-atmakatha-vol-2" data-label="ईश्वर की आत्मकथा — खंड 2"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-ishwar-ki-atmakatha-vol-3">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="ईश्वर की आत्मकथा — खंड 3 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">ईश्वर की आत्मकथा</span><span class="tc-vol">खंड 3</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>ईश्वर की आत्मकथा — खंड 3</h4>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="ईश्वर की आत्मकथा — खंड 3" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-ishwar-ki-atmakatha-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-ishwar-ki-atmakatha-vol-3" data-label="ईश्वर की आत्मकथा — खंड 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-hindi-vol-1">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#7A4FE0" role="img" aria-label="सिद्धि कोश — खंड 1 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">सिद्धि कोश</span><span class="tc-vol">खंड 1</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>सिद्धि कोश — खंड 1</h4>
+        <div class="fl-sub">साधना की नींव और देवताओं की सिद्धियाँ · मंत्र, सिद्धि और पवित्र उपायों का सनातनी विश्वकोश</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="सिद्धि कोश — खंड 1" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-hindi-vol-1"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-hindi-vol-1" data-label="सिद्धि कोश — खंड 1"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-hindi-vol-2">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#D4AF6A" role="img" aria-label="सिद्धि कोश — खंड 2 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">सिद्धि कोश</span><span class="tc-vol">खंड 2</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>सिद्धि कोश — खंड 2</h4>
+        <div class="fl-sub">टोटके और उपाय: कठिन समय के पवित्र उपाय · मंत्र, सिद्धि और पवित्र उपायों का सनातनी विश्वकोश</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="सिद्धि कोश — खंड 2" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-hindi-vol-2"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-hindi-vol-2" data-label="सिद्धि कोश — खंड 2"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-hindi-vol-3">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#2E8B6E" role="img" aria-label="सिद्धि कोश — खंड 3 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">सिद्धि कोश</span><span class="tc-vol">खंड 3</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>सिद्धि कोश — खंड 3</h4>
+        <div class="fl-sub">योग, कुंडलिनी और शास्त्रीय सिद्धियाँ · मंत्र, सिद्धि और पवित्र उपायों का सनातनी विश्वकोश</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="सिद्धि कोश — खंड 3" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-hindi-vol-3"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-hindi-vol-3" data-label="सिद्धि कोश — खंड 3"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-hindi-vol-4">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#E0562F" role="img" aria-label="सिद्धि कोश — खंड 4 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">सिद्धि कोश</span><span class="tc-vol">खंड 4</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>सिद्धि कोश — खंड 4</h4>
+        <div class="fl-sub">तंत्र, शक्ति और दस महाविद्याएँ · मंत्र, सिद्धि और पवित्र उपायों का सनातनी विश्वकोश</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="सिद्धि कोश — खंड 4" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-hindi-vol-4"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-hindi-vol-4" data-label="सिद्धि कोश — खंड 4"></div>
+      </div>
+    </div>
+    <div class="book-row reveal" id="featured-siddhi-kosh-hindi-vol-5">
+      <div class="book-cover-link static"><div class="type-cover" style="--c:#4F7AE0" role="img" aria-label="सिद्धि कोश — खंड 5 — cover"><span class="tc-top">Vishal Singh</span><span class="tc-title">सिद्धि कोश</span><span class="tc-vol">खंड 5</span><span class="tc-rule"></span></div></div>
+      <div>
+        <h4>सिद्धि कोश — खंड 5</h4>
+        <div class="fl-sub">विश्व की सिद्धियाँ · मंत्र, सिद्धि और पवित्र उपायों का सनातनी विश्वकोश</div>
+        <div class="price-row"><span class="price-tag">Coming soon</span><span class="price-note">Get one email the day it launches</span></div>
+        <form class="notify-form fl-notify" data-book="सिद्धि कोश — खंड 5" novalidate><input class="vs-input" type="email" placeholder="you@email.com" aria-label="Your email for launch news" autocomplete="email"><button class="btn btn-accent" type="submit">Notify me</button></form><div class="notice" style="display:none;"></div>
+        <div class="book-actions"><div class="react-btn" data-like="book-siddhi-kosh-hindi-vol-5"></div><div class="react-btn" data-vp-toggle>💬 Share your viewpoint</div></div>
+        <div class="viewpoints" data-comments="book-siddhi-kosh-hindi-vol-5" data-label="सिद्धि कोश — खंड 5"></div>
+      </div>
+    </div>
+    <!-- BOOKS:END -->
+    </div>
   </div>
 </section>
 
-<!-- TEASER MODAL (PiP-style) — I AM GOD -->
-<div class="teaser-modal-backdrop" id="teaserBackdrop">
+<!-- TEASER MODAL (PiP-style) — shared by every book with a teaser -->
+<div class="teaser-modal-backdrop" id="teaserBackdrop" role="dialog" aria-modal="true" aria-label="Book teaser">
   <div class="teaser-modal">
     <div class="teaser-modal-head">
-      <span>I AM GOD — Teaser</span>
+      <span id="teaserTitle">Teaser</span>
       <button class="teaser-close" id="teaserClose" aria-label="Close teaser">✕</button>
     </div>
-    <video id="teaserVideo" src="assets/contribution/i-am-god-teaser.mp4" controls playsinline></video>
-    <div class="teaser-modal-foot">A short teaser for readers deciding whether to pre-book. Full book launches soon — ₹999.</div>
+    <video id="teaserVideo" controls playsinline preload="none"></video>
+    <div class="teaser-modal-foot" id="teaserFoot"></div>
   </div>
 </div>
 
-<!-- TEASER MODAL (PiP-style) — THE DIVINE CODE -->
-<div class="teaser-modal-backdrop" id="teaserBackdrop2">
-  <div class="teaser-modal">
-    <div class="teaser-modal-head">
-      <span>The Divine Code — Teaser</span>
-      <button class="teaser-close" id="teaserClose2" aria-label="Close teaser">✕</button>
-    </div>
-    <video id="teaserVideo2" src="assets/contribution/divine-code-teaser.mp4" controls playsinline></video>
-    <div class="teaser-modal-foot">A short teaser for readers deciding whether to pre-book. Full book launches soon — ₹599.</div>
-  </div>
-</div>
-
+<script src="js/config.js"></script>
+<script src="js/backend.js"></script>
 <script src="js/shell.js"></script>
+
+
 <script>
-  document.querySelectorAll('.react-btn').forEach(btn=>{
-    if(btn.textContent.includes('found this moving')){
-      btn.addEventListener('click', ()=>{
-        const liked = btn.classList.toggle('liked');
-        const n = parseInt(btn.textContent.match(/\d+/)[0], 10);
-        btn.innerHTML = '<span>♡</span> ' + (liked ? n+1 : n-1) + ' found this moving';
-      });
-    }
+(function(){
+  const list = document.getElementById('featuredList');
+  // likes and viewpoints load when a row comes into view (keeps the page fast with 50+ books)
+  const mount = (r) => {
+    const l = r.querySelector('[data-like]'); if (l && !l._m) { l._m = 1; VS.mountLike(l, l.dataset.like, (n, liked) => `<span>${liked ? '♥' : '♡'}</span> ${n} found this moving`); }
+    const c = r.querySelector('[data-comments]'); if (c && !c._vsMounted) VS.mountComments(c, c.dataset.comments, { label: c.dataset.label, placeholder: 'Share your viewpoint on this…' });
+  };
+  const rows = list.querySelectorAll('.book-row');
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { mount(e.target); io.unobserve(e.target); } }), { rootMargin: '400px' }); rows.forEach(r => io.observe(r)); }
+  else rows.forEach(mount);
+  list.querySelectorAll('[data-vp-toggle]').forEach(b => { b.setAttribute('role', 'button'); b.tabIndex = 0; b.addEventListener('click', () => { const r = b.closest('.book-row'); mount(r); const vp = r.querySelector('.viewpoints'); vp.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => { const t = vp.querySelector('textarea'); if (t) t.focus(); }, 350); }); });
+  // one shared teaser player
+  const bd = document.getElementById('teaserBackdrop'), video = document.getElementById('teaserVideo');
+  const closeT = () => { bd.classList.remove('open'); video.pause(); };
+  list.addEventListener('click', e => {
+    const a = e.target.closest('[data-teaser]'); if (!a) return; e.preventDefault();
+    document.getElementById('teaserTitle').textContent = a.dataset.title + ' — Teaser';
+    document.getElementById('teaserFoot').innerHTML = a.dataset.status === 'sale' ? 'Out now — <a href="bookstore.html#book-' + a.closest('.book-row').id.replace('featured-', '') + '" style="color:var(--violet);">see buying options</a>.' : 'Coming soon — tap Notify me to hear the day it launches.';
+    if (video.getAttribute('src') !== a.dataset.teaser) video.setAttribute('src', a.dataset.teaser);
+    bd.classList.add('open'); video.currentTime = 0; video.play().catch(() => {});
   });
-
-  // Teaser modal (PiP-style popup) — reusable per book
-  function initTeaser(ids){
-    const trigger  = document.getElementById(ids.trigger);
-    const backdrop = document.getElementById(ids.backdrop);
-    const closeBtn = document.getElementById(ids.close);
-    const video    = document.getElementById(ids.video);
-    if(!trigger || !backdrop) return;
-
-    function openTeaser(){
-      backdrop.classList.add('open');
-      video.currentTime = 0;
-      video.play().catch(()=>{});
-    }
-    function closeTeaser(){
-      backdrop.classList.remove('open');
-      video.pause();
-    }
-    trigger.addEventListener('click', function(e){ e.preventDefault(); openTeaser(); });
-    closeBtn.addEventListener('click', closeTeaser);
-    backdrop.addEventListener('click', function(e){ if(e.target === backdrop) closeTeaser(); });
-    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeTeaser(); });
-  }
-
-  initTeaser({ trigger:'teaserTrigger',  backdrop:'teaserBackdrop',  close:'teaserClose',  video:'teaserVideo' });
-  initTeaser({ trigger:'teaserTrigger2', backdrop:'teaserBackdrop2', close:'teaserClose2', video:'teaserVideo2' });
-
-  // Pre-book panel toggle + running total — reusable per book
-  function initPrebook(ids, price){
-    const toggle  = document.getElementById(ids.toggle);
-    const panel   = document.getElementById(ids.panel);
-    const qty     = document.getElementById(ids.qty);
-    const total   = document.getElementById(ids.total);
-    const confirm = document.getElementById(ids.confirm);
-    const confirmBox = document.getElementById(ids.confirmBox);
-    if(!toggle || !panel) return;
-
-    toggle.addEventListener('click', function(){
-      panel.classList.toggle('open');
-      if(panel.classList.contains('open')){
-        panel.scrollIntoView({behavior:'smooth', block:'nearest'});
-      }
-    });
-
-    function updateTotal(){
-      const n = parseInt(qty.value, 10) || 1;
-      total.textContent = '₹' + (price * n).toLocaleString('en-IN');
-    }
-    qty.addEventListener('change', updateTotal);
-
-    confirm.addEventListener('click', function(){
-      confirmBox.style.display = 'block';
-      confirmBox.scrollIntoView({behavior:'smooth', block:'nearest'});
-    });
-  }
-
-  initPrebook({ toggle:'prebookToggle',  panel:'prebookPanel',  qty:'pbQty',  total:'pbTotal',  confirm:'pbConfirm',  confirmBox:'pbConfirmBox' }, 999);
-  initPrebook({ toggle:'prebookToggle2', panel:'prebookPanel2', qty:'pbQty2', total:'pbTotal2', confirm:'pbConfirm2', confirmBox:'pbConfirmBox2' }, 599);
+  document.getElementById('teaserClose').addEventListener('click', closeT);
+  bd.addEventListener('click', e => { if (e.target === bd) closeT(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeT(); });
+  // notify forms (coming-soon rows)
+  list.addEventListener('submit', async e => {
+    const f = e.target.closest('.fl-notify'); if (!f) return; e.preventDefault();
+    const input = f.querySelector('input'), box = f.nextElementSibling, btn = f.querySelector('button');
+    const err = VS.validate([{ el: input, req: true, type: 'email', label: 'Email' }]);
+    if (err) { box.style.display = 'block'; box.className = 'notice err'; box.textContent = err; return; }
+    const res = await VS.busy(btn, 'Saving…', () => VS.submitRequest('contact', { email: input.value.trim(), reason: 'Notify me at launch', book: f.dataset.book }, { prefix: 'NTF', subject: 'Launch alert sign-up — ' + f.dataset.book }));
+    box.style.display = 'block'; box.className = 'notice ' + (res.ok ? 'ok' : 'err');
+    box.textContent = res.ok ? "✓ You're on the list — we'll email you the day " + f.dataset.book + ' launches.' : "Couldn't save that just now — please try again.";
+    if (res.ok) input.value = '';
+  });
+})();
 </script>
 </body>
 </html>

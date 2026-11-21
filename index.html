@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vishal Singh — Land, Fire, and Everything Between</title>
+<meta name="description" content="Vishal Singh — founder of V Hospitality, The Pandora City and Forever FYRE, author of An Autobiography of God and The Divine Code. The record of the land, the fire, and everything between.">
+<meta name="theme-color" content="#0B0D12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vishal Singh">
+<meta property="og:title" content="Vishal Singh — Land, Fire, and Everything Between">
+<meta property="og:description" content="Vishal Singh — founder of V Hospitality, The Pandora City and Forever FYRE, author of An Autobiography of God and The Divine Code. The record of the land, the fire, and everything between.">
+<meta property="og:image" content="https://vsofficial.vercel.app/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="css/base.css">
 <style>
   .hero{ position:relative; padding: 90px 0 110px; overflow:hidden; border-bottom:1px solid var(--line); }
@@ -61,6 +74,12 @@
   .lede-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:56px; align-items:center; }
   @media (max-width:860px){ .lede-grid{ grid-template-columns:1fr; } }
   .strip-quote{ font-family: var(--font-display); font-style: italic; font-weight:400; font-size: clamp(24px, 3vw, 36px); line-height:1.4; max-width: 20ch; }
+  .ocard-video{ display:block; }
+  .ocard-video img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.82; transition: transform .5s ease, opacity .3s ease; }
+  .ocard-video::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 45%, rgba(11,13,18,.85)); }
+  .ocard:hover .ocard-video img{ transform:scale(1.05); opacity:1; }
+  .ocard-video .clip-label{ z-index:2; color:var(--ivory); }
+  .ocard-glyph{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:46px; opacity:.85; }
 </style>
 </head>
 <body>
@@ -73,17 +92,17 @@
       <div class="reveal">
         <div class="eyebrow">A Founder's Note</div>
         <h1>Land, ideas, and things worth <em>gathering</em> around.</h1>
-        <p class="hero-sub">I build places people can stand on, write things people can sit with, and host gatherings people remember. This is the record of all three — Pandora City, Forever FYRE, a trilogy in progress, and the work in between.</p>
+        <p class="hero-sub">I build places people can stand on, write things people can sit with, and host gatherings people remember. This is the record of all three — Pandora City, Forever FYRE, a book series in progress, and the work in between.</p>
         <div style="margin-top:36px; display:flex; gap:16px; flex-wrap:wrap;">
           <a href="about.html" class="btn btn-solid">Read the long version</a>
           <a href="talk2me.html" class="btn btn-accent">Talk to me</a>
         </div>
       </div>
       <div class="hero-meta reveal">
-        <div><b>Role</b> — Founder & CEO, V Hospitality Pvt. Ltd.</div>
+        <div><b>Role</b> — Founder & Managing Director, V Hospitality Pvt. Ltd.</div>
         <div><b>Based</b> — Mumbai, Maharashtra</div>
         <div><b>Active ventures</b> — Pandora City, Forever FYRE</div>
-        <div><b>Also writing</b> — AN AUTOBIOGRAPHY OF GOD (trilogy)</div>
+        <div><b>Author</b> — AN AUTOBIOGRAPHY OF GOD, THE DIVINE CODE &amp; 14 published books</div>
       </div>
     </div>
   </div>
@@ -96,16 +115,13 @@
         <div class="eyebrow">The Index</div>
         <h2>Nine rooms. One stage.</h2>
       </div>
-      <p style="max-width:38ch; color:var(--ivory-dim); font-size:14.5px;">Every page below opens with a short clip before the detail. Click a frame to preview.</p>
+      <p style="max-width:38ch; color:var(--ivory-dim); font-size:14.5px;">Nine pages, each a different side of the same story. Pick a door.</p>
     </div>
 
     <div class="card-grid">
 
       <article class="ocard card reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: About Me">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">About Me</div><div class="clip-time">0:48</div>
-        </div>
+        <a class="ocard-video" href="about.html" aria-label="Open About Me"><img src="assets/portrait-jacket.png" alt="" loading="lazy" style="object-position:center 20%;"><div class="clip-label">About Me</div></a>
         <div class="ocard-body">
           <div class="eyebrow">01 · Person</div>
           <h3>About Me</h3>
@@ -115,10 +131,7 @@
       </article>
 
       <article class="ocard card reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Accomplishments">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Accomplishments</div><div class="clip-time">1:12</div>
-        </div>
+        <a class="ocard-video" href="accomplishments.html" aria-label="Open Accomplishments"><img src="assets/celeb-friends.jpg" alt="" loading="lazy" style="object-position:center;"><div class="clip-label">Accomplishments</div></a>
         <div class="ocard-body">
           <div class="eyebrow">02 · Record</div>
           <h3>Accomplishments</h3>
@@ -128,10 +141,7 @@
       </article>
 
       <article class="ocard card emerald reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Pandora City" style="background:radial-gradient(120% 120% at 30% 20%, rgba(46,139,110,0.25), var(--stage));">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Pandora City</div><div class="clip-time">2:03</div>
-        </div>
+        <a class="ocard-video" href="pandora-city.html" aria-label="Open Pandora City" style="background:radial-gradient(120% 120% at 30% 20%, rgba(46,139,110,0.25), var(--stage));"><img src="assets/pandora-city/fruit-farm-final.webp" alt="" loading="lazy" style="object-position:center;"><div class="clip-label">Pandora City</div></a>
         <div class="ocard-body">
           <div class="eyebrow">03 · Venture</div>
           <h3>Pandora City</h3>
@@ -141,10 +151,7 @@
       </article>
 
       <article class="ocard card flame reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Forever FYRE" style="background:radial-gradient(120% 120% at 30% 20%, rgba(224,86,47,0.28), var(--stage));">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Forever FYRE</div><div class="clip-time">1:34</div>
-        </div>
+        <a class="ocard-video" href="forever-fyre.html" aria-label="Open Forever FYRE" style="background:radial-gradient(120% 120% at 30% 20%, rgba(224,86,47,0.28), var(--stage));"><img src="assets/forever-fyre/masterplan-main.webp" alt="" loading="lazy" style="object-position:center;"><div class="clip-label">Forever FYRE</div></a>
         <div class="ocard-body">
           <div class="eyebrow">04 · Venture</div>
           <h3>Forever FYRE</h3>
@@ -154,10 +161,7 @@
       </article>
 
       <article class="ocard card reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Experience and Work">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Experience & Work</div><div class="clip-time">1:20</div>
-        </div>
+        <a class="ocard-video" href="experience.html" aria-label="Open Experience and Work"><img src="assets/experience/vru-events/filmfare-awards.jpg" alt="" loading="lazy" style="object-position:center;"><div class="clip-label">Experience & Work</div></a>
         <div class="ocard-body">
           <div class="eyebrow">05 · Craft</div>
           <h3>Experience & Work</h3>
@@ -167,10 +171,7 @@
       </article>
 
       <article class="ocard card violet reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Talk2Me" style="background:radial-gradient(120% 120% at 30% 20%, rgba(122,79,224,0.28), var(--stage));">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Talk2Me</div><div class="clip-time">0:39</div>
-        </div>
+        <a class="ocard-video" href="talk2me.html" aria-label="Open Talk2Me" style="background:radial-gradient(120% 120% at 30% 20%, rgba(122,79,224,0.28), var(--stage));"><div class="ocard-glyph" aria-hidden="true">💬</div><div class="clip-label">Talk2Me</div></a>
         <div class="ocard-body">
           <div class="eyebrow">06 · Dialogue</div>
           <h3>Talk2Me</h3>
@@ -180,10 +181,7 @@
       </article>
 
       <article class="ocard card reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Gallery">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Gallery</div><div class="clip-time">0:52</div>
-        </div>
+        <a class="ocard-video" href="gallery.html" aria-label="Open Gallery"><img src="assets/athletics/press/adrian-sets-record-vishal-dazzles-1997.jpg" alt="" loading="lazy" style="object-position:center top;"><div class="clip-label">Gallery</div></a>
         <div class="ocard-body">
           <div class="eyebrow">07 · Picture blog</div>
           <h3>Gallery</h3>
@@ -193,10 +191,7 @@
       </article>
 
       <article class="ocard card reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Contribution">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Contribution</div><div class="clip-time">1:05</div>
-        </div>
+        <a class="ocard-video" href="contribution.html" aria-label="Open Contribution"><img src="assets/covers/i-am-god-kindle.webp" alt="" loading="lazy" style="object-position:center 30%;"><div class="clip-label">Contribution</div></a>
         <div class="ocard-body">
           <div class="eyebrow">08 · Reading room</div>
           <h3>Contribution</h3>
@@ -206,10 +201,7 @@
       </article>
 
       <article class="ocard card reveal">
-        <div class="ocard-video" role="button" tabindex="0" aria-label="Preview: Library">
-          <div class="play"><div class="play-btn">▶</div></div>
-          <div class="clip-label">Library</div><div class="clip-time">0:44</div>
-        </div>
+        <a class="ocard-video" href="library.html" aria-label="Open Library"><div class="ocard-glyph" aria-hidden="true">📚</div><div class="clip-label">Library</div></a>
         <div class="ocard-body">
           <div class="eyebrow">09 · Resources</div>
           <h3>Library</h3>
@@ -235,13 +227,5 @@
 </section>
 
 <script src="js/shell.js"></script>
-<script>
-  document.querySelectorAll('.ocard-video').forEach(function(v){
-    v.addEventListener('click', function(){
-      alert('This preview will play the section\'s overview clip once video assets are uploaded. For now, click "Enter the page" to see the full section.');
-    });
-    v.addEventListener('keypress', function(e){ if(e.key==='Enter') v.click(); });
-  });
-</script>
 </body>
 </html>

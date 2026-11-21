@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Owner Dashboard — Vishal Singh</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  .adm-hero{ position:relative; overflow:hidden; padding:64px 0 40px; border-bottom:1px solid var(--line); }
+  .adm-hero .glow{ width:560px; height:560px; background:var(--gold); top:-300px; right:-160px; opacity:.35; }
+  .adm-hero h1{ font-size: clamp(32px,4.4vw,52px); margin-top:14px; }
+  .view{ display:none; } .view.on{ display:block; }
+  .narrow{ max-width:460px; margin:0 auto; }
+  .bar{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:22px; }
+  .bar .btn{ padding:9px 16px; font-size:12px; }
+  .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+  .tabs button, .chips button{ background:none; border:1px solid var(--line); color:var(--ivory-dim); font:600 12.5px var(--font-body); padding:9px 16px; border-radius:999px; cursor:pointer; }
+  .tabs button.on, .chips button.on{ background:var(--gold); color:var(--stage); border-color:var(--gold); }
+  .chips{ display:flex; gap:6px; flex-wrap:wrap; }
+  .chips button{ padding:6px 12px; font-size:11.5px; }
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+  @media (max-width:760px){ .stats{ grid-template-columns:1fr 1fr; } }
+  .stat{ border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--stage-2); }
+  .stat b{ font-family:var(--font-display); font-size:28px; color:var(--gold); display:block; }
+  .stat span{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ivory-dim); }
+  .req{ border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:var(--stage-2); margin-bottom:12px; }
+  .req.new{ border-left:3px solid var(--flame); }
+  .req-head{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:13px; }
+  .req-head .type{ font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:2px 9px; }
+  .req-head .when{ color:var(--ivory-dim); font-size:12px; }
+  .req-head select{ margin-left:auto; background:var(--stage-3); color:var(--ivory); border:1px solid var(--line); border-radius:8px; padding:6px 10px; font-size:12px; }
+  .req dl{ display:grid; grid-template-columns:140px 1fr; gap:4px 14px; margin:12px 0 0; font-size:13px; }
+  @media (max-width:560px){ .req dl{ grid-template-columns:1fr; } .req dt{ margin-top:6px; } }
+  .req dt{ color:var(--ivory-dim); text-transform:capitalize; }
+  .req dd{ margin:0; color:var(--ivory); white-space:pre-wrap; word-break:break-word; }
+  .req .acts{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .req .acts a{ font-size:12px; font-weight:700; color:var(--gold); }
+  .empty{ color:var(--ivory-dim); font-size:14px; padding:30px 0; text-align:center; }
+</style>
+</head>
+<body>
+
+<section class="adm-hero">
+  <div class="glow"></div>
+  <div class="shell">
+    <div class="eyebrow">Owner only</div>
+    <h1>Owner Dashboard</h1>
+    <p style="max-width:62ch; margin-top:14px; color:var(--ivory-dim);">Bookings, pass reservations, pre-orders, messages and comments from the website — in one place.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:56px;">
+  <div class="shell">
+
+    <div class="view on" id="vLoad"><p class="empty">Loading…</p></div>
+
+    <div class="view" id="vOff">
+      <div class="card narrow">
+        <h3 style="font-size:22px;">Dashboard not switched on yet</h3>
+        <p style="color:var(--ivory-dim); font-size:14px; margin-top:12px;">Every booking, pass reservation, pre-order and message from the site is being emailed to you now. To also see them here — and to switch on Talk2Me accounts, comments and likes — connect the free Firebase project described in <b>SETUP-BACKEND.md</b> and paste its settings into <b>js/config.js</b>.</p>
+        <p style="margin-top:14px;"><a class="btn btn-accent" href="admin-orders.html">Open book orders →</a></p>
+      </div>
+    </div>
+
+    <div class="view" id="vSignIn">
+      <div class="card narrow">
+        <h3 style="font-size:22px;">Owner sign in</h3>
+        <form id="sForm" novalidate style="margin-top:18px;">
+          <div class="vs-field"><label for="sEmail">Email</label><input id="sEmail" type="email" autocomplete="email"></div>
+          <div class="vs-field"><label for="sPass">Password</label><input id="sPass" type="password" autocomplete="current-password"></div>
+          <button class="btn btn-accent" style="width:100%; justify-content:center;" id="sBtn" type="submit">Sign in</button>
+          <div id="sMsg" class="notice" style="display:none;"></div>
+        </form>
+        <p style="margin-top:14px;"><a class="btn" href="admin-orders.html">Book orders →</a></p>
+        <p style="font-size:12.5px; color:var(--ivory-dim); margin-top:16px;">First time? Create your account on the <a href="talk2me.html#room" style="color:var(--gold);">Talk2Me page</a> using your owner email, confirm it from your inbox, then sign in here.</p>
+      </div>
+    </div>
+
+    <div class="view" id="vDenied">
+      <div class="card narrow">
+        <h3 style="font-size:22px;">No owner access</h3>
+        <p style="color:var(--ivory-dim); font-size:14px; margin-top:12px;" id="deniedText"></p>
+        <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;"><button class="btn" id="recheckBtn" type="button">I've confirmed my email</button><button class="btn" data-signout type="button">Sign out</button></div>
+      </div>
+    </div>
+
+    <div class="view" id="vDash">
+      <div class="bar">
+        <div style="font-size:13px; color:var(--ivory-dim);">Signed in as <b id="who" style="color:var(--ivory);"></b></div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;"><a class="btn" href="admin-orders.html">Book orders</a><a class="btn" href="talk2me.html#room">Talk2Me inbox <span id="unreadDm"></span></a><button class="btn" id="csvBtn" type="button">Export CSV</button><button class="btn" data-signout type="button">Sign out</button></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="tabs"><button class="on" data-tab="req" type="button">Requests</button><button data-tab="cm" type="button">Comments</button></div>
+
+      <div id="tabReq">
+        <div class="bar">
+          <div class="chips" id="typeChips"></div>
+          <div class="chips" id="statusChips"></div>
+        </div>
+        <div id="reqList"></div>
+      </div>
+      <div id="tabCm" hidden><div id="cmList"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<script src="js/config.js"></script>
+<script src="js/backend.js"></script>
+<script src="js/shell.js"></script>
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id), esc = VS.esc;
+  const show = (id) => document.querySelectorAll('.view').forEach(v => v.classList.toggle('on', v.id === id));
+  const TYPES = { all:'All', stay:'Stays', passes:'Passes', prebook:'Books', contact:'Messages', payment:'Payments', talk2me:'Talk2Me', comment:'Comments' };
+  const STATUSES = ['new','confirmed','paid','done','cancelled'];
+  let F, rows = [], typeF = 'all', statusF = 'open', unsubs = [];
+
+  if (!VS.fbOn()) { show('vOff'); return; }
+  VS.fb().then(f => {
+    if (!f) { show('vOff'); return; }
+    F = f;
+    F.m.onAuthStateChanged(F.auth, route);
+  });
+  function route(u){
+    unsubs.forEach(x => x()); unsubs = [];
+    if (!u || u.isAnonymous) return show('vSignIn');
+    if (!VS.isAdmin(u)) {
+      $('deniedText').textContent = !u.emailVerified ? 'Please confirm your email address first (check your inbox), then tap the button below.' : `${u.email} isn't listed as an owner. Owners are set in js/config.js and firestore.rules.`;
+      return show('vDenied');
+    }
+    $('who').textContent = u.email; show('vDash'); start();
+  }
+  $('sForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = VS.validate([{ el:$('sEmail'), req:true, type:'email', label:'Email' }, { el:$('sPass'), req:true, label:'Password' }]);
+    const box = $('sMsg');
+    if (err) { box.style.display='block'; box.className='notice err'; box.textContent = err; return; }
+    await VS.busy($('sBtn'), 'Signing in…', async () => {
+      try { await F.m.signInWithEmailAndPassword(F.auth, $('sEmail').value.trim(), $('sPass').value); }
+      catch (er) { box.style.display='block'; box.className='notice err'; box.textContent = 'Email or password is incorrect.'; }
+    });
+  });
+  document.querySelectorAll('[data-signout]').forEach(b => b.addEventListener('click', () => F.m.signOut(F.auth)));
+  $('recheckBtn').addEventListener('click', async () => { await F.m.reload(F.auth.currentUser); await F.auth.currentUser.getIdToken(true); route(F.auth.currentUser); });
+
+  function start(){
+    unsubs.push(F.m.onSnapshot(F.m.query(F.m.collection(F.db,'requests'), F.m.orderBy('at','desc'), F.m.limit(500)), s => {
+      rows = s.docs.map(d => Object.assign({ id:d.id }, d.data())); renderStats(); renderReqs();
+    }, e => { console.warn(e); $('reqList').innerHTML = '<p class="empty">Couldn\'t load requests — check your owner email in firestore.rules.</p>'; }));
+    unsubs.push(F.m.onSnapshot(F.m.query(F.m.collection(F.db,'comments'), F.m.orderBy('at','desc'), F.m.limit(150)), s => renderCms(s.docs.map(d => Object.assign({ id:d.id }, d.data()))), e => console.warn(e)));
+    unsubs.push(F.m.onSnapshot(F.m.query(F.m.collection(F.db,'threads'), F.m.where('type','==','dm')), s => {
+      const n = s.docs.filter(d => d.data().unreadAdmin).length; $('unreadDm').textContent = n ? `(${n} new)` : '';
+    }, () => {}));
+  }
+  function renderStats(){
+    const c = (t) => rows.filter(r => r.type === t && r.status !== 'cancelled').length;
+    $('stats').innerHTML = [['New',''+rows.filter(r => r.status === 'new').length],['Stay requests',c('stay')],['Pass reservations',c('passes')],['Book pre-orders',c('prebook')]].map(([k,v]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join('');
+  }
+  $('typeChips').innerHTML = Object.entries(TYPES).map(([k,v]) => `<button type="button" data-t="${k}" class="${k==='all'?'on':''}">${v}</button>`).join('');
+  $('statusChips').innerHTML = [['open','Open'],['all','All statuses']].concat(STATUSES.map(s => [s, s[0].toUpperCase()+s.slice(1)])).map(([k,v]) => `<button type="button" data-s="${k}" class="${k==='open'?'on':''}">${v}</button>`).join('');
+  $('typeChips').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; typeF = b.dataset.t; $('typeChips').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); renderReqs(); });
+  $('statusChips').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; statusF = b.dataset.s; $('statusChips').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); renderReqs(); });
+  function filtered(){ return rows.filter(r => (typeF === 'all' || r.type === typeF) && (statusF === 'all' || (statusF === 'open' ? !['done','cancelled'].includes(r.status) : r.status === statusF))); }
+  function renderReqs(){
+    const list = filtered();
+    $('reqList').innerHTML = list.length ? list.map(r => {
+      const d = r.data || {};
+      const when = new Date(VS.ms(r.at)).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'numeric', minute:'2-digit' });
+      const phone = (d.phone || '').replace(/\D/g,''); const wa = phone ? 'https://wa.me/' + (phone.length === 10 ? '91' + phone : phone) : '';
+      return `<div class="req ${r.status === 'new' ? 'new' : ''}">
+        <div class="req-head"><span class="type">${esc(TYPES[r.type] || r.type)}</span><b>${esc(d.name || '—')}</b><span class="ref-code">${esc(r.ref || '')}</span><span class="when">${when}</span>
+          <select data-id="${r.id}" aria-label="Status">${STATUSES.map(s => `<option ${s === r.status ? 'selected' : ''}>${s}</option>`).join('')}</select></div>
+        <dl>${Object.entries(d).filter(([k]) => k !== 'name').map(([k,v]) => `<dt>${esc(k.replace(/_/g,' '))}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+        <div class="acts">${d.email ? `<a href="mailto:${esc(d.email)}?subject=${encodeURIComponent('Re: ' + (r.ref || 'your enquiry'))}">Reply by email</a>` : ''}${wa ? `<a href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ''}${d.phone ? `<a href="tel:${esc(d.phone)}">Call</a>` : ''}</div>
+      </div>`; }).join('') : '<p class="empty">Nothing here yet.</p>';
+  }
+  $('reqList').addEventListener('change', async e => {
+    const s = e.target.closest('select[data-id]'); if (!s) return;
+    try { await F.m.updateDoc(F.m.doc(F.db,'requests', s.dataset.id), { status: s.value }); VS.toast('Status updated'); } catch (er) { VS.toast('Couldn\'t update status'); }
+  });
+  function renderCms(cms){
+    $('cmList').innerHTML = cms.length ? cms.map(c => `<div class="req"><div class="req-head"><span class="type">${esc(c.page || '')}</span><b>${esc(c.name)}</b>${c.byOwner ? '<span class="cm-badge">Author</span>' : ''}<span class="when">${VS.timeAgo(c.at)} · ${esc(c.thread)}</span>
+      <button class="btn" style="margin-left:auto; padding:6px 12px; font-size:11.5px;" data-del="${c.id}" type="button">Delete</button></div><dl><dt>Comment</dt><dd>${esc(c.text)}</dd></dl></div>`).join('') : '<p class="empty">No comments yet.</p>';
+  }
+  $('cmList').addEventListener('click', async e => {
+    const b = e.target.closest('[data-del]'); if (!b) return;
+    if (!b.dataset.armed) { b.dataset.armed = 1; b.textContent = 'Confirm delete'; return; }
+    try { await F.m.deleteDoc(F.m.doc(F.db,'comments', b.dataset.del)); VS.toast('Comment deleted'); } catch (er) { VS.toast('Couldn\'t delete'); }
+  });
+  document.querySelector('.tabs').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x === b));
+    $('tabReq').hidden = b.dataset.tab !== 'req'; $('tabCm').hidden = b.dataset.tab !== 'cm';
+  });
+  $('csvBtn').addEventListener('click', () => {
+    const list = filtered(); const keys = [...new Set(list.flatMap(r => Object.keys(r.data || {})))];
+    const cell = (v) => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"';
+    const csv = [['date','type','ref','status'].concat(keys).map(cell).join(',')].concat(list.map(r => [new Date(VS.ms(r.at)).toISOString(), r.type, r.ref, r.status].concat(keys.map(k => (r.data || {})[k])).map(cell).join(','))).join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv' })); a.download = 'website-requests.csv'; a.click();
+  });
+})();
+</script>
+</body>
+</html>

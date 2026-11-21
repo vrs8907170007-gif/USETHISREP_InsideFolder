@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pandora City — Vishal Singh</title>
+<meta name="description" content="The Pandora City — a 65-acre agri-tourism destination in Awandhe, Wada, Palghar with five sub-farms, jungle stays and an adventure park. Request a stay.">
+<meta name="theme-color" content="#0B0D12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vishal Singh">
+<meta property="og:title" content="Pandora City — Vishal Singh">
+<meta property="og:description" content="The Pandora City — a 65-acre agri-tourism destination in Awandhe, Wada, Palghar with five sub-farms, jungle stays and an adventure park. Request a stay.">
+<meta property="og:image" content="https://vsofficial.vercel.app/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="css/base.css">
 <style>
   body{ --accent: var(--emerald); --accent-glow: var(--emerald-glow); }
@@ -133,7 +146,7 @@
 
       <!-- FRUIT FARM -->
       <div class="subfarm-panel active" id="sf-fruit">
-        <div class="subfarm-layout"><img src="assets/pandora-city/fruit-farm-final.png" alt="Fruit Farm Retreat master layout"></div>
+        <div class="subfarm-layout"><img loading="lazy" decoding="async" src="assets/pandora-city/fruit-farm-final.webp" alt="Fruit Farm Retreat master layout"></div>
         <div class="stat-mini-row">
           <div class="stat-mini"><b>20</b><span>Acres</span></div>
           <div class="stat-mini"><b>2,000+</b><span>Fruit Trees</span></div>
@@ -146,7 +159,7 @@
 
       <!-- GOAT FARM -->
       <div class="subfarm-panel" id="sf-goat">
-        <div class="subfarm-layout"><img src="assets/pandora-city/goat-farm.png" alt="Goat Farm master layout"></div>
+        <div class="subfarm-layout"><img loading="lazy" decoding="async" src="assets/pandora-city/goat-farm.webp" alt="Goat Farm master layout"></div>
         <div class="stat-mini-row">
           <div class="stat-mini"><b>8</b><span>Acres</span></div>
           <div class="stat-mini"><b>2,000</b><span>Goat Capacity</span></div>
@@ -161,7 +174,7 @@
 
       <!-- DAIRY FARM -->
       <div class="subfarm-panel" id="sf-dairy">
-        <div class="subfarm-layout"><img src="assets/pandora-city/dairy-farm.png" alt="Dairy Farm master layout"></div>
+        <div class="subfarm-layout"><img loading="lazy" decoding="async" src="assets/pandora-city/dairy-farm.webp" alt="Dairy Farm master layout"></div>
         <div class="stat-mini-row">
           <div class="stat-mini"><b>5</b><span>Acres</span></div>
           <div class="stat-mini"><b>50</b><span>Cows + Buffaloes (25 each)</span></div>
@@ -175,7 +188,7 @@
 
       <!-- ADVENTURE PARK -->
       <div class="subfarm-panel" id="sf-adventure">
-        <div class="subfarm-layout"><img src="assets/pandora-city/adventure-park.png" alt="Adventure Park master layout"></div>
+        <div class="subfarm-layout"><img loading="lazy" decoding="async" src="assets/pandora-city/adventure-park.webp" alt="Adventure Park master layout"></div>
         <div class="stat-mini-row">
           <div class="stat-mini"><b>8</b><span>Acres</span></div>
           <div class="stat-mini"><b>40+</b><span>Outdoor &amp; Indoor Activities</span></div>
@@ -189,7 +202,7 @@
 
       <!-- FISH FARM -->
       <div class="subfarm-panel" id="sf-fish">
-        <div class="subfarm-layout"><img src="assets/pandora-city/fish-farm.png" alt="Fish Farm Retreat master layout"></div>
+        <div class="subfarm-layout"><img loading="lazy" decoding="async" src="assets/pandora-city/fish-farm.webp" alt="Fish Farm Retreat master layout"></div>
         <div class="stat-mini-row">
           <div class="stat-mini"><b>4</b><span>Acres of Water</span></div>
           <div class="stat-mini"><b>90,000</b><span>Fish Stocked</span></div>
@@ -205,7 +218,7 @@
 
     <!-- BOOK -->
     <div class="tab-panel" id="tab-book">
-      <div class="field-note">Booking — prototype flow, based on the Fruit Farm Retreat's stay options. No live payment is processed on this demo.</div>
+      <div class="field-note">Request a stay at the Fruit Farm Retreat. Pandora City is opening in phases, so every request is confirmed personally — we'll check your dates and reply within 24 hours.</div>
       <div class="grid-2" style="margin-top:28px; align-items:start;">
         <div>
           <h3 style="font-size:22px; margin-bottom:18px;">Choose your stay</h3>
@@ -225,32 +238,34 @@
 
         <div class="booking-box">
           <div class="form-row">
-            <div><label>Check-in</label><input type="date" id="pcCheckin"></div>
-            <div><label>Check-out</label><input type="date" id="pcCheckout"></div>
+            <div><label for="pcCheckin">Check-in</label><input type="date" id="pcCheckin"></div>
+            <div><label for="pcCheckout">Check-out</label><input type="date" id="pcCheckout"></div>
           </div>
           <div class="form-row">
-            <div><label>Guests</label><select><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4+ guests</option></select></div>
-            <div><label>Full name</label><input type="text" placeholder="Your name"></div>
+            <div><label for="pcGuests">Guests</label><select id="pcGuests"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4 guests</option><option>5–7 guests</option><option>8–20 guests</option></select></div>
+            <div><label for="pcName">Full name</label><input type="text" id="pcName" placeholder="Your name" autocomplete="name"></div>
           </div>
           <div class="form-row">
-            <div><label>Email</label><input type="email" placeholder="you@email.com"></div>
-            <div><label>Phone</label><input type="tel" placeholder="+91"></div>
+            <div><label for="pcEmail">Email</label><input type="email" id="pcEmail" placeholder="you@email.com" autocomplete="email"></div>
+            <div><label for="pcPhone">Phone</label><input type="tel" id="pcPhone" placeholder="+91" autocomplete="tel"></div>
           </div>
 
           <label style="margin-top:8px;">Payment method</label>
           <div class="pay-methods">
-            <div class="pay-chip selected">UPI</div>
-            <div class="pay-chip">Card</div>
-            <div class="pay-chip">Net Banking</div>
-            <div class="pay-chip">Pay at property</div>
+            <div class="pay-chip selected" data-method="upi">UPI</div>
+            <div class="pay-chip" data-method="card">Card</div>
+            <div class="pay-chip" data-method="netbanking">Net Banking</div>
+            <div class="pay-chip" data-method="property">Pay at property</div>
           </div>
+          <div style="margin-top:14px;"><label for="pcNotes">Special requests (optional)</label><textarea id="pcNotes" placeholder="Arrival time, dietary needs, occasion…" style="min-height:70px;"></textarea></div>
+          <input class="hp-field" id="pcHoney" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <div class="total-row"><span>Nightly rate</span><span id="pcRate">₹5,000</span></div>
           <div class="total-row"><span>Nights</span><span id="pcNights">1</span></div>
           <div class="total-row" style="font-weight:700;"><span>Estimated total</span><span id="pcTotal">₹5,000</span></div>
 
-          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pcConfirm">Confirm booking (demo)</button>
-          <div class="confirm-box" id="pcConfirmBox">✓ Booking request captured. In production this step hands off to a live payment gateway and sends a confirmation email/SMS.</div>
+          <button class="btn btn-accent" style="width:100%; justify-content:center; margin-top:22px;" id="pcConfirm" type="button">Request this stay</button>
+          <div class="notice" id="pcResult" style="display:none;"></div>
         </div>
       </div>
     </div>
@@ -262,38 +277,28 @@
       <div class="post">
         <div class="post-meta">12 Aug 2026 · Site Update</div>
         <h3>First orchard rows are in the ground</h3>
-        <div class="post-img">[ photo — orchard planting day ]</div>
+        <div class="post-img"><img src="assets/pandora-city/fruit-farm-final.webp" loading="lazy" alt="Fruit Farm Retreat layout — the orchard belt" style="width:100%; height:100%; object-fit:cover; border-radius:14px;"></div>
         <p style="color:var(--ivory-dim);">A short note on the first planting phase, what we chose to put in first, and why the orchard belt sets the pace for everything downstream of it.</p>
 
-        <div style="margin-top:26px;">
-          <div class="comment">
-            <div class="avatar">RA</div>
-            <div class="comment-body"><b>Riya A.</b><span class="when">2 days ago</span><p>This is exciting to watch unfold — will there be a volunteer planting day open to visitors?</p></div>
-          </div>
-          <div class="comment">
-            <div class="avatar">VS</div>
-            <div class="comment-body"><b>Vishal Singh</b><span class="when">1 day ago</span><p>Yes — planning one for the next phase. Will post dates here first.</p></div>
-          </div>
-        </div>
-
-        <div class="comment-form" style="margin-top:22px;">
-          <label>Leave a comment</label>
-          <textarea placeholder="Share your thoughts..."></textarea>
-          <button class="btn btn-accent">Post comment</button>
-        </div>
+        <div class="cm-title">Comments</div>
+        <div data-comments="pandora-blog-first-orchard-rows" data-label="Pandora City blog: First orchard rows"></div>
       </div>
 
       <div class="post">
         <div class="post-meta">3 Jul 2026 · Milestone</div>
         <h3>Survey complete — 65 acres mapped</h3>
-        <div class="post-img">[ photo — land survey ]</div>
+        <div class="post-img"><img src="assets/pandora-city/adventure-park.webp" loading="lazy" alt="The Pandora City sub-farm layout" style="width:100%; height:100%; object-fit:cover; border-radius:14px;"></div>
         <p style="color:var(--ivory-dim);">The full survey is done. Here's how the land breaks down into five sub-farms, each with its own layout and revenue model.</p>
+        <div class="cm-title">Comments</div>
+        <div data-comments="pandora-blog-survey-complete" data-label="Pandora City blog: Survey complete"></div>
       </div>
     </div>
 
   </div>
 </section>
 
+<script src="js/config.js"></script>
+<script src="js/backend.js"></script>
 <script src="js/shell.js"></script>
 <script>
   document.querySelectorAll('.tab-btn').forEach(btn=>{
@@ -345,9 +350,29 @@
   }
   document.getElementById('pcCheckin').addEventListener('change', updatePcTotal);
   document.getElementById('pcCheckout').addEventListener('change', updatePcTotal);
-  document.getElementById('pcConfirm').addEventListener('click', ()=>{
-    document.getElementById('pcConfirmBox').style.display = 'block';
-  });
+  // ---- live booking ----
+  (function(){
+    const $ = (id) => document.getElementById(id);
+    const today = new Date(); const iso = (d) => new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+    $('pcCheckin').min = iso(today);
+    $('pcCheckin').addEventListener('change', () => { const ci = new Date($('pcCheckin').value); if (!isNaN(ci)) { const n = new Date(ci); n.setDate(n.getDate()+1); $('pcCheckout').min = iso(n); if (!$('pcCheckout').value || $('pcCheckout').value <= $('pcCheckin').value) { $('pcCheckout').value = iso(n); } updatePcTotal(); } });
+    document.querySelectorAll('.stay-option, .pay-chip').forEach(el => { el.setAttribute('role','button'); el.tabIndex = 0; el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } }); });
+    VS.prefill({ name: $('pcName'), email: $('pcEmail'), phone: $('pcPhone') });
+    if (location.hash === '#book') document.querySelector('.tab-btn[data-tab="book"]').click();
+    $('pcConfirm').addEventListener('click', async () => {
+      const box = $('pcResult');
+      let err = VS.validate([{ el: $('pcCheckin'), req: true, label: 'Check-in date' }, { el: $('pcCheckout'), req: true, label: 'Check-out date' }, { el: $('pcName'), req: true, label: 'Your name' }, { el: $('pcEmail'), req: true, type: 'email', label: 'Email' }, { el: $('pcPhone'), req: true, type: 'phone', label: 'Phone' }]);
+      if (!err && $('pcCheckout').value <= $('pcCheckin').value) { err = 'Check-out must be after check-in.'; $('pcCheckout').classList.add('is-invalid'); }
+      if (!err && $('pcCheckin').value < iso(today)) { err = 'Check-in can\'t be in the past.'; $('pcCheckin').classList.add('is-invalid'); }
+      if (err) { box.style.display = 'block'; box.className = 'notice err'; box.textContent = err; return; }
+      const stay = document.querySelector('.stay-option.selected'); const pay = document.querySelector('.pay-chip.selected');
+      const rate = parseInt(stay.dataset.price, 10), nights = nightsBetween(), total = rate * nights;
+      const f = { name: $('pcName').value.trim(), email: $('pcEmail').value.trim(), phone: $('pcPhone').value.trim(), stay: stay.dataset.name, check_in: $('pcCheckin').value, check_out: $('pcCheckout').value, nights, guests: $('pcGuests').value, rate: VS.inr(rate) + ' / night', total: VS.inr(total), payment_method: pay.textContent.trim(), notes: $('pcNotes').value.trim(), _honey: $('pcHoney').value };
+      const res = await VS.busy($('pcConfirm'), 'Sending request…', () => VS.submitRequest('stay', f, { prefix: 'PC', subject: `Stay request — ${f.stay}, ${f.check_in} → ${f.check_out} (${f.total})`, autoresponse: `Thank you for your stay request at The Pandora City (${f.stay}, ${f.check_in} to ${f.check_out}). We'll confirm availability within 24 hours. — Team Pandora City` }));
+      VS.showResult(box, res, { okTitle: 'Stay requested', okText: `${f.stay}, ${nights} night${nights > 1 ? 's' : ''} — ${f.total}. We'll confirm your dates within 24 hours.`, summary: `Pandora City stay request\n${f.stay}\n${f.check_in} → ${f.check_out} (${nights} nights, ${f.guests})\nTotal: ${f.total}\nName: ${f.name}\nPhone: ${f.phone}\nEmail: ${f.email}`, subject: 'Pandora City stay request', payment: { kind: 'stay', amount: total, method: pay.dataset.method, name: f.name, email: f.email, phone: f.phone } });
+    });
+    document.querySelectorAll('[data-comments]').forEach(el => VS.mountComments(el, el.dataset.comments, { label: el.dataset.label }));
+  })();
 </script>
 </body>
 </html>
