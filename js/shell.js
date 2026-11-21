@@ -1,15 +1,15 @@
-// Shared header/footer/ledger-strip injector so every page stays in sync.
+// Shared header/footer injector so every page stays in sync.
+// Edit NAV and SOCIAL_LINKS here only.
+document.documentElement.classList.add("js");
 (function(){
-  const NAV_ITEMS = [
+  const NAV = [
     ["index.html", "Home"],
-    ["about.html", "About Me"],
-    ["accomplishments.html", "Accomplishments"],
-    ["pandora-city.html", "Pandora City"],
-    ["forever-fyre.html", "Forever FYRE"],
-    ["experience.html", "Experience & Work"],
+    ["Story", [["about.html", "About Me"], ["accomplishments.html", "Accomplishments"], ["experience.html", "Experience & Work"]]],
+    ["Ventures", [["pandora-city.html", "Pandora City"], ["forever-fyre.html", "Forever FYRE"]]],
     ["talk2me.html", "Talk2Me"],
     ["gallery.html", "Gallery"],
     ["contribution.html", "Contribution"],
+    ["bookstore.html", "Bookstore"],
     ["library.html", "Library"],
     ["contact.html", "Contact"],
   ];
@@ -19,27 +19,62 @@
     return p === "" ? "index.html" : p;
   }
 
+  function navLink(href, label, cur){
+    return `<a href="${href}" class="${href === cur ? "active" : ""}"${href === cur ? ' aria-current="page"' : ""}>${label}</a>`;
+  }
+
   function buildHeader(){
     const cur = currentFile();
     const header = document.createElement("header");
     header.className = "site-header";
+    const items = NAV.map(([a, b]) => {
+      if (Array.isArray(b)) {
+        const active = b.some(([href]) => href === cur);
+        return `<div class="nav-group${active ? " has-active" : ""}">
+          <button type="button" aria-expanded="false">${a}</button>
+          <div class="nav-menu">${b.map(([href, label]) => navLink(href, label, cur)).join("")}</div>
+        </div>`;
+      }
+      return navLink(a, b, cur);
+    }).join("");
     header.innerHTML = `
       <div class="shell">
         <a href="index.html" class="brand">Vishal Singh <span>/ journal</span></a>
-        <nav class="main-nav" id="mainNav">
-          ${NAV_ITEMS.map(([href, label]) =>
-            `<a href="${href}" class="${href === cur ? "active" : ""}">${label}</a>`
-          ).join("")}
-        </nav>
+        <nav class="main-nav" id="mainNav" aria-label="Main">${items}</nav>
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav">Menu</button>
       </div>`;
     document.body.prepend(header);
+
+    // cart badge (shows only when the visitor has books in their cart)
+    const paintCart = () => {
+      let n = 0; try { n = (JSON.parse(localStorage.getItem("vs_cart") || "[]") || []).reduce((s, x) => s + ((x && x.qty) || 1), 0); } catch (e) {}
+      let a = header.querySelector(".nav-cart");
+      if (!n) { if (a) a.remove(); return; }
+      if (!a) { a = document.createElement("a"); a.href = "checkout.html"; a.className = "nav-cart"; header.querySelector("#mainNav").appendChild(a); }
+      a.innerHTML = 'Cart <b>' + n + '</b>';
+      if (cur === "checkout.html") a.classList.add("active");
+    };
+    paintCart();
+    document.addEventListener("vs-cart", paintCart);
+    window.addEventListener("storage", (e) => { if (e.key === "vs_cart") paintCart(); });
 
     document.getElementById("navToggle").addEventListener("click", function(){
       const nav = document.getElementById("mainNav");
       const open = nav.classList.toggle("open");
       this.setAttribute("aria-expanded", open ? "true" : "false");
+      this.textContent = open ? "Close" : "Menu";
     });
+    header.querySelectorAll(".nav-group > button").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const g = btn.parentElement;
+        const open = !g.classList.contains("open");
+        header.querySelectorAll(".nav-group").forEach(x => { x.classList.remove("open"); x.firstElementChild.setAttribute("aria-expanded","false"); });
+        if (open) { g.classList.add("open"); btn.setAttribute("aria-expanded","true"); }
+      });
+    });
+    document.addEventListener("click", () => header.querySelectorAll(".nav-group.open").forEach(x => x.classList.remove("open")));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") header.querySelectorAll(".nav-group.open").forEach(x => x.classList.remove("open")); });
   }
 
   function buildVentureDock(){
@@ -60,6 +95,7 @@
   function initScrollReveal(){
     const els = document.querySelectorAll(".reveal");
     if (!els.length) return;
+    if (!("IntersectionObserver" in window)) { els.forEach(el => el.classList.add("in")); return; }
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); });
     }, { threshold: 0.12 });
@@ -104,12 +140,19 @@
     footer.className = "site-footer";
     footer.innerHTML = `
       <div class="shell">
-        <div>© ${new Date().getFullYear()} Vishal Singh · V Hospitality Pvt. Ltd. — Prototype site for review.</div>
+        <div>© ${new Date().getFullYear()} Vishal Singh · V Hospitality Pvt. Ltd.</div>
         <div class="footer-links">
           <a href="contact.html">Contact</a>
           <a href="library.html">Library</a>
           <a href="gallery.html">Gallery</a>
           <a href="talk2me.html">Talk2Me</a>
+          <a href="admin.html" rel="nofollow">Owner login</a>
+        </div>
+        <div class="footer-links footer-legal">
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="refund-policy.html">Refunds &amp; Cancellations</a>
+          <a href="shipping-policy.html">Shipping &amp; Delivery</a>
         </div>
         <div class="social-row">
           ${SOCIAL_LINKS.map(s => `
