@@ -34,7 +34,7 @@ Go to **Site configuration → Environment variables** and add:
 | `RAZORPAY_WEBHOOK_SECRET` | A long random password you make up (also used in Step 4) |
 | `ADMIN_PASSWORD` | Your owner password for the Book Orders screen (12+ characters) |
 | `SITE_URL` | Your full address, e.g. `https://vishalsingh.in` |
-| `OWNER_EMAIL` | `p.svishal@gmail.com` (where order alerts go) |
+| `OWNER_EMAIL` | `vsnonchalant@gmail.com` (where order alerts go) |
 | `BREVO_API_KEY`, `EMAIL_FROM` | *Optional* — see Step 5 |
 
 Then go to **Deploys → Trigger deploy** so the new settings take effect. These secrets live only in Netlify. They're never in the website files or visible to visitors.

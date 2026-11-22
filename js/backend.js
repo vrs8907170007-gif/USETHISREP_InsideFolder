@@ -132,7 +132,7 @@
     if (fields._honey) return { ref, ok: true, emailed: false, stored: false }; // bot trap
     delete fields._honey;
     const clean = {};
-    Object.keys(fields).forEach((k) => { if (fields[k] !== "" && fields[k] != null) clean[k] = String(fields[k]).slice(0, 4000); });
+    Object.keys(fields).forEach((k) => { if (fields[k] !== "" && fields[k] != null) clean[k] = String(fields[k]).slice(0, 12000); });
     const [e, s] = await Promise.allSettled([
       opts.noEmail ? Promise.reject(new Error("skip")) : emailIt(type, ref, clean, opts),
       opts.noStore ? Promise.reject(new Error("skip")) : storeIt(type, ref, clean),

@@ -184,6 +184,19 @@
   .aside-card .btn{ margin-top: 14px; }
   .aside-card.ink{ background: var(--ink); border-color: var(--ink-line); }
 
+  /* review step */
+  .review{ display:none; }
+  .booking-box.reviewing > *:not(.review):not(#bResult){ display:none !important; }
+  .booking-box.reviewing .review{ display:block; }
+  .booking-box.sent > *:not(#bResult){ display:none !important; }
+  .rv-group{ border:1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; background: rgba(255,255,255,.02); }
+  .rv-h{ font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .rv-row{ display:grid; grid-template-columns: 40% 1fr; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line-soft); font-size: 13.5px; }
+  .rv-row:first-of-type{ border-top: none; }
+  .rv-row span{ color: var(--ivory-dim); } .rv-row b{ color: var(--ivory); font-weight: 600; word-break: break-word; }
+  @media (max-width: 520px){ .rv-row{ grid-template-columns: 1fr; gap: 2px; } }
+  .rv-actions{ display:flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .rv-actions .btn{ flex: 1; justify-content: center; min-width: 160px; }
   /* faq */
   .faq{ max-width: 840px; }
   .faq details{ border-top: 1px solid var(--line); padding: 18px 0; }
@@ -386,7 +399,7 @@
         <div class="fs-title first">Your reading</div>
         <div class="form-row">
           <div><label for="bPkg">Reading</label><select id="bPkg"></select></div>
-          <div><label>Report &amp; call language</label><div class="chips" data-single id="bLang"><span class="chip selected" data-v="English">English</span><span class="chip" data-v="Hindi">Hindi</span></div></div>
+          <div><label>Report &amp; call language</label><div class="chips" data-single id="bLang"><span class="chip selected" data-v="English">English</span><span class="chip" data-v="Hindi">Hindi</span><span class="chip" data-v="English and Hindi">Both</span></div></div>
         </div>
 
         <div class="fs-title">Your names</div>
@@ -420,6 +433,14 @@
         <div class="chips" id="bStuck" style="margin-bottom:12px;"><span class="chip" data-v="Career">Career</span><span class="chip" data-v="Money">Money</span><span class="chip" data-v="Marriage">Marriage</span><span class="chip" data-v="Health">Health</span><span class="chip" data-v="Family">Family</span><span class="chip" data-v="Business">Business</span></div>
         <div class="form-row one"><div><input id="bStuckMore" placeholder="A line about what's stuck (optional)"></div></div>
         <div class="form-row one"><div><label for="bDecision">Any big decision coming up? <i>(job change, house, wedding, launch)</i></label><input id="bDecision" placeholder="Helps Vishal suggest good dates"></div></div>
+        <div class="form-row one"><div><label for="bQs">Questions you'd like answered <i>(optional)</i></label><textarea id="bQs" placeholder="Anything specific you want the reading or call to cover"></textarea></div></div>
+        <div data-show="name" hidden>
+          <div class="fs-title">Name correction <small>helps us suggest the right spelling</small></div>
+          <div class="form-row cond">
+            <div><label for="bNameUse">Where you use your name most</label><input id="bNameUse" placeholder="e.g. signature, business, Instagram, film credits"></div>
+            <div><label for="bNameIdeas">Spellings or names you're considering <i>(optional)</i></label><input id="bNameIdeas" placeholder="e.g. Priyaa, Priya S."></div>
+          </div>
+        </div>
 
         <div data-show="couple" hidden>
           <div class="fs-title">Your partner <small>for couple compatibility</small></div>
@@ -447,6 +468,7 @@
             <div><label for="bBizType">What the business does</label><input id="bBizType" placeholder="e.g. Women's clothing boutique"></div>
           </div>
           <div class="form-row one cond"><div><label for="bBizPlan">Launch or registration plans <i>(dates, partners)</i></label><input id="bBizPlan" placeholder="e.g. Launch in April 2027, sole owner"></div></div>
+          <div class="form-row one cond"><div><label for="bPartners">Co-founders' names and dates of birth <i>(if any)</i></label><input id="bPartners" placeholder="e.g. Rahul Sharma 22/03/1987"></div></div>
         </div>
         <div data-show="baby" hidden>
           <div class="fs-title">Baby name <small>for the baby name add-on</small></div>
@@ -454,6 +476,10 @@
             <div><label for="bBabyDob">Baby's date of birth <i>(or due date)</i></label><input type="date" id="bBabyDob"></div>
             <div><label for="bSurname">Surname</label><input id="bSurname"></div>
             <div><label for="bLetters">Preferred letters or style <i>(optional)</i></label><input id="bLetters" placeholder="e.g. starts with A, Sanskrit"></div>
+          </div>
+          <div class="form-row cond">
+            <div><label for="bBabyGender">Baby is</label><select id="bBabyGender"><option value="">Not known yet</option><option>Boy</option><option>Girl</option></select></div>
+            <div><label for="bBabyParents">Parents' names and dates of birth</label><input id="bBabyParents" placeholder="e.g. Rahul 22/03/1987, Priya 14/08/1990"></div>
           </div>
         </div>
         <div data-show="children" hidden>
@@ -464,8 +490,14 @@
         <label class="consent"><input type="checkbox" id="bConsent"> I understand this reading is guidance, not a guarantee.</label>
 
         <div id="totals"></div>
-        <button class="btn btn-solid" style="width:100%; justify-content:center; margin-top:22px;" id="bSubmit" type="button">Request my reading</button>
-        <p class="hint" style="text-align:center;">Nothing is charged now. We'll confirm and send a secure payment link within 24 hours.</p>
+        <button class="btn btn-solid" style="width:100%; justify-content:center; margin-top:22px;" id="bSubmit" type="button">Review my details</button>
+        <p class="hint" style="text-align:center;">Next you'll see everything you entered, so you can check it before sending. Nothing is charged now.</p>
+        <div class="review" id="reviewView">
+          <div class="fs-title first">Please check your details</div>
+          <p class="hint" style="margin:-4px 0 16px; font-size:13px;">This is exactly what Vishal will receive. Use <b>Edit details</b> to add or change anything; nothing is sent until you press <b>Confirm and send</b>.</p>
+          <div id="rvBody"></div>
+          <div class="rv-actions"><button class="btn" type="button" id="rvEdit">← Edit details</button><button class="btn btn-solid" type="button" id="rvSend">Confirm and send</button></div>
+        </div>
         <div class="notice" id="bResult" style="display:none;"></div>
       </div>
 
@@ -770,7 +802,8 @@
       house: selAddons.has('house') || (t.p && t.p.id === 'blueprint'),
       business: !!(t.p && t.p.id === 'business'),
       baby: selAddons.has('baby'),
-      children: !!(t.p && t.p.id === 'blueprint')
+      children: !!(t.p && t.p.id === 'blueprint'),
+      name: !!(t.p && (t.p.id === 'name' || t.p.id === 'blueprint'))
     };
     document.querySelectorAll('[data-show]').forEach(el => el.hidden = !show[el.dataset.show]);
     $('asideSummary').innerHTML = (t.p ? `<b>${t.p.name}</b> · ${t.p.fmt}` : 'Add-ons only') + (t.ads.length ? '<br>+ ' + t.ads.map(a => a.name).join(', ') : '') + `<br><span class="gold" style="font-family:var(--font-display); font-size:22px;">${inr(t.total)}</span>`;
@@ -793,11 +826,14 @@
   $('cDob').addEventListener('input', updFree); updFree();
   VS.prefill({ email: $('bEmail'), phone: $('bPhone') });
 
-  /* ================= SUBMIT ================= */
+  /* ================= SUBMIT: validate → review → send ================= */
   const v = (id) => $(id).value.trim();
   const dmy = (s) => s ? s.split('-').reverse().join('/') : '';
-  $('bSubmit').addEventListener('click', async () => {
-    const box = $('bResult'), show = refresh(), t = calcTotal();
+  const escH = (x) => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let pending = null;
+
+  function validate(){
+    const show = refresh(), t = calcTotal();
     const rules = [
       { el: $('bOfficial'), req: true, label: 'Your full name as on Aadhaar, PAN or passport' },
       { el: $('bDob'), req: true, label: 'Date of birth' },
@@ -813,35 +849,90 @@
     if (!msg && show.house && !v('bHouse') && !v('bVehicle')) { msg = 'Please add your house number or vehicle number.'; $('bHouse').classList.add('is-invalid'); $('bHouse').focus(); }
     if (!msg && !t.p && !t.ads.length) msg = 'Please choose a reading or at least one add-on.';
     if (!msg && !$('bConsent').checked) msg = 'Please tick the box to confirm you understand a reading is guidance, not a guarantee.';
-    if (msg) { box.style.display = 'block'; box.className = 'notice err'; box.textContent = msg; box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return; }
+    return { msg, show, t };
+  }
 
-    const f = {
-      name: v('bOfficial'), daily_name: v('bDaily'),
-      date_of_birth: dmy($('bDob').value), time_of_birth: v('bTob'), place_of_birth: v('bPob'),
-      email: v('bEmail'), phone: v('bPhone'), language: pick('bLang'),
-      reading: t.p ? t.p.name + ' (' + inr(t.p.price) + ')' : 'Add-ons only',
-      add_ons: t.ads.map(a => a.name + ' (' + inr(a.price) + ')').join(', '),
-      launch_offer: t.off ? '− ' + inr(t.off) : '', total: inr(t.total),
-      call: show.call ? pick('bMode') + ', ' + $('bSlot').value : '',
-      occupation: v('bWork'), goals: v('bGoals'),
-      stuck: [picks('bStuck'), v('bStuckMore')].filter(Boolean).join(' — '), big_decision: v('bDecision'),
-      partner: show.couple ? [v('bPName'), dmy($('bPDob').value), $('bMarr').value ? 'married/engaged ' + dmy($('bMarr').value) : ''].filter(Boolean).join(', ') : '',
-      mobile_numbers: show.mobile ? v('bMobiles') : '',
-      house_number: show.house ? v('bHouse') : '', vehicle_numbers: show.house ? v('bVehicle') : '',
-      business: show.business ? [v('bBizName'), v('bBizType'), v('bBizPlan')].filter(Boolean).join(' | ') : '',
-      baby: show.baby ? [dmy($('bBabyDob').value), v('bSurname'), v('bLetters')].filter(Boolean).join(', ') : '',
+  // Everything the visitor entered, grouped for the review screen, the email and the WhatsApp fallback.
+  function collect(show, t){
+    const ref = (pending && pending.ref) || VS.makeRef('NM');
+    const g = [];
+    const add = (title, rows) => { rows = rows.filter(r => r[1]); if (rows.length) g.push({ title, rows }); };
+    add('Reading', [
+      ['Reference', ref],
+      ['Reading', t.p ? t.p.name + ' — ' + inr(t.p.price) : 'Add-ons only'],
+      ['Add-ons', t.ads.map(a => a.name + ' — ' + inr(a.price)).join(', ')],
+      ['Launch offer', t.off ? '− ' + inr(t.off) + ' (20%, first 50 clients)' : ''],
+      ['Total', inr(t.total)],
+      ['Language', pick('bLang')],
+      ['Call', show.call ? pick('bMode') + ', ' + $('bSlot').value : '']
+    ]);
+    add('Names', [['Full name (Aadhaar / PAN / passport)', v('bOfficial')], ['Name used day to day', v('bDaily')]]);
+    add('Birth details', [['Date of birth', dmy($('bDob').value)], ['Time of birth', v('bTob')], ['Place of birth', v('bPob')]]);
+    add('Contact', [['Email', v('bEmail')], ['WhatsApp', v('bPhone')]]);
+    add('Life right now', [['Occupation', v('bWork')], ['Goals (next 12 months)', v('bGoals')], ['What feels stuck', [picks('bStuck'), v('bStuckMore')].filter(Boolean).join(' — ')], ['Big decision coming up', v('bDecision')], ['Questions', v('bQs')]]);
+    if (show.name) add('Name correction', [['Where the name is used most', v('bNameUse')], ['Spellings being considered', v('bNameIdeas')]]);
+    if (show.couple) add('Partner', [["Partner's full name", v('bPName')], ["Partner's date of birth", dmy($('bPDob').value)], ['Marriage / engagement date', dmy($('bMarr').value)]]);
+    if (show.children) add('Children', [['Names and dates of birth', v('bKids')]]);
+    if (show.mobile) add('Mobile numbers', [['Numbers in use', v('bMobiles')]]);
+    if (show.house) add('House and vehicles', [['House / flat, building, floor', v('bHouse')], ['Vehicle registration numbers', v('bVehicle')]]);
+    if (show.business) add('Business', [['Business name', v('bBizName')], ['What it does', v('bBizType')], ['Launch / registration plans', v('bBizPlan')], ["Co-founders' names and dates of birth", v('bPartners')]]);
+    if (show.baby) add('Baby name', [["Baby's date of birth / due date", dmy($('bBabyDob').value)], ['Baby is', $('bBabyGender').value || 'Not known yet'], ['Surname', v('bSurname')], ['Preferred letters or style', v('bLetters')], ["Parents' names and dates of birth", v('bBabyParents')]]);
+    // machine-readable copy for the report agent
+    const data = {
+      ref, package: t.p ? t.p.id : 'none', package_name: t.p ? t.p.name : 'Add-ons only', addons: t.ads.map(a => a.id),
+      price: t.p ? t.p.price : 0, launch_offer: t.off, total: t.total, language: pick('bLang'), call: show.call ? pick('bMode') + ', ' + $('bSlot').value : '',
+      client: { official_name: v('bOfficial'), daily_name: v('bDaily'), dob: $('bDob').value, tob: v('bTob'), pob: v('bPob'), email: v('bEmail'), whatsapp: v('bPhone'),
+                occupation: v('bWork'), goals: v('bGoals'), stuck: picks('bStuck'), stuck_note: v('bStuckMore'), decision: v('bDecision'), questions: v('bQs') },
+      name_correction: show.name ? { used_for: v('bNameUse'), ideas: v('bNameIdeas') } : null,
+      partner: show.couple ? { name: v('bPName'), dob: $('bPDob').value, marriage: $('bMarr').value } : null,
       children: show.children ? v('bKids') : '',
-      consent: 'Yes — guidance, not a guarantee', _honey: $('bHoney').value
+      mobiles: show.mobile ? v('bMobiles') : '',
+      house: show.house ? v('bHouse') : '', vehicles: show.house ? v('bVehicle') : '',
+      business: show.business ? { name: v('bBizName'), what: v('bBizType'), plans: v('bBizPlan'), partners: v('bPartners') } : null,
+      baby: show.baby ? { dob: $('bBabyDob').value, gender: $('bBabyGender').value, surname: v('bSurname'), letters: v('bLetters'), parents: v('bBabyParents') } : null,
+      submitted: new Date().toISOString()
     };
-    const res = await VS.busy($('bSubmit'), 'Sending…', () => VS.submitRequest('consult', f, {
-      prefix: 'NM', subject: `Numerology booking — ${f.reading}${f.add_ons ? ' + add-ons' : ''} (${f.total})`,
-      autoresponse: `Thank you for booking ${f.reading} with The Divine Code Numerology (total ${f.total}). We'll confirm on WhatsApp or email within 24 hours and send you a secure payment link. — Vishal Singh`
+    return { ref, g, data, t };
+  }
+
+  const asText = (g) => g.map(x => x.title.toUpperCase() + '\n' + x.rows.map(r => r[0] + ': ' + r[1]).join('\n')).join('\n\n');
+
+  function showReview(p){
+    $('rvBody').innerHTML = p.g.map(x => `<div class="rv-group"><div class="rv-h">${escH(x.title)}</div>${x.rows.map(r => `<div class="rv-row"><span>${escH(r[0])}</span><b>${escH(r[1]).replace(/\n/g, '<br>')}</b></div>`).join('')}</div>`).join('');
+    $('bookingBox').classList.add('reviewing'); $('bResult').style.display = 'none';
+    $('bookingBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function backToForm(){ $('bookingBox').classList.remove('reviewing'); $('bookingBox').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+  $('bSubmit').addEventListener('click', () => {
+    const box = $('bResult'); const { msg, show, t } = validate();
+    if (msg) { box.style.display = 'block'; box.className = 'notice err'; box.textContent = msg; box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return; }
+    pending = collect(show, t); showReview(pending);
+  });
+  $('rvEdit').addEventListener('click', backToForm);
+  $('rvSend').addEventListener('click', async () => {
+    const { msg, show, t } = validate();           // re-check in case something changed
+    if (msg) { backToForm(); const box = $('bResult'); box.style.display = 'block'; box.className = 'notice err'; box.textContent = msg; return; }
+    pending = collect(show, t);
+    const p = pending, text = asText(p.g);
+    const fields = {};
+    p.g.forEach(x => x.rows.forEach(r => { if (r[0] !== 'Reference') fields[x.title + ' · ' + r[0]] = r[1]; }));
+    fields['Booking data (for the report agent)'] = JSON.stringify(p.data);
+    fields.email = v('bEmail'); fields.name = v('bOfficial'); fields.phone = v('bPhone');
+    fields._honey = $('bHoney').value;
+    const pkgName = p.t.p ? p.t.p.name : 'Add-ons only';
+    const res = await VS.busy($('rvSend'), 'Sending…', () => VS.submitRequest('consult', fields, {
+      ref: p.ref,
+      subject: `Numerology booking ${p.ref} — ${pkgName}${p.t.ads.length ? ' + add-ons' : ''} (${inr(p.t.total)})`,
+      autoresponse: `Thank you for booking ${pkgName} with The Divine Code Numerology (reference ${p.ref}, total ${inr(p.t.total)}). We'll confirm on WhatsApp or email within 24 hours and send you a secure payment link. Your report is prepared once payment is received. — Vishal Singh`
     }));
-    VS.showResult(box, res, {
-      okTitle: 'Booking received', okText: `${f.reading}${f.add_ons ? ' + ' + f.add_ons : ''}: ${f.total}. We'll confirm within 24 hours.`,
-      summary: `NUMEROLOGY booking\n${f.reading}${f.add_ons ? '\nAdd-ons: ' + f.add_ons : ''}\nTotal: ${f.total}\nName: ${f.name}\nDOB: ${f.date_of_birth}\nWhatsApp: ${f.phone}\nGoals: ${f.goals}`,
-      subject: 'Numerology booking',
-      payment: { kind: 'consult', amount: t.total, method: 'upi', name: f.name, email: f.email, phone: f.phone }
+    $('bookingBox').classList.remove('reviewing');
+    if (res.ok) { $('bookingBox').classList.add('sent'); pending = null; }
+    VS.showResult($('bResult'), res, {
+      okTitle: 'Booking received', okText: `${pkgName}${p.t.ads.length ? ' + ' + p.t.ads.map(a => a.name).join(', ') : ''}: ${inr(p.t.total)}. We'll confirm within 24 hours.`,
+      summary: 'NUMEROLOGY booking ' + p.ref + '\n\n' + text,
+      subject: 'Numerology booking ' + p.ref,
+      payment: { kind: 'consult', amount: p.t.total, method: 'upi', name: v('bOfficial'), email: v('bEmail'), phone: v('bPhone') }
     });
   });
 

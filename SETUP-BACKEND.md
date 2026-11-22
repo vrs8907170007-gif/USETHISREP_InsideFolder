@@ -14,7 +14,7 @@ Everything is controlled from **one file: `js/config.js`**. There are three part
 
 ## 1. Email delivery (FormSubmit, free)
 
-Already set to `p.svishal@gmail.com` in `js/config.js` (`formEndpoint`).
+Already set to `vsnonchalant@gmail.com` in `js/config.js` (`formEndpoint`).
 
 1. Put the site online.
 2. Send yourself a test message from the Contact page.
@@ -50,7 +50,7 @@ In `js/config.js`:
    },
    ```
    These values are meant to be public. Security comes from the rules you published in step 5.
-7. **Create your owner account:** open **Talk2Me**, sign up with **p.svishal@gmail.com**, and click the confirmation link in your email. Then open **Owner login** (footer link, `admin.html`).
+7. **Create your owner account:** open **Talk2Me**, sign up with **vsnonchalant@gmail.com**, and click the confirmation link in your email. Then open **Owner login** (footer link, `admin.html`).
 
 ### What you get as owner
 - **Talk2Me:** an inbox of every member's private thread, with unread markers. You reply as "Vishal Singh · Author" and can delete any message. You get an email when someone starts a new conversation.

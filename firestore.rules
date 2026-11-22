@@ -6,7 +6,7 @@ service cloud.firestore {
 
     function signedIn()  { return request.auth != null; }
     function verified()  { return signedIn() && request.auth.token.email_verified == true; }
-    function isAdmin()   { return verified() && request.auth.token.email in ['p.svishal@gmail.com']; }
+    function isAdmin()   { return verified() && request.auth.token.email in ['vsnonchalant@gmail.com']; }
     function str(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
     function isTopic(tid){ return tid in ['topic_consciousness','topic_faith','topic_pandora','topic_fyre','topic_writing','topic_hello']; }
     function ownDm(tid)  { return verified() && tid == 'dm_' + request.auth.uid; }

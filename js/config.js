@@ -4,10 +4,10 @@
    =========================================================== */
 window.SITE_CONFIG = {
   ownerName: "Vishal Singh",
-  ownerEmail: "p.svishal@gmail.com",
+  ownerEmail: "vsnonchalant@gmail.com",
 
   // Emails that get the owner/admin view (reply in Talk2Me, delete comments, see bookings).
-  adminEmails: ["p.svishal@gmail.com"],
+  adminEmails: ["vsnonchalant@gmail.com"],
 
   // WhatsApp number (country code, no + or spaces). Used for "Send on WhatsApp" buttons.
   whatsapp: "918369578225",
@@ -19,7 +19,7 @@ window.SITE_CONFIG = {
   //    The very first submission sends an "Activate Form" email to ownerEmail — click it once.
   //    After activating, FormSubmit gives you a random alias; you can paste it in place of the email
   //    (e.g. "https://formsubmit.co/ajax/a1b2c3d4e5...") to keep your address out of the page source.
-  formEndpoint: "https://formsubmit.co/ajax/p.svishal@gmail.com",
+  formEndpoint: "https://formsubmit.co/ajax/vsnonchalant@gmail.com",
 
   // 2) PAYMENTS (optional)
   //    UPI: put your UPI ID (e.g. "yourname@okhdfcbank") and visitors get a QR code + "Pay with UPI app"

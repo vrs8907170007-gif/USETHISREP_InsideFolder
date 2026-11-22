@@ -57,7 +57,7 @@ Assets: `assets/<section>/...`, kebab-case with year. Large PNGs were converted 
 - Pandora City: 65 acres, **5 sub-farms** (Fruit Farm Retreat, Goat Farm, Dairy Farm, Adventure Park, Fish Farm Retreat). Forever FYRE runs across the Pandora City grounds, around the 20-acre orchard.
 - ₹16L: "gross profit / month" for V Services, "monthly collections" for V Hospitality.
 - Forever FYRE lineup = **proposed**, not confirmed.
-- Contact: p.svishal@gmail.com · +91 83695 78225 · +91 91365 40798 · WhatsApp 918369578225.
+- Contact: vsnonchalant@gmail.com · +91 83695 78225 · +91 91365 40798 · WhatsApp 918369578225.
 
 ## Open items
 0. **Shop go-live:** Razorpay account + KYC, deploy on Netlify via GitHub, env vars, webhook (SHOP-SETUP.md). Add Amazon links per book in catalog.json. Upload e-book PDFs. Confirm proposed INR prices (USD final; INR from tier map) and which books/formats are "available" vs "preorder" (all set to preorder now). Book covers needed for 9 new titles (typographic covers shown meanwhile). GST on e-books — check with CA.
@@ -70,6 +70,11 @@ Assets: `assets/<section>/...`, kebab-case with year. Large PNGs were converted 
 7. Unused assets kept: 5 VRU birthday photos (`assets/experience/vru-birthday/*`), `portrait-passport.jpg`.
 
 ## Change log
+- **2026-11-22 v15 — Complete bookings, review step, report agent, email change, AutoSync v2.**
+  - All site email now goes to **vsnonchalant@gmail.com** (forms, contact page, policies, shop settings). FormSubmit sends a one-time "Activate form" email to the new address — click it once.
+  - Numerology booking form: extra fields (Both languages, questions, name-correction details, co-founders, baby gender and parents). After "Review my details" the visitor sees everything, can go back to edit, and only "Confirm and send" sends it. The email (and the WhatsApp/email fallback) carries every detail plus a "Booking data (for the report agent)" JSON block.
+  - `numerology-engine/` (not published on the site): numerology calculator (`engine/numerology.py`), report renderer (`engine/render.py`, PDF with cover, contents and summary card, English and Hindi), arithmetic checker (`engine/check.py`) and the agent's instructions (`PLAYBOOK.md`). A scheduled Claude task reads new bookings in vsnonchalant@gmail.com, writes the report for the package booked, checks it and emails the PDF to vsnonchalant@gmail.com for Vishal to share after payment.
+  - AutoSync v2 (in the Vishalsinghofficial folder): starts with Windows, retries failed uploads every minute, merges GitHub changes, and unpacks zips dropped into `Drop-Updates`.
 - **2026-11-22 v14 — Numerology readings page.**
   - New `numerology.html` (menu: Numerology, after Bookstore): The Divine Code Numerology brand, free calculator (Moolank, Bhagyank, Chaldean name number, Personal Year 2027), "Which number are you?" grid.
   - 6 packages from the price list (Snapshot ₹499, Complete Life Report ₹1,499, Name Correction ₹2,499, 1:1 Consultation ₹3,100, Business & Brand ₹5,100, Life Blueprint ₹6,999 vs ₹7,897) and 4 add-ons (mobile ₹299, house/vehicle ₹499, couple ₹1,999, baby name ₹1,999). Prices, items and samples live in the `PKGS`, `ADDONS` and `SAMPLES` lists at the bottom of the page.

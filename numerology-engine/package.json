@@ -1,0 +1,11 @@
+{
+  "name": "divine-code-numerology-engine",
+  "private": true,
+  "description": "Fonts for the report renderer (Fraunces, Inter, Noto Devanagari).",
+  "dependencies": {
+    "@fontsource/fraunces": "^5.0.0",
+    "@fontsource/inter": "^5.0.0",
+    "@fontsource/noto-sans-devanagari": "^5.0.0",
+    "@fontsource/noto-serif-devanagari": "^5.0.0"
+  }
+}

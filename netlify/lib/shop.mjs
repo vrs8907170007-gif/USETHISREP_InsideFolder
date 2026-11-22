@@ -10,7 +10,7 @@ import catalog from "../../catalog.json" with { type: "json" };
 
 export { catalog };
 const env = (k, d = "") => (process.env[k] || d).trim();
-export const OWNER_EMAIL = () => env("OWNER_EMAIL", "p.svishal@gmail.com");
+export const OWNER_EMAIL = () => env("OWNER_EMAIL", "vsnonchalant@gmail.com");
 
 /* ---------------- responses ---------------- */
 export const json = (data, status = 200, headers = {}) =>
