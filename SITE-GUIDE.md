@@ -70,6 +70,7 @@ Assets: `assets/<section>/...`, kebab-case with year. Large PNGs were converted 
 7. Unused assets kept: 5 VRU birthday photos (`assets/experience/vru-birthday/*`), `portrait-passport.jpg`.
 
 ## Change log
+- **2026-11-22 v16 — Relationship status.** Life Blueprint and the couple add-on now ask for relationship status; partner details are asked (and required) only for Married, Engaged or In a relationship. Report engine reads mobile and vehicle numbers separated by spaces, ignores "Divorced"/"Single" typed as a partner, and the playbook covers single, divorced and widowed clients.
 - **2026-11-22 v15 — Complete bookings, review step, report agent, email change, AutoSync v2.**
   - All site email now goes to **vsnonchalant@gmail.com** (forms, contact page, policies, shop settings). FormSubmit sends a one-time "Activate form" email to the new address — click it once.
   - Numerology booking form: extra fields (Both languages, questions, name-correction details, co-founders, baby gender and parents). After "Review my details" the visitor sees everything, can go back to edit, and only "Confirm and send" sends it. The email (and the WhatsApp/email fallback) carries every detail plus a "Booking data (for the report agent)" JSON block.

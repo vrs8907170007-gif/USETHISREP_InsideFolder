@@ -71,6 +71,13 @@ choose totals that are friendly to the baby's Moolank), with meanings.
 
 If a section needs data the client did not give, write what you can and list the missing items in the email to Vishal.
 
+**Relationship status** (`relationship_status`, also in facts.json): for *Married / Engaged / In a relationship* write the
+couple section from `facts.partner` and `facts.couple`. For *Single, Divorced, Separated or Widowed* there is no partner
+analysis: write **Relationships and family** instead — gentle healing and self-respect (never blame), the client's parents
+and family, which numbers get on most easily with theirs (friends of their Moolank and Bhagyank), and the Personal Years
+that favour new relationships (6 = commitment, 2 = partnership, 5 = meeting new people). For *Widowed*, lead with
+compassion and never suggest a "new relationship" unless the client asked about it.
+
 ## 5. Writing rules
 
 - **Start from the client's own goals, stuck areas, decisions and questions.** Name them in the welcome letter and come back
@@ -137,7 +144,9 @@ Action (2-7-6) = execution. Empty planes point to what to build.
 
 ## 7. Email the report to Vishal
 
-Send **one email per booking** to **vsnonchalant@gmail.com** (send_message, attach the PDFs):
+Send **one email per booking** to **vsnonchalant@gmail.com** (send_message, attach the PDFs by file reference
+`sha256:<hash>:<absolute path>`; keep the PDFs inside your working directory — if an attachment is refused, copy the
+file into the working directory and try again):
 
 - Subject: `Report ready — <reference> — <client name> — <package name>`
 - Body (plain, short):

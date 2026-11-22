@@ -443,8 +443,12 @@
         </div>
 
         <div data-show="couple" hidden>
-          <div class="fs-title">Your partner <small>for couple compatibility</small></div>
-          <div class="form-row three cond">
+          <div class="fs-title">Relationships <small>for the relationships and couple section</small></div>
+          <div class="form-row cond">
+            <div><label for="bRel">Relationship status</label><select id="bRel"><option value="">Please choose</option><option>Married</option><option>Engaged</option><option>In a relationship</option><option>Single</option><option>Divorced</option><option>Separated</option><option>Widowed</option></select></div>
+            <div class="hint" style="align-self:end; margin:0 0 12px;">Partner details are asked only if you have a partner.</div>
+          </div>
+          <div class="form-row three cond" id="partnerRow" hidden>
             <div><label for="bPName">Partner's full name</label><input id="bPName"></div>
             <div><label for="bPDob">Partner's date of birth</label><input type="date" id="bPDob" max="2026-12-31"></div>
             <div><label for="bMarr">Marriage / engagement <i>(if any)</i></label><input type="date" id="bMarr"></div>
@@ -829,6 +833,8 @@
   /* ================= SUBMIT: validate → review → send ================= */
   const v = (id) => $(id).value.trim();
   const dmy = (s) => s ? s.split('-').reverse().join('/') : '';
+  const partnered = () => ['Married', 'Engaged', 'In a relationship'].includes($('bRel').value);
+  $('bRel').addEventListener('change', () => { $('partnerRow').hidden = !partnered(); $('bRel').classList.remove('is-invalid'); });
   const escH = (x) => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   let pending = null;
 
@@ -841,7 +847,8 @@
       { el: $('bPhone'), req: true, type: 'phone', label: 'WhatsApp number' },
       { el: $('bGoals'), req: true, label: 'Your goals for the next 12 months' }
     ];
-    if (show.couple) rules.push({ el: $('bPName'), req: true, label: "Partner's full name" }, { el: $('bPDob'), req: true, label: "Partner's date of birth" });
+    if (show.couple) rules.push({ el: $('bRel'), req: true, label: 'Relationship status' });
+    if (show.couple && partnered()) rules.push({ el: $('bPName'), req: true, label: "Partner's full name" }, { el: $('bPDob'), req: true, label: "Partner's date of birth" });
     if (show.mobile) rules.push({ el: $('bMobiles'), req: true, label: 'Mobile numbers' });
     if (show.business) rules.push({ el: $('bBizType'), req: true, label: 'What the business does' });
     if (show.baby) rules.push({ el: $('bBabyDob'), req: true, label: "Baby's date of birth or due date" });
@@ -871,7 +878,7 @@
     add('Contact', [['Email', v('bEmail')], ['WhatsApp', v('bPhone')]]);
     add('Life right now', [['Occupation', v('bWork')], ['Goals (next 12 months)', v('bGoals')], ['What feels stuck', [picks('bStuck'), v('bStuckMore')].filter(Boolean).join(' — ')], ['Big decision coming up', v('bDecision')], ['Questions', v('bQs')]]);
     if (show.name) add('Name correction', [['Where the name is used most', v('bNameUse')], ['Spellings being considered', v('bNameIdeas')]]);
-    if (show.couple) add('Partner', [["Partner's full name", v('bPName')], ["Partner's date of birth", dmy($('bPDob').value)], ['Marriage / engagement date', dmy($('bMarr').value)]]);
+    if (show.couple) add('Relationships', [['Relationship status', $('bRel').value], ["Partner's full name", partnered() ? v('bPName') : ''], ["Partner's date of birth", partnered() ? dmy($('bPDob').value) : ''], ['Marriage / engagement date', partnered() ? dmy($('bMarr').value) : '']]);
     if (show.children) add('Children', [['Names and dates of birth', v('bKids')]]);
     if (show.mobile) add('Mobile numbers', [['Numbers in use', v('bMobiles')]]);
     if (show.house) add('House and vehicles', [['House / flat, building, floor', v('bHouse')], ['Vehicle registration numbers', v('bVehicle')]]);
@@ -884,7 +891,8 @@
       client: { official_name: v('bOfficial'), daily_name: v('bDaily'), dob: $('bDob').value, tob: v('bTob'), pob: v('bPob'), email: v('bEmail'), whatsapp: v('bPhone'),
                 occupation: v('bWork'), goals: v('bGoals'), stuck: picks('bStuck'), stuck_note: v('bStuckMore'), decision: v('bDecision'), questions: v('bQs') },
       name_correction: show.name ? { used_for: v('bNameUse'), ideas: v('bNameIdeas') } : null,
-      partner: show.couple ? { name: v('bPName'), dob: $('bPDob').value, marriage: $('bMarr').value } : null,
+      relationship_status: show.couple ? $('bRel').value : '',
+      partner: show.couple && partnered() ? { name: v('bPName'), dob: $('bPDob').value, marriage: $('bMarr').value } : null,
       children: show.children ? v('bKids') : '',
       mobiles: show.mobile ? v('bMobiles') : '',
       house: show.house ? v('bHouse') : '', vehicles: show.house ? v('bVehicle') : '',

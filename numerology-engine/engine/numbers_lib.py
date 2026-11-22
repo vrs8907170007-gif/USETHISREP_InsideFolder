@@ -146,13 +146,51 @@ def month_dates(ym, want):
     return out
 
 
+STATUS_WORDS = {'divorced', 'single', 'unmarried', 'widowed', 'widow', 'widower', 'separated', 'none', 'na', 'n/a', 'nil', '-', 'not married', 'no partner'}
+
+
+def split_mobiles(text):
+    """'8369578225 9136540798', '+91 91365 40798, 98201-45673' -> ['8369578225', '9136540798', ...]
+    Tokens are joined until they make a 10-digit number (or 12 with a leading 91, 11 with a leading 0)."""
+    out = []
+    def flush(acc):
+        if len(acc) == 12 and acc.startswith('91'): acc = acc[2:]
+        elif len(acc) == 11 and acc.startswith('0'): acc = acc[1:]
+        if len(acc) >= 6: out.append(acc)
+    for chunk in re.split(r'[,;/\n]| and ', text or ''):
+        acc = ''
+        for tok in chunk.split():
+            acc += re.sub(r'\D', '', tok)
+            if len(acc) >= 10 and not (acc.startswith('91') and len(acc) < 12) and not (acc.startswith('0') and len(acc) < 11):
+                flush(acc); acc = ''
+        flush(acc)
+    return out
+
+
+def split_vehicles(text):
+    """'MH14FH0424 MH01AQ7979' or 'MH14 FH 0424; MH01 AQ 7979' -> one entry per registration."""
+    out = []
+    for chunk in re.split(r'[,;/\n+]| and ', text or ''):
+        plates = re.findall(r'[A-Z]{2}\s*\d{1,2}\s*[A-Z]{1,3}\s*\d{1,4}', chunk.upper())
+        if plates: out += [re.sub(r'\s+', ' ', x).strip() for x in plates]
+        elif re.search(r'\d', chunk): out.append(chunk.strip())
+    return out
+
+
 def from_booking(b, today=None):
     today = today or datetime.date.today()
     c = b.get('client', {})
     facts = {'ref': b.get('ref'), 'package': b.get('package'), 'addons': b.get('addons', []), 'language': b.get('language'), 'generated_on': today.isoformat(),
              'client': person(c.get('official_name', ''), c.get('daily_name', ''), c.get('dob', ''), today)}
     p = b.get('partner') or {}
-    if p.get('name') and p.get('dob'):
+    status = (b.get('relationship_status') or '').strip()
+    pname = (p.get('name') or '').strip()
+    if pname.lower().strip('. ') in STATUS_WORDS:          # e.g. "Divorced" typed into the partner-name box
+        status = status or pname; pname = ''
+    if p.get('dob') and parse_date(p.get('dob')) == parse_date(c.get('dob', '')):
+        pname = ''                                          # partner DOB copied from the client's own: not a real partner
+    facts['relationship_status'] = status or ('Married / partner' if pname else 'Not given')
+    if pname and p.get('dob'):
         facts['partner'] = person(p['name'], '', p['dob'], today)
         cm, pm = facts['client'].get('moolank', {}).get('number'), facts['partner'].get('moolank', {}).get('number')
         cb, pb = facts['client'].get('bhagyank', {}).get('number'), facts['partner'].get('bhagyank', {}).get('number')
@@ -166,10 +204,8 @@ def from_booking(b, today=None):
         md = parse_date(p.get('marriage', ''))
         if md:
             facts['couple']['marriage_date'] = {'date': md.isoformat(), 'day_number': red(md.day), 'total': digits_total(md.strftime('%d%m%Y')), 'number': red(digits_total(md.strftime('%d%m%Y')))}
-    def nums(text):
-        return [x.strip() for x in re.split(r'[,;/\n]| and ', text or '') if re.search(r'\d', x)]
-    facts['mobiles'] = [{'number': n, 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n)), 'planet': PLANET[red(digits_total(n))]} for n in nums(b.get('mobiles'))]
-    facts['vehicles'] = [{'number': n, 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n))} for n in nums(b.get('vehicles'))]
+    facts['mobiles'] = [{'number': n, 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n)), 'planet': PLANET[red(digits_total(n))]} for n in split_mobiles(b.get('mobiles'))]
+    facts['vehicles'] = [{'number': n, 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n)), 'planet': PLANET[red(digits_total(n))]} for n in split_vehicles(b.get('vehicles'))]
     h = b.get('house') or ''
     m = re.search(r'(?:flat|house|apt|apartment|no\.?|#)\s*([0-9]+)', h, re.I) or re.search(r'\b([0-9]{1,5})\b', h)
     if m: facts['house'] = {'text': h, 'flat_number': m.group(1), 'total': digits_total(m.group(1)), 'number': red(digits_total(m.group(1)))}
