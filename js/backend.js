@@ -94,7 +94,7 @@
   };
 
   /* ---------------- requests (forms) ---------------- */
-  const TYPE_LABEL = { contact: "Contact message", stay: "Pandora City stay booking", passes: "Forever FYRE pass booking", prebook: "Book pre-booking", payment: "Payment confirmation", comment: "Comment", talk2me: "Talk2Me message" };
+  const TYPE_LABEL = { contact: "Contact message", stay: "Pandora City stay booking", passes: "Forever FYRE pass booking", prebook: "Book pre-booking", payment: "Payment confirmation", comment: "Comment", talk2me: "Talk2Me message", consult: "Numerology consultation request" };
 
   async function emailIt(type, ref, fields, opts) {
     if (!C.formEndpoint) throw new Error("no endpoint");

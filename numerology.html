@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numerology Readings — Vishal Singh</title>
+<meta name="description" content="The Divine Code Numerology: personal readings by Vishal Singh, author of 7 books on numerology. Moolank, Bhagyank, name correction, 2027 forecast, business names and the complete Life Blueprint.">
+<meta name="theme-color" content="#0B0D12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vishal Singh">
+<meta property="og:title" content="The Divine Code Numerology — Personal Readings by Vishal Singh">
+<meta property="og:description" content="Moolank, Bhagyank, name correction, 2027 forecast, business names and the complete Life Blueprint. Readings from ₹499.">
+<meta property="og:image" content="https://vsofficial.vercel.app/assets/numerology/og-numerology.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body{ --accent: var(--gold); --accent-glow: var(--gold-glow); --ink:#15132f; --ink-2:#1c1a3d; --ink-line: rgba(212,175,106,.22); }
+  .sec-head{ margin-bottom: 38px; }
+  .sec-head h2{ font-size: clamp(30px,3.6vw,44px); margin-top: 14px; }
+  .sec-head p{ color: var(--ivory-dim); max-width: 62ch; margin: 14px 0 0; }
+  .gold{ color: var(--gold); }
+
+  /* hero */
+  .nm-hero{ position:relative; overflow:hidden; padding: 80px 0 72px; border-bottom:1px solid var(--line); background: radial-gradient(120% 90% at 85% 10%, rgba(42,36,110,.55), transparent 60%); }
+  .nm-hero .glow.a{ width:620px; height:620px; background: #3a2f9a; top:-300px; right:-160px; opacity:.45; }
+  .hero-grid{ display:grid; grid-template-columns: 1.25fr 1fr; gap: 50px; align-items:center; }
+  @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr; } }
+  .nm-hero h1{ font-size: clamp(40px,5.6vw,72px); margin-top:16px; }
+  .nm-hero h1 em{ display:block; font-style: italic; color: var(--gold); font-weight: 400; font-size: .62em; margin-top: 14px; }
+  .nm-hero .lede{ max-width: 54ch; margin-top: 20px; color: var(--ivory-dim); font-size: 17px; }
+  .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 28px; }
+  .offer-pill{ display:inline-flex; align-items:center; gap:10px; margin-top: 26px; background: rgba(212,175,106,.12); border:1px solid var(--ink-line); color: var(--gold); padding: 9px 16px; border-radius: 999px; font-size: 13px; font-weight: 700; }
+  .offer-pill b{ background: var(--gold); color: var(--stage); padding: 2px 8px; border-radius: 999px; font-size: 11.5px; letter-spacing: .04em; }
+  .loshu{ display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; max-width: 340px; margin-left:auto; }
+  @media (max-width: 900px){ .loshu{ margin: 10px 0 0; max-width: 280px; } }
+  .loshu span{ aspect-ratio:1; display:flex; align-items:center; justify-content:center; border:1.5px solid var(--gold); font-family: var(--font-display); font-size: clamp(30px,3.4vw,46px); color: var(--gold); border-radius: 4px; }
+  .loshu span.c{ background: var(--gold); color: var(--ink); }
+  .loshu-cap{ text-align:right; font-size: 12px; color: var(--ivory-dim); margin-top: 12px; letter-spacing:.04em; }
+  @media (max-width: 900px){ .loshu-cap{ text-align:left; } }
+  .cred{ display:flex; align-items:center; gap:16px; margin-top: 38px; flex-wrap: wrap; }
+  .cred-covers{ display:flex; }
+  .cred-covers img{ width:42px; height:63px; object-fit:cover; border-radius:4px; border:1px solid var(--line); margin-left:-10px; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+  .cred-covers img:first-child{ margin-left:0; }
+  .cred p{ margin:0; font-size: 13.5px; color: var(--ivory-dim); max-width: 44ch; }
+  .cred p b{ color: var(--ivory); }
+
+  /* calculator */
+  .calc{ display:grid; grid-template-columns: 1fr 1.3fr; gap: 28px; align-items: start; }
+  @media (max-width: 900px){ .calc{ grid-template-columns: 1fr; } }
+  .panel{ border:1px solid var(--line); border-radius:16px; padding: 28px; background: linear-gradient(180deg, var(--stage-2), var(--stage-3)); }
+  .panel h3{ font-size: 20px; margin-bottom: 4px; }
+  .panel .sub{ font-size: 13px; color: var(--ivory-dim); margin: 0 0 14px; }
+  .results{ display:grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+  @media (max-width: 520px){ .results{ grid-template-columns: 1fr; } }
+  .res{ border:1px solid var(--line); border-radius:12px; padding:16px 18px; background: rgba(255,255,255,.02); }
+  .res .k{ font-size: 10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color: var(--ivory-dim); }
+  .res .row{ display:flex; align-items:baseline; gap: 12px; margin-top: 4px; }
+  .res .v{ font-family: var(--font-display); font-size: 42px; color: var(--gold); line-height:1.1; }
+  .res .p{ font-size: 12.5px; color: var(--ivory); font-weight: 700; }
+  .res .t{ font-size: 12.5px; color: var(--ivory-dim); margin-top: 4px; line-height: 1.5; }
+  .res.empty .v{ color: rgba(245,241,232,.18); }
+  .calc-cta{ display:flex; gap: 12px; align-items:center; flex-wrap:wrap; margin-top: 16px; font-size: 13px; color: var(--ivory-dim); }
+  .calc-cta a.link{ color: var(--gold); font-weight: 700; }
+
+  .which{ display:grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 34px; }
+  @media (max-width: 700px){ .which{ grid-template-columns: repeat(2,1fr); } }
+  .which > div{ display:flex; gap: 14px; align-items:center; border:1px solid var(--ink-line); background: var(--ink); border-radius: 10px; padding: 14px 16px; transition: border-color .2s; }
+  .which > div.hit{ border-color: var(--gold); box-shadow: 0 0 22px var(--gold-glow); }
+  .which > div{ min-width:0; }
+  .which > div > div{ min-width:0; }
+  @media (max-width: 520px){ .which > div{ padding: 12px 10px; gap: 10px; } .which b{ font-size: 28px !important; width: 20px !important; } .which span{ font-size: 12px !important; } .which small{ font-size: 11px !important; } }
+  .which b{ font-family: var(--font-display); font-size: 34px; color: var(--gold); font-weight: 500; width: 26px; text-align:center; }
+  .which span{ font-size: 13px; color: var(--ivory); font-weight: 700; display:block; }
+  .which small{ font-size: 12px; color: var(--ivory-dim); }
+
+  /* packages */
+  .offer-bar{ display:flex; justify-content:space-between; align-items:center; gap: 16px; flex-wrap:wrap; background: var(--gold); color: var(--ink); border-radius: 12px; padding: 16px 22px; margin-bottom: 30px; }
+  .offer-bar b{ font-size: 17px; }
+  .offer-bar span{ font-size: 13px; font-weight: 600; }
+  .pkg-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media (max-width: 1000px){ .pkg-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 620px){ .pkg-grid{ grid-template-columns: 1fr; } }
+  .pkg{ position:relative; display:flex; flex-direction:column; padding: 28px 24px 24px; cursor: pointer; }
+  .pkg.selected{ border-color: var(--gold); box-shadow: 0 0 34px var(--gold-glow); }
+  .pkg.featured{ background: linear-gradient(180deg, #221d4f, var(--ink)); border-color: var(--ink-line); }
+  .pkg .badge{ position:absolute; top:-11px; left:24px; font-size:10.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; background: var(--gold); color: var(--stage); padding: 4px 10px; border-radius: 999px; }
+  .pkg .badge.alt{ background: var(--ivory); }
+  .pkg h3{ font-size: 22px; }
+  .pkg .for{ font-size: 13px; color: var(--ivory-dim); margin-top: 6px; }
+  .pkg .price{ display:flex; align-items:baseline; gap: 10px; flex-wrap:wrap; margin-top: 14px; }
+  .pkg .price b{ font-family: var(--font-display); font-size: 34px; font-weight: 600; color: var(--ivory); }
+  .pkg .price s{ color: var(--ivory-dim); font-size: 15px; }
+  .pkg .price .offer{ font-size: 12px; font-weight: 700; color: var(--gold); }
+  .pkg .fmt{ font-size: 12px; color: var(--gold); font-weight: 700; margin-top: 4px; }
+  .pkg ul{ list-style:none; padding:0; margin: 16px 0 20px; font-size: 13.5px; color: var(--ivory-dim); line-height: 1.5; flex:1; }
+  .pkg li{ padding: 6px 0 6px 22px; position:relative; border-top: 1px solid var(--line-soft); }
+  .pkg li:first-child{ border-top: none; }
+  .pkg li::before{ content:"✦"; position:absolute; left:0; top:6px; color: var(--gold); font-size: 11px; }
+  .pkg .acts{ display:flex; gap: 8px; }
+  .pkg .acts .btn{ flex:1; justify-content:center; padding: 12px 10px; font-size: 12.5px; }
+  .pkg.selected .btn-pick{ background: var(--gold); border-color: var(--gold); color: var(--stage); }
+
+  .addons{ margin-top: 34px; }
+  .addons h3{ font-size: 20px; margin-bottom: 4px; }
+  .addons .sub{ font-size: 13.5px; color: var(--ivory-dim); margin: 0 0 14px; }
+  .addon-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  @media (max-width: 1000px){ .addon-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px){ .addon-grid{ grid-template-columns: 1fr; } }
+  .addon{ display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:12px; padding: 14px 16px; cursor:pointer; background: rgba(255,255,255,.02); transition: border-color .2s ease; }
+  .addon:hover{ border-color: rgba(212,175,106,.5); }
+  .addon.on{ border-color: var(--gold); background: rgba(212,175,106,.1); }
+  .addon.incl{ opacity: .6; cursor: default; }
+  .addon b{ font-size: 14px; display:block; }
+  .addon span{ font-size: 12px; color: var(--ivory-dim); }
+  .addon .ap{ font-weight: 700; font-size: 14px; color: var(--gold); white-space: nowrap; margin-left:auto; }
+  .addon .tick{ width:20px; height:20px; border-radius:6px; border:1px solid var(--line); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size: 12px; color: transparent; }
+  .addon.on .tick, .addon.incl .tick{ background: var(--gold); border-color: var(--gold); color: var(--stage); }
+
+  /* matrix */
+  .matrix-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius: 14px; }
+  .matrix{ width:100%; border-collapse: collapse; min-width: 820px; font-size: 13.5px; }
+  .matrix th, .matrix td{ padding: 12px 14px; border-bottom: 1px solid var(--line-soft); text-align:center; }
+  .matrix th{ font-size: 11px; letter-spacing:.08em; text-transform: uppercase; color: var(--ivory-dim); font-weight: 700; background: var(--stage-2); position: sticky; top: 0; }
+  .matrix th:first-child, .matrix td:first-child{ text-align:left; }
+  .matrix td:first-child{ color: var(--ivory); }
+  .matrix td:first-child small{ display:block; color: var(--ivory-dim); font-size: 12px; }
+  .matrix td{ color: var(--ivory-dim); }
+  .matrix .y{ color: var(--gold); font-size: 16px; }
+  .matrix .n{ color: rgba(245,241,232,.2); }
+  .matrix .a{ font-size: 11.5px; color: var(--ivory-dim); border:1px solid var(--line); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+  .matrix tr.foot td{ background: var(--stage-2); font-weight: 700; color: var(--ivory); }
+  .matrix th.hl, .matrix td.hl{ background: rgba(212,175,106,.06); }
+
+  /* steps */
+  .steps{ display:grid; grid-template-columns: repeat(5,1fr); gap: 18px; counter-reset: s; }
+  @media (max-width: 1000px){ .steps{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px){ .steps{ grid-template-columns: 1fr; } }
+  .step{ border-top: 1px solid var(--line); padding-top: 16px; }
+  .step::before{ counter-increment: s; content: "0" counter(s); font-family: var(--font-display); font-size: 26px; color: var(--gold); display:block; margin-bottom: 6px; }
+  .step h4{ font-size: 16.5px; }
+  .step p{ font-size: 13px; color: var(--ivory-dim); margin: 6px 0 0; }
+
+  /* form */
+  .book-wrap{ display:grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items:start; }
+  @media (max-width: 980px){ .book-wrap{ grid-template-columns: 1fr; } }
+  .booking-box{ border:1px solid var(--line); padding:32px; border-radius:16px; background: linear-gradient(180deg, var(--stage-2), var(--stage-3)); }
+  @media (max-width: 520px){ .booking-box{ padding: 24px 18px; } }
+  .fs-title{ font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 24px 0 14px; padding-top: 18px; border-top: 1px solid var(--line-soft); }
+  .fs-title.first{ border-top: none; padding-top: 0; margin-top: 0; }
+  .fs-title small{ text-transform:none; letter-spacing:0; font-weight: 500; color: var(--ivory-dim); font-size: 12px; margin-left: 6px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .form-row.three{ grid-template-columns: 1fr 1fr 1fr; }
+  .form-row.one{ grid-template-columns: 1fr; }
+  @media (max-width:640px){ .form-row, .form-row.three{ grid-template-columns:1fr; } }
+  .booking-box label{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ivory-dim); display:block; margin-bottom:8px; }
+  .booking-box label i{ font-style: normal; text-transform: none; letter-spacing: 0; font-weight: 500; color: rgba(185,182,172,.75); }
+  .booking-box input, .booking-box select, .booking-box textarea{ width:100%; padding:13px 15px; border:1px solid var(--line); background: rgba(255,255,255,0.03); border-radius:8px; font-family:var(--font-body); font-size:14.5px; color:var(--ivory); color-scheme: dark; }
+  .booking-box input::placeholder, .booking-box textarea::placeholder{ color: rgba(245,241,232,.35); }
+  .booking-box select option{ background: var(--stage-2); }
+  .booking-box textarea{ min-height: 84px; resize: vertical; }
+  .booking-box input:focus, .booking-box select:focus, .booking-box textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; border-color: transparent; }
+  .cond{ border-left: 2px solid var(--ink-line); padding-left: 16px; margin-bottom: 4px; }
+  .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+  .chip{ border:1px solid var(--line); padding:9px 15px; border-radius:999px; font-size:12.5px; font-weight:600; cursor:pointer; color: var(--ivory-dim); user-select:none; }
+  .chip.selected{ border-color: var(--gold); background: var(--gold); color: var(--stage); }
+  .booking-box label.consent{ display:flex; gap:10px; align-items:flex-start; font-size: 13px; color: var(--ivory-dim); margin-top: 18px; line-height: 1.5; text-transform:none; letter-spacing:0; font-weight:500; }
+  .consent input{ width:auto; margin-top: 3px; accent-color: var(--gold); }
+  .total-row{ display:flex; justify-content:space-between; gap: 12px; padding-top:12px; border-top:1px solid var(--line); margin-top:12px; font-size:14px; color: var(--ivory-dim); }
+  .total-row b{ color: var(--ivory); white-space: nowrap; }
+  .total-row.save b{ color: #9fe0c8; }
+  .total-row.grand{ font-size: 17px; color: var(--ivory); font-weight: 700; }
+  .total-row.grand b{ color: var(--gold); font-family: var(--font-display); font-size: 26px; font-weight: 600; }
+  .hint{ font-size: 12px; color: var(--ivory-dim); margin-top: 8px; }
+  .aside-card{ border:1px solid var(--line); border-radius:16px; padding: 26px; background: rgba(255,255,255,.02); }
+  .aside-card + .aside-card{ margin-top: 16px; }
+  .aside-card h4{ font-size: 18px; margin-bottom: 10px; }
+  .aside-card ul{ margin:0; padding-left: 18px; font-size: 13.5px; color: var(--ivory-dim); line-height: 1.8; }
+  .aside-card p{ font-size: 13.5px; color: var(--ivory-dim); margin: 0; }
+  .aside-card .btn{ margin-top: 14px; }
+  .aside-card.ink{ background: var(--ink); border-color: var(--ink-line); }
+
+  /* faq */
+  .faq{ max-width: 840px; }
+  .faq details{ border-top: 1px solid var(--line); padding: 18px 0; }
+  .faq details:last-child{ border-bottom: 1px solid var(--line); }
+  .faq summary{ cursor:pointer; font-weight: 600; font-size: 16px; list-style:none; display:flex; justify-content:space-between; gap: 16px; }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{ content:"+"; color: var(--gold); font-size: 22px; line-height: 1; }
+  .faq details[open] summary::after{ content:"–"; }
+  .faq details p{ color: var(--ivory-dim); font-size: 14.5px; margin: 12px 0 0; }
+  .disclaimer{ font-size: 12px; color: var(--ivory-dim); margin-top: 34px; max-width: 840px; font-style: italic; }
+
+  /* sample report modal */
+  .sr-back{ position:fixed; inset:0; z-index: 300; background: rgba(5,6,10,.82); backdrop-filter: blur(6px); display:none; align-items:flex-start; justify-content:center; overflow-y:auto; padding: 40px 16px; }
+  .sr-back.open{ display:flex; }
+  .sr{ width: 100%; max-width: 820px; background: var(--ink); border:1px solid var(--ink-line); border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,.6); position: relative; }
+  .sr-close{ position:absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%; border:1px solid var(--ink-line); background: transparent; color: var(--ivory); font-size: 18px; cursor:pointer; z-index: 2; }
+  .sr-cover{ padding: 38px 40px 30px; border-bottom: 1px solid var(--ink-line); background: radial-gradient(120% 120% at 100% 0%, rgba(212,175,106,.16), transparent 55%); border-radius: 18px 18px 0 0; }
+  @media (max-width: 560px){ .sr-cover{ padding: 30px 22px 24px; } }
+  .sr-cover .brand-line{ font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .sr-cover h3{ font-size: clamp(26px,4vw,36px); margin-top: 12px; }
+  .sr-cover .for{ color: var(--ivory-dim); font-size: 14px; margin-top: 8px; }
+  .sr-meta{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 18px; }
+  .sr-meta span{ font-size: 12px; font-weight: 600; color: var(--ivory); border: 1px solid var(--ink-line); border-radius: 999px; padding: 6px 12px; background: rgba(255,255,255,.03); }
+  .sr-body{ padding: 10px 40px 34px; }
+  @media (max-width: 560px){ .sr-body{ padding: 6px 22px 26px; } }
+  .sr-toc{ display:grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; margin: 22px 0 8px; padding: 18px 20px; border:1px dashed var(--ink-line); border-radius: 12px; }
+  @media (max-width: 560px){ .sr-toc{ grid-template-columns: 1fr; } }
+  .sr-toc div{ font-size: 13px; color: var(--ivory-dim); }
+  .sr-toc div b{ color: var(--gold); font-weight: 700; margin-right: 8px; font-family: var(--font-display); }
+  .sr-sec{ padding-top: 24px; margin-top: 22px; border-top: 1px solid rgba(212,175,106,.14); }
+  .sr-sec h4{ font-size: 19px; display:flex; gap: 10px; align-items: baseline; }
+  .sr-sec h4 small{ font-family: var(--font-body); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .sr-sec p{ color: var(--ivory-dim); font-size: 14.5px; margin: 10px 0 0; }
+  .sr-sec blockquote{ margin: 12px 0 0; padding: 14px 18px; border-left: 2px solid var(--gold); background: rgba(255,255,255,.03); color: var(--ivory); font-family: var(--font-display); font-style: italic; font-size: 16px; line-height: 1.55; border-radius: 0 10px 10px 0; }
+  .sr-todo{ margin-top: 12px; padding: 12px 16px; border-radius: 10px; background: rgba(212,175,106,.1); border: 1px solid var(--ink-line); font-size: 13.5px; color: var(--ivory); }
+  .sr-todo b{ color: var(--gold); text-transform: uppercase; font-size: 11px; letter-spacing: .1em; display:block; margin-bottom: 3px; }
+  .sr table{ width:100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+  .sr table th{ text-align:left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); padding: 8px 10px; border-bottom: 1px solid var(--ink-line); }
+  .sr table td{ padding: 9px 10px; border-bottom: 1px solid rgba(245,241,232,.06); color: var(--ivory-dim); vertical-align: top; }
+  .sr table td:first-child{ color: var(--ivory); }
+  .sr table tr.rec td{ background: rgba(212,175,106,.08); }
+  .sr-tbl{ overflow-x:auto; }
+  @media (max-width: 560px){ .sr table{ font-size: 12.5px; } .sr table th, .sr table td{ padding: 7px 6px; } }
+  .sr-grid{ display:grid; grid-template-columns: repeat(3, 64px); gap: 6px; margin-top: 14px; }
+  .sr-grid span{ height: 64px; display:flex; align-items:center; justify-content:center; border: 1px solid var(--ink-line); border-radius: 6px; font-family: var(--font-display); font-size: 22px; color: var(--gold); }
+  .sr-grid span.e{ color: rgba(245,241,232,.2); }
+  .sr-card{ width: 230px; border-radius: 18px; padding: 20px; background: linear-gradient(170deg, #2a2463, var(--ink)); border: 1px solid var(--gold); margin-top: 14px; }
+  .sr-card .t{ font-size: 10px; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; font-weight: 700; }
+  .sr-card .n{ font-family: var(--font-display); font-size: 20px; margin-top: 8px; }
+  .sr-card .nums{ display:flex; gap: 10px; margin-top: 12px; }
+  .sr-card .nums div{ flex:1; text-align:center; border:1px solid var(--ink-line); border-radius: 8px; padding: 6px 0; }
+  .sr-card .nums b{ display:block; font-family: var(--font-display); font-size: 22px; color: var(--gold); }
+  .sr-card .nums small{ font-size: 9.5px; color: var(--ivory-dim); text-transform: uppercase; letter-spacing: .06em; }
+  .sr-card ol{ margin: 12px 0 0; padding-left: 18px; font-size: 11.5px; color: var(--ivory-dim); line-height: 1.6; }
+  .sr-card .l{ font-size: 11.5px; color: var(--ivory); margin-top: 10px; }
+  .sr-foot{ display:flex; justify-content:space-between; align-items:center; gap: 14px; flex-wrap:wrap; padding: 20px 40px; border-top: 1px solid var(--ink-line); background: rgba(255,255,255,.02); border-radius: 0 0 18px 18px; }
+  @media (max-width: 560px){ .sr-foot{ padding: 18px 22px; } }
+  .sr-foot p{ margin:0; font-size: 12px; color: var(--ivory-dim); font-style: italic; max-width: 44ch; }
+</style>
+</head>
+<body>
+
+<section class="nm-hero">
+  <div class="glow a"></div>
+  <div class="shell">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow reveal">The Divine Code Numerology · अंक ज्योतिष</div>
+        <h1 class="reveal">Your birth date holds a number. <em>Is it working for you?</em></h1>
+        <p class="lede reveal">Personal readings on career, money, marriage and your name, from Vishal Singh, author of 7 books on numerology. Pick a reading, share your details, and get guidance you can act on, in English or Hindi.</p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-solid" href="#packages">See readings &amp; prices</a>
+          <a class="btn btn-accent" href="#calculator">Free Moolank check</a>
+        </div>
+        <div class="offer-pill reveal"><b>LAUNCH OFFER</b> 20% off for the first 50 clients</div>
+      </div>
+      <div class="reveal">
+        <div class="loshu" aria-hidden="true"><span>4</span><span>9</span><span>2</span><span>3</span><span class="c">5</span><span>7</span><span>8</span><span>1</span><span>6</span></div>
+        <div class="loshu-cap">The Lo Shu grid: every birth date fills it differently</div>
+      </div>
+    </div>
+    <div class="cred reveal">
+      <div class="cred-covers">
+        <img src="assets/covers/divine-code-kindle.webp" alt="The Divine Code" loading="lazy">
+        <img src="assets/covers/divine-code-graphic-kindle.webp" alt="The Divine Code: Graphic Edition" loading="lazy">
+        <img src="assets/covers/numerology-vol-1-kindle.webp" alt="The Complete Science of Numerology, Volume 1" loading="lazy">
+        <img src="assets/covers/numerology-vol-2-kindle.webp" alt="Volume 2" loading="lazy">
+        <img src="assets/covers/numerology-vol-3-kindle.webp" alt="Volume 3" loading="lazy">
+        <img src="assets/covers/numerology-vol-4-kindle.webp" alt="Volume 4" loading="lazy">
+        <img src="assets/covers/numerology-vol-5-kindle.webp" alt="Volume 5" loading="lazy">
+      </div>
+      <p>Author of <b>The Divine Code</b> and the five-volume <b>Complete Science of Numerology</b>. <a href="bookstore.html" class="gold" style="font-weight:600;">See the books →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CALCULATOR -->
+<section class="section-tight" id="calculator">
+  <div class="shell">
+    <div class="sec-head">
+      <div class="eyebrow reveal">Free · आपका मूलांक क्या है?</div>
+      <h2 class="reveal">What is your Moolank?</h2>
+      <p class="reveal">Enter your date of birth and name to see your four core numbers. A reading shows how they work together, what's missing from your chart, and what to do about it.</p>
+    </div>
+    <div class="calc reveal">
+      <div class="panel">
+        <h3>Date of birth</h3>
+        <p class="sub">Gives your Moolank, Bhagyank and Personal Year 2027.</p>
+        <input type="date" id="cDob" aria-label="Your date of birth" class="vs-input" style="color-scheme:dark;" max="2026-12-31">
+        <h3 style="margin-top:20px;">Name</h3>
+        <p class="sub">The name you use every day (Chaldean letter values).</p>
+        <input type="text" id="cName" class="vs-input" placeholder="e.g. Priya Sharma" aria-label="Your name" autocomplete="name">
+        <div class="calc-cta"><span>Prefer WhatsApp?</span><a class="link" id="waFree" href="#" target="_blank" rel="noopener">Send your birth date for a free reading →</a></div>
+      </div>
+      <div>
+        <div class="results">
+          <div class="res empty" id="rMool"><div class="k">Moolank · birth day</div><div class="row"><div class="v">–</div><div class="p"></div></div><div class="t">Enter your date of birth</div></div>
+          <div class="res empty" id="rBhag"><div class="k">Bhagyank · full date</div><div class="row"><div class="v">–</div><div class="p"></div></div><div class="t">Enter your date of birth</div></div>
+          <div class="res empty" id="rName"><div class="k">Name number</div><div class="row"><div class="v">–</div><div class="p"></div></div><div class="t">Enter your name</div></div>
+          <div class="res empty" id="rYear"><div class="k">Personal Year 2027</div><div class="row"><div class="v">–</div><div class="p"></div></div><div class="t">Enter your date of birth</div></div>
+        </div>
+        <p class="calc-cta" id="cMatch" style="display:none;"></p>
+      </div>
+    </div>
+
+    <div class="which reveal" id="whichGrid">
+      <div data-n="1"><b>1</b><div><span>Sun सूर्य</span><small>Born 1, 10, 19, 28</small></div></div>
+      <div data-n="2"><b>2</b><div><span>Moon चंद्र</span><small>Born 2, 11, 20, 29</small></div></div>
+      <div data-n="3"><b>3</b><div><span>Jupiter गुरु</span><small>Born 3, 12, 21, 30</small></div></div>
+      <div data-n="4"><b>4</b><div><span>Rahu राहु</span><small>Born 4, 13, 22, 31</small></div></div>
+      <div data-n="5"><b>5</b><div><span>Mercury बुध</span><small>Born 5, 14, 23</small></div></div>
+      <div data-n="6"><b>6</b><div><span>Venus शुक्र</span><small>Born 6, 15, 24</small></div></div>
+      <div data-n="7"><b>7</b><div><span>Ketu केतु</span><small>Born 7, 16, 25</small></div></div>
+      <div data-n="8"><b>8</b><div><span>Saturn शनि</span><small>Born 8, 17, 26</small></div></div>
+      <div data-n="9"><b>9</b><div><span>Mars मंगल</span><small>Born 9, 18, 27</small></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- PACKAGES -->
+<section class="section-tight" id="packages">
+  <div class="shell">
+    <div class="sec-head">
+      <div class="eyebrow reveal">Personal readings</div>
+      <h2 class="reveal">Choose your reading</h2>
+      <p class="reveal">Every reading is prepared personally by Vishal. Tap <b style="color:var(--ivory);">Sample report</b> on any package to see exactly what you'll receive.</p>
+    </div>
+    <div class="offer-bar reveal"><div><b>Launch offer: 20% off</b><br><span>For the first 50 clients, on every reading and add-on. Applied automatically in your total below.</span></div><span>WhatsApp NUMEROLOGY · <a href="#" class="waNum" target="_blank" rel="noopener" style="text-decoration:underline;">+91 91365 40798</a></span></div>
+
+    <div class="pkg-grid" id="pkgGrid"></div>
+
+    <div class="addons reveal">
+      <h3>Add-ons</h3>
+      <p class="sub">Add to any reading. Mobile, house &amp; vehicle and couple compatibility are already included in the Life Blueprint.</p>
+      <div class="addon-grid" id="addonGrid"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- WHAT'S IN EACH REPORT -->
+<section class="section-tight" id="compare">
+  <div class="shell">
+    <div class="sec-head">
+      <div class="eyebrow reveal">Report format</div>
+      <h2 class="reveal">What's inside each reading</h2>
+      <p class="reveal">Reports are built from the same twelve sections. Every section ends with a short <b style="color:var(--ivory);">"What to do"</b> box, because you're paying for guidance you can act on, not descriptions.</p>
+    </div>
+    <div class="matrix-wrap reveal"><table class="matrix" id="matrix"></table></div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- HOW IT WORKS -->
+<section class="section-tight">
+  <div class="shell">
+    <div class="sec-head"><div class="eyebrow reveal">How it works</div><h2 class="reveal">From your details to your reading</h2></div>
+    <div class="steps reveal">
+      <div class="step"><h4>Book below</h4><p>Choose a reading and share your details. It takes about three minutes.</p></div>
+      <div class="step"><h4>Pay securely</h4><p>We confirm on WhatsApp or email within 24 hours with a secure payment link.</p></div>
+      <div class="step"><h4>A personal welcome</h4><p>Within an hour of payment: a voice note from Vishal and your delivery date.</p></div>
+      <div class="step"><h4>Your report</h4><p>A PDF in The Divine Code design, with your name on the cover, plus a phone summary card with Life Blueprint.</p></div>
+      <div class="step"><h4>Call &amp; follow-up</h4><p>Your call, where included, then follow-up questions on WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- BOOKING FORM -->
+<section class="section-tight" id="book">
+  <div class="shell">
+    <div class="sec-head"><div class="eyebrow reveal">Book your reading</div><h2 class="reveal">Tell us about you</h2><p class="reveal">The goals and situation questions matter most: they let Vishal write a report about you, not just your numbers. Your details are used only for your reading.</p></div>
+    <div class="book-wrap">
+      <div class="booking-box reveal" id="bookingBox">
+        <div class="fs-title first">Your reading</div>
+        <div class="form-row">
+          <div><label for="bPkg">Reading</label><select id="bPkg"></select></div>
+          <div><label>Report &amp; call language</label><div class="chips" data-single id="bLang"><span class="chip selected" data-v="English">English</span><span class="chip" data-v="Hindi">Hindi</span></div></div>
+        </div>
+
+        <div class="fs-title">Your names</div>
+        <div class="form-row">
+          <div><label for="bOfficial">Full name as on Aadhaar, PAN or passport</label><input id="bOfficial" placeholder="Exact spelling" autocomplete="name"></div>
+          <div><label for="bDaily">Name used day to day <i>(signature name, nickname)</i></label><input id="bDaily" placeholder="e.g. Priya, P. Sharma"></div>
+        </div>
+
+        <div class="fs-title">Your birth details</div>
+        <div class="form-row three">
+          <div><label for="bDob">Date of birth</label><input type="date" id="bDob" max="2026-12-31"></div>
+          <div><label for="bTob">Time of birth <i>(optional)</i></label><input type="time" id="bTob"></div>
+          <div><label for="bPob">Place of birth <i>(optional)</i></label><input id="bPob" placeholder="City"></div>
+        </div>
+        <p class="hint" style="margin-top:-6px;">Time and place are optional and used only if Vishal also refers to astrology for your question.</p>
+
+        <div class="fs-title">How to reach you</div>
+        <div class="form-row">
+          <div><label for="bEmail">Email</label><input type="email" id="bEmail" placeholder="you@email.com" autocomplete="email"></div>
+          <div><label for="bPhone">WhatsApp number</label><input type="tel" id="bPhone" placeholder="+91" autocomplete="tel"></div>
+        </div>
+        <div class="form-row" data-show="call" hidden>
+          <div><label>Call by</label><div class="chips" data-single id="bMode"><span class="chip selected" data-v="Video call">Video call</span><span class="chip" data-v="Phone call">Phone call</span></div></div>
+          <div><label for="bSlot">Preferred time</label><select id="bSlot"><option>Weekday morning</option><option>Weekday evening</option><option>Weekend</option><option>Any time</option></select></div>
+        </div>
+
+        <div class="fs-title">Your life right now</div>
+        <div class="form-row one"><div><label for="bWork">Occupation, employer or business</label><input id="bWork" placeholder="e.g. Marketing manager at an ad agency"></div></div>
+        <div class="form-row one"><div><label for="bGoals">Your 3 biggest goals for the next 12 months</label><textarea id="bGoals" placeholder="1. &#10;2. &#10;3. "></textarea></div></div>
+        <label>What feels stuck right now?</label>
+        <div class="chips" id="bStuck" style="margin-bottom:12px;"><span class="chip" data-v="Career">Career</span><span class="chip" data-v="Money">Money</span><span class="chip" data-v="Marriage">Marriage</span><span class="chip" data-v="Health">Health</span><span class="chip" data-v="Family">Family</span><span class="chip" data-v="Business">Business</span></div>
+        <div class="form-row one"><div><input id="bStuckMore" placeholder="A line about what's stuck (optional)"></div></div>
+        <div class="form-row one"><div><label for="bDecision">Any big decision coming up? <i>(job change, house, wedding, launch)</i></label><input id="bDecision" placeholder="Helps Vishal suggest good dates"></div></div>
+
+        <div data-show="couple" hidden>
+          <div class="fs-title">Your partner <small>for couple compatibility</small></div>
+          <div class="form-row three cond">
+            <div><label for="bPName">Partner's full name</label><input id="bPName"></div>
+            <div><label for="bPDob">Partner's date of birth</label><input type="date" id="bPDob" max="2026-12-31"></div>
+            <div><label for="bMarr">Marriage / engagement <i>(if any)</i></label><input type="date" id="bMarr"></div>
+          </div>
+        </div>
+        <div data-show="mobile" hidden>
+          <div class="fs-title">Mobile numbers <small>for the mobile number check</small></div>
+          <div class="form-row one cond"><div><label for="bMobiles">All mobile numbers you use</label><input id="bMobiles" placeholder="e.g. 98201 45673, 99300 12345"></div></div>
+        </div>
+        <div data-show="house" hidden>
+          <div class="fs-title">House &amp; vehicle <small>for the house and vehicle check</small></div>
+          <div class="form-row cond">
+            <div><label for="bHouse">House / flat no., building no., floor</label><input id="bHouse" placeholder="e.g. Flat 302, Bldg 7, 3rd floor"></div>
+            <div><label for="bVehicle">Vehicle registration number(s)</label><input id="bVehicle" placeholder="e.g. MH 02 AB 4521"></div>
+          </div>
+        </div>
+        <div data-show="business" hidden>
+          <div class="fs-title">Your business <small>for Business &amp; Brand</small></div>
+          <div class="form-row cond">
+            <div><label for="bBizName">Current or proposed business name</label><input id="bBizName" placeholder="Or 'not decided yet'"></div>
+            <div><label for="bBizType">What the business does</label><input id="bBizType" placeholder="e.g. Women's clothing boutique"></div>
+          </div>
+          <div class="form-row one cond"><div><label for="bBizPlan">Launch or registration plans <i>(dates, partners)</i></label><input id="bBizPlan" placeholder="e.g. Launch in April 2027, sole owner"></div></div>
+        </div>
+        <div data-show="baby" hidden>
+          <div class="fs-title">Baby name <small>for the baby name add-on</small></div>
+          <div class="form-row three cond">
+            <div><label for="bBabyDob">Baby's date of birth <i>(or due date)</i></label><input type="date" id="bBabyDob"></div>
+            <div><label for="bSurname">Surname</label><input id="bSurname"></div>
+            <div><label for="bLetters">Preferred letters or style <i>(optional)</i></label><input id="bLetters" placeholder="e.g. starts with A, Sanskrit"></div>
+          </div>
+        </div>
+        <div data-show="children" hidden>
+          <div class="form-row one"><div><label for="bKids">Children's names and dates of birth <i>(optional, for family harmony)</i></label><input id="bKids" placeholder="e.g. Aarav 12/05/2018"></div></div>
+        </div>
+
+        <input class="hp-field" id="bHoney" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="consent"><input type="checkbox" id="bConsent"> I understand this reading is guidance, not a guarantee.</label>
+
+        <div id="totals"></div>
+        <button class="btn btn-solid" style="width:100%; justify-content:center; margin-top:22px;" id="bSubmit" type="button">Request my reading</button>
+        <p class="hint" style="text-align:center;">Nothing is charged now. We'll confirm and send a secure payment link within 24 hours.</p>
+        <div class="notice" id="bResult" style="display:none;"></div>
+      </div>
+
+      <div>
+        <div class="aside-card ink reveal">
+          <h4>You're booking</h4>
+          <p id="asideSummary" style="color:var(--ivory);"></p>
+          <button class="btn btn-accent" type="button" id="asideSample">View its sample report</button>
+        </div>
+        <div class="aside-card reveal">
+          <h4>Every reading includes</h4>
+          <ul>
+            <li>Calculations double-checked by hand</li>
+            <li>Your goals named throughout the report</li>
+            <li>A "What to do" box after every section</li>
+            <li>A PDF that reads well on your phone</li>
+            <li>English or Hindi</li>
+          </ul>
+        </div>
+        <div class="aside-card reveal">
+          <h4>Questions first?</h4>
+          <p>Not sure which reading fits? Message on WhatsApp and Vishal's team will help you choose.</p>
+          <a class="btn btn-accent waNum" href="#" target="_blank" rel="noopener">WhatsApp +91 91365 40798</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline">
+
+<!-- FAQ -->
+<section class="section-tight">
+  <div class="shell">
+    <div class="sec-head"><div class="eyebrow reveal">Questions</div><h2 class="reveal">Before you book</h2></div>
+    <div class="faq reveal">
+      <details><summary>What's the difference between Moolank and Bhagyank?</summary><p>Moolank (root number) comes from the day you were born and describes your nature and instincts. Bhagyank (destiny number) comes from your full date of birth and describes the path your life tends to take. A good reading looks at where the two agree and where they pull apart.</p></details>
+      <details><summary>How is my Personal Year 2027 worked out?</summary><p>Add your birth day and birth month, add 11 (for 2027: 2+0+2+7), and reduce to one digit. Born 14 August: 1+4+0+8 = 13, 13 + 11 = 24, 2+4 = Personal Year 6. The Complete Life Report and Life Blueprint include a month-by-month forecast.</p></details>
+      <details><summary>Will I have to change my name legally?</summary><p>No. A corrected spelling is used first on your signature, email, business cards and social profiles. Changing official documents is optional.</p></details>
+      <details><summary>Which name system do you use?</summary><p>Name numbers use the Chaldean letter values, as in Vishal's books. The free calculator on this page uses the same values.</p></details>
+      <details><summary>How and when do I pay?</summary><p>After you send the form, we confirm within 24 hours on WhatsApp or email and send a secure payment link (UPI, card or net banking). Work starts once payment is received, and you get your delivery date with the welcome voice note.</p></details>
+      <details><summary>How does the launch offer work?</summary><p>The first 50 clients get 20% off every reading and add-on. The Life Blueprint already includes a ₹898 bundle saving, so the launch offer doesn't apply to it. Your final price is confirmed in your payment link.</p></details>
+      <details><summary>Can I reschedule my call?</summary><p>Yes, with 24 hours' notice. If you cancel before work on your report has started, you get a full refund.</p></details>
+    </div>
+    <p class="disclaimer">Readings are offered for guidance and self-reflection. They are not a substitute for financial, legal, medical or psychological advice, and no specific result is guaranteed.</p>
+  </div>
+</section>
+
+<!-- SAMPLE REPORT MODAL -->
+<div class="sr-back" id="srBack" role="dialog" aria-modal="true" aria-labelledby="srTitle">
+  <div class="sr">
+    <button class="sr-close" id="srClose" type="button" aria-label="Close sample report">✕</button>
+    <div class="sr-cover">
+      <div class="brand-line">The Divine Code Numerology · Sample report</div>
+      <h3 id="srTitle"></h3>
+      <div class="for" id="srFor"></div>
+      <div class="sr-meta" id="srMeta"></div>
+    </div>
+    <div class="sr-body" id="srBody"></div>
+    <div class="sr-foot"><p>Sample prepared for a fictional client, shortened to show tone and depth. Your report is written around your own goals.</p><button class="btn btn-solid" id="srBook" type="button">Book this reading</button></div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script>window.SITE_CONFIG.whatsapp = window.SITE_CONFIG.numerologyWhatsapp || window.SITE_CONFIG.whatsapp;</script>
+<script src="js/backend.js"></script>
+<script src="js/shell.js"></script>
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const inr = (n) => '₹' + Math.round(n).toLocaleString('en-IN');
+  const OFFER = 0.20; // launch offer; set to 0 to switch off
+
+  /* ================= DATA ================= */
+  const PKGS = [
+    { id:'snapshot', name:'Number Snapshot', price:499, for:'A clear first look at your core numbers.', fmt:'PDF + personal voice note',
+      items:['Moolank and Bhagyank explained','Your lucky numbers, days and colours','Strengths and blind spots','Voice note from Vishal'],
+      secs:['core','mool','bhag'], call:0 },
+    { id:'life', name:'Complete Life Report', price:1499, for:'Career, money, relationships and your year ahead.', fmt:'10-page PDF',
+      items:['Moolank, Bhagyank and Lo Shu grid','Career and money','Relationships','2027 forecast, month by month','Your action plan'],
+      secs:['welcome','core','mool','bhag','loshu','career','rel','year','plan'], call:0 },
+    { id:'name', name:'Name Correction', price:2499, for:'Is your name holding you back? नाम सुधार', fmt:'PDF + 15-min call',
+      items:['Name number and compound','Fit with your birth numbers','3 corrected spellings','Signature guidance','15-minute call'],
+      secs:['core','name'], call:15 },
+    { id:'consult', name:'1:1 Consultation', price:3100, for:'Talk it through with Vishal, with your full report in hand.', fmt:'45-min video call + full report',
+      items:['45-minute video call','Complete Life Report included','Your own questions and decisions','7 days of WhatsApp follow-up'],
+      secs:['welcome','core','mool','bhag','loshu','career','rel','year','plan'], call:45, follow:'7 days', badge:'Most personal' },
+    { id:'business', name:'Business & Brand', price:5100, for:'A business name and launch dates that support you.', fmt:'Business report + 30-min call',
+      items:['Business name analysis','Fit with the owner\'s numbers','5 name options','Best launch dates','30-minute call'],
+      secs:['core','biz','year'], call:30 },
+    { id:'blueprint', name:'Life Blueprint', price:6999, was:7897, for:'Everything, for individuals and couples.', fmt:'25–30 page PDF + 45-min call',
+      items:['Premium personal report, all 12 sections','45-minute video consultation','Couple compatibility, mobile, house & vehicle','Phone summary card','30 days of WhatsApp follow-up'],
+      secs:['welcome','core','mool','bhag','loshu','name','career','rel','mobile','house','year','plan'], call:45, follow:'30 days', badge:'Best value · save ₹898', featured:true, noOffer:true, includes:['mobile','house','couple'] }
+  ];
+  const ADDONS = [
+    { id:'mobile', name:'Mobile number check', price:299, d:'Keep it or change it?' },
+    { id:'house', name:'House or vehicle number', price:499, d:'Before you buy or move' },
+    { id:'couple', name:'Couple compatibility', price:1999, d:'Two charts, side by side' },
+    { id:'baby', name:'Baby name', price:1999, d:'Names matched to the birth date' }
+  ];
+  const SECTIONS = [
+    ['welcome','Personal welcome letter','Your goals, signed by Vishal'],
+    ['core','Your core numbers at a glance','Moolank, Bhagyank, name number, Personal Year, lucky numbers'],
+    ['mool','Moolank: who you are','Planet, nature, strengths, blind spots'],
+    ['bhag','Bhagyank: your life path','Purpose; where it agrees with your Moolank'],
+    ['loshu','Lo Shu grid','Repeated and missing numbers, remedies'],
+    ['name','Name analysis & correction','Name number, corrected spellings, signature'],
+    ['career','Career & money','Suited fields, money patterns'],
+    ['rel','Relationships & couple compatibility','Both partners\' numbers side by side'],
+    ['mobile','Mobile number','Keep or change; totals to look for'],
+    ['house','House & vehicle numbers','Each number\'s energy, simple remedies'],
+    ['year','Your 2027 forecast','Month by month, best months to act'],
+    ['plan','Your action plan','5–7 steps in priority order']
+  ];
+
+  /* ---------- sample report content (fictional client: Priya Sharma) ---------- */
+  const todo = (t) => `<div class="sr-todo"><b>What to do</b>${t}</div>`;
+  const sec = (n, title, html) => `<div class="sr-sec"><h4><small>${n}</small>${title}</h4>${html}</div>`;
+  const tbl = (head, rows, rec) => `<div class="sr-tbl"><table><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map((r,i)=>`<tr${rec===i?' class="rec"':''}>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+  const S = {
+    client: '<p><b style="color:var(--ivory);">Client (fictional):</b> Priya Sharma, born 14/08/1990, marketing manager in Mumbai. Goals: start her own clothing boutique, buy a home, and feel less stuck at work.</p>',
+    welcome: sec('1','Welcome letter', `<blockquote>Dear Priya, you told me you want to build something of your own, find a home for your family, and stop feeling that your hard work goes unseen. This report is written around those three goals. Read it slowly, and keep the action plan on the last page close by.</blockquote>`),
+    coreOne: sec('2','Your core numbers at a glance', tbl(['Number','Priya'], [['Moolank (birth day)','5 · Mercury'],['Bhagyank (full date)','5 · Mercury'],['Name number (Chaldean)','29 → 2 · Moon'],['Personal Year 2027','6']])),
+    coreTwo: sec('2','Your core numbers at a glance', tbl(['Number','Priya','Rahul (partner)'], [['Moolank (birth day)','5 · Mercury','4 · Rahu'],['Bhagyank (full date)','5 · Mercury','5 · Mercury'],['Name number (Chaldean)','29 → 2 · Moon','33 → 6 · Venus'],['Personal Year 2027','6','9']])),
+    lucky: sec('✦','Lucky at a glance', tbl(['Lucky numbers','Lucky day','Colours'], [['5, 14, 23','Wednesday (Mercury)','Green, light grey']])),
+    mool: sec('3–4','Moolank and Bhagyank', `<p>Your Moolank and Bhagyank are both 5, ruled by Mercury: a double 5. You think fast, sell ideas well and need variety; routine drains you. Double 5 people do best when they control their own time, which is why a business of your own fits you.</p>${todo('Choose work where you talk to people and make decisions. Plan your week in advance, because Mercury energy scatters easily.')}`),
+    loshu: sec('5','Lo Shu grid', `<p>From 14/08/1990, plus the Moolank and Bhagyank (5, 5):</p><div class="sr-grid"><span>4</span><span>99</span><span class="e">—</span><span class="e">—</span><span>55</span><span class="e">—</span><span>8</span><span>11</span><span class="e">—</span></div><p>The full middle line (9–5–1) shows strong willpower and drive. Missing 2, 3, 6 and 7 point to areas to build: patience in partnerships (2), expressing yourself with confidence (3), balancing family duties (6) and trusting the process (7).</p>${todo('Remedies for each missing number, chosen for your situation.')}`),
+    name: sec('6','Name analysis and correction', `<p>Your name "Priya Sharma" totals 29, which reduces to 2 (Moon). The Moon is gentle and emotional, while your birth numbers are a sharp, fast 5. This mismatch can feel like effort that doesn't convert into recognition.</p>${tbl(['Option','Total','Reduces to','Comment'], [['Priyaa Sharrma','32','5','Matches both birth numbers; recommended'],['Prriya Sharmaa','32','5','Same number; changes both names'],['Priya Sarma','24','6','Venus; softer; supports family and beauty work']], 0)}${todo('Use the new spelling on your signature, email, business cards and social profiles first. Official documents are optional.')}`),
+    sign: sec('✦','Signature guidance', `<p>Sign as "Priyaa Sharrma", with the full name readable and written on a slight upward line. Avoid a line cutting through the name. We go through it together on your 15-minute call.</p>`),
+    career: sec('7','Career and money', `<p>Double 5 suits sales, marketing, media, travel and trading, and especially your own business. Your Personal Year 6 in 2027 is ruled by Venus, the planet of beauty and clothing, which makes a boutique a natural fit.</p>${todo('Use 2027 to move from employee to owner: research in January, funding in February, launch in April.')}`),
+    relOne: sec('8','Relationships', `<p>As a double 5 you need a partner who gives you room to move. You bond through shared adventures and conversation, and pull away when life gets too predictable.</p>${todo('Plan one new experience together each month, and agree on money decisions on paper.')}`),
+    couple: sec('8','Couple compatibility', `<p>You share Bhagyank 5, so you want the same kind of life: movement, variety and growth. Rahul's Moolank 4 wants stability and planning; your 5 wants freedom. Money and big decisions are where you may clash. In 2027 Rahul is in a Personal Year 9, a year of completing and letting go, while you are in a 6, a year of home and family.</p>${todo('Decide big purchases together on paper, with Rahul owning the plan and you owning the opportunity. Let 2027 be the year he closes old chapters while you build the home.')}`),
+    mobile: sec('9','Mobile number', `<p>98201 45673 adds up to 45, which reduces to 9 (Mars). It is neutral for your 5: not harmful, but not helping. Keep it for now.</p>${todo('When you get a business number, choose one whose total reduces to 5.')}`),
+    house: sec('10','House and vehicle', `<p>Flat 302 reduces to 5, the same as both your Bhagyanks: a lively, social home that supports movement and change. The car's number 4521 reduces to 3 (Jupiter), and the full registration digits (MH 02 AB 4521) total 14, which reduces to 5. Both are supportive.</p>`),
+    year: sec('11','Your 2027 forecast: Personal Year 6', tbl(['Month','Personal month','Guidance for Priya'], [['January','7','Plan quietly; research the boutique'],['February','8','Money month: arrange funding and savings'],['March','9','Finish old commitments at work'],['April','1','Best month to launch the boutique'],['May','2','Partnerships, suppliers, patience'],['June','3','Marketing, social media, visibility'],['July','4','Systems, accounts, hard work'],['August','5','Expansion, travel, new customers'],['September','6','Strongest month for buying the home (6 in a 6 year)'],['October','7','Rest and review'],['November','8','Second money push: festive sales'],['December','9','Close the year, plan 2028']])),
+    yearShort: sec('11','Launch timing', `<p>2027 is Priya's Personal Year 6 (Venus: beauty, clothing, home). April is her Personal Month 1, the month of new beginnings, so it is the best month to open.</p>${tbl(['Date','Why'], [['14 April 2027 (Wed)','Date 14 → 5 matches her Moolank; Wednesday is Mercury\'s day. Recommended'],['5 April 2027 (Mon)','Date 5; good backup'],['23 April 2027 (Fri)','Date 23 → 5; Friday is Venus\'s day, good for fashion']], 0)}`),
+    plan: sec('12','Your action plan', `<ol style="color:var(--ivory-dim); font-size:14px; line-height:1.8; margin:10px 0 0; padding-left:20px;"><li>Start using the spelling "Priyaa Sharrma" on your signature and profiles this month.</li><li>Spend January researching the boutique and February arranging funds.</li><li>Launch in April 2027.</li><li>Get a business mobile number whose total reduces to 5.</li><li>Plan the home purchase for September 2027, with Rahul leading the paperwork.</li><li>Book a short review call in June to check progress.</li></ol>`),
+    biz: sec('✦','Business name options', `<p>Priya's working name "Priya Boutique" totals 45, which reduces to 9 (Mars): workable, but Mars pushes and competes, while her double 5 sells through charm and variety. Five options, checked against her numbers:</p>${tbl(['Option','Total','Reduces to','Comment'], [['Sutra Studio','41','5 · Mercury','Matches her double 5; short and memorable. Recommended'],['Sutra by Priya','32','5 · Mercury','Same number and keeps her name visible'],['Rangrez Studio','50','5 · Mercury','Strong for a designer label'],['Kesar Couture','46','1 · Sun','Leadership and a premium feel; good second choice'],['Priya Boutique','45','9 · Mars','Current idea; not recommended']], 0)}${todo('Register the name, domain and Instagram handle together, and use the exact same spelling everywhere.')}`),
+    callPlan: sec('✦','Your 45-minute call', `<p>Ten minutes on your numbers, thirty-five on your questions and decisions. Clients remember the conversation more than the pages. Afterwards you get 7 days of follow-up questions on WhatsApp.</p>${tbl(['Time','What we cover'], [['0–10 min','Your core numbers and what they mean for your goals'],['10–40 min','Your questions: Priya asked about leaving her job, the boutique launch and the home purchase'],['40–45 min','Agreeing your top three actions']])}`),
+    card: sec('✦','Your phone summary card', `<div class="sr-card"><div class="t">The Divine Code</div><div class="n">Priya Sharma</div><div class="nums"><div><b>5</b><small>Moolank</small></div><div><b>5</b><small>Bhagyank</small></div><div><b>6</b><small>2027</small></div></div><div class="l">Lucky day: Wednesday · Colours: green, light grey</div><ol><li>Sign as "Priyaa Sharrma"</li><li>Launch in April 2027</li><li>Buy the home in September</li></ol></div>`)
+  };
+  const SAMPLES = {
+    snapshot: [S.client, S.coreOne, S.lucky, S.mool, sec('✦','Your voice note','<p>A personal voice note from Vishal walks you through your numbers in a few minutes, in English or Hindi.</p>')],
+    life: [S.client, S.welcome, S.coreOne, S.mool, S.loshu, S.career, S.relOne, S.year, S.plan],
+    name: [S.client, S.coreOne, S.name, S.sign],
+    consult: [S.client, S.callPlan, S.coreOne, S.career, S.year],
+    business: [S.client, S.coreOne, S.biz, S.yearShort, sec('✦','Your 30-minute call','<p>We go through the five options together, check the domain and social handles you can get, and fix the launch date.</p>')],
+    blueprint: [S.client, S.welcome, S.coreTwo, S.loshu, S.name, S.couple, S.mobile, S.house, S.year, S.plan, S.card]
+  };
+
+  /* ================= RENDER ================= */
+  const offerPrice = (p) => p.noOffer || !OFFER ? p.price : Math.round(p.price * (1 - OFFER));
+  $('pkgGrid').innerHTML = PKGS.map(p => `
+    <div class="card pkg reveal${p.featured ? ' featured' : ''}" data-pkg="${p.id}" tabindex="0" role="button" aria-label="Choose ${p.name}">
+      ${p.badge ? `<span class="badge${p.featured ? '' : ' alt'}">${p.badge}</span>` : ''}
+      <h3>${p.name}</h3>
+      <div class="for">${p.for}</div>
+      <div class="price"><b>${inr(p.price)}</b>${p.was ? `<s>${inr(p.was)}</s>` : ''}${!p.noOffer && OFFER ? `<span class="offer">${inr(offerPrice(p))} with launch offer</span>` : ''}</div>
+      <div class="fmt">${p.fmt}</div>
+      <ul>${p.items.map(i => `<li>${i}</li>`).join('')}</ul>
+      <div class="acts"><button class="btn btn-sample" type="button" data-sample="${p.id}">Sample report</button><button class="btn btn-pick" type="button">Choose</button></div>
+    </div>`).join('');
+  $('addonGrid').innerHTML = ADDONS.map(a => `
+    <div class="addon" data-addon="${a.id}" tabindex="0" role="checkbox" aria-checked="false"><div class="tick">✓</div><div><b>${a.name}</b><span data-d>${a.d}</span></div><div class="ap">${inr(a.price)}</div></div>`).join('');
+  $('bPkg').innerHTML = PKGS.map(p => `<option value="${p.id}">${p.name} — ${inr(p.price)}</option>`).join('') + '<option value="none">Add-ons only</option>';
+
+  // matrix
+  const has = (p, s) => p.secs.includes(s);
+  const cell = (p, s) => {
+    if (has(p, s)) {
+      if ((s === 'mool' || s === 'bhag') && p.id === 'snapshot') return '<span class="y">✓</span><br><small>summary</small>';
+      if (s === 'rel' && p.id !== 'blueprint') return '<span class="y">✓</span><br><small>relationships</small>';
+      if (s === 'name' && p.id === 'name') return '<span class="y">✓</span><br><small>3 spellings</small>';
+      if (s === 'year' && p.id === 'business') return '<span class="y">✓</span><br><small>launch dates</small>';
+      return '<span class="y">✓</span>';
+    }
+    if (s === 'mobile' || s === 'house') return '<span class="a">add-on</span>';
+    if (s === 'rel') return '<span class="a">couple add-on</span>';
+    return '<span class="n">—</span>';
+  };
+  const extra = [
+    ['Business name &amp; 5 options', p => p.id === 'business' ? '<span class="y">✓</span>' : '<span class="n">—</span>'],
+    ['Voice note', p => p.id === 'snapshot' ? '<span class="y">✓</span>' : (p.id === 'blueprint' || p.id === 'consult') ? '<span class="y">✓</span><br><small>welcome</small>' : '<span class="n">—</span>'],
+    ['Call with Vishal', p => p.call ? p.call + ' min' : '<span class="n">—</span>'],
+    ['WhatsApp follow-up', p => p.follow || '<span class="n">—</span>'],
+    ['Phone summary card', p => p.id === 'blueprint' ? '<span class="y">✓</span>' : '<span class="n">—</span>']
+  ];
+  $('matrix').innerHTML = `<tr><th>Section</th>${PKGS.map(p => `<th class="${p.featured ? 'hl' : ''}">${p.name}</th>`).join('')}</tr>` +
+    SECTIONS.map(([id, t, d], i) => `<tr><td><b class="gold" style="font-family:var(--font-display); margin-right:6px;">${i + 1}</b>${t}<small>${d}</small></td>${PKGS.map(p => `<td class="${p.featured ? 'hl' : ''}">${cell(p, id)}</td>`).join('')}</tr>`).join('') +
+    extra.map(([t, f]) => `<tr><td>${t}</td>${PKGS.map(p => `<td class="${p.featured ? 'hl' : ''}">${f(p)}</td>`).join('')}</tr>`).join('') +
+    `<tr class="foot"><td>Price</td>${PKGS.map(p => `<td class="${p.featured ? 'hl' : ''}">${inr(p.price)}<br><button class="btn btn-sample" type="button" data-sample="${p.id}" style="padding:7px 12px; font-size:11.5px; margin-top:8px;">Sample</button></td>`).join('')}</tr>`;
+
+  /* ================= SAMPLE MODAL ================= */
+  let lastFocus = null, srPkg = null;
+  function openSample(id){
+    const p = PKGS.find(x => x.id === id); if (!p) return;
+    srPkg = id; lastFocus = document.activeElement;
+    $('srTitle').textContent = p.id === 'blueprint' ? 'The Divine Code Life Blueprint' : p.name;
+    $('srFor').textContent = 'Prepared for Priya Sharma (fictional client) · ' + p.for;
+    $('srMeta').innerHTML = [p.fmt, p.follow ? p.follow + ' WhatsApp follow-up' : '', inr(p.price)].filter(Boolean).map(m => `<span>${m}</span>`).join('');
+    const toc = SECTIONS.filter(([s]) => has(p, s)).map(([s, t]) => `<div><b>${SECTIONS.findIndex(x => x[0] === s) + 1}</b>${s === 'rel' && p.id !== 'blueprint' ? 'Relationships' : t}</div>`).join('') +
+      (p.id === 'business' ? '<div><b>✦</b>Business name &amp; 5 options</div>' : '') + (p.id === 'name' ? '<div><b>✦</b>Signature guidance</div>' : '') + (p.id === 'blueprint' ? '<div><b>✦</b>Phone summary card</div>' : '') + (p.call ? `<div><b>✦</b>${p.call}-minute call</div>` : '');
+    $('srBody').innerHTML = `<div class="sr-toc">${toc}</div>` + SAMPLES[id].join('');
+    $('srBack').classList.add('open'); document.body.style.overflow = 'hidden';
+    $('srBack').scrollTop = 0; $('srClose').focus();
+  }
+  function closeSample(){ $('srBack').classList.remove('open'); document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+  $('srClose').addEventListener('click', closeSample);
+  $('srBack').addEventListener('click', e => { if (e.target === $('srBack')) closeSample(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('srBack').classList.contains('open')) closeSample(); });
+  $('srBook').addEventListener('click', () => { closeSample(); choosePkg(srPkg, true); });
+  document.addEventListener('click', e => { const b = e.target.closest('[data-sample]'); if (b) { e.stopPropagation(); openSample(b.dataset.sample); } }, true);
+  $('asideSample').addEventListener('click', () => openSample($('bPkg').value === 'none' ? 'snapshot' : $('bPkg').value));
+
+  /* ================= CALCULATOR ================= */
+  const PLANET = { 1:'Sun', 2:'Moon', 3:'Jupiter', 4:'Rahu', 5:'Mercury', 6:'Venus', 7:'Ketu', 8:'Saturn', 9:'Mars' };
+  const TRAIT = { 1:'Leader, independent, ambitious; happiest in charge.', 2:'Sensitive, intuitive, diplomatic; a natural peacemaker.', 3:'Wise, optimistic, a teacher at heart; loves to grow.', 4:'Unconventional, hardworking, sharp; breaks old patterns.', 5:'Quick, witty, adaptable; thrives on change and people.', 6:'Warm, artistic, loyal; drawn to beauty, family and comfort.', 7:'Deep thinker, spiritual, private; seeks the truth.', 8:'Patient, disciplined, determined; success comes with time.', 9:'Courageous, energetic, protective; a fighter for causes.' };
+  const YEAR = { 1:'New beginnings', 2:'Partnerships', 3:'Creativity', 4:'Hard work', 5:'Change & travel', 6:'Family & home', 7:'Inner growth', 8:'Money & power', 9:'Completion' };
+  const CHALDEAN = {A:1,I:1,J:1,Q:1,Y:1,B:2,K:2,R:2,C:3,G:3,L:3,S:3,D:4,M:4,T:4,E:5,H:5,N:5,X:5,U:6,V:6,W:6,O:7,Z:7,F:8,P:8};
+  const digits = (s) => String(s).replace(/\D/g, '').split('').reduce((a, d) => a + +d, 0);
+  const reduce = (n) => { while (n > 9) n = digits(n); return n; };
+  const nameNum = (s) => { const t = s.toUpperCase().replace(/[^A-Z]/g, '').split('').reduce((a, c) => a + (CHALDEAN[c] || 0), 0); return t ? { t, r: reduce(t) } : null; };
+  function setRes(el, n, opts){
+    opts = opts || {};
+    el.classList.toggle('empty', !n);
+    el.querySelector('.v').textContent = n || '–';
+    el.querySelector('.p').textContent = n ? (opts.p || PLANET[n]) : '';
+    el.querySelector('.t').textContent = n ? (opts.t || TRAIT[n]) : (opts.empty || 'Enter your date of birth');
+  }
+  function calc(){
+    const d = $('cDob').value; let m = 0, b = 0;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+      m = reduce(+d.slice(8, 10)); b = reduce(digits(d));
+      const y = reduce(digits(d.slice(8, 10)) + digits(d.slice(5, 7)) + 11);
+      setRes($('rMool'), m); setRes($('rBhag'), b);
+      setRes($('rYear'), y, { p: YEAR[y], t: 'Your theme for 2027. The Complete Life Report maps it month by month.' });
+    } else { setRes($('rMool'), 0); setRes($('rBhag'), 0); setRes($('rYear'), 0); }
+    const nn = nameNum($('cName').value);
+    setRes($('rName'), nn ? nn.r : 0, nn ? { t: (nn.t > 9 ? nn.t + ' → ' + nn.r + '. ' : '') + TRAIT[nn.r] } : { empty: 'Enter your name' });
+    document.querySelectorAll('#whichGrid [data-n]').forEach(x => x.classList.toggle('hit', +x.dataset.n === m));
+    const cm = $('cMatch');
+    if (m && nn) {
+      const ok = nn.r === m || nn.r === b;
+      cm.style.display = 'flex';
+      cm.innerHTML = ok ? `<span>Your name number ${nn.r} matches your ${nn.r === m ? 'Moolank' : 'Bhagyank'}. A good start. See what else your chart says in a</span><a class="link" href="#packages">Complete Life Report →</a>`
+        : `<span>Your name number (${nn.r}) doesn't match your Moolank (${m}) or Bhagyank (${b}). This is what a</span><a class="link" href="#" data-goto="name">Name Correction →</a><span>looks at.</span>`;
+    } else cm.style.display = 'none';
+  }
+  $('cDob').addEventListener('input', calc); $('cName').addEventListener('input', calc);
+  $('cDob').addEventListener('change', () => { if (!$('bDob').value) $('bDob').value = $('cDob').value; });
+  $('cName').addEventListener('change', () => { if (!$('bOfficial').value) $('bOfficial').value = $('cName').value; });
+  $('cMatch').addEventListener('click', e => { const a = e.target.closest('[data-goto]'); if (a) { e.preventDefault(); choosePkg(a.dataset.goto, true); } });
+
+  /* ================= SELECTION & TOTALS ================= */
+  const selAddons = new Set();
+  const curPkg = () => PKGS.find(p => p.id === $('bPkg').value) || null;
+  function choosePkg(id, scroll){
+    $('bPkg').value = id;
+    document.querySelectorAll('.pkg').forEach(c => c.classList.toggle('selected', c.dataset.pkg === id));
+    refresh();
+    if (scroll) $('book').scrollIntoView({ behavior: 'smooth' });
+  }
+  document.querySelectorAll('.pkg').forEach(c => {
+    c.addEventListener('click', () => choosePkg(c.dataset.pkg, true));
+    c.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target === c) { e.preventDefault(); choosePkg(c.dataset.pkg, true); } });
+  });
+  $('bPkg').addEventListener('change', () => choosePkg($('bPkg').value, false));
+  document.querySelectorAll('.addon').forEach(a => {
+    const tog = () => { if (a.classList.contains('incl')) return; const id = a.dataset.addon; selAddons.has(id) ? selAddons.delete(id) : selAddons.add(id); refresh(); };
+    a.addEventListener('click', tog);
+    a.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tog(); } });
+  });
+
+  function calcTotal(){
+    const p = curPkg(), incl = (p && p.includes) || [];
+    const ads = ADDONS.filter(a => selAddons.has(a.id) && !incl.includes(a.id));
+    const base = (p ? p.price : 0) + ads.reduce((s, a) => s + a.price, 0);
+    const eligible = (p && !p.noOffer ? p.price : 0) + ads.reduce((s, a) => s + a.price, 0);
+    const off = Math.round(eligible * OFFER);
+    return { p, ads, base, off, total: base - off };
+  }
+  function refresh(){
+    const p = curPkg(), incl = (p && p.includes) || [];
+    document.querySelectorAll('.addon').forEach(a => {
+      const id = a.dataset.addon, inc = incl.includes(id);
+      a.classList.toggle('incl', inc); a.classList.toggle('on', !inc && selAddons.has(id));
+      a.setAttribute('aria-checked', String(inc || selAddons.has(id)));
+      a.querySelector('[data-d]').textContent = inc ? 'Included in Life Blueprint' : ADDONS.find(x => x.id === id).d;
+    });
+    const t = calcTotal();
+    let h = '';
+    if (t.p) h += `<div class="total-row"><span>${t.p.name}${t.p.was ? ' <s style="opacity:.6">' + inr(t.p.was) + '</s>' : ''}</span><b>${inr(t.p.price)}</b></div>`;
+    t.ads.forEach(a => h += `<div class="total-row"><span>+ ${a.name}</span><b>${inr(a.price)}</b></div>`);
+    if (t.off) h += `<div class="total-row save"><span>Launch offer (20%, first 50 clients)</span><b>− ${inr(t.off)}</b></div>`;
+    h += `<div class="total-row grand"><span>Total</span><b>${inr(t.total)}</b></div>`;
+    $('totals').innerHTML = h;
+    // conditional fields
+    const show = {
+      call: !!(t.p && t.p.call),
+      couple: selAddons.has('couple') || (t.p && t.p.id === 'blueprint'),
+      mobile: selAddons.has('mobile') || (t.p && t.p.id === 'blueprint'),
+      house: selAddons.has('house') || (t.p && t.p.id === 'blueprint'),
+      business: !!(t.p && t.p.id === 'business'),
+      baby: selAddons.has('baby'),
+      children: !!(t.p && t.p.id === 'blueprint')
+    };
+    document.querySelectorAll('[data-show]').forEach(el => el.hidden = !show[el.dataset.show]);
+    $('asideSummary').innerHTML = (t.p ? `<b>${t.p.name}</b> · ${t.p.fmt}` : 'Add-ons only') + (t.ads.length ? '<br>+ ' + t.ads.map(a => a.name).join(', ') : '') + `<br><span class="gold" style="font-family:var(--font-display); font-size:22px;">${inr(t.total)}</span>`;
+    $('asideSample').hidden = !t.p;
+    return show;
+  }
+
+  /* ================= CHIPS ================= */
+  document.querySelectorAll('.chips').forEach(g => g.querySelectorAll('.chip').forEach(c => {
+    c.setAttribute('role', 'button'); c.tabIndex = 0;
+    c.addEventListener('click', () => { if (g.hasAttribute('data-single')) { g.querySelectorAll('.chip').forEach(x => x.classList.remove('selected')); c.classList.add('selected'); } else c.classList.toggle('selected'); });
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); c.click(); } });
+  }));
+  const pick = (id) => { const s = $(id).querySelector('.chip.selected'); return s ? s.dataset.v : ''; };
+  const picks = (id) => [...$(id).querySelectorAll('.chip.selected')].map(c => c.dataset.v).join(', ');
+
+  /* ================= WHATSAPP ================= */
+  document.querySelectorAll('.waNum').forEach(a => a.href = VS.waLink('NUMEROLOGY — Hi Vishal, I\'d like help choosing a reading.'));
+  const updFree = () => { $('waFree').href = VS.waLink('Hi Vishal, what is my Moolank? My date of birth is ' + ($('cDob').value ? $('cDob').value.split('-').reverse().join('/') : '__/__/____')); };
+  $('cDob').addEventListener('input', updFree); updFree();
+  VS.prefill({ email: $('bEmail'), phone: $('bPhone') });
+
+  /* ================= SUBMIT ================= */
+  const v = (id) => $(id).value.trim();
+  const dmy = (s) => s ? s.split('-').reverse().join('/') : '';
+  $('bSubmit').addEventListener('click', async () => {
+    const box = $('bResult'), show = refresh(), t = calcTotal();
+    const rules = [
+      { el: $('bOfficial'), req: true, label: 'Your full name as on Aadhaar, PAN or passport' },
+      { el: $('bDob'), req: true, label: 'Date of birth' },
+      { el: $('bEmail'), req: true, type: 'email', label: 'Email' },
+      { el: $('bPhone'), req: true, type: 'phone', label: 'WhatsApp number' },
+      { el: $('bGoals'), req: true, label: 'Your goals for the next 12 months' }
+    ];
+    if (show.couple) rules.push({ el: $('bPName'), req: true, label: "Partner's full name" }, { el: $('bPDob'), req: true, label: "Partner's date of birth" });
+    if (show.mobile) rules.push({ el: $('bMobiles'), req: true, label: 'Mobile numbers' });
+    if (show.business) rules.push({ el: $('bBizType'), req: true, label: 'What the business does' });
+    if (show.baby) rules.push({ el: $('bBabyDob'), req: true, label: "Baby's date of birth or due date" });
+    let msg = VS.validate(rules);
+    if (!msg && show.house && !v('bHouse') && !v('bVehicle')) { msg = 'Please add your house number or vehicle number.'; $('bHouse').classList.add('is-invalid'); $('bHouse').focus(); }
+    if (!msg && !t.p && !t.ads.length) msg = 'Please choose a reading or at least one add-on.';
+    if (!msg && !$('bConsent').checked) msg = 'Please tick the box to confirm you understand a reading is guidance, not a guarantee.';
+    if (msg) { box.style.display = 'block'; box.className = 'notice err'; box.textContent = msg; box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return; }
+
+    const f = {
+      name: v('bOfficial'), daily_name: v('bDaily'),
+      date_of_birth: dmy($('bDob').value), time_of_birth: v('bTob'), place_of_birth: v('bPob'),
+      email: v('bEmail'), phone: v('bPhone'), language: pick('bLang'),
+      reading: t.p ? t.p.name + ' (' + inr(t.p.price) + ')' : 'Add-ons only',
+      add_ons: t.ads.map(a => a.name + ' (' + inr(a.price) + ')').join(', '),
+      launch_offer: t.off ? '− ' + inr(t.off) : '', total: inr(t.total),
+      call: show.call ? pick('bMode') + ', ' + $('bSlot').value : '',
+      occupation: v('bWork'), goals: v('bGoals'),
+      stuck: [picks('bStuck'), v('bStuckMore')].filter(Boolean).join(' — '), big_decision: v('bDecision'),
+      partner: show.couple ? [v('bPName'), dmy($('bPDob').value), $('bMarr').value ? 'married/engaged ' + dmy($('bMarr').value) : ''].filter(Boolean).join(', ') : '',
+      mobile_numbers: show.mobile ? v('bMobiles') : '',
+      house_number: show.house ? v('bHouse') : '', vehicle_numbers: show.house ? v('bVehicle') : '',
+      business: show.business ? [v('bBizName'), v('bBizType'), v('bBizPlan')].filter(Boolean).join(' | ') : '',
+      baby: show.baby ? [dmy($('bBabyDob').value), v('bSurname'), v('bLetters')].filter(Boolean).join(', ') : '',
+      children: show.children ? v('bKids') : '',
+      consent: 'Yes — guidance, not a guarantee', _honey: $('bHoney').value
+    };
+    const res = await VS.busy($('bSubmit'), 'Sending…', () => VS.submitRequest('consult', f, {
+      prefix: 'NM', subject: `Numerology booking — ${f.reading}${f.add_ons ? ' + add-ons' : ''} (${f.total})`,
+      autoresponse: `Thank you for booking ${f.reading} with The Divine Code Numerology (total ${f.total}). We'll confirm on WhatsApp or email within 24 hours and send you a secure payment link. — Vishal Singh`
+    }));
+    VS.showResult(box, res, {
+      okTitle: 'Booking received', okText: `${f.reading}${f.add_ons ? ' + ' + f.add_ons : ''}: ${f.total}. We'll confirm within 24 hours.`,
+      summary: `NUMEROLOGY booking\n${f.reading}${f.add_ons ? '\nAdd-ons: ' + f.add_ons : ''}\nTotal: ${f.total}\nName: ${f.name}\nDOB: ${f.date_of_birth}\nWhatsApp: ${f.phone}\nGoals: ${f.goals}`,
+      subject: 'Numerology booking',
+      payment: { kind: 'consult', amount: t.total, method: 'upi', name: f.name, email: f.email, phone: f.phone }
+    });
+  });
+
+  // deep links: numerology.html#book-name, #sample-blueprint
+  const hp = location.hash.match(/^#(book|sample)-(\w+)$/);
+  calc(); choosePkg('life', false);
+  if (hp && PKGS.some(p => p.id === hp[2])) { if (hp[1] === 'book') choosePkg(hp[2], true); else openSample(hp[2]); }
+})();
+</script>
+</body>
+</html>

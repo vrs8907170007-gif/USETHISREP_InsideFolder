@@ -11,6 +11,8 @@ window.SITE_CONFIG = {
 
   // WhatsApp number (country code, no + or spaces). Used for "Send on WhatsApp" buttons.
   whatsapp: "918369578225",
+  // WhatsApp number used on the Numerology page (The Divine Code Numerology).
+  numerologyWhatsapp: "919136540798",
 
   // 1) EMAIL DELIVERY — works immediately, free (FormSubmit.co).
   //    Every form (contact, bookings, passes, pre-books) is emailed here.
@@ -28,7 +30,8 @@ window.SITE_CONFIG = {
   paymentLinks: {
     stay: "",    // Pandora City stays
     passes: "",  // Forever FYRE passes
-    books: ""    // Book pre-booking
+    books: "",   // Book pre-booking
+    consult: ""  // Numerology readings
   },
 
   // 3) FIREBASE (free) — powers Talk2Me accounts & live chat, comments, likes,

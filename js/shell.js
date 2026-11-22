@@ -10,6 +10,7 @@ document.documentElement.classList.add("js");
     ["gallery.html", "Gallery"],
     ["contribution.html", "Contribution"],
     ["bookstore.html", "Bookstore"],
+    ["numerology.html", "Numerology"],
     ["library.html", "Library"],
     ["contact.html", "Contact"],
   ];

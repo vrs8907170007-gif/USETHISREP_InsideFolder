@@ -67,7 +67,7 @@ service cloud.firestore {
     // Bookings, passes, pre-books, contact messages — write-only for visitors, owner reads
     match /requests/{id} {
       allow create: if signedIn()
-        && request.resource.data.type in ['contact','stay','passes','prebook','payment','comment','talk2me']
+        && request.resource.data.type in ['contact','stay','passes','prebook','payment','comment','talk2me','consult']
         && request.resource.data.status == 'new'
         && request.resource.data.data is map
         && request.resource.data.data.size() <= 30

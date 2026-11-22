@@ -70,6 +70,19 @@ Assets: `assets/<section>/...`, kebab-case with year. Large PNGs were converted 
 7. Unused assets kept: 5 VRU birthday photos (`assets/experience/vru-birthday/*`), `portrait-passport.jpg`.
 
 ## Change log
+- **2026-11-22 v14 — Numerology readings page.**
+  - New `numerology.html` (menu: Numerology, after Bookstore): The Divine Code Numerology brand, free calculator (Moolank, Bhagyank, Chaldean name number, Personal Year 2027), "Which number are you?" grid.
+  - 6 packages from the price list (Snapshot ₹499, Complete Life Report ₹1,499, Name Correction ₹2,499, 1:1 Consultation ₹3,100, Business & Brand ₹5,100, Life Blueprint ₹6,999 vs ₹7,897) and 4 add-ons (mobile ₹299, house/vehicle ₹499, couple ₹1,999, baby name ₹1,999). Prices, items and samples live in the `PKGS`, `ADDONS` and `SAMPLES` lists at the bottom of the page.
+  - Launch offer 20% (first 50 clients) applied in the total, except Life Blueprint. Switch off with `const OFFER = 0` in numerology.html.
+  - "Sample report" pop-up for every package (fictional client Priya Sharma, from the Life Blueprint template) and a 12-section "What's inside each reading" table.
+  - Booking form follows the Life Blueprint intake form, with extra sections shown only when needed (partner, mobiles, house/vehicle, business, baby). Requests are emailed via FormSubmit with reference NM-…; payment link sent manually (or set `paymentLinks.consult` / `upiId` in js/config.js).
+  - WhatsApp on this page uses `numerologyWhatsapp` (+91 91365 40798) from js/config.js.
+  - Menu collapses into the Menu button below 1180px wide (10 items no longer fit).
+- **2026-11-21 v13 — Vercel hosting.**
+  - The live site is vsofficial.vercel.app (printed on the book covers), auto-deployed from the GitHub repo psvishal-afk/vishalsingh.com.
+  - Added `vercel.json` (security headers; /private and /netlify blocked), `.vercelignore` (private/, netlify/, *.md, config files are never uploaded or served), `.gitignore` (e-book files are never committed) and `404.html`.
+  - og:image is now an absolute URL. Two zips: **for-vercel** (no e-books — upload this to GitHub) and **master** (with e-books — keep private).
+  - Note: the payment server (netlify/functions) runs on Netlify. On Vercel, the shop stays off until it is ported to Vercel Functions + Vercel Blob, or the site moves to Netlify.
 - **2026-11-21 v12** — Website selling switched **off** until the payment gateway is set up: `"shopOpen": false` in catalog.json. While off, the Bookstore shows Amazon buttons only (Kindle on Amazon.in for India) with "Buying on this website opens soon", checkout is closed, and the server refuses orders and downloads. Contribution rows have "Buy on Amazon" (Kindle page) plus an "All formats" link. To switch on: set it to true and redeploy (SHOP-SETUP.md, Step 6).
 - **2026-11-21 v11 — Bookstore gets its own page.**
   - bookstore.html holds the store (menu: Contribution → Bookstore). contribution.html is the reading room again: all 52 books in the original row style, published first (A–Z), then coming soon.
