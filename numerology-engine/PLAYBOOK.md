@@ -96,10 +96,33 @@ compassion and never suggest a "new relationship" unless the client asked about 
   Vedic astrology).
 - Sign letters and closings as **Vishal Singh, The Divine Code Numerology**.
 
-### Hindi
-If `language` is "Hindi" write the Hindi edition only; if "English and Hindi" write both (same content, same tables).
-Write natural, respectful Hindi (आप). Keep names being analysed in Latin script ("Vishal R. Singh") so the letter totals
-stay visible. Set `lang='hi'`, `html_lang='hi'`, and Hindi labels (`todo='क्या करें'`, `page='पृष्ठ'`, `contents='विषय-सूची'`).
+### Languages
+`languages` (list; older bookings: `language` text such as "English and Hindi") says which editions to write — one or two.
+Write a complete edition in each language chosen, with the same sections, tables and numbers. Supported:
+
+| Language | `lang` code | todo label | contents | page |
+|---|---|---|---|---|
+| English | en | What to do | Contents | Page |
+| Hindi | hi | क्या करें | विषय-सूची | पृष्ठ |
+| Marathi | mr | काय करावे | अनुक्रमणिका | पान |
+| Gujarati | gu | શું કરવું | અનુક્રમણિકા | પાનું |
+| Bengali | bn | কী করবেন | সূচিপত্র | পৃষ্ঠা |
+| Punjabi | pa | ਕੀ ਕਰਨਾ ਹੈ | ਤਤਕਰਾ | ਪੰਨਾ |
+| Tamil | ta | என்ன செய்வது | பொருளடக்கம் | பக்கம் |
+| Telugu | te | ఏమి చేయాలి | విషయసూచిక | పేజీ |
+| Kannada | kn | ಏನು ಮಾಡಬೇಕು | ಪರಿವಿಡಿ | ಪುಟ |
+
+Set `lang` and `html_lang` to the code; translate every label in `L` (cover texts, `footer_conf`, `cover_edition`), the
+summary card and the disclaimer. Write natural, respectful language (Hindi आप, Marathi तुम्ही/आपण, Gujarati આપ…), not
+word-for-word translation. Keep names being analysed in Latin script ("Vishal R Singh") so the letter totals stay visible,
+and keep digits as 0–9. Keep `file_name` in English letters; the renderer adds the language to the file name. In the email
+to Vishal, list which language editions are attached; for languages other than English and Hindi, add: "Please have a
+native speaker glance at this edition before sharing."
+
+### Homes, vehicles and mobiles
+`facts.houses` (every home, office or property with flat total, floor number and building-name number), `facts.vehicles`
+(with type) and `facts.mobiles` (with "used for") may each have several entries — cover every one, in one table per kind,
+and say which suits which purpose (for example the business line versus the numerology line).
 
 ### Meanings to draw on (Indian numerology, Chaldean names)
 | No. | Planet | Nature | Strengths | Watch out for | Fields | Day · colours |

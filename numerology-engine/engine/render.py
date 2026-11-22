@@ -19,14 +19,30 @@ FONTS = ''.join(
         ('Inter', 'inter', 'latin', (400, 500, 600, 700), ('normal',)),
         ('NotoSerifDeva', 'noto-serif-devanagari', 'devanagari', (400, 500, 600, 700), ('normal',)),
         ('NotoSansDeva', 'noto-sans-devanagari', 'devanagari', (400, 500, 600, 700), ('normal',)),
-    ] for w in ws for st in sts)
+    ] + [(f'Noto{k.title()}{scr.title()}', f'noto-{k}-{scr}', scr, (400, 600), ('normal',))
+         for scr in ('gujarati', 'bengali', 'gurmukhi', 'tamil', 'telugu', 'kannada') for k in ('sans', 'serif')]
+    for w in ws for st in sts)
+
+# language code -> (display font, body font, file-name suffix). Marathi and Hindi share Devanagari.
+LANGS = {
+    'en': ("'Fraunces',serif", "'Inter',sans-serif", 'English'),
+    'hi': ("'NotoSerifDeva','Fraunces',serif", "'NotoSansDeva','Inter',sans-serif", 'Hindi'),
+    'mr': ("'NotoSerifDeva','Fraunces',serif", "'NotoSansDeva','Inter',sans-serif", 'Marathi'),
+    'gu': ("'NotoSerifGujarati','Fraunces',serif", "'NotoSansGujarati','Inter',sans-serif", 'Gujarati'),
+    'bn': ("'NotoSerifBengali','Fraunces',serif", "'NotoSansBengali','Inter',sans-serif", 'Bengali'),
+    'pa': ("'NotoSerifGurmukhi','Fraunces',serif", "'NotoSansGurmukhi','Inter',sans-serif", 'Punjabi'),
+    'ta': ("'NotoSerifTamil','Fraunces',serif", "'NotoSansTamil','Inter',sans-serif", 'Tamil'),
+    'te': ("'NotoSerifTelugu','Fraunces',serif", "'NotoSansTelugu','Inter',sans-serif", 'Telugu'),
+    'kn': ("'NotoSerifKannada','Fraunces',serif", "'NotoSansKannada','Inter',sans-serif", 'Kannada'),
+}
 
 CSS = """
 :root{ --ink:#15132f; --ink2:#221d4f; --gold:#b8913f; --gold2:#d4af6a; --paper:#fbf8f1; --text:#26243a; --muted:#6b6880; --line:#e6dfcd; }
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
 body{ font-family: var(--body); color: var(--text); font-size: 11.2pt; line-height: 1.66; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-body.hi{ font-size: 11.8pt; line-height: 1.85; } body.hi table{ font-size: 10.6pt; } body.hi .sec-head h2{ font-size: 23pt; }
+body.indic{ font-size: 11.8pt; line-height: 1.85; } body.indic table{ font-size: 10.6pt; } body.indic .sec-head h2{ font-size: 23pt; }
+body.ta, body.te, body.kn{ font-size: 11pt; } body.ta table, body.te table, body.kn table{ font-size: 9.8pt; } body.ta .sec-head h2, body.te .sec-head h2, body.kn .sec-head h2{ font-size: 20pt; }
 h1,h2,h3{ font-family: var(--display); color: var(--ink); margin:0; font-weight: 600; }
 b{ color: var(--ink); font-weight: 600; }
 p{ margin: 0 0 9pt; text-align: left; }
@@ -45,14 +61,14 @@ table{ width:100%; border-collapse: collapse; margin: 6pt 0 12pt; font-size: 9.9
 thead{ display: table-header-group; }
 tr{ break-inside: avoid; }
 th{ background: var(--ink); color: #f3e7c8; text-align:left; font-family: 'Inter', var(--body); font-weight: 600; font-size: 8pt; letter-spacing: .06em; text-transform: uppercase; padding: 6pt 8pt; }
-body.hi th{ text-transform: none; letter-spacing: 0; font-size: 8.8pt; }
+body.indic th{ text-transform: none; letter-spacing: 0; font-size: 8.8pt; }
 td{ padding: 6pt 8pt; border-bottom: .6pt solid var(--line); vertical-align: top; }
 tbody tr:nth-child(even) td{ background: #faf6ec; }
 tr.rec td{ background: #f3e6c4 !important; }
 tr.rec td:first-child{ border-left: 3pt solid var(--gold); }
 .todo{ break-inside: avoid; background: var(--ink); color: #ece6d6; border-radius: 8pt; padding: 12pt 16pt 8pt; margin: 14pt 0 4pt; }
 .todo-h{ font-family: 'Inter', var(--body); font-size: 8pt; letter-spacing: .2em; text-transform: uppercase; color: var(--gold2); font-weight: 700; margin-bottom: 6pt; }
-body.hi .todo-h{ letter-spacing: .02em; font-size: 10pt; }
+body.indic .todo-h{ letter-spacing: .02em; font-size: 10pt; }
 .todo ul{ margin:0; padding-left: 15pt; } .todo li{ margin-bottom: 5pt; } .todo b{ color:#fff; }
 .letter{ background: #fff; border: .8pt solid var(--line); border-radius: 8pt; padding: 22pt 26pt; font-size: 11pt; }
 .letter p{ margin-bottom: 11pt; }
@@ -108,8 +124,8 @@ html,body{ margin:0; height: 297mm; }
 """
 
 def fam(lang):
-    if lang == 'hi':
-        return "--display:'NotoSerifDeva','Fraunces',serif; --body:'NotoSansDeva','Inter',sans-serif;"
+    if lang in LANGS and lang != 'en':
+        d, b, _ = LANGS[lang]; return f"--display:{d}; --body:{b};"
     return "--display:'Fraunces',serif; --body:'Inter',sans-serif;"
 
 def body_html(C, pages=None):
@@ -133,7 +149,7 @@ def body_html(C, pages=None):
             f'<ol>{"".join(f"<li>{x}</li>" for x in sm["steps"])}</ol></div>'
             f'<p class="disc">{C.DISCLAIMER}</p></section>')
     return (f'<!doctype html><html lang="{L["html_lang"]}"><head><meta charset="utf-8"><style>{FONTS}:root{{{fam(L["lang"])}}}{CSS}'
-            f'@page{{ size:A4; margin: 18mm 17mm 20mm; }}</style></head><body class="{L["lang"]}">{toc}{"".join(secs)}{card}</body></html>')
+            f'@page{{ size:A4; margin: 18mm 17mm 20mm; }}</style></head><body class="{L["lang"]}{" indic" if L["lang"] != "en" else ""}">{toc}{"".join(secs)}{card}</body></html>')
 
 def cover_html(C):
     L = C.L
@@ -183,7 +199,7 @@ async def render(path):
     for f in (cov, bod):
         for pgx in PdfReader(f).pages: w.add_page(pgx)
     safe = re.sub(r'[^A-Za-z0-9]+', '_', C.L.get('file_name') or (C.L['doc_en'] if 'doc_en' in C.L else C.L['doc']) + '_' + C.L.get('client_en', C.L['client'])).strip('_')
-    name = f"{safe}_{'Hindi' if lang == 'hi' else 'English'}.pdf"
+    name = f"{safe}_{LANGS.get(lang, LANGS['en'])[2]}.pdf"
     w.add_metadata({'/Title': f'{C.L["doc"]} — {C.L["client"]}', '/Author': 'Vishal Singh · The Divine Code Numerology'})
     path = os.path.join(OUT, name); w.write(path)
     n = len(PdfReader(path).pages)

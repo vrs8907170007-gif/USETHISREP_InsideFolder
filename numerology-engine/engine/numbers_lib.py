@@ -204,11 +204,32 @@ def from_booking(b, today=None):
         md = parse_date(p.get('marriage', ''))
         if md:
             facts['couple']['marriage_date'] = {'date': md.isoformat(), 'day_number': red(md.day), 'total': digits_total(md.strftime('%d%m%Y')), 'number': red(digits_total(md.strftime('%d%m%Y')))}
-    facts['mobiles'] = [{'number': n, 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n)), 'planet': PLANET[red(digits_total(n))]} for n in split_mobiles(b.get('mobiles'))]
-    facts['vehicles'] = [{'number': n, 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n)), 'planet': PLANET[red(digits_total(n))]} for n in split_vehicles(b.get('vehicles'))]
-    h = b.get('house') or ''
-    m = re.search(r'(?:flat|house|apt|apartment|no\.?|#)\s*([0-9]+)', h, re.I) or re.search(r'\b([0-9]{1,5})\b', h)
-    if m: facts['house'] = {'text': h, 'flat_number': m.group(1), 'total': digits_total(m.group(1)), 'number': red(digits_total(m.group(1)))}
+    # mobiles / vehicles / properties: website v17 sends lists of objects; older bookings send one text field
+    def as_list(v, key):
+        if isinstance(v, list): return [(x.get(key, '') if isinstance(x, dict) else str(x), x if isinstance(x, dict) else {}) for x in v]
+        return None
+    ml = as_list(b.get('mobiles'), 'number')
+    mobiles = [(n, extra) for raw, extra in ml for n in split_mobiles(raw)] if ml is not None else [(n, {}) for n in split_mobiles(b.get('mobiles'))]
+    facts['mobiles'] = [{'number': n, 'use': e.get('use', ''), 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n)), 'planet': PLANET[red(digits_total(n))]} for n, e in mobiles]
+    vl = as_list(b.get('vehicles'), 'reg')
+    vehicles = [(n, extra) for raw, extra in vl for n in (split_vehicles(raw) or [raw])] if vl is not None else [(n, {}) for n in split_vehicles(b.get('vehicles'))]
+    facts['vehicles'] = [{'number': n, 'type': e.get('type', ''), 'total': digits_total(n), 'chain': reduce_chain(digits_total(n)), 'number_reduced': red(digits_total(n)), 'planet': PLANET[red(digits_total(n))]} for n, e in vehicles if re.search(r'\d', n)]
+    props = b.get('properties')
+    if not isinstance(props, list):
+        props = [{'flat': b.get('house') or ''}] if b.get('house') else []
+    facts['houses'] = []
+    for pr in props:
+        h = pr.get('flat', '') if isinstance(pr, dict) else str(pr)
+        m = re.search(r'(?:flat|house|apt|apartment|unit|office|shop|no\.?|#)\s*([0-9]+)', h, re.I) or re.search(r'\b([0-9]{1,5})\b', h)
+        if not m: continue
+        floor = (pr.get('floor', '') if isinstance(pr, dict) else '')
+        fm = re.search(r'\d+', floor or '')
+        facts['houses'].append({'text': ', '.join(x for x in (h, pr.get('building', '') if isinstance(pr, dict) else '', ('floor ' + floor) if floor else '') if x),
+                                'flat_number': m.group(1), 'total': digits_total(m.group(1)), 'chain': reduce_chain(digits_total(m.group(1))), 'number': red(digits_total(m.group(1))),
+                                'floor_number': red(int(fm.group(0))) if fm else None,
+                                'building_name_numbers': name_info(pr.get('building', '').split(',')[0]) if isinstance(pr, dict) and pr.get('building') else None})
+    if facts['houses']: facts['house'] = facts['houses'][0]
+    facts['languages'] = b.get('languages') or [x.strip() for x in re.split(r' and |,', b.get('language') or 'English') if x.strip()]
     biz = b.get('business') or {}
     if biz.get('name'): facts['business_name'] = name_info(biz['name'])
     baby = b.get('baby') or {}

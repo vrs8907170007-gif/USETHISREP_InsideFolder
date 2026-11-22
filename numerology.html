@@ -184,6 +184,14 @@
   .aside-card .btn{ margin-top: 14px; }
   .aside-card.ink{ background: var(--ink); border-color: var(--ink-line); }
 
+  .booking-box [hidden]{ display:none !important; }
+  /* repeatable lists */
+  .replist .rl-row{ display:grid; gap: 10px; margin-bottom: 10px; align-items: center; }
+  .replist .rl-row .rl-x{ width: 38px; height: 44px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--ivory-dim); cursor: pointer; font-size: 16px; }
+  .replist .rl-row .rl-x:hover{ color: var(--ivory); border-color: var(--gold); }
+  .replist .rl-add{ background: none; border: 1px dashed var(--line); color: var(--gold); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%; text-align: left; }
+  .replist .rl-add:hover{ border-color: var(--gold); }
+  @media (max-width: 640px){ .replist .rl-row{ grid-template-columns: 1fr 38px !important; } .replist .rl-row > :not(.rl-x):not(:first-child){ grid-column: 1; } .replist .rl-row .rl-x{ grid-column: 2; grid-row: 1; } }
   /* review step */
   .review{ display:none; }
   .booking-box.reviewing > *:not(.review):not(#bResult){ display:none !important; }
@@ -266,7 +274,7 @@
       <div>
         <div class="eyebrow reveal">The Divine Code Numerology · अंक ज्योतिष</div>
         <h1 class="reveal">Your birth date holds a number. <em>Is it working for you?</em></h1>
-        <p class="lede reveal">Personal readings on career, money, marriage and your name, from Vishal Singh, author of 7 books on numerology. Pick a reading, share your details, and get guidance you can act on, in English or Hindi.</p>
+        <p class="lede reveal">Personal readings on career, money, marriage and your name, from Vishal Singh, author of 7 books on numerology. Pick a reading, share your details, and get guidance you can act on, in English, Hindi, Marathi, Gujarati or five more Indian languages.</p>
         <div class="hero-actions reveal">
           <a class="btn btn-solid" href="#packages">See readings &amp; prices</a>
           <a class="btn btn-accent" href="#calculator">Free Moolank check</a>
@@ -399,7 +407,7 @@
         <div class="fs-title first">Your reading</div>
         <div class="form-row">
           <div><label for="bPkg">Reading</label><select id="bPkg"></select></div>
-          <div><label>Report &amp; call language</label><div class="chips" data-single id="bLang"><span class="chip selected" data-v="English">English</span><span class="chip" data-v="Hindi">Hindi</span><span class="chip" data-v="English and Hindi">Both</span></div></div>
+          <div><label>Report language <i>(choose up to two)</i></label><div class="chips" id="bLang" data-max="2"><span class="chip selected" data-v="English">English</span><span class="chip" data-v="Hindi">हिन्दी Hindi</span><span class="chip" data-v="Marathi">मराठी Marathi</span><span class="chip" data-v="Gujarati">ગુજરાતી Gujarati</span><span class="chip" data-v="Bengali">বাংলা Bengali</span><span class="chip" data-v="Punjabi">ਪੰਜਾਬੀ Punjabi</span><span class="chip" data-v="Tamil">தமிழ் Tamil</span><span class="chip" data-v="Telugu">తెలుగు Telugu</span><span class="chip" data-v="Kannada">ಕನ್ನಡ Kannada</span></div></div>
         </div>
 
         <div class="fs-title">Your names</div>
@@ -424,6 +432,7 @@
         <div class="form-row" data-show="call" hidden>
           <div><label>Call by</label><div class="chips" data-single id="bMode"><span class="chip selected" data-v="Video call">Video call</span><span class="chip" data-v="Phone call">Phone call</span></div></div>
           <div><label for="bSlot">Preferred time</label><select id="bSlot"><option>Weekday morning</option><option>Weekday evening</option><option>Weekend</option><option>Any time</option></select></div>
+          <div><label>Call language</label><div class="chips" data-single id="bCallLang"><span class="chip selected" data-v="English">English</span><span class="chip" data-v="Hindi">Hindi</span></div></div>
         </div>
 
         <div class="fs-title">Your life right now</div>
@@ -445,7 +454,7 @@
         <div data-show="couple" hidden>
           <div class="fs-title">Relationships <small>for the relationships and couple section</small></div>
           <div class="form-row cond">
-            <div><label for="bRel">Relationship status</label><select id="bRel"><option value="">Please choose</option><option>Married</option><option>Engaged</option><option>In a relationship</option><option>Single</option><option>Divorced</option><option>Separated</option><option>Widowed</option></select></div>
+            <div><label for="bRel">Relationship status</label><select id="bRel"><option value="">Please choose</option><option>Married</option><option>Engaged / in a relationship</option><option>Unmarried</option><option>Divorced</option><option>Separated</option><option>Widowed</option><option>Prefer not to say</option></select></div>
             <div class="hint" style="align-self:end; margin:0 0 12px;">Partner details are asked only if you have a partner.</div>
           </div>
           <div class="form-row three cond" id="partnerRow" hidden>
@@ -456,13 +465,13 @@
         </div>
         <div data-show="mobile" hidden>
           <div class="fs-title">Mobile numbers <small>for the mobile number check</small></div>
-          <div class="form-row one cond"><div><label for="bMobiles">All mobile numbers you use</label><input id="bMobiles" placeholder="e.g. 98201 45673, 99300 12345"></div></div>
+          <div class="cond"><div class="replist" id="lMobiles" data-add="+ Add another mobile number"></div></div>
         </div>
         <div data-show="house" hidden>
-          <div class="fs-title">House &amp; vehicle <small>for the house and vehicle check</small></div>
-          <div class="form-row cond">
-            <div><label for="bHouse">House / flat no., building no., floor</label><input id="bHouse" placeholder="e.g. Flat 302, Bldg 7, 3rd floor"></div>
-            <div><label for="bVehicle">Vehicle registration number(s)</label><input id="bVehicle" placeholder="e.g. MH 02 AB 4521"></div>
+          <div class="fs-title">Homes, property &amp; vehicles <small>add every one you'd like checked</small></div>
+          <div class="cond">
+            <label>Homes, offices or property</label><div class="replist" id="lProps" data-add="+ Add another home or property"></div>
+            <label style="margin-top:14px;">Vehicles</label><div class="replist" id="lVehicles" data-add="+ Add another vehicle"></div>
           </div>
         </div>
         <div data-show="business" hidden>
@@ -518,7 +527,7 @@
             <li>Your goals named throughout the report</li>
             <li>A "What to do" box after every section</li>
             <li>A PDF that reads well on your phone</li>
-            <li>English or Hindi</li>
+            <li>English, Hindi, Marathi, Gujarati, Bengali, Punjabi, Tamil, Telugu or Kannada</li>
           </ul>
         </div>
         <div class="aside-card reveal">
@@ -818,7 +827,12 @@
   /* ================= CHIPS ================= */
   document.querySelectorAll('.chips').forEach(g => g.querySelectorAll('.chip').forEach(c => {
     c.setAttribute('role', 'button'); c.tabIndex = 0;
-    c.addEventListener('click', () => { if (g.hasAttribute('data-single')) { g.querySelectorAll('.chip').forEach(x => x.classList.remove('selected')); c.classList.add('selected'); } else c.classList.toggle('selected'); });
+    c.addEventListener('click', () => {
+      if (g.hasAttribute('data-single')) { g.querySelectorAll('.chip').forEach(x => x.classList.remove('selected')); c.classList.add('selected'); return; }
+      const max = +g.dataset.max || 99, on = [...g.querySelectorAll('.chip.selected')];
+      if (!c.classList.contains('selected') && on.length >= max) on[0].classList.remove('selected');   // keep at most `max`, dropping the oldest
+      c.classList.toggle('selected');
+    });
     c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); c.click(); } });
   }));
   const pick = (id) => { const s = $(id).querySelector('.chip.selected'); return s ? s.dataset.v : ''; };
@@ -833,7 +847,29 @@
   /* ================= SUBMIT: validate → review → send ================= */
   const v = (id) => $(id).value.trim();
   const dmy = (s) => s ? s.split('-').reverse().join('/') : '';
-  const partnered = () => ['Married', 'Engaged', 'In a relationship'].includes($('bRel').value);
+  /* repeatable lists: mobiles, properties, vehicles */
+  const LISTS = {
+    lMobiles: { cols: '1.2fr 1fr 38px', fields: [['number', 'Mobile number', 'tel'], ['use', 'Used for (personal, business…)', 'text']] },
+    lProps:   { cols: '1fr 1.3fr .8fr 38px', fields: [['flat', 'Flat / house no.', 'text'], ['building', 'Building / society, area', 'text'], ['floor', 'Floor', 'text']] },
+    lVehicles:{ cols: '1.2fr 1fr 38px', fields: [['reg', 'Registration no. e.g. MH 02 AB 4521', 'text'], ['type', 'Car / bike / other', 'text']] }
+  };
+  function addRow(id, vals){
+    const L = LISTS[id], box = $(id), row = document.createElement('div');
+    row.className = 'rl-row'; row.style.gridTemplateColumns = L.cols;
+    row.innerHTML = L.fields.map(([k, ph, ty]) => `<input data-k="${k}" type="${ty}" placeholder="${ph}" aria-label="${ph}">`).join('') + '<button type="button" class="rl-x" aria-label="Remove">✕</button>';
+    L.fields.forEach(([k]) => { if (vals && vals[k]) row.querySelector(`[data-k="${k}"]`).value = vals[k]; });
+    row.querySelector('.rl-x').addEventListener('click', () => { if (box.querySelectorAll('.rl-row').length > 1) row.remove(); else row.querySelectorAll('input').forEach(i => i.value = ''); });
+    box.insertBefore(row, box.querySelector('.rl-add'));
+  }
+  Object.keys(LISTS).forEach(id => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'rl-add'; b.textContent = $(id).dataset.add;
+    b.addEventListener('click', () => { addRow(id); const rows = $(id).querySelectorAll('.rl-row'); rows[rows.length - 1].querySelector('input').focus(); });
+    $(id).appendChild(b); addRow(id);
+  });
+  const listVals = (id) => [...$(id).querySelectorAll('.rl-row')].map(r => { const o = {}; r.querySelectorAll('input').forEach(i => { if (i.value.trim()) o[i.dataset.k] = i.value.trim(); }); return o; }).filter(o => Object.keys(o).length);
+  const listText = (id, fmt) => listVals(id).map(fmt).join('\n');
+  const langs = () => [...$('bLang').querySelectorAll('.chip.selected')].map(c => c.dataset.v);
+  const partnered = () => ['Married', 'Engaged / in a relationship'].includes($('bRel').value);
   $('bRel').addEventListener('change', () => { $('partnerRow').hidden = !partnered(); $('bRel').classList.remove('is-invalid'); });
   const escH = (x) => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   let pending = null;
@@ -849,11 +885,12 @@
     ];
     if (show.couple) rules.push({ el: $('bRel'), req: true, label: 'Relationship status' });
     if (show.couple && partnered()) rules.push({ el: $('bPName'), req: true, label: "Partner's full name" }, { el: $('bPDob'), req: true, label: "Partner's date of birth" });
-    if (show.mobile) rules.push({ el: $('bMobiles'), req: true, label: 'Mobile numbers' });
+    if (show.mobile && !listVals('lMobiles').length) { const el = $('lMobiles').querySelector('input'); el.classList.add('is-invalid'); el.focus(); return { msg: 'Please add at least one mobile number.', show, t }; }
     if (show.business) rules.push({ el: $('bBizType'), req: true, label: 'What the business does' });
     if (show.baby) rules.push({ el: $('bBabyDob'), req: true, label: "Baby's date of birth or due date" });
     let msg = VS.validate(rules);
-    if (!msg && show.house && !v('bHouse') && !v('bVehicle')) { msg = 'Please add your house number or vehicle number.'; $('bHouse').classList.add('is-invalid'); $('bHouse').focus(); }
+    if (!msg && show.house && !listVals('lProps').length && !listVals('lVehicles').length) { msg = 'Please add at least one home, property or vehicle number.'; const el = $('lProps').querySelector('input'); el.classList.add('is-invalid'); el.focus(); }
+    if (!msg && !langs().length) msg = 'Please choose a report language.';
     if (!msg && !t.p && !t.ads.length) msg = 'Please choose a reading or at least one add-on.';
     if (!msg && !$('bConsent').checked) msg = 'Please tick the box to confirm you understand a reading is guidance, not a guarantee.';
     return { msg, show, t };
@@ -870,8 +907,8 @@
       ['Add-ons', t.ads.map(a => a.name + ' — ' + inr(a.price)).join(', ')],
       ['Launch offer', t.off ? '− ' + inr(t.off) + ' (20%, first 50 clients)' : ''],
       ['Total', inr(t.total)],
-      ['Language', pick('bLang')],
-      ['Call', show.call ? pick('bMode') + ', ' + $('bSlot').value : '']
+      ['Report language', langs().join(' and ')],
+      ['Call', show.call ? pick('bMode') + ', ' + $('bSlot').value + ', in ' + pick('bCallLang') : '']
     ]);
     add('Names', [['Full name (Aadhaar / PAN / passport)', v('bOfficial')], ['Name used day to day', v('bDaily')]]);
     add('Birth details', [['Date of birth', dmy($('bDob').value)], ['Time of birth', v('bTob')], ['Place of birth', v('bPob')]]);
@@ -880,22 +917,22 @@
     if (show.name) add('Name correction', [['Where the name is used most', v('bNameUse')], ['Spellings being considered', v('bNameIdeas')]]);
     if (show.couple) add('Relationships', [['Relationship status', $('bRel').value], ["Partner's full name", partnered() ? v('bPName') : ''], ["Partner's date of birth", partnered() ? dmy($('bPDob').value) : ''], ['Marriage / engagement date', partnered() ? dmy($('bMarr').value) : '']]);
     if (show.children) add('Children', [['Names and dates of birth', v('bKids')]]);
-    if (show.mobile) add('Mobile numbers', [['Numbers in use', v('bMobiles')]]);
-    if (show.house) add('House and vehicles', [['House / flat, building, floor', v('bHouse')], ['Vehicle registration numbers', v('bVehicle')]]);
+    if (show.mobile) add('Mobile numbers', [['Numbers in use', listText('lMobiles', m => m.number + (m.use ? ' (' + m.use + ')' : ''))]]);
+    if (show.house) add('Homes, property and vehicles', [['Homes / property', listText('lProps', h => [h.flat, h.building, h.floor ? 'floor ' + h.floor : ''].filter(Boolean).join(', '))], ['Vehicles', listText('lVehicles', x => x.reg + (x.type ? ' (' + x.type + ')' : ''))]]);
     if (show.business) add('Business', [['Business name', v('bBizName')], ['What it does', v('bBizType')], ['Launch / registration plans', v('bBizPlan')], ["Co-founders' names and dates of birth", v('bPartners')]]);
     if (show.baby) add('Baby name', [["Baby's date of birth / due date", dmy($('bBabyDob').value)], ['Baby is', $('bBabyGender').value || 'Not known yet'], ['Surname', v('bSurname')], ['Preferred letters or style', v('bLetters')], ["Parents' names and dates of birth", v('bBabyParents')]]);
     // machine-readable copy for the report agent
     const data = {
       ref, package: t.p ? t.p.id : 'none', package_name: t.p ? t.p.name : 'Add-ons only', addons: t.ads.map(a => a.id),
-      price: t.p ? t.p.price : 0, launch_offer: t.off, total: t.total, language: pick('bLang'), call: show.call ? pick('bMode') + ', ' + $('bSlot').value : '',
+      price: t.p ? t.p.price : 0, launch_offer: t.off, total: t.total, language: langs().join(' and '), languages: langs(), call: show.call ? pick('bMode') + ', ' + $('bSlot').value + ', in ' + pick('bCallLang') : '',
       client: { official_name: v('bOfficial'), daily_name: v('bDaily'), dob: $('bDob').value, tob: v('bTob'), pob: v('bPob'), email: v('bEmail'), whatsapp: v('bPhone'),
                 occupation: v('bWork'), goals: v('bGoals'), stuck: picks('bStuck'), stuck_note: v('bStuckMore'), decision: v('bDecision'), questions: v('bQs') },
       name_correction: show.name ? { used_for: v('bNameUse'), ideas: v('bNameIdeas') } : null,
       relationship_status: show.couple ? $('bRel').value : '',
       partner: show.couple && partnered() ? { name: v('bPName'), dob: $('bPDob').value, marriage: $('bMarr').value } : null,
       children: show.children ? v('bKids') : '',
-      mobiles: show.mobile ? v('bMobiles') : '',
-      house: show.house ? v('bHouse') : '', vehicles: show.house ? v('bVehicle') : '',
+      mobiles: show.mobile ? listVals('lMobiles') : [],
+      properties: show.house ? listVals('lProps') : [], vehicles: show.house ? listVals('lVehicles') : [],
       business: show.business ? { name: v('bBizName'), what: v('bBizType'), plans: v('bBizPlan'), partners: v('bPartners') } : null,
       baby: show.baby ? { dob: $('bBabyDob').value, gender: $('bBabyGender').value, surname: v('bSurname'), letters: v('bLetters'), parents: v('bBabyParents') } : null,
       submitted: new Date().toISOString()

@@ -5,7 +5,19 @@
   "dependencies": {
     "@fontsource/fraunces": "^5.0.0",
     "@fontsource/inter": "^5.0.0",
+    "@fontsource/noto-sans-bengali": "^5.3.0",
     "@fontsource/noto-sans-devanagari": "^5.0.0",
-    "@fontsource/noto-serif-devanagari": "^5.0.0"
+    "@fontsource/noto-sans-gujarati": "^5.3.0",
+    "@fontsource/noto-sans-gurmukhi": "^5.3.0",
+    "@fontsource/noto-sans-kannada": "^5.3.0",
+    "@fontsource/noto-sans-tamil": "^5.3.0",
+    "@fontsource/noto-sans-telugu": "^5.3.0",
+    "@fontsource/noto-serif-bengali": "^5.3.0",
+    "@fontsource/noto-serif-devanagari": "^5.0.0",
+    "@fontsource/noto-serif-gujarati": "^5.3.0",
+    "@fontsource/noto-serif-gurmukhi": "^5.3.0",
+    "@fontsource/noto-serif-kannada": "^5.3.0",
+    "@fontsource/noto-serif-tamil": "^5.3.0",
+    "@fontsource/noto-serif-telugu": "^5.3.0"
   }
 }
