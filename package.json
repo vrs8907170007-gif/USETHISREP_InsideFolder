@@ -1,0 +1,9 @@
+{
+  "name": "vishal-singh-site",
+  "private": true,
+  "type": "module",
+  "description": "Static site + Netlify Functions for book sales (Razorpay).",
+  "dependencies": {
+    "@netlify/blobs": "8.2.0"
+  }
+}

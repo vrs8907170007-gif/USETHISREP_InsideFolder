@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Book Orders — Owner</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  :root{ --accent: var(--violet); }
+  .wrap{ padding: 56px 0 90px; }
+  .wrap h1{ font-size: clamp(30px,4vw,46px); margin-top: 12px; }
+  .bar{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin: 26px 0 18px; }
+  .bar .btn{ padding:9px 16px; font-size:12px; }
+  .chips{ display:flex; gap:6px; flex-wrap:wrap; }
+  .chips button{ background:none; border:1px solid var(--line); color:var(--ivory-dim); font:600 12px var(--font-body); padding:7px 14px; border-radius:999px; cursor:pointer; }
+  .chips button.on{ background:var(--violet); color:#fff; border-color:var(--violet); }
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  @media (max-width:760px){ .stats{ grid-template-columns:1fr 1fr; } }
+  .stat{ border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--stage-2); }
+  .stat b{ font-family:var(--font-display); font-size:26px; color:var(--violet); display:block; }
+  .stat span{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ivory-dim); }
+  .ord{ border:1px solid var(--line); border-radius:12px; background:var(--stage-2); padding:18px; margin-bottom:12px; }
+  .ord.todo{ border-left:3px solid var(--flame); }
+  .oh{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:13px; }
+  .oh .when{ color:var(--ivory-dim); font-size:12px; }
+  .tag{ font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 9px; border-radius:999px; border:1px solid var(--line); color:var(--ivory-dim); }
+  .tag.paid{ border-color:var(--emerald); color:#8fd9bf; } .tag.created{ border-color:var(--gold); color:var(--gold); } .tag.refunded{ border-color:var(--flame); color:#f3b29d; }
+  .ob{ display:grid; grid-template-columns: 1.3fr 1fr; gap:18px; margin-top:12px; font-size:13px; }
+  @media (max-width:760px){ .ob{ grid-template-columns:1fr; } }
+  .ob ul{ list-style:none; padding:0; margin:0; }
+  .ob li{ padding:4px 0; }
+  .ob small{ color:var(--ivory-dim); }
+  .acts{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; align-items:center; }
+  .acts .btn{ padding:7px 14px; font-size:11.5px; }
+  .acts input{ background:var(--stage-3); border:1px solid var(--line); color:var(--ivory); border-radius:8px; padding:8px 10px; font-size:12px; width:150px; }
+  .rel{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; border:1px dashed var(--violet); border-radius:12px; padding:14px 16px; margin-top:16px; font-size:13px; color:var(--ivory-dim); }
+  .rel select{ background:var(--stage-3); color:var(--ivory); border:1px solid var(--line); border-radius:8px; padding:8px 10px; }
+  .empty{ color:var(--ivory-dim); text-align:center; padding:30px 0; }
+</style>
+</head>
+<body>
+<section class="wrap">
+  <div class="shell">
+    <div class="eyebrow">Owner only</div>
+    <h1>Book Orders</h1>
+
+    <div class="card" id="login" style="max-width:420px; margin-top:28px;">
+      <form id="lf" novalidate>
+        <div class="vs-field"><label for="pw">Owner password</label><input id="pw" type="password" autocomplete="current-password"></div>
+        <button class="btn btn-accent" style="width:100%; justify-content:center;" type="submit" id="lb">Open orders</button>
+        <div class="notice" id="lm" style="display:none;"></div>
+      </form>
+      <p style="font-size:12px; color:var(--ivory-dim); margin-top:14px;">This is the <b>ADMIN_PASSWORD</b> you set in Netlify (see SHOP-SETUP.md).</p>
+    </div>
+
+    <div id="dash" hidden>
+      <div class="bar">
+        <div class="stats" id="stats" style="flex:1;"></div>
+      </div>
+      <div class="bar">
+        <div class="chips" id="chips"></div>
+        <div style="display:flex; gap:8px;"><button class="btn" id="refresh" type="button">Refresh</button><button class="btn" id="csv" type="button">Export CSV</button><button class="btn" id="out" type="button">Lock</button></div>
+      </div>
+      <div class="rel">
+        <span><b style="color:var(--ivory);">Launching an e-book?</b> Set its ebook status to "available" in catalog.json, add the PDF to private/ebooks, redeploy — then send links to everyone who pre-ordered:</span>
+        <select id="relBook"></select><button class="btn btn-accent" id="relBtn" type="button" style="padding:8px 14px; font-size:12px;">Send download links</button>
+      </div>
+      <div id="list" style="margin-top:20px;"></div>
+    </div>
+  </div>
+</section>
+<script src="js/config.js"></script>
+<script src="js/backend.js"></script>
+<script src="js/catalog-data.js"></script>
+<script src="js/shop.js"></script>
+<script src="js/shell.js"></script>
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id), esc = SHOP.esc;
+  let pw = ''; try { pw = sessionStorage.getItem('vs_admin_pw') || ''; } catch (e) {}
+  let orders = [], filter = 'todo';
+  const api = async (method, body) => {
+    const r = await fetch('/api/admin-orders', { method, headers: { Authorization: 'Bearer ' + pw, 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
+    const j = await r.json().catch(() => ({})); if (!r.ok) { const e = new Error(j.message || 'Error ' + r.status); e.status = r.status; throw e; } return j;
+  };
+  async function load(){
+    try { orders = (await api('GET')).orders; $('login').hidden = true; $('dash').hidden = false; render(); }
+    catch (e) { $('login').hidden = false; $('dash').hidden = true; if (pw) { const m = $('lm'); m.style.display = 'block'; m.className = 'notice err'; m.textContent = e.status === 401 ? 'Wrong password.' : (e.status === 404 ? 'Order system not deployed yet — see SHOP-SETUP.md.' : e.message); } }
+  }
+  $('lf').addEventListener('submit', async (e) => { e.preventDefault(); pw = $('pw').value; try { sessionStorage.setItem('vs_admin_pw', pw); } catch (er) {} await VS.busy($('lb'), 'Opening…', load); });
+  $('out').addEventListener('click', () => { pw = ''; try { sessionStorage.removeItem('vs_admin_pw'); } catch (e) {} location.reload(); });
+  $('refresh').addEventListener('click', load);
+
+  const needsAction = (o) => o.status === 'paid' && o.items.some(it => it.state === 'to-ship' || (it.state === 'preorder'));
+  const FILTERS = { todo: ['To ship', needsAction], paid: ['All paid', o => o.status === 'paid'], ebook: ['E-book pre-orders', o => o.status === 'paid' && o.items.some(it => it.state === 'awaiting-launch')], created: ['Unpaid / abandoned', o => o.status === 'created'], all: ['Everything', () => true] };
+  $('chips').innerHTML = Object.entries(FILTERS).map(([k, v]) => `<button type="button" data-f="${k}" class="${k === filter ? 'on' : ''}">${v[0]}</button>`).join('');
+  $('chips').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; filter = b.dataset.f; $('chips').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); render(); });
+  SHOP.catalog().then(c => { $('relBook').innerHTML = c.books.filter(b => b.status === 'sale').map(b => `<option value="${b.id}">${esc(b.title)}</option>`).join(''); });
+
+  function render(){
+    const paid = orders.filter(o => o.status === 'paid');
+    const revenue = paid.reduce((s, o) => s + o.total, 0);
+    $('stats').innerHTML = [['To ship', orders.filter(needsAction).length], ['Paid orders', paid.length], ['Revenue', SHOP.inr(revenue)], ['E-book pre-orders', paid.filter(o => o.items.some(it => it.state === 'awaiting-launch')).length]].map(([a, b]) => `<div class="stat"><b>${b}</b><span>${a}</span></div>`).join('');
+    const list = orders.filter(FILTERS[filter][1]);
+    $('list').innerHTML = list.length ? list.map(o => {
+      const phone = (o.customer.phone || '').replace(/\D/g, ''); const wa = phone ? 'https://wa.me/' + (phone.length === 10 ? '91' + phone : phone) : '';
+      const hasPrint = o.items.some(it => it.format !== 'ebook');
+      return `<div class="ord ${needsAction(o) ? 'todo' : ''}" data-id="${esc(o.id)}">
+        <div class="oh"><span class="ref-code">${esc(o.id)}</span><span class="tag ${o.status}">${o.status === 'created' ? 'unpaid' : o.status}</span><b>${SHOP.inr(o.total)}</b><span class="when">${new Date(o.createdAt).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'numeric', minute:'2-digit' })}</span>${o.payment ? `<span class="when">· ${esc(o.payment.method || '')} ${esc(o.payment.id)}</span>` : ''}</div>
+        <div class="ob"><ul>${o.items.map(it => `<li>${it.qty} × <b>${esc(it.title)}</b> <small>${esc(it.formatLabel)} · ${esc(it.state || '—')}${it.download ? ' · ' + it.downloadsLeft + ' downloads left' : ''}</small></li>`).join('')}
+          ${o.shipping ? `<li><small>Shipping ${SHOP.inr(o.shipping)}</small></li>` : ''}</ul>
+          <div><b>${esc(o.customer.name)}</b><br><small>${esc(o.customer.email)} · ${esc(o.customer.phone)}</small>${o.address ? `<br><small>${esc(o.address.line1)}${o.address.line2 ? ', ' + esc(o.address.line2) : ''}, ${esc(o.address.city)}, ${esc(o.address.state)} ${esc(o.address.pincode)}</small>` : ''}
+          ${o.shipment ? `<br><small>Shipped: ${esc(o.shipment.courier)} ${esc(o.shipment.tracking)}</small>` : ''}${o.lastError ? `<br><small style="color:#f3b29d;">${esc(o.lastError)}</small>` : ''}</div></div>
+        <div class="acts">
+          ${o.status === 'paid' && hasPrint && !o.shipment ? `<input placeholder="Courier" data-courier><input placeholder="Tracking no." data-tracking><button class="btn btn-accent" type="button" data-act="ship">Mark shipped + email buyer</button>` : ''}
+          ${o.shipment && o.items.some(it => it.state === 'shipped') ? '<button class="btn" type="button" data-act="delivered">Mark delivered</button>' : ''}
+          ${o.status === 'paid' ? '<button class="btn" type="button" data-act="resend">Resend receipt</button><button class="btn" type="button" data-act="refunded">Mark refunded</button>' : ''}
+          <a class="btn" href="mailto:${esc(o.customer.email)}?subject=${encodeURIComponent('Your book order ' + o.id)}">Email</a>${wa ? `<a class="btn" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ''}
+        </div></div>`; }).join('') : '<p class="empty">Nothing here.</p>';
+  }
+  $('list').addEventListener('click', async e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    const card = b.closest('.ord'), id = card.dataset.id, act = b.dataset.act;
+    const body = { action: act, id };
+    if (act === 'ship') { body.courier = card.querySelector('[data-courier]').value.trim(); body.tracking = card.querySelector('[data-tracking]').value.trim(); if (!body.courier || !body.tracking) return VS.toast('Enter courier and tracking number'); }
+    if (act === 'refunded' && !b.dataset.armed) { b.dataset.armed = 1; b.textContent = 'Confirm: refunded in Razorpay?'; return; }
+    try { await VS.busy(b, 'Saving…', () => api('POST', body)); VS.toast(act === 'ship' ? 'Marked shipped — buyer emailed' : act === 'resend' ? 'Receipt re-sent' : 'Updated'); load(); }
+    catch (er) { VS.toast(er.message); }
+  });
+  $('relBtn').addEventListener('click', async () => {
+    try { const r = await VS.busy($('relBtn'), 'Sending…', () => api('POST', { action: 'release', bookId: $('relBook').value })); VS.toast(r.emailed ? `Download links sent to ${r.emailed} buyer(s)` : 'No pending pre-orders — or the e-book isn\'t marked available / PDF missing'); load(); }
+    catch (er) { VS.toast(er.message); }
+  });
+  $('csv').addEventListener('click', () => {
+    const cell = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const rows = [['order','status','date','name','email','phone','items','total','address','courier','tracking','payment_id']].concat(orders.map(o => [o.id, o.status, o.createdAt, o.customer.name, o.customer.email, o.customer.phone, o.items.map(it => it.qty + 'x ' + it.title + ' (' + it.formatLabel + ')').join('; '), o.total, o.address ? [o.address.line1, o.address.line2, o.address.city, o.address.state, o.address.pincode].filter(Boolean).join(', ') : '', o.shipment ? o.shipment.courier : '', o.shipment ? o.shipment.tracking : '', o.payment ? o.payment.id : '']));
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([rows.map(r => r.map(cell).join(',')).join('\n')], { type: 'text/csv' })); a.download = 'book-orders.csv'; a.click();
+  });
+  if (pw) load();
+})();
+</script>
+</body>
+</html>

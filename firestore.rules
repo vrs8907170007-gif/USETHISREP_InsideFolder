@@ -1,0 +1,78 @@
+rules_version = '2';
+// Security rules for the Vishal Singh website.
+// If you change the owner email, change it here AND in js/config.js (adminEmails).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn()  { return request.auth != null; }
+    function verified()  { return signedIn() && request.auth.token.email_verified == true; }
+    function isAdmin()   { return verified() && request.auth.token.email in ['p.svishal@gmail.com']; }
+    function str(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
+    function isTopic(tid){ return tid in ['topic_consciousness','topic_faith','topic_pandora','topic_fyre','topic_writing','topic_hello']; }
+    function ownDm(tid)  { return verified() && tid == 'dm_' + request.auth.uid; }
+    function canChat(tid){ return isAdmin() || ownDm(tid) || (verified() && isTopic(tid)); }
+
+    // Talk2Me member profiles
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && str(request.resource.data.name, 80)
+        && request.resource.data.keys().hasOnly(['name','email','about','createdAt','lastSeen']);
+    }
+
+    // Talk2Me threads: 'dm_<uid>' = private chat with Vishal; 'topic_<slug>' = open rooms
+    match /threads/{tid} {
+      allow get: if canChat(tid);
+      allow list: if isAdmin();
+      allow create, update: if canChat(tid)
+        && request.resource.data.keys().hasOnly(['type','title','ownerUid','ownerName','ownerEmail','lastText','lastAt','lastBy','unreadAdmin','unreadOwner'])
+        && (isAdmin() || isTopic(tid) || request.resource.data.ownerUid == request.auth.uid);
+      allow delete: if isAdmin();
+
+      match /messages/{mid} {
+        allow read: if canChat(tid);
+        allow create: if canChat(tid)
+          && request.resource.data.uid == request.auth.uid
+          && str(request.resource.data.text, 2000)
+          && str(request.resource.data.name, 80)
+          && request.resource.data.byOwner == isAdmin()
+          && request.resource.data.keys().hasOnly(['uid','name','text','byOwner','at']);
+        allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      }
+    }
+
+    // Public comments (gallery, books, blogs) — anyone can read; signed-in (incl. anonymous) can post
+    match /comments/{id} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && str(request.resource.data.thread, 120)
+        && str(request.resource.data.name, 60)
+        && str(request.resource.data.text, 1000)
+        && request.resource.data.byOwner == isAdmin()
+        && request.resource.data.keys().hasOnly(['thread','page','name','text','uid','byOwner','at']);
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    // Likes — one per visitor per item (doc id = item__uid)
+    match /likes/{id} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.item + '__' + request.auth.uid
+        && request.resource.data.keys().hasOnly(['item','uid','at']);
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    // Bookings, passes, pre-books, contact messages — write-only for visitors, owner reads
+    match /requests/{id} {
+      allow create: if signedIn()
+        && request.resource.data.type in ['contact','stay','passes','prebook','payment','comment','talk2me']
+        && request.resource.data.status == 'new'
+        && request.resource.data.data is map
+        && request.resource.data.data.size() <= 30
+        && request.resource.data.keys().hasOnly(['type','ref','status','data','uid','page','at']);
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

@@ -1,16 +1,7 @@
-# Environment and secret files
-.env
-.env.*
-!.env.example
-
-# Dependencies and generated output
+# Never commit the e-book files - they are the product. Keep them only in your private master copy.
+private/ebooks/*.pdf
+private/ebooks/*.epub
+.netlify/
 node_modules/
-dist/
-build/
-.vercel/
-coverage/
-
-# Local tooling and OS files
 .DS_Store
 Thumbs.db
-*.log

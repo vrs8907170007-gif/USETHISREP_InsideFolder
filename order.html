@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Your Order — Vishal Singh Books</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  :root{ --accent: var(--violet); }
+  .od{ max-width: 720px; margin: 0 auto; }
+  .od h1{ font-size: clamp(32px, 4.4vw, 48px); margin-top: 12px; }
+  .od-box{ border:1px solid var(--line); border-radius:16px; background: var(--stage-2); padding: 24px; margin-top: 22px; }
+  .it{ display:flex; justify-content:space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line-soft); flex-wrap: wrap; }
+  .it:first-child{ border-top: 0; padding-top: 0; }
+  .it b{ display:block; }
+  .it small{ color: var(--ivory-dim); }
+  .it .btn{ padding: 10px 18px; font-size: 12.5px; margin-top: 10px; }
+  .st{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:999px; border:1px solid var(--emerald); color:#8fd9bf; }
+  .st.wait{ border-color: var(--gold); color: var(--gold); }
+  .st.bad{ border-color: var(--flame); color: #f3b29d; }
+  .sum{ display:flex; justify-content:space-between; font-size:14px; padding:5px 0; color:var(--ivory-dim); }
+  .sum.total{ color:var(--ivory); font-weight:700; font-size:16px; }
+</style>
+</head>
+<body>
+<section class="section" style="padding-top:64px;">
+  <div class="shell od" id="od"><p style="color:var(--ivory-dim);">Loading your order…</p></div>
+</section>
+<script src="js/config.js"></script>
+<script src="js/backend.js"></script>
+<script src="js/shop.js"></script>
+<script src="js/shell.js"></script>
+<script>
+(function(){
+  const q = new URLSearchParams(location.search), esc = SHOP.esc, el = document.getElementById('od');
+  const id = q.get('id'), k = q.get('k');
+  const STATE = { ready: ['Ready to download', ''], 'awaiting-launch': ['Pre-order · download link at launch', 'wait'], preorder: ['Pre-order · ships at launch', 'wait'], 'to-ship': ['Packing — ships in 3–7 days', 'wait'], shipped: ['Shipped', ''], delivered: ['Delivered', ''] };
+  async function load(tries){
+    let r, j = {};
+    try { r = await fetch('/api/order-status?id=' + encodeURIComponent(id || '') + '&k=' + encodeURIComponent(k || '')); j = await r.json(); } catch (e) {}
+    if (!r || !r.ok) { el.innerHTML = '<div class="eyebrow">Bookstore</div><h1>Order not found</h1><p style="color:var(--ivory-dim); margin-top:14px;">Please use the link from your order email. Need help? <a href="contact.html" style="color:var(--gold);">Contact us</a>.</p>'; return; }
+    const o = j.order;
+    if (o.status === 'created' && tries < 8) { el.innerHTML = '<p style="color:var(--ivory-dim);">Confirming your payment with Razorpay…</p>'; return setTimeout(() => load(tries + 1), 2500); }
+    const head = o.status === 'paid' ? (q.get('new') ? 'Thank you!' : 'Your order') : o.status === 'refunded' ? 'Order refunded' : 'Payment not completed';
+    el.innerHTML = `<div class="eyebrow">Order <span class="ref-code">${esc(o.id)}</span></div>
+      <h1>${head}</h1>
+      <p style="color:var(--ivory-dim); margin-top:12px;">${o.status === 'paid' ? `Payment confirmed${o.paidAt ? ' on ' + new Date(o.paidAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'numeric', minute:'2-digit' }) : ''}. A receipt is on its way to <b>${esc(o.customer.email)}</b>. <b>Bookmark this page</b> — your download links live here.` : o.status === 'refunded' ? 'This order was refunded.' : 'We haven\'t received payment for this order. If money was deducted, it will be refunded automatically by your bank within 5–7 days — or <a href="contact.html" style="color:var(--gold);">contact us</a>.'}</p>
+      <div class="od-box">${o.items.map(it => { const s = STATE[it.state] || null; return `<div class="it"><div><b>${esc(it.title)}</b><small>${esc(it.formatLabel)} × ${it.qty}</small><br>${s && o.status === 'paid' ? `<span class="st ${s[1]}">${s[0]}</span>` : ''}
+        ${it.files && it.files.length ? `<br>${it.files.map(f => `<a class="btn btn-accent" href="${esc(f.url)}" style="margin-right:8px;">Download ${esc(f.type)}</a>`).join('')} <small style="margin-left:8px;">${it.downloadsLeft} download${it.downloadsLeft === 1 ? '' : 's'} left</small>` : ''}</div><div>${SHOP.inr(it.line)}</div></div>`; }).join('')}
+        <div style="border-top:1px solid var(--line); margin-top:10px; padding-top:10px;">
+          <div class="sum"><span>Subtotal</span><span>${SHOP.inr(o.subtotal)}</span></div>
+          ${o.shipping ? `<div class="sum"><span>Shipping</span><span>${SHOP.inr(o.shipping)}</span></div>` : ''}
+          <div class="sum total"><span>Total ${o.status === 'paid' ? 'paid' : ''}</span><span>${SHOP.inr(o.total)}</span></div>
+        </div></div>
+      ${o.shipment ? `<div class="od-box"><b>Shipped</b><p style="color:var(--ivory-dim); margin-top:8px;">Courier: <b>${esc(o.shipment.courier)}</b> · Tracking: <span class="ref-code">${esc(o.shipment.tracking)}</span></p></div>` : ''}
+      ${o.address ? `<div class="od-box"><b>Delivering to</b><p style="color:var(--ivory-dim); margin-top:8px;">${esc(o.customer.name)}<br>${esc(o.address.line1)}${o.address.line2 ? ', ' + esc(o.address.line2) : ''}<br>${esc(o.address.city)}, ${esc(o.address.state)} ${esc(o.address.pincode)}</p></div>` : ''}
+      <p style="margin-top:24px; font-size:13px; color:var(--ivory-dim);">Questions about this order? <a href="${VS.waLink('Hi, about my book order ' + o.id)}" target="_blank" rel="noopener" style="color:var(--gold);">WhatsApp</a> or <a href="mailto:${esc(VS.cfg.ownerEmail)}?subject=${encodeURIComponent('Order ' + o.id)}" style="color:var(--gold);">email us</a>.</p>`;
+  }
+  load(0);
+})();
+</script>
+</body>
+</html>

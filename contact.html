@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Vishal Singh</title>
+<meta name="description" content="Contact Vishal Singh — email, phone, WhatsApp, or send a message for Pandora City, Forever FYRE, books, press and collaborations.">
+<meta name="theme-color" content="#0B0D12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vishal Singh">
+<meta property="og:title" content="Contact — Vishal Singh">
+<meta property="og:description" content="Contact Vishal Singh — email, phone, WhatsApp, or send a message for Pandora City, Forever FYRE, books, press and collaborations.">
+<meta property="og:image" content="https://vsofficial.vercel.app/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="css/base.css">
 <style>
   .con-hero{ position:relative; overflow:hidden; padding:76px 0 56px; border-bottom:1px solid var(--line); }
@@ -61,6 +74,10 @@
           <div><a href="tel:+919136540798">+91 91365 40798</a><div class="sub">Alternate phone</div></div>
         </div>
         <div class="contact-line">
+          <div class="icon">✆</div>
+          <div><a href="https://wa.me/918369578225?text=Hi%20Vishal%2C%20I%20found%20you%20through%20your%20website." target="_blank" rel="noopener">Chat on WhatsApp</a><div class="sub">Fastest reply</div></div>
+        </div>
+        <div class="contact-line">
           <div class="icon">in</div>
           <div><a href="https://linkedin.com/in/nonchalantvs" target="_blank" rel="noopener">linkedin.com/in/nonchalantvs</a><div class="sub">LinkedIn</div></div>
         </div>
@@ -88,37 +105,60 @@
     <div class="form-card reveal">
       <div class="eyebrow">Send a message</div>
       <h3 style="font-size:24px; margin-top:12px;">Write to me directly</h3>
-      <div style="margin-top:24px;">
+      <form id="contactForm" novalidate style="margin-top:24px;">
         <div class="form-row-2">
-          <div><label>Full name</label><input type="text" placeholder="Your name"></div>
-          <div><label>Email</label><input type="email" placeholder="you@email.com"></div>
+          <div><label for="cName">Full name</label><input id="cName" type="text" placeholder="Your name" autocomplete="name"></div>
+          <div><label for="cEmail">Email</label><input id="cEmail" type="email" placeholder="you@email.com" autocomplete="email"></div>
         </div>
-        <div class="form-row">
-          <label>Reason for reaching out</label>
-          <select>
+        <div class="form-row-2">
+          <div><label for="cPhone">Phone (optional)</label><input id="cPhone" type="tel" placeholder="+91" autocomplete="tel"></div>
+          <div><label for="cReason">Reason for reaching out</label>
+          <select id="cReason">
             <option>General / just saying hello</option>
             <option>Pandora City enquiry</option>
             <option>Forever FYRE enquiry</option>
+            <option>Books</option>
             <option>Press or collaboration</option>
             <option>Something else</option>
-          </select>
+          </select></div>
         </div>
         <div class="form-row">
-          <label>Message</label>
-          <textarea style="min-height:130px;" placeholder="Write your message..."></textarea>
+          <label for="cMsg">Message</label>
+          <textarea id="cMsg" style="min-height:130px;" placeholder="Write your message..."></textarea>
         </div>
-        <button class="btn btn-accent" style="width:100%; justify-content:center;" id="contactSend">Send message (demo)</button>
-        <div class="confirm-box" id="contactConfirm">✓ Message captured. In production this sends directly to p.svishal@gmail.com.</div>
-      </div>
+        <input class="hp-field" id="cHoney" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-accent" style="width:100%; justify-content:center;" id="contactSend" type="submit">Send message</button>
+        <div class="notice" id="contactResult" style="display:none;"></div>
+      </form>
     </div>
   </div>
 </section>
 
 <script src="js/shell.js"></script>
+<script src="js/config.js"></script>
+<script src="js/backend.js"></script>
 <script>
-  document.getElementById('contactSend').addEventListener('click', ()=>{
-    document.getElementById('contactConfirm').style.display = 'block';
-  });
+  (function(){
+    const $ = (id) => document.getElementById(id);
+    const q = new URLSearchParams(location.search).get('reason');
+    if (q) [...$('cReason').options].forEach(o => { if (o.text.toLowerCase().includes(q.toLowerCase())) o.selected = true; });
+    VS.prefill({ name: $('cName'), email: $('cEmail'), phone: $('cPhone') });
+    $('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const box = $('contactResult');
+      const err = VS.validate([{ el: $('cName'), req: true, label: 'Your name' }, { el: $('cEmail'), req: true, type: 'email', label: 'Email' }, { el: $('cPhone'), type: 'phone' }, { el: $('cMsg'), req: true, label: 'Message' }]);
+      if (err) { box.style.display = 'block'; box.className = 'notice err'; box.textContent = err; return; }
+      const f = { name: $('cName').value.trim(), email: $('cEmail').value.trim(), phone: $('cPhone').value.trim(), reason: $('cReason').value, message: $('cMsg').value.trim(), _honey: $('cHoney').value };
+      const res = await VS.busy($('contactSend'), 'Sending…', () => VS.submitRequest('contact', f, { prefix: 'MSG', subject: f.reason + ' — from ' + f.name, autoresponse: 'Thank you for reaching out. Your message has reached me and I will reply personally, usually within a day or two. — Vishal Singh' }));
+      VS.showResult(box, res, { okTitle: 'Message sent', okText: 'A confirmation is on its way to your email, and I\'ll reply personally soon.', summary: `${f.reason}
+Name: ${f.name}
+Email: ${f.email}
+Phone: ${f.phone}
+
+${f.message}`, subject: f.reason });
+      if (res.ok) $('cMsg').value = '';
+    });
+  })();
 </script>
 </body>
 </html>
