@@ -12,7 +12,8 @@ after the client's payment is confirmed.
 ## 1. Find new bookings
 
 1. Gmail search: `subject:"Numerology booking" newer_than:14d -label:nm-report-sent`.
-2. For each thread, open it in full (get_thread) and take the booking email sent by FormSubmit (from `submissions@formsubmit.co`
+2. Emails titled "Payment proof NM-…" carry the client's payment screenshot for Vishal; they are not bookings — skip them.
+   For each booking thread, open it in full (get_thread) and take the booking email sent by FormSubmit (from `submissions@formsubmit.co`
    or similar). Skip threads that are only replies or auto-responses.
 3. Find the field **"Booking data (for the report agent)"**. It holds the booking as JSON (HTML entities may need unescaping:
    `&quot;` → `"`). If the field is missing (an older booking or one forwarded from WhatsApp), rebuild the same structure
@@ -174,7 +175,10 @@ file into the working directory and try again):
 - Subject: `Report ready — <reference> — <client name> — <package name>`
 - Body (plain, short):
   - Client: name, WhatsApp, email; package, add-ons, total; language.
-  - "Share after payment is confirmed." (Payment is not visible to you.)
+  - **Payment** (from `payment` in the booking JSON): amount, UPI transaction ID (UTR), app, paid-to UPI ID — and the line
+    "Verify this UTR in your UPI app and the screenshot in the email 'Payment proof <reference>' before sharing." If
+    `payment` is missing or the amount differs from the package total, say so clearly at the top of the email.
+    Never treat the payment as confirmed yourself; only Vishal can.
   - 3–5 bullet summary of the key findings and recommendations.
   - Packages with a call (`name` 15 min, `consult` 45 min, `business` 30 min, `blueprint` 45 min): a **call plan** —
     timings, the client's own questions, and the points to cover.

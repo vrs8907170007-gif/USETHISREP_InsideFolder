@@ -192,6 +192,24 @@
   .replist .rl-add{ background: none; border: 1px dashed var(--line); color: var(--gold); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%; text-align: left; }
   .replist .rl-add:hover{ border-color: var(--gold); }
   @media (max-width: 640px){ .replist .rl-row{ grid-template-columns: 1fr 38px !important; } .replist .rl-row > :not(.rl-x):not(:first-child){ grid-column: 1; } .replist .rl-row .rl-x{ grid-column: 2; grid-row: 1; } }
+  /* payment step */
+  .pay-step{ border-top: 1px solid var(--line-soft); margin-top: 8px; padding-top: 4px; }
+  .pay-grid{ display:grid; grid-template-columns: 240px 1fr; gap: 22px; align-items:start; margin-bottom: 18px; }
+  @media (max-width: 640px){ .pay-grid{ grid-template-columns: 1fr; } }
+  .pay-qr-box{ display:flex; flex-direction:column; align-items:center; gap: 10px; }
+  .pay-qr{ width: 220px; height: 220px; background: #fff; border-radius: 12px; padding: 10px; box-sizing: border-box; }
+  .pay-qr svg{ width: 100%; height: 100%; display:block; }
+  .pay-to{ font-size: 12px; color: var(--ivory-dim); text-align:center; word-break: break-all; }
+  .pay-open{ display:none; justify-content:center; width: 100%; }
+  @media (hover: none) and (pointer: coarse){ .pay-open{ display:inline-flex; } }
+  .pay-alt-h{ font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .pay-id{ display:flex; align-items:center; justify-content:space-between; gap: 10px; border:1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; font-size: 14px; }
+  .pay-id b{ color: var(--ivory); font-weight: 600; word-break: break-all; } .pay-id small{ display:block; color: var(--ivory-dim); font-size: 12px; }
+  .pay-id button{ flex:none; background:none; border:1px solid var(--line); color: var(--gold); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700; cursor:pointer; }
+  .pay-more summary{ cursor:pointer; font-size: 13px; color: var(--gold); font-weight: 600; margin: 6px 0; }
+  .pay-imgs{ display:flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .pay-imgs img{ width: 150px; border-radius: 10px; background:#fff; }
+  .booking-box input[type=file]{ padding: 10px; }
   /* review step */
   .review{ display:none; }
   .booking-box.reviewing > *:not(.review):not(#bResult){ display:none !important; }
@@ -388,8 +406,8 @@
     <div class="sec-head"><div class="eyebrow reveal">How it works</div><h2 class="reveal">From your details to your reading</h2></div>
     <div class="steps reveal">
       <div class="step"><h4>Book below</h4><p>Choose a reading and share your details. It takes about three minutes.</p></div>
-      <div class="step"><h4>Pay securely</h4><p>We confirm on WhatsApp or email within 24 hours with a secure payment link.</p></div>
-      <div class="step"><h4>A personal welcome</h4><p>Within an hour of payment: a voice note from Vishal and your delivery date.</p></div>
+      <div class="step"><h4>Pay by UPI</h4><p>Check your details, pay the exact amount by UPI, then add your transaction ID and a screenshot.</p></div>
+      <div class="step"><h4>A personal welcome</h4><p>Once your payment is verified: a voice note from Vishal and your delivery date.</p></div>
       <div class="step"><h4>Your report</h4><p>A PDF in The Divine Code design, with your name on the cover, plus a phone summary card with Life Blueprint.</p></div>
       <div class="step"><h4>Call &amp; follow-up</h4><p>Your call, where included, then follow-up questions on WhatsApp.</p></div>
     </div>
@@ -504,14 +522,55 @@
 
         <div id="totals"></div>
         <button class="btn btn-solid" style="width:100%; justify-content:center; margin-top:22px;" id="bSubmit" type="button">Review my details</button>
-        <p class="hint" style="text-align:center;">Next you'll see everything you entered, so you can check it before sending. Nothing is charged now.</p>
+        <p class="hint" style="text-align:center;">Next you'll check everything you entered and pay by UPI. Your booking is sent only after that.</p>
         <div class="review" id="reviewView">
           <div class="fs-title first">Please check your details</div>
           <p class="hint" style="margin:-4px 0 16px; font-size:13px;">This is exactly what Vishal will receive. Use <b>Edit details</b> to add or change anything; nothing is sent until you press <b>Confirm and send</b>.</p>
           <div id="rvBody"></div>
-          <div class="rv-actions"><button class="btn" type="button" id="rvEdit">← Edit details</button><button class="btn btn-solid" type="button" id="rvSend">Confirm and send</button></div>
+          <div class="pay-step" id="payStep">
+            <div class="fs-title first" style="margin-top:22px;">Pay <span id="payAmt"></span> to confirm your booking</div>
+            <p class="hint" style="margin:-4px 0 16px; font-size:13px;">Scan the code with any UPI app (Google Pay, PhonePe, Paytm, MobiKwik, BHIM). The amount and your booking reference are already filled in. Then add your transaction ID and a screenshot below; your booking is processed once Vishal has matched your payment.</p>
+            <div class="pay-grid">
+              <div class="pay-qr-box">
+                <div id="payQr" class="pay-qr" role="img" aria-label="UPI QR code with the amount filled in"></div>
+                <div class="pay-to" id="payTo"></div>
+                <a class="btn btn-accent pay-open" id="payOpen" href="#">Open UPI app</a>
+              </div>
+              <div class="pay-alt">
+                <div class="pay-alt-h">Or pay to a UPI ID</div>
+                <div id="payIds"></div>
+                <details class="pay-more"><summary>Show my other QR codes</summary><div class="pay-imgs" id="payImgs"></div></details>
+                <p class="hint">Please pay exactly <b id="payAmt2"></b> and write <b id="payRef"></b> in the payment note if your app allows.</p>
+              </div>
+            </div>
+            <div class="form-row">
+              <div><label for="pUtr">UPI transaction ID / UTR</label><input id="pUtr" placeholder="12-digit number shown in your UPI app" autocomplete="off" maxlength="40"></div>
+              <div><label for="pApp">Paid with</label><select id="pApp"><option>Google Pay</option><option>PhonePe</option><option>Paytm</option><option>MobiKwik</option><option>BHIM</option><option>Bank app</option><option>Other</option></select></div>
+            </div>
+            <form id="proofForm" method="POST" enctype="multipart/form-data" target="proofFrame" novalidate>
+              <input type="hidden" name="_subject" value="">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="">
+              <input type="hidden" name="Reference" value="">
+              <input type="hidden" name="Client" value="">
+              <input type="hidden" name="WhatsApp" value="">
+              <input type="hidden" name="Amount" value="">
+              <input type="hidden" name="Transaction ID" value="">
+              <input type="hidden" name="Paid with" value="">
+              <input type="hidden" name="Paid to" value="">
+              <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <div class="form-row">
+                <div><label for="pFile">Payment screenshot</label><input type="file" id="pFile" name="attachment" accept="image/*"><div class="hint" id="pFileInfo">JPG or PNG, up to 10 MB.</div></div>
+                <div><label for="pTo">Paid to</label><select id="pTo"></select></div>
+              </div>
+            </form>
+            <label class="consent"><input type="checkbox" id="pConfirm"> <span id="pConfirmTxt">I have paid the amount above for this booking.</span></label>
+          </div>
+          <div class="rv-actions"><button class="btn" type="button" id="rvEdit">← Edit details</button><button class="btn btn-solid" type="button" id="rvSend">Submit booking and payment proof</button></div>
         </div>
         <div class="notice" id="bResult" style="display:none;"></div>
+        <iframe name="proofFrame" id="proofFrame" title="Payment proof upload" style="display:none;" aria-hidden="true"></iframe>
       </div>
 
       <div>
@@ -551,8 +610,8 @@
       <details><summary>How is my Personal Year 2027 worked out?</summary><p>Add your birth day and birth month, add 11 (for 2027: 2+0+2+7), and reduce to one digit. Born 14 August: 1+4+0+8 = 13, 13 + 11 = 24, 2+4 = Personal Year 6. The Complete Life Report and Life Blueprint include a month-by-month forecast.</p></details>
       <details><summary>Will I have to change my name legally?</summary><p>No. A corrected spelling is used first on your signature, email, business cards and social profiles. Changing official documents is optional.</p></details>
       <details><summary>Which name system do you use?</summary><p>Name numbers use the Chaldean letter values, as in Vishal's books. The free calculator on this page uses the same values.</p></details>
-      <details><summary>How and when do I pay?</summary><p>After you send the form, we confirm within 24 hours on WhatsApp or email and send a secure payment link (UPI, card or net banking). Work starts once payment is received, and you get your delivery date with the welcome voice note.</p></details>
-      <details><summary>How does the launch offer work?</summary><p>The first 50 clients get 20% off every reading and add-on. The Life Blueprint already includes a ₹898 bundle saving, so the launch offer doesn't apply to it. Your final price is confirmed in your payment link.</p></details>
+      <details><summary>How and when do I pay?</summary><p>After checking your details, you pay the exact amount by UPI (Google Pay, PhonePe, Paytm, MobiKwik, BHIM or your bank app) and upload the payment screenshot with your transaction ID. Vishal matches the payment, and then your report is prepared and emailed to you.</p></details>
+      <details><summary>How does the launch offer work?</summary><p>The first 50 clients get 20% off every reading and add-on. The Life Blueprint already includes a ₹898 bundle saving, so the launch offer doesn't apply to it. The discounted total is shown in the form and on the payment screen.</p></details>
       <details><summary>Can I reschedule my call?</summary><p>Yes, with 24 hours' notice. If you cancel before work on your report has started, you get a full refund.</p></details>
     </div>
     <p class="disclaimer">Readings are offered for guidance and self-reflection. They are not a substitute for financial, legal, medical or psychological advice, and no specific result is guaranteed.</p>
@@ -942,9 +1001,65 @@
 
   const asText = (g) => g.map(x => x.title.toUpperCase() + '\n' + x.rows.map(r => r[0] + ': ' + r[1]).join('\n')).join('\n\n');
 
+  /* payment step */
+  const UPI = (window.SITE_CONFIG.numerologyUpi || []);
+  let qrLib = null;
+  const loadQrLib = () => qrLib || (qrLib = new Promise((res, rej) => { if (window.qrcode) return res(); const sc = document.createElement('script'); sc.src = 'js/vendor/qrcode.js'; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); }));
+  const upiUrl = (u, amt, ref) => `upi://pay?pa=${encodeURIComponent(u.id)}&pn=${encodeURIComponent(u.name)}&am=${Number(amt).toFixed(2)}&cu=INR&tn=${encodeURIComponent(ref)}`;
+  $('pTo').innerHTML = UPI.map(u => `<option value="${escH(u.id)}">${escH(u.id)}</option>`).join('');
+  $('payIds').innerHTML = UPI.map(u => `<div class="pay-id"><div><b>${escH(u.id)}</b><small>${escH(u.label)}</small></div><button type="button" data-copy="${escH(u.id)}">Copy</button></div>`).join('');
+  $('payImgs').innerHTML = UPI.filter(u => u.qr).map(u => `<img src="${escH(u.qr)}" alt="UPI QR code for ${escH(u.id)}" loading="lazy">`).join('');
+  $('payIds').addEventListener('click', e => { const b = e.target.closest('[data-copy]'); if (!b) return; (navigator.clipboard ? navigator.clipboard.writeText(b.dataset.copy) : Promise.reject()).then(() => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1500); }).catch(() => {}); });
+  async function renderPayment(p){
+    const amt = p.t.total, u = UPI[0];
+    $('payAmt').textContent = inr(amt); $('payAmt2').textContent = inr(amt); $('payRef').textContent = p.ref;
+    $('pConfirmTxt').textContent = `I have paid ${inr(amt)} for booking ${p.ref}.`;
+    $('payStep').hidden = !(amt > 0 && u);
+    if (!u) return;
+    const url = upiUrl(u, amt, p.ref);
+    $('payOpen').href = url; $('payTo').textContent = `${u.name} · ${u.id}`;
+    try { await loadQrLib(); const q = window.qrcode(0, 'M'); q.addData(url); q.make(); $('payQr').innerHTML = q.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); }
+    catch (e) { $('payQr').innerHTML = u.qr ? `<img src="${escH(u.qr)}" alt="UPI QR code" style="width:100%;">` : ''; }
+  }
+  $('pFile').addEventListener('change', () => { const f = $('pFile').files[0]; $('pFileInfo').textContent = f ? `${f.name} · ${(f.size / 1048576).toFixed(1)} MB` : 'JPG or PNG, up to 10 MB.'; $('pFile').classList.remove('is-invalid'); });
+  // Shrink big phone screenshots so the email stays small (keeps the original if anything fails).
+  async function shrinkProof(){
+    const inp = $('pFile'), f = inp.files[0]; if (!f || f.size < 900000 || !window.DataTransfer) return;
+    try {
+      const bmp = await createImageBitmap(f); const k = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+      const cv = document.createElement('canvas'); cv.width = Math.round(bmp.width * k); cv.height = Math.round(bmp.height * k);
+      cv.getContext('2d').drawImage(bmp, 0, 0, cv.width, cv.height);
+      const blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.82)); if (!blob || blob.size >= f.size) return;
+      const dt = new DataTransfer(); dt.items.add(new File([blob], f.name.replace(/\.[^.]+$/, '') + '.jpg', { type: 'image/jpeg' })); inp.files = dt.files;
+    } catch (e) { /* keep original */ }
+  }
+  function sendProof(p){
+    const f = $('proofForm'), set = (n, val) => { f.querySelector(`[name="${n}"]`).value = val; };
+    const ep = (window.SITE_CONFIG.formEndpoint || '').replace('/ajax/', '/');
+    if (!ep) return Promise.resolve(false);
+    f.action = ep;
+    set('_subject', `Payment proof ${p.ref} — ${inr(p.t.total)} — ${v('bOfficial')}`);
+    set('_next', new URL('payment-received.html', location.href).href);
+    set('Reference', p.ref); set('Client', v('bOfficial')); set('WhatsApp', v('bPhone')); set('Amount', inr(p.t.total));
+    set('Transaction ID', v('pUtr')); set('Paid with', $('pApp').value); set('Paid to', $('pTo').value);
+    return new Promise(res => { const fr = $('proofFrame'); const done = () => { fr.removeEventListener('load', done); res(true); }; fr.addEventListener('load', done); setTimeout(() => res(false), 20000); f.submit(); });
+  }
+  function validatePayment(p){
+    if ($('payStep').hidden) return '';
+    const utr = v('pUtr'), file = $('pFile').files[0];
+    if (!/^[A-Za-z0-9-]{6,40}$/.test(utr)) { $('pUtr').classList.add('is-invalid'); $('pUtr').focus(); return 'Please enter the UPI transaction ID (UTR) from your payment app.'; }
+    if (!file) { $('pFile').classList.add('is-invalid'); $('pFile').focus(); return 'Please attach a screenshot of your payment.'; }
+    if (!/^image\//.test(file.type)) { $('pFile').classList.add('is-invalid'); return 'The payment screenshot must be an image (JPG or PNG).'; }
+    if (file.size > 10 * 1048576) { $('pFile').classList.add('is-invalid'); return 'The screenshot is larger than 10 MB. Please attach a smaller image.'; }
+    if (!$('pConfirm').checked) return `Please tick the box to confirm you have paid ${inr(p.t.total)}.`;
+    return '';
+  }
+  $('pUtr').addEventListener('input', () => $('pUtr').classList.remove('is-invalid'));
+
   function showReview(p){
     $('rvBody').innerHTML = p.g.map(x => `<div class="rv-group"><div class="rv-h">${escH(x.title)}</div>${x.rows.map(r => `<div class="rv-row"><span>${escH(r[0])}</span><b>${escH(r[1]).replace(/\n/g, '<br>')}</b></div>`).join('')}</div>`).join('');
     $('bookingBox').classList.add('reviewing'); $('bResult').style.display = 'none';
+    renderPayment(p);
     $('bookingBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function backToForm(){ $('bookingBox').classList.remove('reviewing'); $('bookingBox').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
@@ -959,26 +1074,37 @@
     const { msg, show, t } = validate();           // re-check in case something changed
     if (msg) { backToForm(); const box = $('bResult'); box.style.display = 'block'; box.className = 'notice err'; box.textContent = msg; return; }
     pending = collect(show, t);
-    const p = pending, text = asText(p.g);
+    const p = pending;
+    const payMsg = validatePayment(p);
+    if (payMsg) { const box = $('bResult'); box.style.display = 'block'; box.className = 'notice err'; box.textContent = payMsg; box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return; }
+    const paid = !$('payStep').hidden;
+    if (paid) {
+      p.g.push({ title: 'Payment', rows: [['Amount paid', inr(p.t.total)], ['UPI transaction ID', v('pUtr')], ['Paid with', $('pApp').value], ['Paid to', $('pTo').value], ['Screenshot', 'Sent in a separate email: "Payment proof ' + p.ref + '"']] });
+      p.data.payment = { amount: p.t.total, utr: v('pUtr'), app: $('pApp').value, paid_to: $('pTo').value, screenshot: 'separate email "Payment proof ' + p.ref + '"' };
+    }
+    const text = asText(p.g);
     const fields = {};
     p.g.forEach(x => x.rows.forEach(r => { if (r[0] !== 'Reference') fields[x.title + ' · ' + r[0]] = r[1]; }));
     fields['Booking data (for the report agent)'] = JSON.stringify(p.data);
     fields.email = v('bEmail'); fields.name = v('bOfficial'); fields.phone = v('bPhone');
     fields._honey = $('bHoney').value;
     const pkgName = p.t.p ? p.t.p.name : 'Add-ons only';
+    if (paid) { $('rvSend').disabled = true; await shrinkProof(); }
+    const proofP = paid ? sendProof(p) : Promise.resolve(true);
     const res = await VS.busy($('rvSend'), 'Sending…', () => VS.submitRequest('consult', fields, {
       ref: p.ref,
       subject: `Numerology booking ${p.ref} — ${pkgName}${p.t.ads.length ? ' + add-ons' : ''} (${inr(p.t.total)})`,
-      autoresponse: `Thank you for booking ${pkgName} with The Divine Code Numerology (reference ${p.ref}, total ${inr(p.t.total)}). We'll confirm on WhatsApp or email within 24 hours and send you a secure payment link. Your report is prepared once payment is received. — Vishal Singh`
+      autoresponse: `Thank you for booking ${pkgName} with The Divine Code Numerology (reference ${p.ref}, ${inr(p.t.total)}). We have received your booking and payment details. Once your payment is verified, your report is prepared and emailed to you. — Vishal Singh`
     }));
+    const proofOk = await proofP;
     $('bookingBox').classList.remove('reviewing');
     if (res.ok) { $('bookingBox').classList.add('sent'); pending = null; }
     VS.showResult($('bResult'), res, {
-      okTitle: 'Booking received', okText: `${pkgName}${p.t.ads.length ? ' + ' + p.t.ads.map(a => a.name).join(', ') : ''}: ${inr(p.t.total)}. We'll confirm within 24 hours.`,
-      summary: 'NUMEROLOGY booking ' + p.ref + '\n\n' + text,
-      subject: 'Numerology booking ' + p.ref,
-      payment: { kind: 'consult', amount: p.t.total, method: 'upi', name: v('bOfficial'), email: v('bEmail'), phone: v('bPhone') }
+      okTitle: 'Booking received', okText: `${pkgName}${p.t.ads.length ? ' + ' + p.t.ads.map(a => a.name).join(', ') : ''}: ${inr(p.t.total)}. ` + (paid ? (proofOk ? 'Your payment proof has been sent. Once Vishal has verified the payment, your report will be emailed to you.' : 'Your booking was sent, but the screenshot upload could not be confirmed — please also send the screenshot on WhatsApp.') : "We'll confirm within 24 hours."),
+      summary: 'NUMEROLOGY booking ' + p.ref + '\n\n' + text + (paid ? '\n\n(Payment screenshot attached separately)' : ''),
+      subject: 'Numerology booking ' + p.ref
     });
+    $('rvSend').disabled = false;
   });
 
   // deep links: numerology.html#book-name, #sample-blueprint

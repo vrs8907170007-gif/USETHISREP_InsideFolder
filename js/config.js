@@ -13,6 +13,12 @@ window.SITE_CONFIG = {
   whatsapp: "918369578225",
   // WhatsApp number used on the Numerology page (The Divine Code Numerology).
   numerologyWhatsapp: "919136540798",
+  // UPI accounts shown on the Numerology booking form (pay first, upload proof, then submit).
+  // The first one gets a QR code with the exact amount and booking reference filled in.
+  numerologyUpi: [
+    { id: "vrs8907170007-5@okaxis", name: "Vishal Singh", label: "Google Pay / any UPI app", qr: "assets/payments/gpay-qr.jpg" },
+    { id: "8369578225@mbk", name: "Vishal Singh", label: "MobiKwik / any UPI app", qr: "assets/payments/mobikwik-qr.jpg" }
+  ],
 
   // 1) EMAIL DELIVERY — works immediately, free (FormSubmit.co).
   //    Every form (contact, bookings, passes, pre-books) is emailed here.
