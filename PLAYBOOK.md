@@ -95,7 +95,8 @@ compassion and never suggest a "new relationship" unless the client asked about 
 - Keep the method transparent: the "How to read" section includes the method table (Moolank, Bhagyank, Chaldean names,
   Lo Shu with Moolank and Bhagyank added, Personal Year = birth day + birth month + year, planetary friendships of
   Vedic astrology).
-- Sign letters and closings as **Vishal Singh, The Divine Code Numerology**.
+- Sign the welcome letter and the closing note as **SANATANI V (Vishal R Singh)**, The Divine Code Numerology — use
+  `SIGN_HTML` from engine/branding.py (mandatory).
 
 ### Mandatory branding — every report, every package, every language
 Every report MUST carry, without exception:
@@ -106,13 +107,16 @@ Every report MUST carry, without exception:
 3. **The MRP** — the package price (Snapshot ₹499 · Complete Life Report ₹1,499 · Name Correction ₹2,499 · 1:1 Consultation
    ₹3,100 · Business & Brand ₹5,100 · Life Blueprint ₹6,999), plus add-ons if priced. If the customer paid a discounted amount
    (`payment.amount` in the booking JSON, or stated by Vishal), also show "Paid ₹…".
+4. **The sign-off** — every welcome letter (and the action-plan closing) ends with **SANATANI V (Vishal R Singh)** via `SIGN_HTML`.
+
 All of this is done by one call at the very end of every content file, after the last `S(...)` section:
 ```
-from branding import apply_branding, PRICES
+from branding import apply_branding, PRICES, SIGN_HTML, SIGN_HTML_HI
 DISCLAIMER = apply_branding(L, S, mrp=PRICES['blueprint'], package='Life Blueprint', paid=None)
 ```
-(engine/branding.py; the logos are embedded in it). For Hindi and other editions pass translated `package` text if wanted;
-keep the call. A report without logos, credits, MRP and disclaimer must not be sent.
+(engine/branding.py; it reuses the logos embedded in numerology-engine/branding.py — keep both files). For the Hindi edition
+set `L['lang'] = 'hi'` — the credits and disclaimer then come out in Hindi automatically; use `SIGN_HTML_HI` for the Hindi
+welcome-letter sign-off. Keep the call. A report without logos, credits, MRP and disclaimer must not be sent.
 
 ### Languages
 `languages` (list; older bookings: `language` text such as "English and Hindi") says which editions to write — one or two.
