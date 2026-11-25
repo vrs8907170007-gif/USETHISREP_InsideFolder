@@ -25,7 +25,7 @@ after the client's payment is confirmed.
 ## 2. Prepare the engine (once per run)
 
 ```
-git clone --depth 1 -b main https://github.com/vrs8907170007-gif/USETHISREP_InsideFolder.git site
+git clone --depth 1 https://github.com/vrs8907170007-gif/USETHISREP_InsideFolder.git site
 cd site/numerology-engine && npm install --silent
 ```
 If the clone fails (for example, the repository was made private), email Vishal: "The report agent could not download
@@ -97,23 +97,6 @@ compassion and never suggest a "new relationship" unless the client asked about 
   Vedic astrology).
 - Sign letters and closings as **Vishal Singh, The Divine Code Numerology**.
 
-### Mandatory branding — every report, every package, every language
-Every report MUST carry, without exception:
-1. **The two logos** — Nonchalant and Sanatani V — small and square (1:1), on the cover (start) and on the final page (end).
-2. **A "Credits, MRP and disclaimer" section** as the last section before the summary card: logos, credits (The Divine Code
-   Numerology · Vishal Singh; Nonchalant — Live · Learn · Explore; Sanatani V — Wisdom Meets Technology; the engine), the MRP
-   and the full disclaimer.
-3. **The MRP** — the package price (Snapshot ₹499 · Complete Life Report ₹1,499 · Name Correction ₹2,499 · 1:1 Consultation
-   ₹3,100 · Business & Brand ₹5,100 · Life Blueprint ₹6,999), plus add-ons if priced. If the customer paid a discounted amount
-   (`payment.amount` in the booking JSON, or stated by Vishal), also show "Paid ₹…".
-All of this is done by one call at the very end of every content file, after the last `S(...)` section:
-```
-from branding import apply_branding, PRICES
-DISCLAIMER = apply_branding(L, S, mrp=PRICES['blueprint'], package='Life Blueprint', paid=None)
-```
-(engine/branding.py; the logos are embedded in it). For Hindi and other editions pass translated `package` text if wanted;
-keep the call. A report without logos, credits, MRP and disclaimer must not be sent.
-
 ### Languages
 `languages` (list; older bookings: `language` text such as "English and Hindi") says which editions to write — one or two.
 Write a complete edition in each language chosen, with the same sections, tables and numbers. Supported:
@@ -172,6 +155,28 @@ Action (2-7-6) = execution. Empty planes point to what to build.
 **Friendships** (how planet A treats B) are in facts.json (`relation` values: friend / neutral / enemy). Present
 "enemy" gently as "pulls in a different direction" and turn it into advice.
 
+### Mandatory on every report (the renderer refuses to build without them)
+- **Both brand logos**, small and square (1:1), on the cover and again on the last page. The renderer places them from
+  `numerology-engine/assets/logo-1.png` and `logo-2.png`; never remove or replace these files.
+- **A last page with credits, the disclaimer and the price.** Set `L['ref']` and `L['mrp']` in every content file:
+  `mrp` = package price + add-on prices, before any offer. If the client paid less (launch offer), also set
+  `L['paid']` = the booking `total` and `L['paid_note']` = "20% launch offer". `DISCLAIMER` must be filled.
+  If you used web research (salaries, visas, rules), list the sources in `CREDITS = [('Research sources', '…')]`.
+- In Hindi and other editions, translate `credits_title`, `mrp_label`, `mrp_note`, `paid_label`, `disclaimer_title`
+  and `copy_note` as well.
+
+### Lal Kitab and relationship requests
+- If the client asks for Lal Kitab remedies, choose simple acts (feeding animals and birds, charity, floating rice or a
+  coconut in flowing water, respecting the mother and elders, wearing silver) with the Lal Kitab rules (one cycle at a
+  time, 43 days, between sunrise and sunset). Keep them faith-neutral and invite the client to add a prayer in their own
+  tradition. No gemstones, paid rituals or yantras.
+- For a broken relationship or "reunion" request: remedies work on the client (calm, timing, self-improvement), never
+  on the other person. Never offer vashikaran or anything meant to control someone; say plainly that no remedy can
+  override another person's free will, warn against "guaranteed love back" sellers, and give timing and a respectful
+  way to reconnect.
+- Requests about jobs or income abroad: give real, sourced salary ranges and the official safety steps (eMigrate
+  registered agents, OWRC helpline 1800 11 3090), and be honest when a route cannot reach the client's target.
+
 ## 6. Build, check and look
 
 1. Copy `examples/content_template.py` to `work/<ref>/content_en.py` (and `content_hi.py`), write the report.
@@ -179,10 +184,9 @@ Action (2-7-6) = execution. Empty planes point to what to build.
    `GRID(grid_from_counts(facts['client']['loshu']['counts']), caption)` for Lo Shu grids. In name tables keep the columns
    *Name · Total · Number · …* so the checker can verify them.
 2. `python3 ../site/numerology-engine/engine/check.py content_en.py facts.json` — must print **OK**. Fix every ✗.
-   Confirm the content file ends with the `apply_branding(...)` call (mandatory branding above).
 3. `python3 ../site/numerology-engine/engine/render.py content_en.py content_hi.py --out out`
 4. Look at every page: `pdftoppm -r 50 -png out/<file>.pdf pages/p` and view the images. Fix overflowing tables,
-   empty pages, broken Hindi text, wrong names. Check the logos show on the cover and the last page, and the MRP is correct. Check the page count is within the package range.
+   empty pages, broken Hindi text, wrong names. Check the page count is within the package range, and that both logos appear on the cover and on the last page with the right MRP.
 
 ## 7. Email the report to Vishal
 

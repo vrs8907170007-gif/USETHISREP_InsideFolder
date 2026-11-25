@@ -4,13 +4,59 @@
 Usage:  python3 render.py path/to/content_en.py [path/to/content_hi.py ...] [--out OUTDIR]
 A content file defines L (labels), SECTIONS, SUMMARY and DISCLAIMER; see ../examples/content_template.py.
 Fonts come from ../node_modules/@fontsource (run `npm install` in numerology-engine once)."""
-import importlib.util, os, re, sys, asyncio
+import importlib.util, os, re, sys, asyncio, base64
 from pypdf import PdfReader, PdfWriter
 from playwright.async_api import async_playwright
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FS = 'file://' + os.path.join(os.path.dirname(HERE), 'node_modules/@fontsource')
 OUT = os.path.join(os.getcwd(), 'out')
+ASSETS = os.path.join(os.path.dirname(HERE), 'assets')
+
+# ---- Mandatory on every report: both brand logos (1:1, small) on the cover and the last page, credits, disclaimer, MRP.
+def logo_uris():
+    out = []
+    for n in ('logo-1', 'logo-2'):
+        for ext, mt in (('png', 'png'), ('jpg', 'jpeg'), ('jpeg', 'jpeg'), ('webp', 'webp')):
+            f = os.path.join(ASSETS, f'{n}.{ext}')
+            if os.path.exists(f):
+                out.append(f'data:image/{mt};base64,' + base64.b64encode(open(f, 'rb').read()).decode()); break
+        else:
+            sys.exit(f'Missing {n}.png in {ASSETS}: both brand logos are mandatory on every report.')
+    return out
+
+def inr(n):
+    s = str(int(n)); head, tail = s[:-3], s[-3:]
+    while len(head) > 2: tail = head[-2:] + ',' + tail; head = head[:-2]
+    return '₹' + (head + ',' + tail if head else tail) + '/-'
+
+def check_mandatory(C):
+    L = C.L
+    if not L.get('mrp'): sys.exit('L["mrp"] is mandatory: the package price (or the discounted price the client paid) in rupees.')
+    if not getattr(C, 'DISCLAIMER', ''): sys.exit('DISCLAIMER is mandatory.')
+
+def logos_html(cls):
+    a, b = logo_uris()
+    return f'<div class="{cls}"><img src="{a}" alt=""><img src="{b}" alt=""></div>'
+
+def credits_html(C):
+    L = C.L
+    ref = L.get('ref', '')
+    base = L.get('credits') or [
+        ('Report prepared by', 'Vishal Singh, numerologist and author · The Divine Code Numerology'),
+        ('Prepared for', L.get('client_en', L['client']) + (f' · Reference {ref}' if ref else '')),
+        ('Method', 'Moolank and Bhagyank, Chaldean name numerology, Lo Shu grid, Personal Year cycles and the classical planetary friendships of Vedic astrology. Every number was calculated and cross-checked by The Divine Code report engine.'),
+        ('Contact', 'WhatsApp +91 91365 40798 · vsofficial.vercel.app/numerology.html · vsnonchalant@gmail.com'),
+    ]
+    rows = ''.join(f'<div class="cr-row"><span>{a}</span><span>{b}</span></div>' for a, b in list(base) + list(getattr(C, 'CREDITS', [])))
+    paid = L.get('paid')
+    price = (f'<div class="mrp"><div><span>{L.get("mrp_label", "MRP")}</span><b>{inr(L["mrp"])}</b><small>{L.get("mrp_note", "inclusive of all taxes")}</small></div>'
+             + (f'<div><span>{L.get("paid_label", "Price paid")}</span><b>{inr(paid)}</b><small>{L.get("paid_note", "")}</small></div>' if paid and int(paid) != int(L['mrp']) else '')
+             + '</div>')
+    return (f'<section class="credits"><div class="mark">QQZENDZQQ</div>{logos_html("cr-logos")}'
+            f'<h2>{L.get("credits_title", "Credits, disclaimer and price")}</h2><div class="cr">{rows}</div>{price}'
+            f'<h3>{L.get("disclaimer_title", "Disclaimer")}</h3><p class="disc2">{C.DISCLAIMER}</p>'
+            f'<p class="copy">© {L.get("year", "2026")} The Divine Code Numerology · Vishal Singh. {L.get("copy_note", "Prepared personally for the client named above. Please do not resell or publish.")}</p></section>')
 
 FONTS = ''.join(
     f"@font-face{{font-family:'{fam}';src:url('{FS}/{pkg}/files/{pkg}-{sub}-{w}-{st}.woff2') format('woff2');font-weight:{w};font-style:{st};}}"
@@ -102,6 +148,13 @@ ol.plan{ margin: 0; padding-left: 18pt; } ol.plan li{ margin-bottom: 9pt; paddin
 .scard .rows span:first-child{ color: #bdb7a6; } .scard .rows span:last-child{ color: #fff; text-align: right; }
 .scard ol{ margin: 12pt 0 0; padding-left: 16pt; font-size: 9pt; line-height: 1.65; }
 .disc{ margin-top: 26pt; font-size: 8.5pt; color: var(--muted); font-style: italic; text-align: left; border-top: .6pt solid var(--line); padding-top: 10pt; }
+.credits{ break-before: page; position: relative; }
+.cr-logos{ display:flex; gap: 8pt; margin-bottom: 14pt; } .cr-logos img{ width: 15mm; height: 15mm; object-fit: contain; border-radius: 2.5mm; }
+.credits h2{ font-size: 20pt; margin-bottom: 10pt; } .credits h3{ font-size: 12pt; margin: 16pt 0 6pt; }
+.cr-row{ display:flex; gap: 14pt; padding: 6pt 0; border-bottom: .6pt solid var(--line); font-size: 9.6pt; } .cr-row span:first-child{ width: 120pt; flex: none; color: var(--muted); } .cr-row span:last-child{ color: var(--ink); }
+.mrp{ display:flex; gap: 12pt; margin-top: 16pt; } .mrp > div{ flex:1; border: 1.2pt solid var(--gold); border-radius: 8pt; padding: 10pt 14pt; background:#fffaf0; }
+.mrp span{ display:block; font-family:'Inter'; font-size: 7.5pt; letter-spacing:.2em; text-transform: uppercase; color: var(--gold); font-weight:700; } .mrp b{ display:block; font-family: var(--display); font-size: 22pt; font-weight: 600; } .mrp small{ color: var(--muted); font-size: 8.5pt; }
+.disc2{ font-size: 9pt; color: var(--text); line-height: 1.6; } .copy{ margin-top: 14pt; font-size: 8pt; color: var(--muted); }
 .sec, .card-page{ position: relative; } .mark{ position:absolute; top:0; right:0; font-size: 4pt; color: #fffffe; line-height:1; font-family: 'Inter', sans-serif; white-space: nowrap; }
 """
 
@@ -120,6 +173,7 @@ html,body{ margin:0; height: 297mm; }
 .cover .loshu span.c{ background: #d4af6a; color: #15132f; }
 .cover .foot{ position:absolute; left: 22mm; bottom: 22mm; font-family: var(--body); font-size: 9pt; color: #bdb7a6; line-height: 1.8; }
 .cover .foot b{ color: #fff; font-weight: 600; }
+.cover .logos{ position:absolute; top: 22mm; right: 22mm; display:flex; gap: 3mm; } .cover .logos img{ width: 15mm; height: 15mm; object-fit: contain; border-radius: 2.5mm; }
 .cover .brandmark{ position:absolute; left: 22mm; bottom: 34mm; font-family: var(--display); font-size: 14pt; color: #fff; }
 """
 
@@ -136,6 +190,8 @@ def body_html(C, pages=None):
         toc_rows.append(f'<div class="toc-row"><span class="n">{s["num"]}</span><span class="t">{s["title"]}</span><span class="p">{pg}</span></div>')
     pg = pages.get('CARD', '') if pages else '00'
     toc_rows.append(f'<div class="toc-row"><span class="n">✦</span><span class="t">{C.SUMMARY["title"]}</span><span class="p">{pg}</span></div>')
+    pg = pages.get('END', '') if pages else '00'
+    toc_rows.append(f'<div class="toc-row"><span class="n">✦</span><span class="t">{L.get("credits_title", "Credits, disclaimer and price")}</span><span class="p">{pg}</span></div>')
     toc = f'<section class="toc"><h2>{L["contents"]}</h2>{"".join(toc_rows)}</section>'
     secs = []
     for i, s in enumerate(C.SECTIONS):
@@ -147,16 +203,16 @@ def body_html(C, pages=None):
             f'<div class="nums">{"".join(f"<div><b>{a}</b><small>{b}</small></div>" for a, b in sm["nums"])}</div>'
             f'<div class="rows">{"".join(f"<div><span>{a}</span><span>{b}</span></div>" for a, b in sm["rows"])}</div>'
             f'<ol>{"".join(f"<li>{x}</li>" for x in sm["steps"])}</ol></div>'
-            f'<p class="disc">{C.DISCLAIMER}</p></section>')
+            f'</section>')
     return (f'<!doctype html><html lang="{L["html_lang"]}"><head><meta charset="utf-8"><style>{FONTS}:root{{{fam(L["lang"])}}}{CSS}'
-            f'@page{{ size:A4; margin: 18mm 17mm 20mm; }}</style></head><body class="{L["lang"]}{" indic" if L["lang"] != "en" else ""}">{toc}{"".join(secs)}{card}</body></html>')
+            f'@page{{ size:A4; margin: 18mm 17mm 20mm; }}</style></head><body class="{L["lang"]}{" indic" if L["lang"] != "en" else ""}">{toc}{"".join(secs)}{card}{credits_html(C)}</body></html>')
 
 def cover_html(C):
     L = C.L
     meta = '<br>'.join(L['cover_meta'])
     grid = ''.join(f'<span class="{"c" if n == "5" else ""}">{n}</span>' for n in '492357816')
     return (f'<!doctype html><html lang="{L["html_lang"]}"><head><meta charset="utf-8"><style>{FONTS}:root{{{fam(L["lang"])}}}{COVER_CSS}</style></head><body>'
-            f'<div class="cover"><div class="kick">{L["cover_kicker"]}</div><h1>{L["cover_title"]}</h1><div class="rule"></div>'
+            f'<div class="cover">{logos_html("logos")}<div class="kick">{L["cover_kicker"]}</div><h1>{L["cover_title"]}</h1><div class="rule"></div>'
             f'<div class="for">{L["cover_for"]}</div><div class="name">{L["client"]}</div><div class="meta">{meta}</div>'
             f'<div class="loshu">{grid}</div>'
             f'<div class="foot"><b>{L["brand"]}</b><br>{L.get("cover_contact", "Vishal Singh · vsofficial.vercel.app · WhatsApp +91 91365 40798")}<br>{L["cover_date"]} · {L["cover_edition"]}</div></div></body></html>')
@@ -170,7 +226,7 @@ def load(path):
     m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
 
 async def render(path):
-    C = load(path); lang = C.L['lang']; os.makedirs(OUT, exist_ok=True)
+    C = load(path); check_mandatory(C); lang = C.L['lang']; os.makedirs(OUT, exist_ok=True)
     async with async_playwright() as p:
         b = await p.chromium.launch()
         pg = await b.new_page()
@@ -190,7 +246,7 @@ async def render(path):
         # find the page of each section marker (body page index + 2 because the cover is page 1)
         pages = {}
         for i, page in enumerate(PdfReader(bod).pages):
-            for m in re.findall(r'QQZ(S\d+|CARD)ZQQ', page.extract_text() or ''):
+            for m in re.findall(r'QQZ(S\d+|CARD|END)ZQQ', page.extract_text() or ''):
                 pages.setdefault(m, i + 1)
         await pdf(body_html(C, pages), bod, True)
         await b.close()

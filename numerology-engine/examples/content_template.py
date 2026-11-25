@@ -20,7 +20,14 @@ L = dict(
   contents='Contents', todo='What to do', page='Page',
   footer_conf='Prepared personally for Priya Sharma · Confidential',
   file_name='Complete_Life_Report_Priya_Sharma',      # PDF file name (ASCII); language suffix is added
+  ref='NM-XXXXXXX',                                   # booking reference, shown in the credits
+  # MANDATORY: MRP = package price + add-on prices (before any offer). If the client paid less (launch offer),
+  # also set paid=<booking total> and paid_note='20% launch offer'. Indian editions also translate
+  # credits_title, mrp_label, mrp_note, paid_label, disclaimer_title and copy_note.
+  mrp=1499,
 )
+# Optional extra rows for the credits page, e.g. research sources used for this report:
+# CREDITS = [('Research sources', 'Source A; Source B')]
 TODO = lambda items: todo_box(items, L['todo'])
 
 SECTIONS = []
