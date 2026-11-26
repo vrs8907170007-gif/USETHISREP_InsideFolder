@@ -7,7 +7,7 @@ document.documentElement.classList.add("js");
     ["Story", [["about.html", "About Me"], ["accomplishments.html", "Accomplishments"], ["experience.html", "Experience & Work"]]],
     ["Ventures", [["pandora-city.html", "Pandora City"], ["forever-fyre.html", "Forever FYRE"]]],
     ["talk2me.html", "Talk2Me"],
-    ["gallery.html", "Gallery"],
+    ["gallery.html", "Certificates"],
     ["contribution.html", "Contribution"],
     ["bookstore.html", "Bookstore"],
     ["numerology.html", "Numerology"],
@@ -145,7 +145,7 @@ document.documentElement.classList.add("js");
         <div class="footer-links">
           <a href="contact.html">Contact</a>
           <a href="library.html">Library</a>
-          <a href="gallery.html">Gallery</a>
+          <a href="gallery.html">Certificates</a>
           <a href="talk2me.html">Talk2Me</a>
           <a href="admin.html" rel="nofollow">Owner login</a>
         </div>
